@@ -17,6 +17,8 @@ echo "Changing to the dotfiles directory"
 cd $dir
 echo "...done"
 
+mv ~/$file/ir_black.vim ~/.vim/colors/
+
 for file in $files; do
    echo "Moving any existing dotfiles from ~ to $olddir"
    mv ~/.$file ~/dotfiles_old/
