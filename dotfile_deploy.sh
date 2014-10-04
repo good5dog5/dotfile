@@ -1,10 +1,10 @@
-!/bin/bash
+#!/bin/bash
 #################
 #dotfile_deploy.sh
 #This script creates symlinks forem the home diectory to any desired dotfiles in ~/dotfile
 #################
 
-dir=~/dotfils
+dir=~/dotfile
 olddir=~/dotfiles_old
 files="bashrc vimrc "
 
@@ -20,7 +20,7 @@ echo "...done"
 for file in $files; do
    echo "Moving any existing dotfiles from ~ to $olddir"
    mv ~/.$file ~/dotfiles_old/
-   ehco "Creating symlink to $file in $HOME"
+   echo "Creating symlink to $file in $HOME"
    ln -s $dir/$file ~/.$file
 done
 
