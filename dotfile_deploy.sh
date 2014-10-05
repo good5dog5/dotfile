@@ -6,7 +6,7 @@
 
 dir=~/dotfile
 olddir=~/dotfiles_old
-files="bashrc vimrc "
+files="bashrc vimrc bash_aliases"
 
 #create dotfiles_old in homedir
 echo "Creating $olddir for backup of any existing  dotfiles in $HOME"

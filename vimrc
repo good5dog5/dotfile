@@ -27,10 +27,9 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible
 filetype off
-
 set rtp+=~/.vim/bundle/vundle
-call vundle#begin()
 
+call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'ervandew/supertab'
 Plugin 'tomtom/tlib_vim'
@@ -60,9 +59,9 @@ set ignorecase
 set hlsearch
 set incsearch
 set cursorline 
+set noswapfile
 ""Don't redraw while executing macros (good performance config)
 set lazyredraw
-
 ""source  /etc/vim/Auto_SetTitle.vim
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
