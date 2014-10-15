@@ -40,7 +40,8 @@ Plugin 'Rip-Rip/Clang_complete'
 Plugin 'othree/vim-autocomplpop'
 Plugin 'bling/vim-airline'
 Plugin 'Townk/vim-autoclose'
-Plugin 'xuhdev/SingleCompile'
+Plugin 'xuhdev/SingleCompile' 
+Plugin 'scrooloose/nerdtree'
 call vundle#end()
 
 filetype indent plugin on
@@ -50,6 +51,9 @@ set fdm=syntax
 set foldnestmax=3
 set foldcolumn=3
 
+set fileencodings=utf-8,big5
+set encoding=utf-8
+set tenc=utf-8 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       Vim user interface                 "         
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -64,6 +68,8 @@ set noswapfile
 set lazyredraw
 ""source  /etc/vim/Auto_SetTitle.vim
 
+autocmd VimEnter * NERDTree
+autocmd BufEnter * NERDTreeMirror
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                     Colors and Fonts                     "         
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -78,6 +84,8 @@ highlight CursorLine   ctermbg=239 ctermfg=NONE
 set laststatus=2
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+"Enalbe display buffers with a single tab
+let g:airline#extensions#tabline#show_buffers = 1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       Useful shortcuts                   "        
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
