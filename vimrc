@@ -26,10 +26,9 @@
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim/
-
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
-"Plugin 'ervandew/supertab'
+Plugin 'ervandew/supertab'
 Plugin 'tomtom/tlib_vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'garbas/vim-snipmate'
@@ -40,7 +39,7 @@ Plugin 'bling/vim-airline'
 Plugin 'Townk/vim-autoclose'
 Plugin 'xuhdev/SingleCompile' 
 Plugin 'scrooloose/nerdtree'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'pangloss/vim-javascript'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'maksimr/vim-jsbeautify'
