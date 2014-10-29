@@ -20,5 +20,9 @@ function lll ()
 {
        command grep --color -E -- "$(ls -rtl $@ | tail -n3)|$" <(ls -l $@)
 }
-
+#Aliases toward tmux
 alias tmux='tmux -2'
+alias tml="tmux list-sessions"
+alias tma="tmux attach-session -t"
+alias tmc="clear && tmux clear-history"
+alias tmk="tmux kill-session"

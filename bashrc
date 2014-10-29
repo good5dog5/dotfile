@@ -10,10 +10,7 @@ source /etc/default/locale
 if [ -f /etc/bash_completion ]; then
    source /etc/bash_completion
 fi
-#Enable homesick, the git dotfile synchronizer written in bash
-if [ -f $HOME/.homesick/repos/homeshick/homeshick.sh ]; then
-   source $HOME/.homesick/repos/homeshick/homeshick.sh
-fi
+
 #Enable Powerline bash prompt
 if [ -f /home/jordan/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh ]; then
    source /home/jordan/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
