@@ -40,7 +40,7 @@ Plugin 'bling/vim-airline'
 Plugin 'Townk/vim-autoclose'
 Plugin 'xuhdev/SingleCompile' 
 Plugin 'scrooloose/nerdtree'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'pangloss/vim-javascript'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'maksimr/vim-jsbeautify'
@@ -48,7 +48,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'marijnh/tern_for_vim'
 call vundle#end()
 
-filetype indent plugin on
+filetype  indent plugin on
 syntax on
 
 set fdm=syntax
@@ -107,7 +107,8 @@ nmap <leader>v :tabedit $MYVIMRC<CR>
 nmap <leader>r :source $MYVIMRC<CR>
 nmap <leader>n :NERDTree .<CR>
 nmap <leader>w :w<CR>
-nmap <leader>q :wq<CR>
+nmap <leader>wq :w<CR> :bd <CR>
+nmap <leader><Tab> <C-W><C-W>
 
 nmap <leader>b :bnext<CR>
 nmap <leader>B :bprevious<CR>
@@ -168,10 +169,13 @@ let g:airline#extensions#tabline#show_buffers = 1
 
 let NERDTreeChDirMode=2
 "close vim if the only window left open is a NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 let g:javascript_enable_domhtmlcss = 1
 
 
 map <c-f> :call JsBeautify()<cr>
+let g:ycm_semantic_triggers =  {
+         \ 'javascript': ['.'],
+      \}
 
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTag,
