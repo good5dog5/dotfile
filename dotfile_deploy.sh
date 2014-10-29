@@ -4,8 +4,8 @@
 #This script creates symlinks forem the home diectory to any desired dotfiles in ~/dotfile
 #################
 
-dir=~/dotfile
-olddir=~/dotfiles_old
+dir=~/Document/dotfile
+olddir=~/Document/dotfiles_old
 files="bashrc vimrc bash_aliases tmux.conf"
 
 #create dotfiles_old in homedir

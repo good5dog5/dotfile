@@ -18,7 +18,7 @@ fi
 
 # Set the PS1 prompt (with color).
 #Enable Powerline
-PS1="\[\e[36;1m\]\h:\[\e[32;1m\]\w$ \[\e[0m\]""]]]"
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\][ \W ]\[\033[00m\]\$ '
 
 
 # don't put duplicate lines or lines starting with space in the history.
