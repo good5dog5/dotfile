@@ -23,6 +23,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       General                            "        
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let $MANPAGER=' '
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim/
@@ -58,10 +59,18 @@ set fileencodings=utf-8,big5
 set encoding=utf-8
 set tenc=utf-8 
 au FileType javascript call JavaScriptFold()
+
+
+set columns=80
+autocmd VimResized * if (&columns > 80) | set columns=80 | endif
+set wrap
+set linebreak
+set showbreak=+++
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       Vim user interface                    "         
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set number
+set nowrap
 set hidden
 set ignorecase
 set hlsearch
