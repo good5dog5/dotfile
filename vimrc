@@ -61,11 +61,8 @@ set tenc=utf-8
 au FileType javascript call JavaScriptFold()
 
 
-set columns=80
-autocmd VimResized * if (&columns > 80) | set columns=80 | endif
-set wrap
-set linebreak
-set showbreak=+++
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       Vim user interface                    "         
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

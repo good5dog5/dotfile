@@ -11,6 +11,7 @@ alias dc="cd ~/Documents"
 # Fast edit config file
 alias evr="vim $HOME/.vimrc"
 alias ebr="vim $HOME/.bashrc"
+alias sbr="source $HOME/.bashrc"
 alias eba="vim $HOME/.bash_aliases"
 alias etmr="vim $HOME/.tmux.conf"
 
@@ -36,3 +37,5 @@ alias mount='mount |column -t'
 #Network relative
 alias inet='ifconfig | grep "inet addr"'
 alias ports='netstat -tulanp'
+
+alias telnet_ptt="luit -encoding big5 telnet ptt.cc"

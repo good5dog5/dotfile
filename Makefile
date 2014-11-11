@@ -5,6 +5,7 @@ init:
 	ln -fs ${BASEDIR}/bash_aliases ${HOME}/.bash_aliases
 	ln -fs ${BASEDIR}/tmux.conf ${HOME}/.tmux.conf
 	ln -fs $(BASEDIR)/vimrc ${HOME}/.vimrc
+	ln -fs $(BASEDIR)/LESS_TERMCAP ${HOME}/.LESS_TERMCAP 
 	cp -r  $(BASEDIR)/ir_black.vim ${HOME}/.vim/colors/ir_black.vim
 
 install:
