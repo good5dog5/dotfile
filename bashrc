@@ -3,7 +3,7 @@
 
 # Set the default editor
 export EDITOR=vim
-export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/.local/bin:$HOME/.local/bin/script:$PATH
 
 source /etc/default/locale
 #Enable programmable completion features.
@@ -41,7 +41,7 @@ fi
 
 #Use vim as man page viewer
 #export MANPAGER="/bin/sh -c \"unset PAGER;col -b -x |  vim -R -c 'set ft=man nomod nolist' -c 'map q :q<CR>' -c 'map <SPACE> <C-D>' -c 'map b <C-U>' -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
-# Get color support for 'less'
+#Get color support for 'less'
 export LESS="--RAW-CONTROL-CHARS"
 
 # Use colors for less, man, etc.
