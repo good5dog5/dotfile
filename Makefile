@@ -1,12 +1,17 @@
 BASEDIR:=$(shell pwd)
 
+VIMDIR:=${BASEDIR}/vim
+BASHDIR:=${BASEDIR}/bash
+
 init:
-	ln -fs ${BASEDIR}/bashrc ${HOME}/.bashrc
-	ln -fs ${BASEDIR}/bash_aliases ${HOME}/.bash_aliases
+	ln -fs ${BASHDIR}/bashrc ${HOME}/.bashrc
+	ln -fs ${BASHDIR}/bash_aliases ${HOME}/.bash_aliases
 	ln -fs ${BASEDIR}/tmux.conf ${HOME}/.tmux.conf
-	ln -fs $(BASEDIR)/vimrc ${HOME}/.vimrc
-	ln -fs $(BASEDIR)/LESS_TERMCAP ${HOME}/.LESS_TERMCAP 
-	cp -r  $(BASEDIR)/ir_black.vim ${HOME}/.vim/colors/ir_black.vim
+	ln -fs $(BASHDIR)/LESS_TERMCAP ${HOME}/.LESS_TERMCAP 
+	ln -fs $(VIMDIR)/vimrc ${HOME}/.vimrc
+	ln -fs $(VIMDIR)/ir_black.vim ${HOME}/.vim/colors/ir_black.vim
+	ln -fs $(VIMDIR)/jellybeans.vim ${HOME}/.vim/colors/jellybeans.vim
+
 
 install:
 	$(BASEDIR)/install_vundle.sh

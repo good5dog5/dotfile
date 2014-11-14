@@ -23,7 +23,6 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " }}}
 " [ General          ] {{{
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       General                            "        
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -50,6 +49,7 @@
    Plugin 'godlygeek/tabular'
    Plugin 'marijnh/tern_for_vim'
    Plugin 'steffanc/cscopemaps.vim'
+   Plugin 'Yggdroot/indentLine'
    call vundle#end()
 
    filetype  indent plugin on
@@ -103,7 +103,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
    set t_Co=256
-   colorscheme ir_black
+   colorscheme jellybeans
    set guifont=Monaco\ 12
    highlight Pmenu ctermbg=240 ctermfg=48
    highlight PmenuSel ctermbg=99
@@ -124,6 +124,7 @@
    nmap <leader>n :NERDTree .<CR>
    nmap <leader>w :w<CR>
    nmap <leader>wq :w<CR> :bd <CR>
+   nmap <leader>q :bd<CR>
    nmap <leader><Tab> <C-W><C-W>
    nmap  <F4> :!clear <CR> :SCCompile<CR>
    nmap  <F5> :!clear <CR> :SCCompileRun<CR>
@@ -150,6 +151,7 @@
 
    nmap <leader>+ =:set syntax=javascript<CR>
    " }}}
+" }}}
 " [ Plugin configure ] {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       Plugin configure                   "        
@@ -180,6 +182,27 @@
    let g:ycm_semantic_triggers =  {
             \ 'javascript': ['.'],
          \}
+
+   if has("cscope")
+      "Specifies the command to execute cscope
+      set csprg=/usr/bin/cscope
+      "Determine the order in which cstag performs a search, default 0"
+      "indicate search cscope first"
+      set csto=0
+      set cst
+      "Search and add cscopt.out frim current directory up to root
+      "
+      let db = findfile("cscope.out", ".;")
+      if (!empty(db))
+         let path = strpart(db, 0, match(db, "/cscope.out$"))
+         set nocscopeverbose " suppress 'duplicate connection' error
+         exe "cs add " . db . " " .  path
+      endif
+      set csverb
+   endif
+
+   let g:indentLine_color_term = 240
+   let g:indentLine_char       = '¦'
 
 " }}}
 " [ Auto command   ] {{{
