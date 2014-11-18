@@ -11,6 +11,7 @@ init:
 	ln -fs $(VIMDIR)/vimrc ${HOME}/.vimrc
 	ln -fs $(VIMDIR)/ir_black.vim ${HOME}/.vim/colors/ir_black.vim
 	ln -fs $(VIMDIR)/jellybeans.vim ${HOME}/.vim/colors/jellybeans.vim
+	ln -fs $(VIMDIR)/.ycm_extra_conf.py ${HOME}/.vim/
 
 
 install:
