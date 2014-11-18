@@ -74,6 +74,7 @@
    set shiftwidth=3
    set expandtab
 
+
    set wildmode=list:longest,full
    "Complete options (disable preview scratch window, longest removed to aways show menu
    set completeopt=menu,menuone
@@ -108,7 +109,7 @@
    highlight Pmenu ctermbg=240 ctermfg=48
    highlight PmenuSel ctermbg=99
    highlight CursorLine   ctermbg=239 ctermfg=NONE
-
+   
    set laststatus=2
 " }}}
 " [ Useful shortcuts ] {{{
@@ -118,7 +119,8 @@
    " [ General         ] {{{
    "Set key combination's map leader
    let mapleader = ","
-
+   "clear highlight after search
+   nnoremap <CR> :noh<CR><CR>
    nmap <leader>v :tabedit $MYVIMRC<CR>
    nmap <leader>r :source $MYVIMRC<CR>
    nmap <leader>n :NERDTree .<CR>
@@ -149,6 +151,10 @@
       vmap <Leader><F1>: :Tabularize /:\zs<CR>
    endif
 
+   nmap <leader>gl :YcmCompleter GoToDeclaration<CR>
+   nmap <leader>gf :YcmCompleter GoToDefinition<CR>
+   nmap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
    nmap <leader>+ =:set syntax=javascript<CR>
    " }}}
 " }}}
@@ -162,10 +168,10 @@
    "solve the conflict of supertab and snipmate
 
    "Clang_complete And  Supertab"
-   let g:clang_snippets=1
-   let g:clang_conceal_snippets=1
+   "let g:clang_snippets=1
+   "let g:clang_conceal_snippets=1
    " The single one that works with clang_complete
-   let g:clang_snippets_engine='clang_complete'
+   "let g:clang_snippets_engine='clang_complete'
 
    let g:airline_powerline_fonts = 1
    let g:airline#extensions#tabline#enabled = 1
@@ -179,9 +185,6 @@
 
 
    map <c-f> :call JsBeautify()<cr>
-   let g:ycm_semantic_triggers =  {
-            \ 'javascript': ['.'],
-         \}
 
    if has("cscope")
       "Specifies the command to execute cscope
@@ -203,6 +206,18 @@
 
    let g:indentLine_color_term = 240
    let g:indentLine_char       = '¦'
+
+
+   "YCM
+   "location for global configure file
+   let g:ycm_global_ycm_extra_conf = "$HOME/.vim/.ycm_extra_conf.py"
+   let g:ycm_seed_identifiers_with_syntax = 1
+   "enable completion in comment
+   let g:ycm_complete_in_comments = 1
+   "start completion while typing first charcter
+   let g:ycm_min_num_of_chars_for_completion = 1
+   "do not check ycm_extra_conf
+   let g:ycm_confirm_extra_conf = 0
 
 " }}}
 " [ Auto command   ] {{{
