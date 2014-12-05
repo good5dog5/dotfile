@@ -3,7 +3,7 @@
 
 # Set the default editor
 export EDITOR=vim
-export PATH=$HOME/.local/bin:$HOME/.local/bin/script:$PATH
+export PATH=$HOME/.local/bin:$HOME/.local/bin/script:/usr/clang_3_4/bin:$PATH
 
 source /etc/default/locale
 #Enable programmable completion features.

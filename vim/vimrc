@@ -49,7 +49,9 @@
    Plugin 'godlygeek/tabular'
    Plugin 'marijnh/tern_for_vim'
    Plugin 'steffanc/cscopemaps.vim'
-   Plugin 'Yggdroot/indentLine'
+   Plugin 'SirVer/ultisnips'
+   Plugin 'Shougo/unite.vim'
+   Plugin 'Shougo/vimproc.vim'
    call vundle#end()
 
    filetype  indent plugin on
@@ -59,7 +61,7 @@
    set foldnestmax=3
    set foldcolumn=3
 
-   set fileencodings=utf-8,big5
+   set fileencodings=utf-8
    set encoding=utf-8
    set tenc=utf-8 
    au FileType javascript call JavaScriptFold()
@@ -151,12 +153,22 @@
       vmap <Leader><F1>: :Tabularize /:\zs<CR>
    endif
 
+   "YCM
    nmap <leader>gl :YcmCompleter GoToDeclaration<CR>
    nmap <leader>gf :YcmCompleter GoToDefinition<CR>
    nmap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
+   "UltiSnips
+   let g:UltiSnipsJumpForwardTrigger="<tab>"
    nmap <leader>+ =:set syntax=javascript<CR>
+
+   "Unite
+   nmap <leader>f :Unite -start-insert file_rec/async:!<CR>
+   "Tern_for_vim
+   nmap _d :TernDef<CR>
+   nmap _D :TernDoc<CR>
    " }}}
+   
 " }}}
 " [ Plugin configure ] {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -165,13 +177,6 @@
 
    let g:SingleCompile_menumode = 2
    let g:SingleCompile_split = 'split'
-   "solve the conflict of supertab and snipmate
-
-   "Clang_complete And  Supertab"
-   "let g:clang_snippets=1
-   "let g:clang_conceal_snippets=1
-   " The single one that works with clang_complete
-   "let g:clang_snippets_engine='clang_complete'
 
    let g:airline_powerline_fonts = 1
    let g:airline#extensions#tabline#enabled = 1
@@ -179,6 +184,8 @@
    let g:airline#extensions#tabline#show_buffers = 1
 
    let NERDTreeChDirMode=2
+   "Automatic close Nerdtree after having file opened
+   let NERDTreeQuitOnOpen=1
    "close vim if the only window left open is a NERDTree
 
    let g:javascript_enable_domhtmlcss = 1
@@ -204,13 +211,11 @@
       set csverb
    endif
 
-   let g:indentLine_color_term = 240
-   let g:indentLine_char       = '¦'
 
 
    "YCM
    "location for global configure file
-   let g:ycm_global_ycm_extra_conf = "$HOME/.vim/.ycm_extra_conf.py"
+   let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
    let g:ycm_seed_identifiers_with_syntax = 1
    "enable completion in comment
    let g:ycm_complete_in_comments = 1
@@ -218,7 +223,26 @@
    let g:ycm_min_num_of_chars_for_completion = 1
    "do not check ycm_extra_conf
    let g:ycm_confirm_extra_conf = 0
+   let g:ycm_register_as_syntastic_checker = 0
 
+   "UltiSnips
+   function! g:UltiSnips_Complete()
+      call UltiSnips#ExpandSnippet()
+      if g:ulti_expand_res == 0
+         if pumvisible()
+            return "\<C-n>"
+         else
+            call UltiSnips#JumpForwards()
+            if g:ulti_jump_forwards_res == 0
+               return "\<TAB>"
+            endif
+         endif
+      endif
+      return ""
+   endfunction
+
+   "Unite
+   let g:unite_source_file_rec_max_cache_files=1000
 " }}}
 " [ Auto command   ] {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -226,4 +250,11 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
    autocmd FileType vim setlocal fdm=marker
    autocmd FileType html set omnifunc=htmlcomplete#CompleteTag,
-" }}}
+   autocmd BufNewFile *.py 0put =\"#!/usr/bin/python\<nl>\"|$
+   autocmd BufNewFile,BufRead  *.htm,*.html set filetype=javascript
+   "Automatic save fold view while leave and reload when re-enter buffer
+   autocmd BufWinLeave *.* mkview!
+   autocmd BufWinEnter *.* silent loadview
+   "Automatic BufEnter for UltiSnips function 
+   au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+   " }}}
