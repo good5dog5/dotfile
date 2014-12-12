@@ -9,7 +9,7 @@
 "Sections:
 "     ->General
 "     ->VIM user interface
-"     ->Colors and fonts"     ->Texts, tab and indent related
+"     ->Colors and fonts     ->Texts, tab and indent related
 "     ->Visual mode related
 "     ->Moving around, tab and buffers
 "     ->Status line
@@ -132,6 +132,10 @@
    nmap <leader><Tab> <C-W><C-W>
    nmap  <F4> :!clear <CR> :SCCompile<CR>
    nmap  <F5> :!clear <CR> :SCCompileRun<CR>
+   "Replace word under current cursor"
+   nmap <leader>s :%s/\<<C-r><C-w>\>/
+   nmap ,d :b#<bar>bd#<CR>
+
    " }}} 
    " [ Buf switch | tab switch ] {{{
       nmap <leader>b :bnext<CR>
@@ -220,7 +224,7 @@
    "enable completion in comment
    let g:ycm_complete_in_comments = 1
    "start completion while typing first charcter
-   let g:ycm_min_num_of_chars_for_completion = 1
+   let g:ycm_min_num_of_chars_for_completion = 3
    "do not check ycm_extra_conf
    let g:ycm_confirm_extra_conf = 0
    let g:ycm_register_as_syntastic_checker = 0
@@ -252,7 +256,7 @@
    autocmd FileType html set omnifunc=htmlcomplete#CompleteTag,
    autocmd BufNewFile *.py 0put =\"#!/usr/bin/python\<nl>\"|$
    autocmd BufNewFile,BufRead  *.htm,*.html set filetype=javascript
-   "Automatic save fold view while leave and reload when re-enter buffer
+   "Automatic story folding state while switch between buffers
    autocmd BufWinLeave *.* mkview!
    autocmd BufWinEnter *.* silent loadview
    "Automatic BufEnter for UltiSnips function 
