@@ -261,5 +261,4 @@
    autocmd BufWinLeave *.* mkview!
    autocmd BufWinEnter *.* silent loadview
    "Automatic BufEnter for UltiSnips function 
-   au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
    " }}}
