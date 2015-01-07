@@ -12,11 +12,11 @@ if [ -f /etc/bash_completion ]; then
 fi
 
 #Enable Powerline bash prompt
-if [ -f /home/jordan/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh ]; then
-   source /home/jordan/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+if [ -f ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh ]; then
+   source ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 fi
 #Enable autojump function
-[[ -s /home/jordan/.autojump/etc/profile.d/autojump.sh ]] && source /home/jordan/.autojump/etc/profile.d/autojump.sh 
+[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && source ~/.autojump/etc/profile.d/autojump.sh 
 # Set the PS1 prompt (with color).
 #Enable Powerline
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\][ \W ]\[\033[00m\]\$ '
