@@ -1,3 +1,6 @@
+#Get python version
+PYV=`python -c "import sys;t='{v[0]}.{v[1]}'.format(v=list(sys.version_info[:2]));sys.stdout.write(t)";`
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -12,8 +15,8 @@ if [ -f /etc/bash_completion ]; then
 fi
 
 #Enable Powerline bash prompt
-if [ -f ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh ]; then
-   source ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+if [ -f ~/.local/lib/python$PYV/site-packages/powerline/bindings/bash/powerline.sh ]; then
+   source ~/.local/lib/python$PYV/site-packages/powerline/bindings/bash/powerline.sh
 fi
 #Enable autojump function
 [[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && source ~/.autojump/etc/profile.d/autojump.sh 
