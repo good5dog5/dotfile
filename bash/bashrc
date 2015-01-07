@@ -1,5 +1,4 @@
 #Get python version
-PYV=`python -c "import sys;t='{v[0]}.{v[1]}'.format(v=list(sys.version_info[:2]));sys.stdout.write(t)";`
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -8,16 +7,18 @@ PYV=`python -c "import sys;t='{v[0]}.{v[1]}'.format(v=list(sys.version_info[:2])
 export EDITOR=vim
 export PATH=$HOME/.local/bin:$HOME/.local/bin/script:/usr/clang_3_4/bin:$PATH
 
-source /etc/default/locale
+
+[ -e /etc/default/locale ] &&  source /etc/default/locale
 #Enable programmable completion features.
 if [ -f /etc/bash_completion ]; then
    source /etc/bash_completion
 fi
 
 #Enable Powerline bash prompt
-if [ -f ~/.local/lib/python$PYV/site-packages/powerline/bindings/bash/powerline.sh ]; then
-   source ~/.local/lib/python$PYV/site-packages/powerline/bindings/bash/powerline.sh
+if [ -f /usr/lib/python3.4/site-packages/powerline/bindings/bash/powerline.sh ]; then
+   source  /usr/lib/python3.4/site-packages/powerline/bindings/bash/powerline.sh 
 fi
+
 #Enable autojump function
 [[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && source ~/.autojump/etc/profile.d/autojump.sh 
 # Set the PS1 prompt (with color).
