@@ -1,10 +1,10 @@
 #!/bin/bash
 
-vim_dir=~/.vim/
+vim_dir=~/.vim/colors/
 font_dir=~/.fonts/
 
 if [! -d "$vim_dir"]; then
-   mkdir $vim_dir && printf "%-35s %6s\n" "Make dir $vim_dir" "[done]"
+   mkdir -p $vim_dir && printf "%-35s %6s\n" "Make dir $vim_dir" "[done]"
 fi
 
 if [! -d "$font_dir"]; then
