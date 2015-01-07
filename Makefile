@@ -19,3 +19,4 @@ install:
 	$(BASEDIR)/install_vundle.sh
 	$(BASEDIR)/install_autojump.sh
 	$(BASEDIR)/install_colorgcc.sh
+	$(BASEDIR)/install_powerline_font.sh

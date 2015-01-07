@@ -28,7 +28,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
    set nocompatible
    filetype off
-   set rtp+=~/.vim/bundle/Vundle.vim/
+   set rtp+=~/.vim/bundle/Vundle/
 
    call vundle#begin()
    Plugin 'gmarik/Vundle.vim'
@@ -255,7 +255,8 @@
    autocmd FileType vim setlocal fdm=marker
    autocmd FileType html set omnifunc=htmlcomplete#CompleteTag,
    autocmd BufNewFile *.py 0put =\"#!/usr/bin/python\<nl>\"|$
-   autocmd BufNewFile,BufRead  *.htm,*.html set filetype=javascript
+   autocmd BufNewFile,BufRead  *.html set filetype=html.javascript
+   autocmd BufNewFile,BufRead  *.htm set filetype=javascript
    "Automatic story folding state while switch between buffers
    autocmd BufWinLeave *.* mkview!
    autocmd BufWinEnter *.* silent loadview
