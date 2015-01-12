@@ -1,0 +1,26 @@
+map A <Nop>
+map <C-o> <Nop>
+map <C-i> <Nop>
+map J <C-d>
+noremap K <C-u>
+noremap h gT
+noremap l gt
+noremap j 3j
+noremap k 3k
+noremap I <C-o>
+noremap O <C-i>
+noremap <C-u> <C-v><C-u>
+noremap <C-s> <C-c>
+noremap <C-c> <C-v><C-c>
+noremap <C-a> <C-v><C-a>
+cnoremap <C-c> <C-v><C-c>
+cnoremap <C-v> <C-v><C-v>
+cnoremap <C-x> <C-v><C-x>
+inoremap <C-a> <Ins><C-a><Ins>
+inoremap <C-c> <Ins><C-c><Ins>
+inoremap <C-v> <Ins><C-v><Ins>
+inoremap <C-x> <Ins><C-x><Ins>
+inoremap <C-z> <Ins><C-z><Ins>
+inoremap <C-y> <Ins><C-y><Ins>
+
+set editor="vim"
