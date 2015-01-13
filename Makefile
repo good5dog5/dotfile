@@ -13,6 +13,7 @@ init:
 	ln -fs $(VIMDIR)/jellybeans.vim ${HOME}/.vim/colors/jellybeans.vim
 	ln -fs $(VIMDIR)/.ycm_extra_conf.py ${HOME}/.vim/
 	ln -fs $(VIMDIR)/vimperatorrc ${HOME}/.vimperatorrc
+	cp -R  ${BASEDIR}/bin/stardict/* ${HOME}/.stardict/dic
 
 
 
