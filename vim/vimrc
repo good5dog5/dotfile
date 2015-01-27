@@ -28,7 +28,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
    set nocompatible
    filetype off
-   set rtp+=~/.vim/bundle/Vundle/
+   set rtp+=~/.vim/bundle/Vundle.vim/
 
    call vundle#begin()
    Plugin 'gmarik/Vundle.vim'
@@ -39,7 +39,6 @@
    "Plugin 'Rip-Rip/Clang_complete'
    "Plugin 'othree/vim-autocomplpop'
    Plugin 'bling/vim-airline'
-   Plugin 'Townk/vim-autoclose'
    Plugin 'xuhdev/SingleCompile' 
    Plugin 'scrooloose/nerdtree'
    Plugin 'Valloric/YouCompleteMe'
@@ -52,6 +51,7 @@
    Plugin 'SirVer/ultisnips'
    Plugin 'Shougo/unite.vim'
    Plugin 'Shougo/vimproc.vim'
+   Plugin 'Raimondi/delimitMate'
    call vundle#end()
 
    filetype  indent plugin on
@@ -135,6 +135,7 @@
    "Replace word under current cursor"
    nmap <leader>s :%s/\<<C-r><C-w>\>/
    nmap ,d :b#<bar>bd#<CR>
+   imap jk <Esc>
 
    " }}} 
    " [ Buf switch | tab switch ] {{{
