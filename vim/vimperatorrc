@@ -24,3 +24,7 @@ inoremap <C-z> <Ins><C-z><Ins>
 inoremap <C-y> <Ins><C-y><Ins>
 
 set editor="vim"
+
+" PassThrough gmail and greader
+autocmd LocationChange .* js modes.passAllKeys = /.*(mail\.google\.com|www\.google\.com\/reader|docs\.google\.com).*/.test(buffer.URL)
+
