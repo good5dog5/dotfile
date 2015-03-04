@@ -48,6 +48,9 @@ alias vi="vim"
 
 #For delelopment convinient
 alias mm="make -f Makefile.ELX"
+alias armgcc="arm-linux-gnueabihf-gcc"
+alias armobjdump="arm-linux-gnueabihf-objdump"
+
 #For git
 alias gst='git status '
 alias ga='git add '

@@ -52,6 +52,7 @@
    Plugin 'Shougo/unite.vim'
    Plugin 'Shougo/vimproc.vim'
    Plugin 'Raimondi/delimitMate'
+   Plugin 'good5dog5/arm.vim'
    call vundle#end()
 
    filetype  indent plugin on
@@ -265,5 +266,7 @@
    "Automatic story folding state while switch between buffers
    autocmd BufWinLeave * mkview!
    autocmd BufWinEnter * silent loadview
-   "Automatic BufEnter for UltiSnips function 
+   "Auto highlight assembly files depands on extension
+   au BufRead,BufNewFile *.s   let asmsyntax='gas'|let filetype_inc='gas'
+   au BufRead,BufNewFile *.asm let asmsyntax='armasm'|let filetype_inc='armasm'
    " }}}
