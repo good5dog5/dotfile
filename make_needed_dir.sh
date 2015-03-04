@@ -3,7 +3,7 @@
 vimDir=~/.vim/colors/
 fontDir=~/.fonts/
 usrDir=~/usr/
-stardictDir=~/.stardict/dic/
+stardictDir=~/stardict/dic/
 
 if [ ! -d "$vimDir" ]; then
    mkdir -p $vimDir && printf "%-35s %6s\n" "Make dir $vimDir" "[done]"
@@ -18,7 +18,7 @@ if [ ! -d "$usrDir" ]; then
 fi
 
 if [ ! -d "$stardictDir" ]; then
-   mkdir -R $stardictDir && printf "%-35s %6s\n" "Make dir $stardictDir" "[done]"
+   mkdir -p $stardictDir && printf "%-35s %6s\n" "Make dir $stardictDir" "[done]"
 fi
 
 
