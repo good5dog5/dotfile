@@ -1,3 +1,4 @@
+.PHONY: clean 
 BASEDIR:=$(shell pwd)
 
 VIMDIR:=${BASEDIR}/vim
@@ -13,7 +14,7 @@ init:
 	ln -fs $(VIMDIR)/jellybeans.vim ${HOME}/.vim/colors/jellybeans.vim
 	ln -fs $(VIMDIR)/.ycm_extra_conf.py ${HOME}/.vim/
 	ln -fs $(VIMDIR)/vimperatorrc ${HOME}/.vimperatorrc
-	cp -R  ${BASEDIR}/bin/stardict/* ${HOME}/.stardict/dic
+	cp -R  ${BASEDIR}/bin/stardict/* ${STARDICT_DATA_DIR}
 
 
 
@@ -24,3 +25,7 @@ install:
 	$(BASEDIR)/install_colorgcc.sh
 	$(BASEDIR)/install_powerline_font.sh
 	ln -fs $(BASEDIR)/colorgcc /usr/bin
+
+mkPath:
+	ln -s ~/Documents/Edimax/ELX/ ~/ELX
+	ln -s ~/Documents/Edimax/ELX/APPS/web/ ~/eweb

@@ -1,0 +1,29 @@
+[user]
+   email         = good5dog5@gmail.com
+   name          = Jordan Huang
+[color]
+   ui            = true
+   diff          = auto
+   branch        = auto
+   log           = auto
+
+[alias]
+   st            = status
+   stat          = status
+
+   bo            = fetch origin
+   fu            = fetch upstream
+   po            = push origin
+   pu            = pull --rebase origin master
+
+[core]
+   editor        = vi
+[color "diff"]
+   meta          = yellow bold
+   frag          = magenta bold
+   old           = red bold
+   new           = green bold
+[color "status"]
+   aded          = yellow
+   changed       = green
+   untracked     = cyan

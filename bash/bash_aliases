@@ -22,6 +22,9 @@ alias ll="ls -alhF --color=auto"
 alias l.="ls -d .*"  #list hidden files
 alias lld="ls -lUd */ --color=auto"  #list directories
 alias ls="ls --color=auto  --group-directories-first --sort=extension"
+alias grep="grep -n --color=auto"
+alias mgp="grep -inR --color=auto"
+alias dic="sdcv"
 
 # List only directories
 alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
@@ -42,4 +45,15 @@ alias ports='netstat -tulanp'
 
 alias telnet_ptt="luit -encoding big5 telnet ptt.cc"
 alias vi="vim"
+
+#For delelopment convinient
+alias mm="make -f Makefile.ELX"
+#For git
+alias gst='git status '
+alias ga='git add '
+alias gb='git branch '
+alias gc='git commit'
+alias gd='git diff'
+alias gl='git log'
+alias js="java -jar /home/jordan/.local/bin/js.jar"
 

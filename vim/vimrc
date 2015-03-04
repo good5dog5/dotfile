@@ -58,7 +58,7 @@
    syntax on
 
    set fdm=syntax
-   set foldnestmax=3
+   set foldnestmax=8
    set foldcolumn=3
 
    set fileencodings=utf-8
@@ -132,6 +132,10 @@
    nmap <leader><Tab> <C-W><C-W>
    nmap  <F4> :!clear <CR> :SCCompile<CR>
    nmap  <F5> :!clear <CR> :SCCompileRun<CR>
+   nmap <tab>     v>
+   nmap <s-tab>   v<
+   vmap <tab>     >gv
+   vmap <s-tab>   <gv
    "Replace word under current cursor"
    nmap <leader>s :%s/\<<C-r><C-w>\>/
    nmap ,d :b#<bar>bd#<CR>
@@ -259,7 +263,7 @@
    autocmd BufNewFile,BufRead  *.html set filetype=javascript
    autocmd BufNewFile,BufRead  *.htm set filetype=javascript
    "Automatic story folding state while switch between buffers
-   autocmd BufWinLeave *.* mkview!
-   autocmd BufWinEnter *.* silent loadview
+   autocmd BufWinLeave * mkview!
+   autocmd BufWinEnter * silent loadview
    "Automatic BufEnter for UltiSnips function 
    " }}}

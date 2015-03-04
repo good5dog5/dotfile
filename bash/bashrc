@@ -6,6 +6,11 @@
 # Set the default editor
 export EDITOR=vim
 export PATH=$HOME/.local/bin:$HOME/.local/bin/script:/usr/clang_3_4/bin:$PATH
+export CLASSPATH="$HOE/.local/bin/js.jar"
+
+#Some path for daily use
+export STARDICT_DATA_DIR=$HOME/stardict/dic/
+export UVA_PATH=$HOME/github/codeSet/c/Uva/
 
 
 [ -e /etc/default/locale ] &&  source /etc/default/locale
