@@ -23,7 +23,7 @@ alias l.="ls -d .*"  #list hidden files
 alias lld="ls -lUd */ --color=auto"  #list directories
 alias ls="ls --color=auto  --group-directories-first --sort=extension"
 alias grep="grep -n --color=auto"
-alias mgp="grep -inR --color=auto"
+alias wg="grep -inR --color=auto"
 alias dic="sdcv"
 
 # List only directories
