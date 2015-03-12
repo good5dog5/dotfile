@@ -28,7 +28,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
    set nocompatible
    filetype off
-   set rtp+=~/.vim/bundle/Vundle.vim/
+   set rtp+=~/.vim/bundle/Vundle/
 
    call vundle#begin()
    Plugin 'gmarik/Vundle.vim'
@@ -267,6 +267,8 @@
    autocmd BufWinLeave * mkview!
    autocmd BufWinEnter * silent loadview
    "Auto highlight assembly files depands on extension
-   au BufRead,BufNewFile *.s   let asmsyntax='gas'|let filetype_inc='gas'
-   au BufRead,BufNewFile *.asm let asmsyntax='armasm'|let filetype_inc='armasm'
+   au BufRead,BufNewFile *.s set filetype=arm 
+   "Open a default template while open c-family file. "
+   autocmd BufNewFile *.cpp r ~/.vim/template/template.cpp 
+   autocmd BufNewFile *.c r ~/.vim/template/template.c 
    " }}}
