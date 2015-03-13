@@ -25,6 +25,7 @@ alias ls="ls --color=auto  --group-directories-first --sort=extension"
 alias grep="grep -n --color=auto"
 alias wg="grep -inR --color=auto"
 alias dic="sdcv"
+alias opend="xdg-open"
 
 # List only directories
 alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
@@ -58,5 +59,6 @@ alias gb='git branch '
 alias gc='git commit'
 alias gd='git diff'
 alias gl='git log'
+
 alias js="java -jar /home/jordan/.local/bin/js.jar"
 
