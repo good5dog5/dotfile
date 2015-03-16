@@ -72,9 +72,9 @@
 
    set showcmd		" Show (partial) command in status line.
    set incsearch		" Incremental search
-   set tabstop=8
+   set tabstop=4
    set smartindent
-   set shiftwidth=8
+   set shiftwidth=4
    set expandtab
 
 
