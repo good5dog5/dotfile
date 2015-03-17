@@ -133,10 +133,6 @@
    nmap <leader><Tab> <C-W><C-W>
    nmap  <F4> :!clear <CR> :SCCompile<CR>
    nmap  <F5> :!clear <CR> :SCCompileRun<CR>
-   nmap <tab>     v>
-   nmap <s-tab>   v<
-   vmap <tab>     >gv
-   vmap <s-tab>   <gv
    "Replace word under current cursor"
    nmap <leader>s :%s/\<<C-r><C-w>\>/
    nmap ,d :b#<bar>bd#<CR>
