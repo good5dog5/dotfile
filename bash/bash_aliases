@@ -48,9 +48,15 @@ alias telnet_ptt="luit -encoding big5 telnet ptt.cc"
 alias vi="vim"
 
 #For delelopment convinient
-alias mm="make -f Makefile.ELX"
+if [ -e "Makefile.ELX" ]
+then
+   alias mm="make -f Makefile.ELX"
+else
+   alias mm="make "
+fi
 alias armgcc="arm-linux-gnueabihf-gcc"
 alias armobjdump="arm-linux-gnueabihf-objdump"
+alias gdb="gdb -q"
 
 #For git
 alias gst='git status '
