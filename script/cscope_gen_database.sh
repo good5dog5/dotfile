@@ -1,11 +1,15 @@
-find ./ -type f -name "*.c" -o -name "*.h" -o -name "*.cpp" > cscope.files
+DIR[0] = "./"
+DIR[1] = "/usr/include/i386-linux-gnu/sys/"
+DIR[2] = "/usr/include/i386-linux-gnu/bits/"
+
 find /usr/include/ -maxdepth 1 -type f -name "*.[hc]" >> cscope.files
 
-for dir in /usr/include/i386-linux-gnu/sys \
-           /usr/include/i386-linux-gnu/bits 
+for d in "${DIR[@]}"; do
 
-do 
-   find $dir -type f -name "*.[hc]" -o -name "*.cpp" >> cscope.files
+    if [ -d "$d" ]; then
+       find $dir -type f -name "*.[hc]" -o -name "*.cpp" >> cscope.files
+    fi
+
 done           
 
 cscope -Rbq -i cscope.files

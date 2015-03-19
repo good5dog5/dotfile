@@ -20,7 +20,8 @@ install_all:
 setup_others:
 	@ln -fs ${CONFDIR}/tmux.conf 							   ${HOME}/.tmux.conf
 	@cp -R  ${BINDIR}/stardict/* 					   		${STARDICT_DATA_DIR}
-	@ln -fs $(BINDIR)/colorgcc 								/usr/bin
+	@ln -fs $(BINDIR)/colorgcc 								${HOME}/usr/bin
+	@ln -fs ${CONFDIR}/gitconfig								${HOME}/.gitconfig
 	@cp -R  ${SCRIPTDIR}/*										${HOME}/usr/script/
 
 setup_vim:

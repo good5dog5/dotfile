@@ -17,7 +17,7 @@
    pu            = pull --rebase origin master
 
 [core]
-   editor        = vi
+   editor        = vim
 [color "diff"]
    meta          = yellow bold
    frag          = magenta bold
