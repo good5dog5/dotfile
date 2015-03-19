@@ -5,7 +5,8 @@ Hope you enjoy it :).
 
 ##Installation
 Change directory to where you want to put this dotfiles in, and type
-    git clone https://github.com/good5dog5.git .
+
+`git clone https://github.com/good5dog5.git .`
 this will clone the repo intto current directory.
 
 
