@@ -19,11 +19,16 @@ alias etmr="vim $HOME/.tmux.conf"
 alias h="history"
 
 alias ll="ls -alhF --color=auto"
-alias l.="ls -d .*"  #list hidden files
-alias lld="ls -lUd */ --color=auto"  #list directories
+#list hidden files
+alias l.="ls -d .*"
+#list directories
+alias lld="ls -lUd */ --color=auto"  
 alias ls="ls --color=auto  --group-directories-first --sort=extension"
 alias grep="grep -n --color=auto"
+#word grep
 alias wg="grep -inR --color=auto"
+#find name
+alias fn="find ./ -name "
 alias dic="sdcv"
 alias opend="xdg-open"
 
