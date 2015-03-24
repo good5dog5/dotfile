@@ -50,7 +50,7 @@ alias inet='ifconfig | grep "inet addr"'
 alias ports='netstat -tulanp'
 
 alias telnet_ptt="luit -encoding big5 telnet ptt.cc"
-alias vi="vim"
+alias vi="vim -X"
 
 #For delelopment convinient
 if [ -e "Makefile.ELX" ]
@@ -65,6 +65,7 @@ alias gdb="gdb -q"
 
 #For git
 alias gst='git status '
+alias gstuno='git status -uno'
 alias ga='git add '
 alias gb='git branch '
 alias gc='git commit'
