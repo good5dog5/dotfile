@@ -64,6 +64,7 @@
    set smartindent
    set shiftwidth=4
    set expandtab
+   set autoindent
 
    set fileencodings=utf-8
    set encoding=utf-8
@@ -257,6 +258,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
    autocmd FileType vim setlocal fdm=marker
    autocmd FileType html set omnifunc=htmlcomplete#CompleteTag,
+   autocmd Filetype make setlocal noexpandtab
    autocmd BufNewFile *.py 0put =\"#!/usr/bin/python\<nl>\"|$
    autocmd BufNewFile,BufRead  *.html set filetype=javascript
    autocmd BufNewFile,BufRead  *.htm set filetype=javascript
