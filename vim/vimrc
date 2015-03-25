@@ -273,6 +273,7 @@
    autocmd BufNewFile *.c call LoadCTemplate()
    autocmd BufNewFile *.cpp call LoadCPPTemplate()
    autocmd BufNewFile *.sh call LoadBashTemplate()
+   autocmd BufNewFile *.md set filetype=markdown setlocal nospell
    " }}}
 " [ My function   ] {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
