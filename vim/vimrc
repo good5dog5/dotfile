@@ -51,6 +51,7 @@
    Plugin 'Shougo/vimproc.vim'
    Plugin 'Raimondi/delimitMate'
    Plugin 'good5dog5/arm.vim'
+   Plugin 'gabrielelana/vim-markdown'
    call vundle#end()
 
    filetype  indent plugin on
@@ -232,6 +233,7 @@
    "do not check ycm_extra_conf
    let g:ycm_confirm_extra_conf = 0
    let g:ycm_register_as_syntastic_checker = 0
+   let g:ycm_filetype_blacklist={}
 
    "UltiSnips
    function! g:UltiSnips_Complete()

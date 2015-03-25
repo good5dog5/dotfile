@@ -28,7 +28,7 @@ alias grep="grep -n --color=auto"
 #word grep
 alias wg="grep -inR --color=auto"
 #find name
-alias fn="find ./ -name "
+alias fn="find ./ -iname "
 alias dic="sdcv"
 alias opend="xdg-open"
 
