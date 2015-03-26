@@ -22,6 +22,7 @@ setup_others:
 	@cp -R  ${BINDIR}/stardict/* 					   		${STARDICT_DATA_DIR}
 	@ln -fs $(BINDIR)/colorgcc 								${HOME}/usr/bin
 	@ln -fs ${CONFDIR}/gitconfig							${HOME}/.gitconfig
+	@ln -fs ${CONFDIR}/inputrc								${HOME}/.inputrc
 	@cp -R  ${SCRIPTDIR}/*									${HOME}/usr/script/
 
 setup_vim:
