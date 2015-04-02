@@ -28,7 +28,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
    set nocompatible
    filetype off
-   set rtp+=~/.vim/bundle/Vundle/
+   set rtp+=~/.vim/bundle/Vundle.vim/
 
    call vundle#begin()
    Plugin 'gmarik/Vundle.vim'
@@ -52,6 +52,7 @@
    Plugin 'Raimondi/delimitMate'
    Plugin 'good5dog5/arm.vim'
    Plugin 'gabrielelana/vim-markdown'
+   Plugin 'Valloric/MatchTagAlways'
    call vundle#end()
 
    filetype  indent plugin on
@@ -176,6 +177,9 @@
    "Tern_for_vim
    nmap _d :TernDef<CR>
    nmap _D :TernDoc<CR>
+
+   "MatchTagAlways
+   nmap <leader>% :MtaJumpToOtherTag<CR>
    " }}}
    
 " }}}
@@ -263,35 +267,51 @@
    autocmd Filetype make setlocal noexpandtab
    autocmd BufNewFile *.py 0put =\"#!/usr/bin/python\<nl>\"|$
    autocmd BufNewFile,BufRead  *.html set filetype=javascript
-   autocmd BufNewFile,BufRead  *.htm set filetype=javascript
+   autocmd BufNewFile,BufRead  *.htm  set filetype=javascript
+   autocmd BufNewFile,BufRead  *bashrc, *bash_aliases* set filetype=sh
    "Automatic story folding state while switch between buffers
    autocmd BufWinLeave * mkview!
    autocmd BufWinEnter * silent loadview
    "Auto highlight assembly files depands on extension
    au BufRead,BufNewFile *.s set filetype=arm 
    "Open a default template while open c-family file. "
-   autocmd BufNewFile *.c call LoadCTemplate()
+   autocmd BufNewFile *.c   call LoadCTemplate()
    autocmd BufNewFile *.cpp call LoadCPPTemplate()
-   autocmd BufNewFile *.sh call LoadBashTemplate()
-   autocmd BufNewFile *.md set filetype=markdown setlocal nospell
+   autocmd BufNewFile *.sh  call LoadBashTemplate()
+   autocmd BufNewFile *.md set filetype=markdown 
+   autocmd BufNewFile *.md setlocal nospell 
+   autocmd BufNewFile *.md call LoadMarkdownTemplate()
+   "autocmd FileType      c call FoldPreprocessor()
    " }}}
 " [ My function   ] {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       My function                        "        
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "C/C++
-function LoadCTemplate()
+function! LoadCTemplate()
    0r ~/.vim/template/template.c
    normal zR5G
 endfunction
 
-function LoadCPPTemplate()
+function! LoadCPPTemplate()
    0r ~/.vim/template/template.cpp
    normal zR5G
 endfunction
 
 "bash script"
-function LoadBashTemplate()
+function! LoadBashTemplate()
    0r ~/.vim/template/template.sh
    normal zRG
+endfunction
+
+"markdown"
+function! LoadMarkdownTemplate()
+    0r ~/.vim/template/template.md
+    normal zR2G
+endfunction
+
+" Add foldmarker to c and cpp "
+function! FoldPreprocessor()
+    set foldmarker=#if,#endif
+    set foldmethod=marker
 endfunction
