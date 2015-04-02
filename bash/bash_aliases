@@ -35,7 +35,6 @@ alias opend="xdg-open"
 # List only directories
 alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
  
-md () { mkdir -p "$1" && cd "$1"; } #mkdir and go to new dir 
 #Aliases toward tmux
 alias tmux="tmux -2"
 alias tml="tmux list-sessions"
@@ -54,12 +53,7 @@ alias vi="vim"
 alias jserv="jekyll serve"
 
 #For delelopment convinient
-if [ -e "Makefile.ELX" ]
-then
-   alias mm="make -f Makefile.ELX"
-else
-   alias mm="make "
-fi
+
 alias armgcc="arm-linux-gnueabihf-gcc"
 alias armobjdump="arm-linux-gnueabihf-objdump"
 alias gdb="gdb -q"
@@ -75,3 +69,23 @@ alias gl='git log'
 
 alias js="java -jar /home/jordan/.local/bin/js.jar"
 
+# Functions
+mm() { 
+
+    if [ -e "Makefile.ELX" ];
+    then
+        make -f Makefile.ELX
+    else 
+        make 
+fi
+}
+mc() {
+
+    if [ -e "Makefile.ELX" ];
+    then
+        make -f Makefile.ELX clean && make -f Makefile.ELX
+    else
+        make clean && make 
+    fi
+}
+md () { mkdir -p "$1" && cd "$1"; } #mkdir and go to new dir 
