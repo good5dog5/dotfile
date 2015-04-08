@@ -1,0 +1,43 @@
+" Mapping {{{
+map , <leader>
+"" scroll more
+nmap -builtin j 10j
+nmap -builtin k 10k
+
+nmap -builtin x <C-^>
+
+"" U list closed tabs
+nmap -builtin U :undo<Space>
+
+"" prev selected tab
+"}}}
+
+" autoload config file
+map <leader>r :so "~/.pentadactylrc"<cr>
+
+" Set hint keys on the home row
+set hintkeys=asdfghjkl;
+
+" used to use combo {{{
+
+noremap <C-c> <C-v><C-c>
+noremap <C-v> <C-v><C-v>
+noremap <C-x> <C-v><C-x>
+
+cnoremap <C-c> <C-v><C-c>
+cnoremap <C-v> <C-v><C-v>
+cnoremap <C-x> <C-v><C-x>
+
+inoremap <C-c> <C-v><C-c>
+inoremap <C-v> <C-v><C-v>
+inoremap <C-x> <C-v><C-x>
+
+cmap jk <Esc>
+imap jk <Esc>
+
+nmap H :tabprevious<CR>
+nmap L :tabnext<CR>
+
+"}}}
+set go=mTBnrs
+

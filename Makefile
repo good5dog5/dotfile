@@ -31,6 +31,7 @@ setup_vim:
 	@ln -fs $(VIMDIR)/colors/jellybeans.vim 			    ${HOME}/.vim/colors/jellybeans.vim
 	@ln -fs $(VIMDIR)/.ycm_extra_conf.py 				    ${HOME}/.vim/
 	@ln -fs $(VIMDIR)/vimperatorrc 						    ${HOME}/.vimperatorrc
+	@ln -fs $(VIMDIR)/pentadactylrc 						    ${HOME}/.pentadactylrc
 	@cp -r  $(VIMDIR)/template/          				    ${HOME}/.vim/
 
 setup_bash:
