@@ -23,8 +23,15 @@ inoremap <C-x> <Ins><C-x><Ins>
 inoremap <C-z> <Ins><C-z><Ins>
 inoremap <C-y> <Ins><C-y><Ins>
 
+"Undo list
+noremap U :undo<Space>
 set editor="vim"
+let mapleader=","
 
 " PassThrough gmail and greader
 autocmd LocationChange .* js modes.passAllKeys = /.*(mail\.google\.com|www\.google\.com\/reader|docs\.google\.com|192\.168\.*).*/.test(buffer.URL)
 
+"URL Mappings"
+map <leader>git :topen https://github.com/good5dog5<CR>
+map <leader>note :topen http://0.0.0.0:4000<CR>
+map <leader>mail :topen https://mail.google.com<CR>
