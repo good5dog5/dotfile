@@ -293,14 +293,13 @@
    autocmd FileType html set omnifunc=htmlcomplete#CompleteTag,
    autocmd Filetype make setlocal noexpandtab
    autocmd BufNewFile *.py 0put =\"#!/usr/bin/python\<nl>\"|$
-   autocmd BufNewFile,BufRead  *.html set filetype=javascript
-   autocmd BufNewFile,BufRead  *.htm  set filetype=javascript
-   autocmd BufNewFile,BufRead  *bashrc, *bash_aliases* set filetype=sh
+   autocmd BufNewFile,BufRead  *.vim  set filetype=vim
+   autocmd BufNewFile,BufRead  .bash* call SetBashOption()
    "Automatic story folding state while switch between buffers
    autocmd BufWinLeave * mkview!
    autocmd BufWinEnter * silent loadview
    "Auto highlight assembly files depands on extension
-   au BufRead,BufNewFile *.s set filetype=arm 
+   autocmd BufRead,BufNewFile *.s set filetype=arm 
    "Open a default template while open c-family file. "
    autocmd BufNewFile *.c   call LoadCTemplate()
    autocmd BufNewFile *.cpp call LoadCPPTemplate()
@@ -308,17 +307,13 @@
    autocmd BufNewFile *.md set filetype=markdown 
    autocmd BufNewFile *.md setlocal nospell 
    autocmd BufNewFile *.md call LoadMarkdownTemplate()
-   autocmd BufNewFile,BufRead *.py  setlocal tabstop=4  softtabstop=4  shiftwidth=4  textwidth=80  smarttab  expandtab
-   "Auto BufEnter for UltiSnips_Complete, which integrate YCM and Ulitsnips well
-   "autocmd InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-   "autocmd FileType      c call FoldPreprocessor()
-   " }}}
+   autocmd BufNewFile,BufRead *.py  setlocal tabstop=4  softtabstop=4  shiftwidth=4   smarttab  expandtab
 " [ My function   ] {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       My function                        "        
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "C/C++
-function! LoadCTemplate()
+function! LoadCTemplate() 
    0r ~/.vim/template/template.c
    normal zR5G
 endfunction
@@ -344,4 +339,11 @@ endfunction
 function! FoldPreprocessor()
     set foldmarker=#if,#endif
     set foldmethod=marker
+endfunction
+
+" SetOption of bash
+function! SetBashOption()
+    set foldmethod=marker
+    set foldmarker={,}
+    set filetype=sh
 endfunction
