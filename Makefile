@@ -14,7 +14,7 @@ install_all:
 	sh      $(SETUPDIR)/make_needed_dir.sh
 	sh      $(SETUPDIR)/install_vundle.sh
 	sh      $(SETUPDIR)/install_autojump.sh
-	sh      $(SETUPDIR)/install_colorgcc.sh
+	#bash      $(SETUPDIR)/install_colorgcc.sh
 	sh      $(SETUPDIR)/install_powerline_font.sh
 
 setup_others:
