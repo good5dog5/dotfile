@@ -11,10 +11,9 @@ SCRIPTDIR:=${BASEDIR}/script
 all: install_all setup_others setup_bash setup_vim setup_ELX_quicklink
 
 install_all:
-	sh      $(SETUPDIR)/make_needed_dir.sh
+	sh      $(SETUPDIR)/init.sh
 	sh      $(SETUPDIR)/install_vundle.sh
 	sh      $(SETUPDIR)/install_autojump.sh
-	#bash      $(SETUPDIR)/install_colorgcc.sh
 	sh      $(SETUPDIR)/install_powerline_font.sh
 
 setup_others:
@@ -22,7 +21,6 @@ setup_others:
 	@cp -R  ${BINDIR}/stardict/* 					   		${STARDICT_DATA_DIR}
 	@ln -fs $(BINDIR)/colorgcc 								${HOME}/usr/bin
 	@ln -fs ${CONFDIR}/gitconfig							${HOME}/.gitconfig
-	#@ln -fs ${CONFDIR}/inputrc								${HOME}/.inputrc
 	@cp -R  ${SCRIPTDIR}/*									${HOME}/usr/script/
 
 setup_vim:
