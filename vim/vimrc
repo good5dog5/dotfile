@@ -307,7 +307,7 @@
    autocmd BufNewFile *.md set filetype=markdown 
    autocmd BufNewFile *.md setlocal nospell 
    autocmd BufNewFile *.md call LoadMarkdownTemplate()
-   autocmd BufNewFile,BufRead *.py  setlocal tabstop=4  softtabstop=4  shiftwidth=4   smarttab  expandtab
+   autocmd BufNewFile,BufRead *.py call SetPythonOption() 
 " [ My function   ] {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       My function                        "        
@@ -346,4 +346,14 @@ function! SetBashOption()
     set foldmethod=marker
     set foldmarker={,}
     set filetype=sh
+endfunction
+
+function! SetPythonOption()
+    set tabstop=4  
+    set softtabstop=4
+    set shiftwidth=4
+    set smarttab
+    set expandtab
+    set foldmethod=indent
+    set foldnestmax=2
 endfunction

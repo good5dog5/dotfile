@@ -23,9 +23,11 @@ cd /www/cgi-bin/
 printf "\n%s\n\n" "[ Begin remove old cgi ]"
 
 rm admin.cgi                        && show_rm_state admin.cgi
+rm advance.cgi                      && show_rm_state advance.cgi
 rm buzr.cgi                         && show_rm_state buzr.cgi 
 rm cgi_box                          && show_rm_state cgi_box
 rm common.cgi                       && show_rm_state common.cgi
+rm firewall.cgi                     && show_rm_state firewall.cgi
 rm genfile.cgi                      && show_rm_state genfile.cgi
 rm lan.cgi                          && show_rm_state lan.cgi
 rm led.cgi                          && show_rm_state led.cgi
@@ -39,6 +41,7 @@ rm taskmanager.cgi                  && show_rm_state taskmanager.cgi
 rm time.cgi                         && show_rm_state time.cgi
 rm tools.cgi                        && show_rm_state tools.cgi
 rm vlan.cgi                         && show_rm_state vlan.cgi
+rm wan.cgi                          && show_rm_state wan.cgi
 rm wlan.cgi                         && show_rm_state wlan.cgi
 
 printf "\n%s\n\n" "[ Begin transfer new cgi_box ]"
@@ -49,8 +52,10 @@ chmod 755 cgi_box
 printf "\n%s\n\n" "[ Begin linking... ]"
 
 ln -sf  cgi_box admin.cgi           && show_ln_state admin.cgi
+ln -sf  cgi_box advance.cgi         && show_ln_state advance.cgi
 ln -sf  cgi_box buzr.cgi            && show_ln_state bzur.cgi
 ln -sf  cgi_box common.cgi          && show_ln_state common.cgi
+ln -sf  cgi_box firewall.cgi        && show_ln_state firewall.cgi
 ln -sf  cgi_box genfile.cgi         && show_ln_state genfile.cgi
 ln -sf  cgi_box lan.cgi             && show_ln_state lan.cgi
 ln -sf  cgi_box led.cgi             && show_ln_state led.cgi
@@ -64,6 +69,7 @@ ln -sf  cgi_box taskmanager.cgi     && show_ln_state taskmanager.cgi
 ln -sf  cgi_box time.cgi            && show_ln_state time.cgi
 ln -sf  cgi_box tools.cgi           && show_ln_state tools.cgi
 ln -sf  cgi_box vlan.cgi            && show_ln_state vlan.cgi
+ln -sf  cgi_box wan.cgi             && show_ln_state wan.cgi
 ln -sf  cgi_box wlan.cgi            && show_ln_state wlan.cgi
 
 printf "\n%s\n\n" "[ All done. ]"

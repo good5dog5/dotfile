@@ -2,7 +2,6 @@
 
 sudo ln -sf /bin/bash /bin/sh
 
-user="felixlin"
 
 DIR[0]="$HOME/.vim/colors/"
 DIR[1]="$HOME/.fonts/"
@@ -13,7 +12,7 @@ DIR[3]="$HOME/stardict/dic/"
 for d in "${DIR[@]}"; do
     if [ ! -d "$d" ]; then
        sudo rm -rf $d
-       sudo -u $user mkdir -p  $d && printf "%-35s %6s\n" "Make dir $d " "[done]"
+       sudo -u $USER mkdir -p  $d && printf "%-35s %6s\n" "Make dir $d " "[done]"
     fi
 done
 

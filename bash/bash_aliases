@@ -77,18 +77,18 @@ mm() {
 
     if [ -e "Makefile.ELX" ];
     then
-        make -f Makefile.ELX
+        colormake -f Makefile.ELX $1
     else 
-        make 
+        colormake $1
 fi
 }
 mc() {
 
     if [ -e "Makefile.ELX" ];
     then
-        make -f Makefile.ELX clean && make -f Makefile.ELX
+        colormake -f Makefile.ELX clean && colormake -f Makefile.ELX $1
     else
-        make clean && make 
+        colormake clean && colormake $1
     fi
 }
 jserv () {
