@@ -64,10 +64,18 @@
    set foldnestmax=8
    set foldcolumn=3
 
-   set tabstop=4
-   set smartindent
-   set shiftwidth=4
-   set expandtab
+   "retab command can replace all sequence of white-space"
+   "contain<bt> with new strings of wihte-space, use the"
+   "value of tabstop"'
+   "/\t can use for visable <tab> "
+
+   set expandtab        
+   set tabstop=4        
+   set shiftwidth=4     "number of spaces to use for each step of (auto)indent, use for cindent >> << etc"
+                        
+                        
+                        
+   set smartindent     
    set autoindent
 
    set fileencodings=utf-8
@@ -78,8 +86,8 @@
 
    set switchbuf=split
 
-   set showcmd		" Show (partial) command in status line.
-   set incsearch		" Incremental search
+   set showcmd      " Show (partial) command in status line.
+   set incsearch        " Incremental search
 
 
    set wildmode=list:longest,full
@@ -302,6 +310,7 @@
    autocmd BufRead,BufNewFile *.s set filetype=arm 
    "Open a default template while open c-family file. "
    autocmd BufNewFile *.c   call LoadCTemplate()
+   autocmd BufReadPost,BufNewFile *.c call SetupELXEnvironment() 
    autocmd BufNewFile *.cpp call LoadCPPTemplate()
    autocmd BufNewFile *.sh  call LoadBashTemplate()
    autocmd BufNewFile *.md set filetype=markdown 
@@ -356,4 +365,15 @@ function! SetPythonOption()
     set expandtab
     set foldmethod=indent
     set foldnestmax=2
+endfunction
+
+function! SetupELXEnvironment()
+    let l:path = expand('%:p')
+    if l:path =~ '/home/jordan/Documents/Edimax/ELX/*'
+        set tabstop=8
+        set shiftwidth=8
+        set softtabstop=8
+        set expandtab
+
+    endif
 endfunction

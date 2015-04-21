@@ -77,23 +77,32 @@ mm() {
 
     if [ -e "Makefile.ELX" ];
     then
-        colormake -f Makefile.ELX $1
+        colormake -f Makefile.ELX clean && colormake -f Makefile.ELX $1
     else 
-        colormake $1
+        colormake clean && colormake $1
 fi
 }
 mc() {
 
     if [ -e "Makefile.ELX" ];
     then
-        colormake -f Makefile.ELX clean && colormake -f Makefile.ELX $1
+        colormake -f Makefile.ELX clean 
     else
-        colormake clean && colormake $1
+        colormake clean 
     fi
 }
 jserv () {
     if [ -d "$HOME/Dropbox/EDIMAX" ];
     then
         cd $HOME/Dropbox/EDIMAX && jekyll serve 
+    fi
+}
+uva() {
+    mkdir -p "$1" && cd "$1"
+    cp "$HOME/.vim/template/template.c" "./$1.c"
+
+    if [ -f "../Makefile" ];
+    then
+        ln -sf "../Makefile" "./Makefile"
     fi
 }
