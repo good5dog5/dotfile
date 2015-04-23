@@ -310,12 +310,13 @@
    autocmd BufRead,BufNewFile *.s set filetype=arm 
    "Open a default template while open c-family file. "
    autocmd BufNewFile *.c   call LoadCTemplate()
-   autocmd BufReadPost,BufNewFile *.c call SetupELXEnvironment() 
+   "autocmd BufReadPost,BufNewFile *.c call SetupELXEnvironment() 
    autocmd BufNewFile *.cpp call LoadCPPTemplate()
    autocmd BufNewFile *.sh  call LoadBashTemplate()
    autocmd BufNewFile *.md set filetype=markdown 
    autocmd BufNewFile *.md setlocal nospell 
    autocmd BufNewFile *.md call LoadMarkdownTemplate()
+   autocmd BufNewFile gdb* set filetype=gdb
    autocmd BufNewFile,BufRead *.py call SetPythonOption() 
 " [ My function   ] {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
