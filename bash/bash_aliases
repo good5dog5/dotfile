@@ -18,12 +18,13 @@ alias etmr="vim $HOME/.tmux.conf"
 #Shortcuts
 alias h="history | tail -100"
 
-alias ll="ls -alhF --color=auto"
+# ls -r mean reverse the sort order
+alias ll="ls -alrhF --color=auto --group-directories-first"
 #list hidden files
 alias l.="ls -d .*"
 #list directories
-alias lld="ls -lUd */ --color=auto"  
-alias ls="ls --color=auto  --group-directories-first --sort=extension"
+alias lld="ls -lrUd */ --color=auto"  
+alias ls="ls -r --color=auto  --group-directories-first --sort=extension"
 alias grep="grep -n --color=auto"
 #word grep
 alias wg="grep -inR --color=auto"
@@ -73,22 +74,54 @@ alias js="java -jar /home/jordan/.local/bin/js.jar"
 md () { mkdir -p "$1" && cd "$1"; } #mkdir and go to new dir 
 #bu - Back Up a file. Usage "bu filename.txt" 
 bu () { cp $1 ${1}-`date +%Y%m%d%H%M`.backup ; }
-mm() { 
+
+# MAKE 
+#-------------------------------------
+makefile=""
+make=""
+
+chkEnv() {
+    # Determine make and makefile
 
     if [ -e "Makefile.ELX" ];
     then
-        colormake -f Makefile.ELX clean && colormake -f Makefile.ELX $1
-    else 
-        colormake clean && colormake $1
-fi
+        makefile="Makefile.ELX"
+    else
+        makefile="Makefile"
+    fi
+    if [ "${PWD##/home/jordan/Documents/Edimax/ELX/boards}" != "${PWD}" ];
+    then 
+        make="make"
+    else
+        make="colormake"
+    fi
+    echo $makefile
+    echo $make
 }
+
+# Make 
+mm() { 
+    chkEnv
+    $make -f $makefile $1
+}
+# make clear
 mc() {
 
-    if [ -e "Makefile.ELX" ];
+    chkEnv
+    $make -f $makefile clean
+}
+# Clear then make all
+cm() {
+    chkEnv
+    $make -f $makefile clean && $make -f $makefile $1
+}
+# make -f makefile menuconfig
+mmu() {
+    if [ "${PWD##/home/jordan/Documents/Edimax/ELX/boards}" != "${PWD}" ];
     then
-        colormake -f Makefile.ELX clean 
+        make -f Makefile.ELX menuconfig
     else
-        colormake clean 
+        echo "Please eba"
     fi
 }
 jserv () {
@@ -98,6 +131,7 @@ jserv () {
     fi
 }
 uva() {
+    cd "$HOME/github/codeSet/c/Uva/"
     mkdir -p "$1" && cd "$1"
     cp "$HOME/.vim/template/template.c" "./$1.c"
 
