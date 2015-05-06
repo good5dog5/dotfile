@@ -25,7 +25,7 @@ alias l.="ls -d .*"
 #list directories
 alias lld="ls -lrUd */ --color=auto"  
 alias ls="ls -r --color=auto  --group-directories-first --sort=extension"
-alias grep="grep -n --color=auto"
+alias grep="grep  --color=auto"
 #word grep
 alias wg="grep -inR --color=auto"
 #find name
@@ -69,6 +69,7 @@ alias gd='git diff'
 alias gl='git log'
 
 alias js="java -jar /home/jordan/.local/bin/js.jar"
+alias netok="ping 8.8.8.8"
 
 # Functions ------------------
 md () { mkdir -p "$1" && cd "$1"; } #mkdir and go to new dir 

@@ -72,7 +72,8 @@
    set expandtab        
    set tabstop=4        
    set shiftwidth=4     "number of spaces to use for each step of (auto)indent, use for cindent >> << etc"
-                        
+
+   set backspace=indent,eol,start                       
                         
                         
    set smartindent     
@@ -137,6 +138,7 @@
    "clear highlight after search
    nnoremap <CR> :noh<CR><CR>
    nmap <leader>v :tabedit $MYVIMRC<CR>
+   nmap <leader>l :call ShowText() <CR>
    nmap <leader>r :source $MYVIMRC<CR>
    nmap <leader>n :NERDTree .<CR>
    nmap <leader>w :w<CR>
@@ -310,13 +312,12 @@
    autocmd BufRead,BufNewFile *.s set filetype=arm 
    "Open a default template while open c-family file. "
    autocmd BufNewFile *.c   call LoadCTemplate()
-   "autocmd BufReadPost,BufNewFile *.c call SetupELXEnvironment() 
    autocmd BufNewFile *.cpp call LoadCPPTemplate()
    autocmd BufNewFile *.sh  call LoadBashTemplate()
-   autocmd BufNewFile *.md set filetype=markdown 
-   autocmd BufNewFile *.md setlocal nospell 
-   autocmd BufNewFile *.md call LoadMarkdownTemplate()
-   autocmd BufNewFile gdb* set filetype=gdb
+   autocmd BufNewFile *.md  set filetype=markdown 
+   autocmd BufNewFile *.md  setlocal nospell 
+   autocmd BufNewFile *.md  call LoadMarkdownTemplate()
+   autocmd BufNewFile gdb*  set filetype=gdb
    autocmd BufNewFile,BufRead *.py call SetPythonOption() 
 " [ My function   ] {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -377,4 +378,20 @@ function! SetupELXEnvironment()
         set expandtab
 
     endif
+endfunction
+function! ShowText()
+
+    let num = expand("<cword>")
+    let path = expand('%@')
+
+    " If word under cursor isn't a number
+    if type(str2nr(num)) == 0 && str2nr(num) <= 0
+        return -1
+    endif
+
+    echomsg path
+
+
+
+
 endfunction
