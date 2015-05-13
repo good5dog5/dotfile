@@ -1,37 +1,58 @@
-map A <Nop>
-map <C-o> <Nop>
-map <C-i> <Nop>
-map J <C-d>
-noremap K <C-u>
-noremap h gT
-noremap l gt
-noremap j 3j
-noremap k 3k
-noremap I <C-o>
-noremap O <C-i>
-noremap <C-u> <C-v><C-u>
-noremap <C-s> <C-c>
-noremap <C-c> <C-v><C-c>
-noremap <C-a> <C-v><C-a>
-cnoremap <C-c> <C-v><C-c>
-cnoremap <C-v> <C-v><C-v>
-cnoremap <C-x> <C-v><C-x>
-inoremap <C-a> <Ins><C-a><Ins>
-inoremap <C-c> <Ins><C-c><Ins>
-inoremap <C-v> <Ins><C-v><Ins>
-inoremap <C-x> <Ins><C-x><Ins>
-inoremap <C-z> <Ins><C-z><Ins>
-inoremap <C-y> <Ins><C-y><Ins>
+" Settings {{{1
+    "Use letter instead of numbers"
+    set hintchars=abcdefghijklmnopqrstuvwxyz        
+    " a max number of listing items
+    set maxitems=10
+    " don't focus the new opened tab automatically
+    set activate=
+    " all type pages are opened in new tab
+    " addons + downloads + help + javascript + prefs
+    set newtab=all
+
+    set editor="urxvt -fn 'xft:Bitstream Vera Sans Mono:pixelsize=15' -e vim"
+
+" Mappings {{{1
+    " clear all key mappings
+    " to avoid troubles from loading rc file several times
+    mapclear
+    cmapclear
+    imapclear
+
+    let mapleader=","
+
+    map A <Nop>
+    map <C-o> <Nop>
+    map <C-i> <Nop>
+    map J <C-d>
+    noremap h gT
+    noremap l gt
+    noremap j 6j
+    noremap k 6k
+
+    noremap  I     <C-o>
+    noremap  O     <C-i>
+    noremap  <C-u> <C-v><C-u>
+    noremap  <C-s> <C-c>
+    noremap  <C-c> <C-v><C-c>
+    noremap  <C-a> <C-v><C-a>
+    cnoremap <C-c> <C-v><C-c>
+    cnoremap <C-v> <C-v><C-v>
+    cnoremap <C-x> <C-v><C-x>
+    inoremap <C-a> <Ins><C-a><Ins>
+    inoremap <C-c> <Ins><C-c><Ins>
+    inoremap <C-v> <Ins><C-v><Ins>
+    inoremap <C-x> <Ins><C-x><Ins>
+    inoremap <C-z> <Ins><C-z><Ins>
+    inoremap <C-y> <Ins><C-y><Ins>
+    nmap     <leader>r : source ~/.vimperatorrc<CR> :echomsg "Reload vimperatorrc [done]"<CR>
 
 "Undo list
 noremap U :undo<Space>
-set editor="vim"
-let mapleader=","
 
 " PassThrough gmail and greader
 autocmd LocationChange .* js modes.passAllKeys = /.*(mail\.google\.com|www\.google\.com\/reader|docs\.google\.com|192\.168\.*).*/.test(buffer.URL)
 
 "URL Mappings"
-map <leader>git :topen https://github.com/good5dog5<CR>
-map <leader>note :topen http://0.0.0.0:4000<CR>
-map <leader>mail :topen https://mail.google.com<CR>
+map  <leader>git :topen https://github.com/good5dog5<CR>
+map  <leader>note :topen http://0.0.0.0:4000<CR>
+map  <leader>mail :topen https://mail.google.com<CR>
