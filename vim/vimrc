@@ -36,7 +36,6 @@
    Plugin 'MarcWeber/vim-addon-mw-utils'
    Plugin 'vim-scripts/L9'
    Plugin 'bling/vim-airline'
-   Plugin 'xuhdev/SingleCompile' 
    Plugin 'scrooloose/nerdtree'
    Plugin 'Valloric/YouCompleteMe'
    Plugin 'pangloss/vim-javascript'
@@ -55,6 +54,8 @@
    Plugin 'Valloric/MatchTagAlways'
    Plugin 'hynek/vim-python-pep8-indent'
    Plugin 'ervandew/supertab'
+   Plugin 'Lokaltog/vim-easymotion'
+   Plugin 'majutsushi/tagbar'
    call vundle#end()
 
    filetype  indent plugin on
@@ -141,12 +142,9 @@
    nmap <leader>l :call ShowText() <CR>
    nmap <leader>r :source $MYVIMRC<CR>
    nmap <leader>n :NERDTree .<CR>
-   nmap <leader>w :w<CR>
-   nmap <leader>wq :w<CR> :bd <CR>
    nmap <leader>q :bd<CR>
    nmap <leader><Tab> <C-W><C-W>
-   nmap  <F4> :!clear <CR> :SCCompile<CR>
-   nmap  <F5> :!clear <CR> :SCCompileRun<CR>
+   nmap <F8>      :TagbarToggle<CR>
    "Replace word under current cursor"
    nmap <leader>s :%s/\<<C-r><C-w>\>/
    nmap ,d :b#<bar>bd#<CR>
@@ -154,45 +152,29 @@
    vmap <C-c> "+y
    nmap <C-p> "+p
 
-   " }}} 
-   " [ Buf switch | tab switch ] {{{
-      nmap <leader>b :bnext<CR>
-      nmap <leader>B :bprevious<CR>
-      nmap <leader>t :tabnext<CR>
-      nmap <leader>T :tabprevious<CR>
-   " }}}
-   " [ Plugin       ] {{{
+   "}}} 
+   "[ Buf switch | tab switch ] {{{
+      nmap <silent> <Left>  :bprevious<CR>
+      nmap <silent> <Right> :bprevious<CR>
+
+      " Alt + Num to switch to buffer[Num]
+      nmap <silent> <M-1> :confirm :b1<CR>
+      nmap <silent> <M-2> :confirm :b2<CR>
+      nmap <silent> <M-3> :confirm :b3<CR>
+      nmap <silent> <M-4> :confirm :b4<CR>
+      nmap <silent> <M-5> :confirm :b5<CR>
+      nmap <silent> <M-6> :confirm :b6<CR>
+      nmap <silent> <M-7> :confirm :b7<CR>
+      nmap <silent> <M-8> :confirm :b8<CR>
+      nmap <silent> <M-9> :confirm :b9<CR>
+   "}}}
+   "[ Plugin       ] {{{
    function! JavaScriptFold()
          setl foldmethod=syntax
          setl foldlevelstart=1
          syntax region foldBraces start=/{/ end=/}/ transparent fold keepend extend
    endfunction
-
-   if exists(":Tabularize")
-      nmap <Leader><F1>= :Tabularize /=<CR>
-      vmap <Leader><F1>= :Tabularize /=<CR>
-      nmap <Leader><F1>: :Tabularize /:\zs<CR>
-      vmap <Leader><F1>: :Tabularize /:\zs<CR>
-   endif
-
-   "YCM
-   nmap <leader>gl :YcmCompleter GoToDeclaration<CR>
-   nmap <leader>gf :YcmCompleter GoToDefinition<CR>
-   nmap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
-   "UltiSnips
-   let g:UltiSnipsJumpForwardTrigger="<tab>"
-   nmap <leader>+ =:set syntax=javascript<CR>
-
-   "Unite
-   nmap <leader>f :Unite -start-insert file_rec/async:!<CR>
-   "Tern_for_vim
-   nmap _d :TernDef<CR>
-   nmap _D :TernDoc<CR>
-
-   "MatchTagAlways
-   nmap <leader>% :MtaJumpToOtherTag<CR>
-   " }}}
+   "}}}
    
 " }}}
 " [ Plugin configure ] {{{
@@ -200,8 +182,6 @@
 "                       Plugin configure                   "        
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-   let g:SingleCompile_menumode = 2
-   let g:SingleCompile_split = 'split'
 
    let g:airline_powerline_fonts = 1
    let g:airline#extensions#tabline#enabled = 1
@@ -216,18 +196,21 @@
    let g:javascript_enable_domhtmlcss = 1
 
 
-   map <c-f> :call JsBeautify()<cr>
 
    if has("cscope")
+
       "Specifies the command to execute cscope
       set csprg=/usr/bin/cscope
+
       "Determine the order in which cstag performs a search, default 0"
       "indicate search cscope first"
       set csto=0
       set cst
+
       "Search and add cscopt.out frim current directory up to root
-      "
+
       let db = findfile("cscope.out", ".;")
+
       if (!empty(db))
          let path = strpart(db, 0, match(db, "/cscope.out$"))
          set nocscopeverbose " suppress 'duplicate connection' error
@@ -236,64 +219,79 @@
       set csverb
    endif
 
+   "Tabularize
 
+       if exists(":Tabularize")
+          nmap <Leader><F1>= :Tabularize /=<CR>
+          vmap <Leader><F1>= :Tabularize /=<CR>
+          nmap <Leader><F1>: :Tabularize /:\zs<CR>
+          vmap <Leader><F1>: :Tabularize /:\zs<CR>
+       endif
 
    "YCM
-   "location for global configure file
-   let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-   let g:ycm_seed_identifiers_with_syntax = 1
-   "enable completion in comment
-   let g:ycm_complete_in_comments = 1
-   "start completion while typing first charcter
-   let g:ycm_min_num_of_chars_for_completion = 3
-   "do not check ycm_extra_conf
-   let g:ycm_confirm_extra_conf = 0
-   let g:ycm_register_as_syntastic_checker = 0
-   let g:ycm_filetype_blacklist={}
+
+       nmap <leader>gl :YcmCompleter GoToDeclaration<CR>
+       nmap <leader>gf :YcmCompleter GoToDefinition<CR>
+       nmap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+       "location for global configure file
+       let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+       let g:ycm_seed_identifiers_with_syntax = 1
+
+       "enable completion in comment
+       let g:ycm_complete_in_comments = 1            
+
+       "start completion while typing first charcter
+       let g:ycm_min_num_of_chars_for_completion = 3 
+       
+       "do not check ycm_extra_conf
+       let g:ycm_confirm_extra_conf = 0
+       let g:ycm_register_as_syntastic_checker = 0
+       let g:ycm_filetype_blacklist={}
 
    "UltiSnips
 
-    " make YCM compatible with UltiSnips (using supertab)
-    let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-    let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-    let g:SuperTabDefaultCompletionType = '<C-n>'
+        nmap <leader>+ =:set syntax=javascript<CR>
 
-    " better key bindings for UltiSnipsExpandTrigger
-    let g:UltiSnipsExpandTrigger = "<tab>"
-    let g:UltiSnipsJumpForwardTrigger = "<tab>"
-    let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-   "let g:UltiSnipsJumpForwardTrigger="<tab>"
+        let g:UltiSnipsJumpForwardTrigger="<tab>"
 
-   "function! g:UltiSnips_Complete()
-   "   call UltiSnips#ExpandSnippet()
-   "   if g:ulti_expand_res == 0
-   "      if pumvisible()
-   "         return "\<C-n>"
-   "      else
-   "         call UltiSnips#JumpForwards()
-   "         if g:ulti_jump_forwards_res == 0
-   "            return "\<TAB>"
-   "         endif
-   "      endif
-   "   endif
-   "   return ""
-   "endfunction
+        " make YCM compatible with UltiSnips (using supertab)
+        let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+        let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+        let g:SuperTabDefaultCompletionType = '<C-n>'
 
-   ""Expand snippet or return
-   "let g:ulti_expand_res = 0
-   "function! Ulti_ExpandOrEnter()
-   "    call UltiSnips#ExpandSnippet()
-   "    if g:ulti_expand_res
-   "        return ''
-   "    else
-   "        return "\<return>"
-   "endfunction
-
-   ""Set <space> as primary trigger
-   "inoremap <return> <C-R>=Ulti_ExpandOrEnter()<CR>
+        " better key bindings for UltiSnipsExpandTrigger
+        let g:UltiSnipsExpandTrigger = "<tab>"
+        let g:UltiSnipsJumpForwardTrigger = "<tab>"
+        let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+       "let g:UltiSnipsJumpForwardTrigger="<tab>"
 
    "Unite
-   let g:unite_source_file_rec_max_cache_files=1000
+
+       nmap <leader>f :Unite -start-insert file_rec/async:!<CR>
+
+   "Tern_for_vim
+
+       nmap _d :TernDef<CR>
+       nmap _D :TernDoc<CR>
+
+       let g:unite_source_file_rec_max_cache_files=1000
+
+   "Easy-motion
+
+        let g:EasyMotion_do_mapping = 0 "Disable default mapping
+        let g:EasyMotion_smartcase  = 1 "Turn on case insensitive feature
+
+        "2-character search motion
+        nmap s <Plug>(easymotion-s2)
+
+        " JK motions: Line motions
+        map <Leader>j <Plug>(easymotion-j)
+        map <Leader>k <Plug>(easymotion-k)
+
+   "MatchTagAlways
+
+       nmap <leader>% :MtaJumpToOtherTag<CR>
 " }}}
 " [ Auto command   ] {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -301,13 +299,17 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
    autocmd FileType vim setlocal fdm=marker
    autocmd FileType html set omnifunc=htmlcomplete#CompleteTag,
+   autocmd FileType htm* set filetype=javascript
    autocmd Filetype make setlocal noexpandtab
    autocmd BufNewFile *.py 0put =\"#!/usr/bin/python\<nl>\"|$
-   autocmd BufNewFile,BufRead  *.vim  set filetype=vim
-   autocmd BufNewFile,BufRead  .bash* call SetBashOption()
+   autocmd BufNewFile,BufRead  *.vim*  set filetype=vim
+   autocmd BufNewFile,BufRead  *.bash* call SetBashOption()
+   autocmd BufNewFile,BufRead  *.sh    call SetBashOption()
+
    "Automatic story folding state while switch between buffers
    autocmd BufWinLeave * mkview!
    autocmd BufWinEnter * silent loadview
+
    "Auto highlight assembly files depands on extension
    autocmd BufRead,BufNewFile *.s set filetype=arm 
    "Open a default template while open c-family file. "
