@@ -22,7 +22,7 @@
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " }}}
-" [ General          ] {{{
+" [ General          ] {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       General                            "        
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -40,7 +40,6 @@
    Plugin 'Valloric/YouCompleteMe'
    Plugin 'pangloss/vim-javascript'
    Plugin 'jelera/vim-javascript-syntax'
-   Plugin 'maksimr/vim-jsbeautify'
    Plugin 'godlygeek/tabular'
    Plugin 'marijnh/tern_for_vim'
    Plugin 'steffanc/cscopemaps.vim'
@@ -129,31 +128,37 @@
    
    set laststatus=2
 " }}}
-" [ Useful shortcuts ] {{{
+" [ Useful shortcuts ] {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       Useful shortcuts                   "        
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-   " [ General         ] {{{
+   " [ General         ] {{{2
    "Set key combination's map leader
    let mapleader = ","
-   "clear highlight after search
+
+   "clear highlight after search nnoremap: nmap and no-remap
    nnoremap <CR> :noh<CR><CR>
+
    nmap <leader>v :tabedit $MYVIMRC<CR>
    nmap <leader>l :call ShowText() <CR>
    nmap <leader>r :source $MYVIMRC<CR>
    nmap <leader>n :NERDTree .<CR>
-   nmap <leader>q :bd<CR>
+   nmap <leader>q  :bd<CR>
    nmap <leader><Tab> <C-W><C-W>
+
    nmap <F8>      :TagbarToggle<CR>
+
    "Replace word under current cursor"
    nmap <leader>s :%s/\<<C-r><C-w>\>/
    nmap ,d :b#<bar>bd#<CR>
+
    imap jk <Esc>
+
    vmap <C-c> "+y
    nmap <C-p> "+p
 
    "}}} 
-   "[ Buf switch | tab switch ] {{{
+   "[ Buf switch | tab switch ] {{{2
       nmap <silent> <Left>  :bprevious<CR>
       nmap <silent> <Right> :bprevious<CR>
 
@@ -168,7 +173,7 @@
       nmap <silent> <M-8> :confirm :b8<CR>
       nmap <silent> <M-9> :confirm :b9<CR>
    "}}}
-   "[ Plugin       ] {{{
+   "[ Plugin       ] {{{2
    function! JavaScriptFold()
          setl foldmethod=syntax
          setl foldlevelstart=1
@@ -289,9 +294,18 @@
         map <Leader>j <Plug>(easymotion-j)
         map <Leader>k <Plug>(easymotion-k)
 
-   "MatchTagAlways
+   " MatchTagAlways
 
        nmap <leader>% :MtaJumpToOtherTag<CR>
+   " Tagbar
+
+       let g:tagbar_type_make = {
+                   \ 'kinds':[
+                       \ 'm:macros',
+                       \ 't:targets'
+                   \ ]
+       \}
+
 " }}}
 " [ Auto command   ] {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -307,8 +321,8 @@
    autocmd BufNewFile,BufRead  *.sh    call SetBashOption()
 
    "Automatic story folding state while switch between buffers
-   autocmd BufWinLeave * mkview!
-   autocmd BufWinEnter * silent loadview
+   autocmd BufWinLeave ?* mkview!
+   autocmd BufWinEnter ?* silent loadview
 
    "Auto highlight assembly files depands on extension
    autocmd BufRead,BufNewFile *.s set filetype=arm 

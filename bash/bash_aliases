@@ -70,6 +70,7 @@ alias gl='git log'
 
 alias js="java -jar /home/jordan/.local/bin/js.jar"
 alias netok="ping 8.8.8.8"
+alias twk="python $HOME/usr/venv/bin/rainbowstream"
 
 # Functions ------------------
 md () { mkdir -p "$1" && cd "$1"; } #mkdir and go to new dir 
@@ -90,7 +91,7 @@ chkEnv() {
     else
         makefile="Makefile"
     fi
-    if [ "${PWD##/home/jordan/Documents/Edimax/ELX/boards}" != "${PWD}" ];
+    if [ "${PWD##$HOME/Documents/Edimax/ELX/boards}" != "${PWD}" ];
     then 
         make="make"
     else
@@ -173,4 +174,10 @@ Gcgi() {
 
     curl --digest -u "$USER:$PASS" "http://$IP/cgi-bin/$1.cgi?info=$2&radio_idx=$3" \
         | jq '.'
+}
+function path(){
+    old=$IFS
+    IFS=:
+    printf "%s\n" $PATH
+    IFS=$old
 }
