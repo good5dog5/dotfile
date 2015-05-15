@@ -295,8 +295,8 @@
         map <Leader>k <Plug>(easymotion-k)
 
    " MatchTagAlways
-
        nmap <leader>% :MtaJumpToOtherTag<CR>
+
    " Tagbar
 
        let g:tagbar_type_make = {
@@ -313,7 +313,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
    autocmd FileType vim setlocal fdm=marker
    autocmd FileType html set omnifunc=htmlcomplete#CompleteTag,
-   autocmd FileType htm* set filetype=javascript
+   autocmd BufNewFile,BufRead htm* set filetype=javascript
    autocmd Filetype make setlocal noexpandtab
    autocmd BufNewFile *.py 0put =\"#!/usr/bin/python\<nl>\"|$
    autocmd BufNewFile,BufRead  *.vim*  set filetype=vim
@@ -385,16 +385,6 @@ function! SetPythonOption()
     set foldnestmax=2
 endfunction
 
-function! SetupELXEnvironment()
-    let l:path = expand('%:p')
-    if l:path =~ '/home/jordan/Documents/Edimax/ELX/*'
-        set tabstop=8
-        set shiftwidth=8
-        set softtabstop=8
-        set expandtab
-
-    endif
-endfunction
 function! ShowText()
 
     let num = expand("<cword>")

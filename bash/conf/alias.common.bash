@@ -12,7 +12,7 @@ alias dc="cd ~/Documents"
 alias evr="vim $HOME/.vimrc"
 alias ebr="vim $HOME/.bashrc"
 alias sbr="source $HOME/.bashrc"
-alias eba="vim $HOME/.bash_aliases"
+alias eba="vim $HOME/bash_conf/alias.common.bash"
 alias etmr="vim $HOME/.tmux.conf"
 
 #Shortcuts
@@ -59,14 +59,6 @@ alias armgcc="arm-linux-gnueabihf-gcc"
 alias armobjdump="arm-linux-gnueabihf-objdump"
 alias gdb="gdb -q"
 
-#For git
-alias gst='git status '
-alias gstuno='git status -uno'
-alias ga='git add '
-alias gb='git branch '
-alias gc='git commit'
-alias gd='git diff'
-alias gl='git log'
 
 alias js="java -jar /home/jordan/.local/bin/js.jar"
 alias netok="ping 8.8.8.8"
@@ -79,53 +71,6 @@ bu () { cp $1 ${1}-`date +%Y%m%d%H%M`.backup ; }
 
 # MAKE 
 #-------------------------------------
-makefile=""
-make=""
-
-chkEnv() {
-    # Determine make and makefile
-
-    if [ -e "Makefile.ELX" ];
-    then
-        makefile="Makefile.ELX"
-    else
-        makefile="Makefile"
-    fi
-    if [ "${PWD##$HOME/Documents/Edimax/ELX/boards}" != "${PWD}" ];
-    then 
-        make="make"
-    else
-        make="colormake"
-    fi
-    echo $makefile
-    echo $make
-}
-
-# Make 
-mm() { 
-    chkEnv
-    $make -f $makefile $1
-}
-# make clear
-mc() {
-
-    chkEnv
-    $make -f $makefile clean
-}
-# Clear then make all
-cm() {
-    chkEnv
-    $make -f $makefile clean && $make -f $makefile $1
-}
-# make -f makefile menuconfig
-mmu() {
-    if [ "${PWD##/home/jordan/Documents/Edimax/ELX/boards}" != "${PWD}" ];
-    then
-        make -f Makefile.ELX menuconfig
-    else
-        echo "Please eba"
-    fi
-}
 jserv () {
     if [ -d "$HOME/Dropbox/EDIMAX" ];
     then
@@ -166,14 +111,6 @@ extract () {
 	else
 		echo "'$1' is not a valid file"
 	fi
-}
-Gcgi() {
-    local IP="192.168.2.2"
-    local USER="admin"
-    local PASS="1234"
-
-    curl --digest -u "$USER:$PASS" "http://$IP/cgi-bin/$1.cgi?info=$2&radio_idx=$3" \
-        | jq '.'
 }
 function path(){
     old=$IFS

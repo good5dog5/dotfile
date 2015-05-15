@@ -9,7 +9,7 @@
     " addons + downloads + help + javascript + prefs
     set newtab=all
 
-    set editor="urxvt -fn 'xft:Bitstream Vera Sans Mono:pixelsize=15' -e vim"
+    set editor="urxvt -fn 'xft:Droid Sans Mono for Powerline:pixelsize=15' -e vim"
 
 " Mappings {{{1
     " clear all key mappings
@@ -29,8 +29,8 @@
     noremap j 6j
     noremap k 6k
 
-    noremap  I     <C-o>
-    noremap  O     <C-i>
+    noremap  I     <C-i>
+    noremap  O     <C-o>
     noremap  <C-u> <C-v><C-u>
     noremap  <C-s> <C-c>
     noremap  <C-c> <C-v><C-c>
@@ -50,7 +50,7 @@
 noremap U :undo<Space>
 
 " PassThrough gmail and greader
-autocmd LocationChange .* js modes.passAllKeys = /.*(mail\.google\.com|www\.google\.com\/reader|docs\.google\.com|192\.168\.*).*/.test(buffer.URL)
+autocmd LocationChange .* js modes.passAllKeys = /.*(mail\.google\.com|www\.google\.com\/reader|docs\.google\.com).*/.test(buffer.URL)
 
 "URL Mappings"
 map  <leader>git :topen https://github.com/good5dog5<CR>
