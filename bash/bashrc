@@ -4,16 +4,33 @@
 [ -z "$PS1" ] && return
 
 # Set the default editor
+PATH="$HOME/.local/bin        \
+     :$HOME/usr/script        \
+     :$HOME/usr/phantomjs/bin \
+     :$PATH"
+
+if [ -d "$HOME/bash_conf" ]; then
+
+    CUSTOM="$HOME/bash_conf/*"
+    for conf in $CUSTOM
+    do
+        source "$conf"
+    done
+fi
+
+export CLASSPATH="$HOME/.local/bin/js.jar"
 export EDITOR=vim
-export PATH=$HOME/.local/bin:$HOME/usr/script:/usr/clang_3_4/bin:$HOME/usr/phantomjs/bin:$HOME/usr/venv/bin:$PATH
-export CLASSPATH="$HOE/.local/bin/js.jar"
 
 #Some path for daily use
 export STARDICT_DATA_DIR=$HOME/stardict/dic/
 export UVA_PATH=$HOME/github/codeSet/c/Uva/
 
+#Get color support for 'less'
+export LESS="--RAW-CONTROL-CHARS"
+export NVM_DIR="/home/jordan/.nvm"
 
 [ -e /etc/default/locale ] &&  source /etc/default/locale
+
 #Enable programmable completion features.
 if [ -f /etc/bash_completion ]; then
    source /etc/bash_completion
@@ -54,14 +71,13 @@ shopt -s histappend
 shopt -s checkwinsize
 shopt -s histverify
 
-if [ -f ~/.bash_aliases ]; then
-   source ~/.bash_aliases
-fi
 
 #Use vim as man page viewer
 #export MANPAGER="/bin/sh -c \"unset PAGER;col -b -x |  vim -R -c 'set ft=man nomod nolist' -c 'map q :q<CR>' -c 'map <SPACE> <C-D>' -c 'map b <C-U>' -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
-#Get color support for 'less'
-export LESS="--RAW-CONTROL-CHARS"
+
 
 # Use colors for less, man, etc.
 [[ -f ~/.LESS_TERMCAP ]] && . ~/.LESS_TERMCAP
+
+
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
