@@ -26,8 +26,8 @@
     map J <C-d>
     noremap h gT
     noremap l gt
-    noremap j 6j
-    noremap k 6k
+    noremap j j
+    noremap k k
 
     noremap  I     <C-i>
     noremap  O     <C-o>
@@ -46,6 +46,9 @@
     inoremap <C-y> <Ins><C-y><Ins>
     nmap     <leader>r : source ~/.vimperatorrc<CR> :echomsg "Reload vimperatorrc [done]"<CR>
 
+    " Show HTTP Headers
+    noremap ,p <Esc>:pageinfo gfmhH<CR>
+
 "Undo list
 noremap U :undo<Space>
 
@@ -56,3 +59,8 @@ autocmd LocationChange .* js modes.passAllKeys = /.*(mail\.google\.com|www\.goog
 map  <leader>git :topen https://github.com/good5dog5<CR>
 map  <leader>note :topen http://0.0.0.0:4000<CR>
 map  <leader>mail :topen https://mail.google.com<CR>
+
+source ~/.vimperator/plugin/_smooziee.js
+source ~/.vimperator/plugin/jquery-loader.js
+source ~/.vimperator/plugin/google-results.js
+source ~/.vimperator/plugin/jquery-2.1.4.js
