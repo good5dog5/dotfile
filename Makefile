@@ -31,7 +31,8 @@ setup_vim:
 	@ln -sfr ${VIMDIR}/dot.ycm_extra_conf.py				${HOME}/.ycm_extra_conf
 	@ln -sfr ${VIMDIR}/dot.pentadactylrc 					${HOME}/.pentadactylrc
 	@ln -sfr ${VIMDIR}/dot.ctags 							${HOME}/.ctags
-	@cp -R   ${VIMDIR}/colors/ 							${HOME}/.vim/
+	@cp -R   ${VIMDIR}/colors 								${HOME}/.vim/
+	@cp -R   ${VIMDIR}/template                           	${HOME}/.vim/template/
 
 clean_vim:
 	@rm 	  ${HOME}/.vimrc
@@ -45,7 +46,10 @@ clean_vim:
 
 setup_bash:
 	@ln -sf   ${BASHDIR}/bashrc                             ${HOME}/.bashrc
-	@mkdir -p ${HOME}/bash_conf && cp ${BASHDIR}/conf/* ${HOME}/bash_conf
+	@mkdir -p ${HOME}/bash_conf 
+	@ln -sf   ${BASHDIR}/conf/alias.git.bash                ${HOME}/bash_conf/alias.git.bash
+	@ln -sf   ${BASHDIR}/conf/alias.dev.bash                ${HOME}/bash_conf/alias.dev.bash
+	@ln -sf   ${BASHDIR}/conf/alias.common.bash             ${HOME}/bash_conf/alias.common.bash
 
 clean_bash:
 	@rm -rf   ${HOME}/bash_conf

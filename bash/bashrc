@@ -4,10 +4,7 @@
 [ -z "$PS1" ] && return
 
 # Set the default editor
-PATH="$HOME/.local/bin        \
-     :$HOME/usr/script        \
-     :$HOME/usr/phantomjs/bin \
-     :$PATH"
+export PATH=$HOME/.local/bin:$HOME/usr/script:/usr/clang_3_4/bin:$HOME/usr/phantomjs/bin:$HOME/usr/venv/bin:$PATH
 
 if [ -d "$HOME/bash_conf" ]; then
 
@@ -44,10 +41,6 @@ if [ -f ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.s
    source ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh 
 fi
 
-# Enable rainbowstream
-if [ -d $HOME/usr/venv ]; then
-    source $HOME/usr/venv/bin/activate
-fi
 # Enable autojump function
 [[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && source ~/.autojump/etc/profile.d/autojump.sh 
 

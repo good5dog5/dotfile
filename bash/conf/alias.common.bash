@@ -12,8 +12,16 @@ alias dc="cd ~/Documents"
 alias evr="vim $HOME/.vimrc"
 alias ebr="vim $HOME/.bashrc"
 alias sbr="source $HOME/.bashrc"
-alias eba="vim $HOME/bash_conf/alias.common.bash"
 alias etmr="vim $HOME/.tmux.conf"
+eba() {
+    echo $#
+
+   if [ "$#" -eq 0 ]; then
+       "vim $HOME/bash_conf/alias.common.bash"
+   else
+       "vim $HOME/bash_conf/alias.$1.bash"
+   fi
+}
 
 #Shortcuts
 alias h="history | tail -100"
