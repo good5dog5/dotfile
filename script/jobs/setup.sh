@@ -1,7 +1,7 @@
 #!/bin/sh
 
 HOST=192.168.2.222
-ROOT=web_asus
+ROOT=web_edimax_smb
 
 image=images.db
 css=css.db
@@ -34,14 +34,16 @@ updateFile() {
       while read line
       do
          rmname=$(basename "$line" )
-         rm $rmname && printf "%-8s %-14s %7s\n"  Remove $rmname [done]
+         rm $rmname && printf "%-8s %-27s %7s\n"  Remove $rmname [done]
       done< /storage/scripts/$db
    fi
+
+   printf "\n --- \n\n" 
 
    while read line
    do
       name=$line
-      tftp -g -r $name $HOST && printf "%-24s %6s\n" $(basename "$name") [done]
+      tftp -g -r $name $HOST && printf "%-8s %-28s %6s\n" Copy $(basename "$name") [done]
    done < /storage/scripts/$db
 
    cd /storage/scripts/
@@ -56,20 +58,18 @@ begin()
    echo "================================="
    printf "\n\n"
 }
+update()
+{
+    [ -e $PWD/$1 ] && rm $PWD/$1       && printf "%-8s %-8s --> "   "Remove" "$1" 
+    tftp -g -r $ROOT/scripts/$1 $HOST  && printf "%-8s %-8s %7s\n"  "Copy"   "$1" "[done]"
+}
 
 begin
 
-[ -e $PWD/$image ] && rm $PWD/$image && printf "%-8s %-14s %7s\n" "Remove" "$image" "[done]"
-[ -e $PWD/$css   ] && rm $PWD/$css   && printf "%-8s %-14s %7s\n" "Remove" "$css"   "[done]"
-[ -e $PWD/$html  ] && rm $PWD/$html  && printf "%-8s %-14s %7s\n" "Remove" "$html"  "[done]"
-[ -e $PWD/$file  ] && rm $PWD/$file  && printf "%-8s %-14s %7s\n" "Remove" "$file"  "[done]"
-
-tftp -g -r $ROOT/scripts/$image $HOST  && printf "%-8s %-14s %7s\n" "Copy" "$image"   "[done]"
-tftp -g -r $ROOT/scripts/$css   $HOST  && printf "%-8s %-14s %7s\n" "Copy" "$css"     "[done]"
-tftp -g -r $ROOT/scripts/$html  $HOST  && printf "%-8s %-14s %7s\n" "Copy" "$html"    "[done]"
-tftp -g -r $ROOT/scripts/$file  $HOST  && printf "%-8s %-14s %7s\n" "Copy" "$file"    "[done]"
-
-tftp -g -r $ROOT/scripts/update_cgi.sh $HOST && printf "%-8s %-14s %7s\n" "Copy" update_cgi.sh "[done]"
+update $image
+update $css
+update $html
+update $file
 
 
 if [ -e $PWD/$image ] 
@@ -97,6 +97,17 @@ then
    updateFile $file  /www/html/file
 fi
 
+update update_cgi.sh
+update update_lang.sh
 
 chmod 777 update_cgi.sh
+chmod 777 update_lang.sh
+
 sh update_cgi.sh
+sh update_lang.sh
+
+# self update
+update init.sh
+
+chmod 777 setup.sh
+chmod 777 init.sh
