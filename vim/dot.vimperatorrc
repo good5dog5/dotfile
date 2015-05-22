@@ -1,14 +1,39 @@
+" Useful default mapping {{{1
+        " @Tabs {{{2
+    
+            "b          Show interactive list of tabs (buffers)
+            "B          Show static list of current tab-group's buffers
+            "[count] b  Specify a number (nth buffer not buffer ID) and jump directly to that buffer
+            "g$         Go to last tab
+            "g0         Go to first tab
+            "gi         Go to first input field quickly
+            "gf         Swtich between View Page Source / Page
+            "gF         View source in external editor
+            "H          History backward
+            "L          History forward
+            "gU 	       Go to site root
+            "gh 	       Go to home page
+            "gH 	       New tab with home page
+        "}}}
+        " @Opening {{{2
+             "~ 	       Open homedir in current tab
+    "}}}
 " Settings {{{1
-    "Use letter instead of numbers"
+" 
+    " Use letter instead of numbers"
     set hintchars=abcdefghijklmnopqrstuvwxyz        
-    " a max number of listing items
-    set maxitems=10
-    " don't focus the new opened tab automatically
-    set activate=
+
+    " Max number to list
+    set maxitems=10         
+
     " all type pages are opened in new tab
     " addons + downloads + help + javascript + prefs
     set newtab=all
 
+    " Makr tab with numbers
+    set tabnumbers
+    " Complete search engines and bookmarks.
+    set complete=sb
     set editor="urxvt -fn 'xft:Droid Sans Mono for Powerline:pixelsize=15' -e vim"
 
 " Mappings {{{1
@@ -28,13 +53,15 @@
     noremap l gt
     noremap j j
     noremap k k
+    cnoremap jk <Esc>
+    inoremap jk <Esc>
 
     noremap  I     <C-i>
     noremap  O     <C-o>
     noremap  <C-u> <C-v><C-u>
     noremap  <C-s> <C-c>
     noremap  <C-c> <C-v><C-c>
-    noremap  <C-a> <C-v><C-a>
+    noremap  <C-a> <Ins><C-a><Ins>
     cnoremap <C-c> <C-v><C-c>
     cnoremap <C-v> <C-v><C-v>
     cnoremap <C-x> <C-v><C-x>
@@ -44,6 +71,8 @@
     inoremap <C-x> <Ins><C-x><Ins>
     inoremap <C-z> <Ins><C-z><Ins>
     inoremap <C-y> <Ins><C-y><Ins>
+    nmap 0   g0
+    nmap $   g$
     nmap     <leader>r : source ~/.vimperatorrc<CR> :echomsg "Reload vimperatorrc [done]"<CR>
 
     " Show HTTP Headers
@@ -61,6 +90,6 @@ map  <leader>note :topen http://0.0.0.0:4000<CR>
 map  <leader>mail :topen https://mail.google.com<CR>
 
 source ~/.vimperator/plugin/_smooziee.js
-source ~/.vimperator/plugin/jquery-loader.js
-source ~/.vimperator/plugin/google-results.js
-source ~/.vimperator/plugin/jquery-2.1.4.js
+" source ~/.vimperator/plugin/jquery-loader.js
+" source ~/.vimperator/plugin/jquery-2.1.4.js
+

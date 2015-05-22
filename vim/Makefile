@@ -1,4 +1,4 @@
-.PHONY: clean clean_bash
+.PHONY: clean 
 BASEDIR:=$(shell pwd)
 
 VIMDIR   :=${BASEDIR}/vim
@@ -7,7 +7,6 @@ SETUPDIR :=${BASEDIR}/setup
 BINDIR   :=${BASEDIR}/bin
 CONFDIR  :=${BASEDIR}/conf
 SCRIPTDIR:=${BASEDIR}/script
-EMACSDIR :=${BASEDIR}/emacs
 
 all: install_all setup_others setup_bash setup_vim setup_ELX_quicklink
 
@@ -25,9 +24,6 @@ setup_others:
 	@ln -fs $(BINDIR)/colorgcc								${HOME}/usr/bin
 	@cp -R  ${SCRIPTDIR}/*									${HOME}/usr/script/
 
-setup_emacs:
-	@ln -sfr  ${EMACSDIR}/init.el 							${HOME}/.emacs.d/init.el
-
 setup_vim:
 	@ln -sfr ${VIMDIR}/dot.vimrc							${HOME}/.vimrc
 	@ln -sfr ${VIMDIR}/dot.vimperatorrc						${HOME}/.vimperatorrc
@@ -35,30 +31,22 @@ setup_vim:
 	@ln -sfr ${VIMDIR}/dot.ycm_extra_conf.py				${HOME}/.ycm_extra_conf
 	@ln -sfr ${VIMDIR}/dot.pentadactylrc 					${HOME}/.pentadactylrc
 	@ln -sfr ${VIMDIR}/dot.ctags 							${HOME}/.ctags
-	@cp -R   ${VIMDIR}/colors 								${HOME}/.vim/
-	@cp -R   ${VIMDIR}/template                           	${HOME}/.vim/template/
+	@cp -R   ${VIMDIR}/colors/ 							${HOME}/.vim/
 
 clean_vim:
-	@rm 	  ${HOME}/.vimrc
-	@rm 	  ${HOME}/.vimperatorrc
-	@rm 	  ${HOME}/.pentadactylrc
-	@rm       ${HOME}/.tern-project
-	@rm   	  ${HOME}/.ycm_extra_conf
-	@rm  	  ${HOME}/.ctags
-	@rm -rf   ${HOME}/.vim/template 
-	@rm -rf   ${HOME}/.vim/colors
+	@rm 	${HOME}/.vimrc
+	@rm 	${HOME}/.vimperatorrc
+	@rm 	${HOME}/.pentadactylrc
+	@rm     ${HOME}/.tern-project
+	@rm   	${HOME}/.ycm_extra_conf
+	@rm  	${HOME}/.ctags
+	@rm -rf ${HOME}/.vim/template 
+	@rm -rf ${HOME}/.vim/colors
 
 setup_bash:
-	@ln -sf   ${BASHDIR}/bashrc                             ${HOME}/.bashrc
-	@mkdir -p ${HOME}/bash_conf 
-	@ln -sf   ${BASHDIR}/conf/alias.git.bash                ${HOME}/bash_conf/alias.git.bash
-	@ln -sf   ${BASHDIR}/conf/alias.dev.bash                ${HOME}/bash_conf/alias.dev.bash
-	@ln -sf   ${BASHDIR}/conf/alias.common.bash             ${HOME}/bash_conf/alias.common.bash
-
-clean_bash:
-	@rm -rf   ${HOME}/bash_conf
+	@install -D ${BASHDIR}/$(wildcard *) 				    ${HOME}/bash_conf/$(wildcard *)
 
 setup_elx:
-	@ln -fs   ${HOME}/Documents/Edimax/ELX/					${HOME}/ELX
-	@ln -fs   ${HOME}/Documents/Edimax/ELX/APPS/web/			${HOME}/eweb
+	@ln -fs  ${HOME}/Documents/Edimax/ELX/					${HOME}/ELX
+	@ln -fs  ${HOME}/Documents/Edimax/ELX/APPS/web/			${HOME}/eweb
 	@sudo cp -r ${SCRIPTDIR}/jobs/*							/tftpboot/scripts/

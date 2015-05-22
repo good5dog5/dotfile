@@ -13,13 +13,12 @@ alias evr="vim $HOME/.vimrc"
 alias ebr="vim $HOME/.bashrc"
 alias sbr="source $HOME/.bashrc"
 alias etmr="vim $HOME/.tmux.conf"
+alias eemr="vim $HOME/.emacs.d/init.el"
 eba() {
-    echo $#
-
    if [ "$#" -eq 0 ]; then
-       "vim $HOME/bash_conf/alias.common.bash"
+       vim $HOME/bash_conf/alias.common.bash
    else
-       "vim $HOME/bash_conf/alias.$1.bash"
+       vim $HOME/bash_conf/alias.$1.bash
    fi
 }
 
@@ -35,7 +34,7 @@ alias lld="ls -lrUd */ --color=auto"
 alias ls="ls -r --color=auto  --group-directories-first --sort=extension"
 alias grep="grep  --color=auto"
 #word grep
-alias wg="grep -inR --color=auto"
+alias wg="ag -anr "
 #find name
 alias fn="find ./ -iname "
 alias dic="sdcv"
@@ -59,6 +58,7 @@ alias ports='netstat -tulanp'
 
 alias telnet_ptt="luit -encoding big5 telnet ptt.cc"
 alias vi="vim"
+alias em="emacs -nw"
 alias py="python"
 
 #For delelopment convinient
@@ -71,6 +71,9 @@ alias gdb="gdb -q"
 alias js="java -jar /home/jordan/.local/bin/js.jar"
 alias netok="ping 8.8.8.8"
 alias twk="python $HOME/usr/venv/bin/rainbowstream"
+
+alias setclip='xclip -selection c'
+alias getclip='xclip -selection clipboard -o'
 
 # Functions ------------------
 md () { mkdir -p "$1" && cd "$1"; } #mkdir and go to new dir 

@@ -145,6 +145,8 @@
     " [ General         ] {{{2
     "Set key combination's map leader
     let mapleader = ","
+
+    map <F12> :call Switch_html_javascript()<CR>
  
     "clear highlight after search nnoremap: nmap and no-remap
     nnoremap <CR> :noh<CR><CR>
@@ -247,10 +249,10 @@
     "Tabularize {{{2
  
         if exists(":Tabularize")
-           nmap <Leader><F1>= :Tabularize /=<CR>
-           vmap <Leader><F1>= :Tabularize /=<CR>
-           nmap <Leader><F1>: :Tabularize /:\zs<CR>
-           vmap <Leader><F1>: :Tabularize /:\zs<CR>
+           nmap <Leader>T= :Tabularize /=<CR>
+           vmap <Leader>T= :Tabularize /=<CR>
+           nmap <Leader>T: :Tabularize /:\zs<CR>
+           vmap <Leader>T: :Tabularize /:\zs<CR>
         endif
      ""}}}
     "YCM {{{2
@@ -443,4 +445,14 @@ function! SetupELXEnvironment()
          set expandtab
  
      endif
+endfunction
+
+function! Switch_html_javascript()
+    if (&ft=='javascript')
+        :set ft=html
+        :set foldmethod=manual
+    else
+        :set ft=javascript
+        :set foldmethod=syntax
+    end
 endfunction
