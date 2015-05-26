@@ -11,9 +11,9 @@
             "gF         View source in external editor
             "H          History backward
             "L          History forward
-            "gU 	       Go to site root
-            "gh 	       Go to home page
-            "gH 	       New tab with home page
+            "gU 	    Go to site root
+            "gh 	    Go to home page
+            "gH 	    New tab with home page
         "}}}
         " @Opening {{{2
              "~ 	       Open homedir in current tab

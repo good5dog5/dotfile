@@ -10,6 +10,7 @@ alias dc="cd ~/Documents"
 
 # Fast edit config file
 alias evr="vim $HOME/.vimrc"
+alias evpr="vim $HOME/.vimperatorrc"
 alias ebr="vim $HOME/.bashrc"
 alias sbr="source $HOME/.bashrc"
 alias etmr="vim $HOME/.tmux.conf"
@@ -34,7 +35,7 @@ alias lld="ls -lrUd */ --color=auto"
 alias ls="ls -r --color=auto  --group-directories-first --sort=extension"
 alias grep="grep  --color=auto"
 #word grep
-alias wg="ag -anr "
+alias wg="ag -inr "
 #find name
 alias fn="find ./ -iname "
 alias dic="sdcv"

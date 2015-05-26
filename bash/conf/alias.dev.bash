@@ -1,5 +1,5 @@
 # Enviroment variable
-export WEBROOT="web_edimax_smb"
+export WEBROOT="web_elecom"
 export BOARDIP="192.168.2.2"
 export PCIP="192.168.2.222"
 
@@ -10,6 +10,9 @@ target="1.left"
 alias bR="bash /tftpboot/scripts/boardControl/reboot.sh "
 # board Default
 alias bD="bash /tftpboot/scripts/boardControl/default.sh "
+# board setup
+alias bs='tmux send-keys -t $target "sh /storage/scripts/setup.sh" C-m'
+
 
 # Move_script_to_board
 function mstb() {
@@ -17,6 +20,10 @@ function mstb() {
     tmux send-keys -t $target "rm /storage/scripts/$1.sh" C-m
     tmux send-keys -t $target "tftp -g -r $WEBROOT/scripts/$1.sh $PCIP" C-m
     tmux send-keys -t $target "chmod +x /storage/scripts/$1.sh" C-m
+}
+function fr() {
+    [ "$#" -eq 0 ] && echo "2 argument is required" && return 1
+    sed -i "s/$1/$2/g" *
 }
 # MAKE 
 #-------------------------------------
