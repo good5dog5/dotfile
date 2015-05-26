@@ -69,9 +69,12 @@
     filetype  indent plugin on
     syntax on
  
-    set fdm=marker
+    set fdm=syntax
     set foldnestmax=8
     set foldcolumn=3
+
+    " Automatically refresh any unchanged files
+    "set autoread
  
     "retab command can replace all sequence of white-space"
     "contain<bt> with new strings of wihte-space, use the"
@@ -386,6 +389,7 @@
     autocmd BufNewFile *.md  call LoadMarkdownTemplate()
     autocmd BufNewFile gdb*  set filetype=gdb
     autocmd BufNewFile,BufRead *.py call SetPythonOption() 
+
 " [ My function   ] {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       My function                        "        
