@@ -14,6 +14,7 @@
             "gU 	    Go to site root
             "gh 	    Go to home page
             "gH 	    New tab with home page
+            "y          Copy current url to clipboard
         "}}}
         " @Opening {{{2
              "~ 	       Open homedir in current tab
@@ -81,8 +82,9 @@
 "Undo list
 noremap U :undo<Space>
 
-" PassThrough gmail and greader
-autocmd LocationChange .* js modes.passAllKeys = /.*(mail\.google\.com|www\.google\.com\/reader|docs\.google\.com).*/.test(buffer.URL)
+" PassThrough gmail 
+autocmd LocationChange .*                             js modes.passAllKeys = false
+autocmd LocationChange mail\\.google\\.com            js modes.passAllKeys = true
 
 "URL Mappings"
 map  <leader>git :topen https://github.com/good5dog5<CR>

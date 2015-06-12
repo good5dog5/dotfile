@@ -63,6 +63,7 @@
     Plugin 'ervandew/supertab'
     Plugin 'rking/ag.vim'
     Plugin 'kien/ctrlp.vim'
+    Plugin 'nelstrom/vim-visual-star-search'
 
     call vundle#end()
  
@@ -366,6 +367,7 @@
 "                       Auto command                       "        
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     autocmd FileType vim setlocal fdm=marker
+    autocmd FileType lua setlocal fdm=marker
     autocmd FileType html set omnifunc=htmlcomplete#CompleteTag,
     autocmd BufNewFile,BufRead *.htm* set filetype=javascript
     autocmd Filetype make setlocal noexpandtab
@@ -373,6 +375,7 @@
     autocmd BufNewFile,BufRead  *.vim*  set filetype=vim
     autocmd BufNewFile,BufRead  *.bash* call SetBashOption()
     autocmd BufNewFile,BufRead  *.sh    call SetBashOption()
+    autocmd BufNewFile,BufRead  *.cgi   set filetype=json
  
     "Automatic story folding state while switch between buffers
     autocmd BufWinLeave ?* mkview!

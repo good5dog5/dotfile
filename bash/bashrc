@@ -4,7 +4,9 @@
 [ -z "$PS1" ] && return
 
 # Set the default editor
-export PATH=$HOME/.local/bin:$HOME/usr/script:/usr/clang_3_4/bin:$HOME/usr/phantomjs/bin:$HOME/usr/venv/bin:$PATH
+export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/usr/script
+export PATH=$PATH:$HOME/usr/phantomjs/bin
 
 if [ -d "$HOME/bash_conf" ]; then
 
@@ -56,6 +58,8 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[0
 HISTCONTROL=ignoreboth
 HISTSIZE=1000
 HISTFILESIZE=2000
+#Specify that it (Ctrl+D) must pressed twice to exit Bash
+export IGNOREEOF=1
 # append to the history file, don't overwrite it
 shopt -s histappend
 
