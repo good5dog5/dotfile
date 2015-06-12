@@ -35,7 +35,7 @@ alias lld="ls -lrUd */ --color=auto"
 alias ls="ls -r --color=auto  --group-directories-first --sort=extension"
 alias grep="grep  --color=auto"
 #word grep
-alias wg="ag -inr "
+alias wg="ag -inru "
 #find name
 alias fn="find ./ -iname "
 alias dic="sdcv"

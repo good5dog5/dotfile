@@ -5,32 +5,36 @@ export PCIP="192.168.2.222"
 
 target="1.left"
 
-# Alias
 # board Reboot
-alias bR="bash /tftpboot/scripts/boardControl/reboot.sh "
-# board Default
-alias bD="bash /tftpboot/scripts/boardControl/default.sh "
-# board setup
-alias bs='tmux send-keys -t $target "sh /storage/scripts/setup.sh" C-m'
+alias b_reboot="bash /tftpboot/scripts/boardControl/reboot.sh "
 
+# board Default
+alias b_default="bash /tftpboot/scripts/boardControl/default.sh "
+alias b_reset="bash /tftpboot/scripts/boardControl/default_and_setup.sh"
+alias master="bash ~/usr/script/100thousand.sh"
+# board setup
+bs () {
+    Tcmd "cd /storage/scripts" 
+    Tcmd "sh /storage/scripts/setup.sh" 
+}
+function Tcmd() {
+    tmux send-key -t "$target" "$1" 
+}
 
 # Move_script_to_board
 function mstb() {
     [ "$#" -eq 0 ] && echo "no file to tftp, exit" && return 1
-    tmux send-keys -t $target "rm /storage/scripts/$1.sh" C-m
-    tmux send-keys -t $target "tftp -g -r $WEBROOT/scripts/$1.sh $PCIP" C-m
-    tmux send-keys -t $target "chmod +x /storage/scripts/$1.sh" C-m
+    Tcmd "rm /storage/scripts/$1.sh" 
+    Tcmd "tftp -g -r $WEBROOT/scripts/$1.sh $PCIP" 
+    Tcmd "chmod +x /storage/scripts/$1.sh" 
 }
-function fr() {
-    [ "$#" -eq 0 ] && echo "2 argument is required" && return 1
-    sed -i "s/$1/$2/g" *
-}
+
 # MAKE 
 #-------------------------------------
 makefile=""
 make=""
 
-chkEnv() {
+function chkEnv() {
     # Determine make and makefile
 
     if [ -e "Makefile.ELX" ];
@@ -50,23 +54,23 @@ chkEnv() {
 }
 
 # Make 
-mm() { 
+function mm() { 
     chkEnv
     $make -f $makefile $1
 }
 # make clear
-mc() {
+function mc() {
 
     chkEnv
     $make -f $makefile clean
 }
 # Clear then make all
-cm() {
+function cm() {
     chkEnv
     $make -f $makefile clean && $make -f $makefile $1
 }
 # make -f makefile menuconfig
-mmu() {
+function mmu() {
     if [ "${PWD##/home/jordan/Documents/Edimax/ELX/boards}" != "${PWD}" ];
     then
         make -f Makefile.ELX menuconfig
@@ -74,11 +78,16 @@ mmu() {
         echo "Please eba"
     fi
 }
-Gcgi() {
+function Gcgi() {
     local IP="192.168.2.2"
     local USER="admin"
     local PASS="1234"
 
     curl --digest -u "$USER:$PASS" "http://$IP/cgi-bin/$1.cgi?info=$2&radio_idx=$3" \
         | jq '.'
+}
+# lazy gcc, default outfile: filename_prefix.out, eg: hello.c -> hello.out
+function lgcc ()
+{
+    gcc -o ${1%.*}{.out,.${1##*.}} $2 $3 $4 $5
 }
