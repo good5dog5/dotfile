@@ -1,16 +1,19 @@
 #!/bin/env bash
 
-sudo ln -sf /bin/bash /bin/sh
-
-
-DIR[0]="$HOME/.fonts/"
-DIR[1]="$HOME/usr/script/"
-DIR[2]="$HOME/stardict/dic/"
+DIR=( "$HOME/.fonts/"
+      "$HOME/usr/script/"
+      "$HOME/usr/tools/"
+      "$HOME/usr/lib/"
+      "$HOME/stardict/dic/"
+      "$HOME/usr/.local/bin"
+      "$HOME/ycm_build"
+      "$HOME/ycm_temp/llvm_root_dir"
+      )
 
 for d in "${DIR[@]}"; do
     if [ ! -d "$d" ]; then
-       sudo rm -rf $d
-       sudo -u $USER mkdir -p  $d && printf "%-35s %6s\n" "Make dir $d " "[done]"
+       #rm -rf $d
+       mkdir -p  $d && printf "%-65s %6s\n" "Create $d " "[done]"
     fi
 done
 

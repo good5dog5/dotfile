@@ -92,6 +92,6 @@ map  <leader>note :topen http://0.0.0.0:4000<CR>
 map  <leader>mail :topen https://mail.google.com<CR>
 
 source ~/.vimperator/plugin/_smooziee.js
-" source ~/.vimperator/plugin/jquery-loader.js
-" source ~/.vimperator/plugin/jquery-2.1.4.js
+source ~/.vimperator/plugin/jquery-loader.js
+source ~/.vimperator/plugin/jquery-2.1.4.js
 

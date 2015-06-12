@@ -1,5 +1,4 @@
 curl
-dropbox
 gparted
 htop
 konsole
@@ -15,3 +14,19 @@ vim
 wget
 wireshark
 zathura
+vlc
+meld
+tig
+build-essential
+colormake
+libncurses5-dev
+python-dev
+libx11-dev
+libxt-dev
+libgtk2.0-dev
+libncurses5
+libevent-2.0-5
+automake
+libevent-dev
+golang
+cmake
