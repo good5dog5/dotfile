@@ -30,3 +30,4 @@ automake
 libevent-dev
 golang
 cmake
+python-gpgme
