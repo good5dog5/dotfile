@@ -64,6 +64,7 @@
     Plugin 'rking/ag.vim'
     Plugin 'kien/ctrlp.vim'
     Plugin 'nelstrom/vim-visual-star-search'
+    Plugin 'tomtom/tcomment_vim'
 
     call vundle#end()
  

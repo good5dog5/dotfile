@@ -6,11 +6,11 @@ export PCIP="192.168.2.222"
 target="1.left"
 
 # board Reboot
-alias b_reboot="bash /tftpboot/scripts/boardControl/reboot.sh "
+alias b_reboot="bash /tftpboot/scripts/boardControl/b_reboot.sh "
 
 # board Default
-alias b_default="bash /tftpboot/scripts/boardControl/default.sh "
-alias b_reset="bash /tftpboot/scripts/boardControl/default_and_setup.sh"
+alias b_default="bash /tftpboot/scripts/boardControl/b_default.sh "
+alias b_reset="bash /tftpboot/scripts/boardControl/b_reset.sh"
 alias master="bash ~/usr/script/100thousand.sh"
 # board setup
 bs () {
@@ -18,13 +18,13 @@ bs () {
     Tcmd "sh /storage/scripts/setup.sh" 
 }
 function Tcmd() {
-    tmux send-key -t "$target" "$1" 
+    tmux send-key -t "$target" "$1" C-m
 }
 
 # Move_script_to_board
 function mstb() {
     [ "$#" -eq 0 ] && echo "no file to tftp, exit" && return 1
-    Tcmd "rm /storage/scripts/$1.sh" 
+    Tcmd "cd /storage/scripts" 
     Tcmd "tftp -g -r $WEBROOT/scripts/$1.sh $PCIP" 
     Tcmd "chmod +x /storage/scripts/$1.sh" 
 }
