@@ -88,6 +88,26 @@
     set shiftwidth=4     "number of spaces to use for each step of (auto)indent, use for cindent >> << etc"
  
     set backspace=indent,eol,start                       
+    
+    " Disable auto-comment 
+    "{{{2
+    " You can use the 'formatoptions' option  to influence how Vim formats text.
+    " 'formatoptions' is a string that can contain any of the letters below.  The
+    " default setting is "tcq".  You can separate the option letters with commas for
+    " readability.
+    " 
+    " letter  meaning when present in 'formatoptions'
+    " 
+    " t       Auto-wrap text using textwidth
+    " c       Auto-wrap comments using textwidth, inserting the current comment
+    "         leader automatically.
+    " r       Automatically insert the current comment leader after hitting
+    "         <Enter> in Insert mode.
+    " o       Automatically insert the current comment leader after hitting 'o' or
+    "         'O' in Normal mode.
+    " 
+    "}}}
+    set formatoptions-=cro
                          
                          
     set smartindent     
@@ -159,6 +179,7 @@
     nmap <leader>v :edit $MYVIMRC<CR>
     nmap <leader>r :source $MYVIMRC<CR>
     nmap <leader>n :NERDTree .<CR>
+    nmap <leader>w :call ShowText()<CR>
 
     " Close current buffer
     nmap <leader>q :bd<CR>
@@ -464,3 +485,12 @@ function! Switch_html_javascript()
         :set foldmethod=syntax
     end
 endfunction
+
+function! ShowText()
+
+    let l:currentWord = expand('<cword>')+2
+    let l:file="/tftpboot/web_elecom/lang/basic/uk.js"
+
+    echomsg system("sed '" . l:currentWord . "!d' " . l:file)
+endfunction
+

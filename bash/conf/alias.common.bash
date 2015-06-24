@@ -59,7 +59,7 @@ alias inet='ifconfig | grep "inet addr"'
 alias ports='netstat -tulanp'
 
 alias telnet_ptt="luit -encoding big5 telnet ptt.cc"
-#alias vi="vim"
+alias vi="vim"
 alias em="emacs -nw"
 alias py="python"
 
