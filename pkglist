@@ -10,7 +10,6 @@ scim-chewing
 silversearcher-ag
 tmux
 tree
-vim
 wget
 wireshark
 zathura
@@ -31,3 +30,9 @@ libevent-dev
 golang
 cmake
 python-gpgme
+xbindkeys
+pidgin
+checkinstall
+youtube-dl
+wget
+lame

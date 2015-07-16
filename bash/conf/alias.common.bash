@@ -58,8 +58,9 @@ alias mount='mount |column -t'
 alias inet='ifconfig | grep "inet addr"'
 alias ports='netstat -tulanp'
 
-alias telnet_ptt="luit -encoding big5 telnet ptt.cc"
+alias ptt="luit -encoding big5 telnet ptt.cc"
 alias vi="vim"
+alias vd="vimdiff"
 alias em="emacs -nw"
 alias py="python"
 
@@ -81,7 +82,6 @@ alias getclip='xclip -selection clipboard -o'
 md () { mkdir -p "$1" && cd "$1"; } #mkdir and go to new dir 
 #bu - Back Up a file. Usage "bu filename.txt" 
 bu () { cp $1 ${1}-`date +%Y%m%d%H%M`.backup ; }
-
 # MAKE 
 #-------------------------------------
 jserv () {
@@ -130,4 +130,7 @@ function path(){
     IFS=:
     printf "%s\n" $PATH
     IFS=$old
+}
+batch_install() {
+    [ -f $HOME/.pkglist ] && cat $HOME/.pkglist | xargs sudo apt-get -y install
 }

@@ -1,26 +1,27 @@
 #!/bin/bash
 build_Apache_Thrift()
 {
-    sudo apt-get install -y         \
-        libboost-dev                \
-        libboost-test-dev           \
-        libboost-program-options-dev\
-        libboost-system-dev         \
-        libboost-filesystem-dev     \
-        libevent-dev                \
+    sudo apt-get install -y          \
+        pidgin                       \
+        libboost-dev                 \
+        libboost-test-dev            \
+        libboost-program-options-dev \
+        libboost-system-dev          \
+        libboost-filesystem-dev      \
+        libevent-dev                 \
         libpurple-dev                \
-        automake                    \
-        libtool                     \
-        flex                        \
-        bison                       \
-        pkg-config                  \
-        g++                         \
-        libssl-dev                  
+        automake                     \
+        libtool                      \
+        flex                         \
+        bison                        \
+        pkg-config                   \
+        g++                          \
+        libssl-dev                   
 
     cd /tmp
     curl http://ftp.twaren.net/Unix/Web/apache/thrift/0.9.2/thrift-0.9.2.tar.gz | tar zx
-     cd thrift-0.9.2/ 
-     ./configure 
+    cd thrift-0.9.2/ 
+    ./configure 
     make -j16 
     sudo checkinstall
     thrift --help 

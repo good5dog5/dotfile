@@ -76,5 +76,9 @@ shopt -s histverify
 # Use colors for less, man, etc.
 [[ -f ~/.LESS_TERMCAP ]] && . ~/.LESS_TERMCAP
 
+# Enable Ctrl-z to toggle vim fg-bg switch
+# remap susp to ^o and ~/.inputrc assing ^z to "fg
+stty susp ^o
+
 
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

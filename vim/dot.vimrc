@@ -42,6 +42,7 @@
     Plugin 'good5dog5/arm.vim'
     Plugin 'gabrielelana/vim-markdown'
     Plugin 'hynek/vim-python-pep8-indent'
+
     " Navagation
     Plugin 'scrooloose/nerdtree'
     Plugin 'Lokaltog/vim-easymotion'
@@ -49,9 +50,13 @@
     Plugin 'Valloric/MatchTagAlways'
     Plugin 'majutsushi/tagbar'
     Plugin 'christoomey/vim-tmux-navigator'
+    Plugin 'terryma/vim-smooth-scroll'
+    Plugin 'terryma/vim-expand-region'
+
     " Good-looking
     Plugin 'bling/vim-airline'
-    Plugin 'godlygeek/tabular'
+    Plugin 'junegunn/vim-easy-align'
+    Plugin 'nathanaelkane/vim-indent-guides'
     " Auto-complete
     Plugin 'Valloric/YouCompleteMe'
     Plugin 'marijnh/tern_for_vim'
@@ -65,6 +70,7 @@
     Plugin 'kien/ctrlp.vim'
     Plugin 'nelstrom/vim-visual-star-search'
     Plugin 'tomtom/tcomment_vim'
+    Plugin 'wikitopian/hardmode'
 
     call vundle#end()
  
@@ -74,7 +80,6 @@
     set fdm=syntax
     set foldnestmax=8
     set foldcolumn=3
-
     " Automatically refresh any unchanged files
     "set autoread
  
@@ -162,6 +167,10 @@
     highlight CursorLine   ctermbg=239 ctermfg=NONE
     
     set laststatus=2
+    hi IndentGuidesEven ctermbg=238
+    hi IndentGuidesOdd ctermbg=236
+    " let g:indent_guides_start_level=2
+    let g:indent_guides_guide_size=1
 " }}}
 " [ Useful shortcuts ] {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -180,6 +189,9 @@
     nmap <leader>r :source $MYVIMRC<CR>
     nmap <leader>n :NERDTree .<CR>
     nmap <leader>w :call ShowText()<CR>
+    "sts the lines matching the word under the cursor from the beginning of the file, and then asks you which match you want to jump to, and finally, jumps to that match.
+    "reference http://superuser.com/questions/692548/go-to-lines-matched-by-i-command-to-display-lines-with-word-under-the-cursor
+    nmap <leader>F [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 
     " Close current buffer
     nmap <leader>q :bd<CR>
@@ -194,6 +206,10 @@
  
     "Replace word under current cursor"
     nmap <leader>s :%s/\<<C-r><C-w>\>/
+    "Replace select word (save in register ")
+    "Idea from http://asktherelic.com/2011/04/02/on-easily-replacing-text-in-vim/
+    vmap <Leader>s "sy:%s/<C-R>=substitute(@s,"\n",'\\n','g')<CR>/
+
     nmap ,d :b#<bar>bd#<CR>
  
     imap jk <Esc>
@@ -203,20 +219,27 @@
     nmap <C-p> "+p
  
     "}}} 
-    "[ Buf switch | tab switch ] {{{2
-       nmap <silent> <Left>  :bprevious<CR>
-       nmap <silent> <Right> :bprevious<CR>
- 
-       " Alt + Num to switch to buffer[Num]
-       nmap <silent> <M-1> :b1<CR>
-       nmap <silent> <M-2> :b2<CR>
-       nmap <silent> <M-3> :b3<CR>
-       nmap <silent> <M-4> :b4<CR>
-       nmap <silent> <M-5> :b5<CR>
-       nmap <silent> <M-6> :b6<CR>
-       nmap <silent> <M-7> :b7<CR>
-       nmap <silent> <M-8> :b8<CR>
-       nmap <silent> <M-9> :b9<CR>
+    "[ Text movement ] {{{2
+       " Idea from http://codingfearlessly.com/2012/08/21/vim-putting-arrows-to-use/
+       nmap <Left>  <<
+       nmap <Right> >>
+
+       " gv reselect the last visual area.
+       vmap <Left>  <gv
+       vmap <Right> >gv
+    "}}}
+
+    "[vimdiff mapping] {{{2
+    "do - Get changes from other window into the current window.
+    "dp - Put the changes from current window into the other window.
+        if &diff
+            set nofoldenable
+            nnoremap J ]c
+            nnoremap K [c
+            nnoremap L dp 
+            nnoremap H do 
+            nnoremap U :diffupdate<CR>
+        endif
     "}}}
     "[ Plugin       ] {{{2
     function! JavaScriptFold()
@@ -272,15 +295,15 @@
        set csverb
     endif
     "}}}
-    "Tabularize {{{2
- 
-        if exists(":Tabularize")
-           nmap <Leader>T= :Tabularize /=<CR>
-           vmap <Leader>T= :Tabularize /=<CR>
-           nmap <Leader>T: :Tabularize /:\zs<CR>
-           vmap <Leader>T: :Tabularize /:\zs<CR>
-        endif
-     ""}}}
+    "Easy-vim-alig {{{2
+
+        " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+        vmap <Enter> <Plug>(EasyAlign)
+
+        " Start interactive EasyAlign for a motion/text object (e.g. gaip)
+        nmap ga <Plug>(EasyAlign)
+
+    "}}}
     "YCM {{{2
  
         nmap <leader>gl :YcmCompleter GoToDeclaration<CR>
@@ -353,8 +376,27 @@
         \}
      "}}}
     " CtrlP {{{2
-        
+
+        " Use the nearest .git directory as the cwd
+        " This makes a lot of sense if you are working on a project that is in version
+        " control. It also supports works with .svn, .hg, .bzr.
+        let g:ctrlp_working_path_mode = 'r'
+        " ag is fast enough that CtrlP doesn't need to cache
+        let g:ctrlp_use_caching = 0
         let g:ctrlp_map = '<leader>f'
+
+        if executable('ag')
+
+            set grepprg=ag\ --nogroup\ --nocolor
+
+            " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+            let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+        else
+            let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+            let g:ctrlp_prompt_mappings = {
+            \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
+            \ }
+        endif
 
         " Setup some default ignores
         let g:ctrlp_custom_ignore = {
@@ -362,24 +404,25 @@
           \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
         \}
 
-        " Use the nearest .git directory as the cwd
-        " This makes a lot of sense if you are working on a project that is in version
-        " control. It also supports works with .svn, .hg, .bzr.
-        let g:ctrlp_working_path_mode = 'r'
+    "}}}
+    " hardMode {{{2
+        noremap <leader>h <Esc>:call ToggleHardMode()<CR>
     "}}}
 
     " The Silver Searcher {{{1
+    "}}}
 
-    if executable('ag')
-        " Use ag over grep
-            set grepprg=ag\ --nogroup\ --nocolor
+    " vim-smooth-scroll {{{1
+            noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+            noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+            noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+            noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 
-        " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-            let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+    "}}}
 
-        " ag is fast enough that CtrlP doesn't need to cache
-            let g:ctrlp_use_caching = 0
-    endif
+    " vim-expand-region {{{1
+            vmap v     <Plug>(expand_region_expand)
+            vmap <C-v> <Plug>(expand_region_shrink)
     "}}}
 
 
@@ -456,7 +499,7 @@ function! SetBashOption()
 endfunction
 
 function! SetPythonOption()
-     set tabstop=4  
+     set tabstop=8  
      set softtabstop=4
      set shiftwidth=4
      set smarttab
