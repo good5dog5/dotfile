@@ -91,7 +91,10 @@ map  <leader>git :topen https://github.com/good5dog5<CR>
 map  <leader>note :topen http://0.0.0.0:4000<CR>
 map  <leader>mail :topen https://mail.google.com<CR>
 
-source ~/.vimperator/plugin/_smooziee.js
+let g:smooth_scroll_amount="70"
+let g:smooth_scroll_interval="20"
+
+source ~/.vimperator/plugin/smooth.js
 source ~/.vimperator/plugin/jquery-loader.js
 source ~/.vimperator/plugin/jquery-2.1.4.js
 
