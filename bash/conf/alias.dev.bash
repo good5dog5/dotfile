@@ -1,7 +1,7 @@
 # Enviroment variable
-export WEBROOT="web_elecom"
-export BOARDIP="192.168.2.2"
-export PCIP="192.168.2.222"
+export WEBROOT="web_hawking"
+export BOARDIP="192.168.1.235"
+export PCIP="192.168.1.222"
 
 target="1.left"
 
@@ -79,11 +79,10 @@ function mmu() {
     fi
 }
 function Gcgi() {
-    local IP="192.168.2.2"
     local USER="admin"
     local PASS="1234"
 
-    curl --digest -u "$USER:$PASS" "http://$IP/cgi-bin/$1.cgi?info=$2&radio_idx=$3" \
+    curl --digest -u "$USER:$PASS" "http://$BOARDIP/cgi-bin/$1.cgi?info=$2&radio_idx=$3" \
         | jq '.'
 }
 # lazy gcc, default outfile: filename_prefix.out, eg: hello.c -> hello.out

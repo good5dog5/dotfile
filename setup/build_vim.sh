@@ -1,4 +1,5 @@
 #!/bin/bash
+# Reference to https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source
 dir="$HOME/usr/tools/"
 
 clone_vim_repo() {
@@ -27,6 +28,7 @@ config_and_build()
                 --enable-gnome-check
                 --enable-cscope
                 --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu"
+                --prefix=/usr
 
     ./configure $flag
 }
@@ -52,6 +54,13 @@ install_vim ()
     echo "Ready to install vim"
     sudo make install
 
+}
+set_default_editor()
+{
+    sudo update-alternatives --install /usr/bin/editor editor /usr/bin/vim 1
+    sudo update-alternatives --set editor /usr/bin/vim
+    sudo update-alternatives --install /usr/bin/vi vi /usr/bin/vim 1
+    sudo update-alternatives --set vi /usr/bin/vim
 }
 
 cd "$dir"

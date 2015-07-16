@@ -18,12 +18,13 @@ install_all:
 	sh      $(SETUPDIR)/install_powerline_font.sh
 
 setup_others:
-	@ln -fs ${CONFDIR}/tmux.conf							${HOME}/.tmux.conf
-	@ln -fs ${CONFDIR}/gitconfig							${HOME}/.gitconfig
-	@ln -fs ${CONFDIR}/LESS_TERMCAP 						${HOME}/.LESS_TERMCAP
-	@cp -R  ${BINDIR}/stardict/*							${STARDICT_DATA_DIR}
-	@ln -fs $(BINDIR)/colorgcc								${HOME}/usr/bin
-	@cp -R  ${SCRIPTDIR}/*									${HOME}/usr/script/
+	@ln -fs   ${CONFDIR}/tmux.conf							${HOME}/.tmux.conf
+	@ln -fs   ${CONFDIR}/gitconfig							${HOME}/.gitconfig
+	@ln -fs   ${CONFDIR}/LESS_TERMCAP 						${HOME}/.LESS_TERMCAP
+	@cp -R    ${BINDIR}/stardict/*							${STARDICT_DATA_DIR}
+	@ln -fs   $(BINDIR)/colorgcc							${HOME}/usr/bin
+	@cp -R    ${SCRIPTDIR}/*								${HOME}/usr/script/
+	@ln -fsr ./pkglist  								    ${HOME}/.pkglist
 
 setup_emacs:
 	@ln -sfr  ${EMACSDIR}/init.el 							${HOME}/.emacs.d/init.el
