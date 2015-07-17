@@ -36,3 +36,9 @@ checkinstall
 youtube-dl
 wget
 lame
+default-jre
+openjdk-7-jre-headless
+libgcj14
+java-package
+freemind
+gimp

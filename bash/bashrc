@@ -6,6 +6,7 @@
 # Set the default editor
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/usr/script
+export PATH=$PATH:$HOME/usr/nand2tetris/tools
 export PATH=$PATH:$HOME/usr/phantomjs/bin
 
 if [ -d "$HOME/bash_conf" ]; then
@@ -16,8 +17,8 @@ if [ -d "$HOME/bash_conf" ]; then
         source "$conf"
     done
 fi
-
-export CLASSPATH="$HOME/.local/bin/js.jar"
+setterm -blength 0
+#export CLASSPATH="$HOME.local/bin/js.jar"
 export EDITOR=vim
 
 #Some path for daily use
