@@ -71,6 +71,7 @@
     Plugin 'nelstrom/vim-visual-star-search'
     Plugin 'tomtom/tcomment_vim'
     Plugin 'wikitopian/hardmode'
+    Plugin 'KitN/nand2-vim-syn'
 
     call vundle#end()
  
@@ -123,6 +124,8 @@
     set tenc=utf-8 
     au FileType javascript call JavaScriptFold()
  
+    "No bells
+    set noerrorbells visualbell t_vb=
  
     set switchbuf=split
  
@@ -457,6 +460,8 @@
     autocmd BufNewFile *.md  call LoadMarkdownTemplate()
     autocmd BufNewFile gdb*  set filetype=gdb
     autocmd BufNewFile,BufRead *.py call SetPythonOption() 
+    " For nand2tetris use
+    autocmd BufNewFile,BufRead *.hdl set filetype=nandhdl
 
 " [ My function   ] {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
