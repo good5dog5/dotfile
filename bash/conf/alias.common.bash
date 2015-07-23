@@ -1,4 +1,8 @@
+#!/usr/bin/env bash
+# Jordan huang<good5dog5@gmail.com>
 # Somesier navigation 
+
+
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -37,8 +41,7 @@ alias grep="grep  --color=auto"
 #word grep
 alias wg="ag -inru "
 #find name
-alias fn="find ./ -type f -iname "
-alias fD="find ./ -type d -iname "
+alias fn="find ./ -iname "
 alias dic="sdcv"
 alias opend="xdg-open"
 
@@ -77,6 +80,11 @@ alias twk="python $HOME/usr/venv/bin/rainbowstream"
 
 alias setclip='xclip -selection c'
 alias getclip='xclip -selection clipboard -o'
+
+# todo.txt_cli
+export TODOTXT_DEFAULT_ACTION=ls
+export TODOTXT_CFG_FILE="${HOME}/github/dotfile/setup/todo.txt_cli-2.9/.todo.cfg"
+alias t="todo.sh $1"
 
 # Functions ------------------
 md () { mkdir -p "$1" && cd "$1"; } #mkdir and go to new dir 

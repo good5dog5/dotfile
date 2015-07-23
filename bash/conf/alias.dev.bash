@@ -88,5 +88,5 @@ function Gcgi() {
 # lazy gcc, default outfile: filename_prefix.out, eg: hello.c -> hello.out
 function lgcc ()
 {
-    gcc -o ${1%.*}{.out,.${1##*.}} $2 $3 $4 $5
+    gcc -std=c99  -o ${1%.*}{.out,.${1##*.}} $2 $3 $4 $5 -lm && time ./${1%.*}.out
 }
