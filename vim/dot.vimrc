@@ -416,8 +416,8 @@
     "}}}
 
     " vim-smooth-scroll {{{1
-            noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
-            noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+            noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 1, 2)<CR>
+            noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 1, 2)<CR>
             noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
             noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 
@@ -462,6 +462,9 @@
     autocmd BufNewFile,BufRead *.py call SetPythonOption() 
     " For nand2tetris use
     autocmd BufNewFile,BufRead *.hdl set filetype=nandhdl
+
+    " Set scripts to be executable from the shell
+    autocmd BufWritePost * call Mode_executable()
 
 " [ My function   ] {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -540,5 +543,11 @@ function! ShowText()
     let l:file="/tftpboot/web_elecom/lang/basic/uk.js"
 
     echomsg system("sed '" . l:currentWord . "!d' " . l:file)
+endfunction
+
+function! Mode_executable()
+    if (getline(1) =~ "^#!")
+        silent !chmod +x % 
+    endif
 endfunction
 
