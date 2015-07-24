@@ -439,7 +439,6 @@
     autocmd FileType html set omnifunc=htmlcomplete#CompleteTag,
     autocmd BufNewFile,BufRead *.htm* set filetype=javascript
     autocmd Filetype make setlocal noexpandtab
-    autocmd BufNewFile *.py 0put =\"#!/usr/bin/python\<nl>\"|$
     autocmd BufNewFile,BufRead  *.vim*  set filetype=vim
     autocmd BufNewFile,BufRead  *.bash* call SetBashOption()
     autocmd BufNewFile,BufRead  *.sh    call SetBashOption()
@@ -455,9 +454,10 @@
     autocmd BufNewFile *.c   call LoadCTemplate()
     autocmd BufNewFile *.cpp call LoadCPPTemplate()
     autocmd BufNewFile *.sh  call LoadBashTemplate()
+    autocmd BufNewFile *.md  call LoadMarkdownTemplate()
+    autocmd BufNewFile *.py  call LoadPythonTemplate()
     autocmd BufNewFile *.md  set filetype=markdown 
     autocmd BufNewFile *.md  setlocal nospell 
-    autocmd BufNewFile *.md  call LoadMarkdownTemplate()
     autocmd BufNewFile gdb*  set filetype=gdb
     autocmd BufNewFile,BufRead *.py call SetPythonOption() 
     " For nand2tetris use
@@ -491,6 +491,12 @@ endfunction
 function! LoadMarkdownTemplate()
      0r ~/.vim/template/template.md
      normal zR2G
+endfunction
+
+"python
+function! LoadPythonTemplate()
+     0r ~/.vim/template/template.py
+     normal zR5G
 endfunction
 
 " Add foldmarker to c and cpp "

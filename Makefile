@@ -11,13 +11,13 @@ EMACSDIR :=${BASEDIR}/emacs
 
 all: install_all setup_others setup_bash setup_vim setup_ELX_quicklink
 
-install_all:
+all_install:
 	sh      $(SETUPDIR)/init.sh
 	sh      $(SETUPDIR)/install_vundle.sh
 	sh      $(SETUPDIR)/install_autojump.sh
 	sh      $(SETUPDIR)/install_powerline_font.sh
 
-setup_others:
+others_install:
 	@ln -fs   ${CONFDIR}/tmux.conf							${HOME}/.tmux.conf
 	@ln -fs   ${CONFDIR}/gitconfig							${HOME}/.gitconfig
 	@ln -fs   ${CONFDIR}/LESS_TERMCAP 						${HOME}/.LESS_TERMCAP
@@ -26,20 +26,22 @@ setup_others:
 	@cp -R    ${SCRIPTDIR}/*								${HOME}/usr/script/
 	@ln -fsr ./pkglist  								    ${HOME}/.pkglist
 
-setup_emacs:
+emace_install:
 	@ln -sfr  ${EMACSDIR}/init.el 							${HOME}/.emacs.d/init.el
 
-setup_vim:
-	@ln -sfr ${VIMDIR}/dot.vimrc							${HOME}/.vimrc
-	@ln -sfr ${VIMDIR}/dot.vimperatorrc						${HOME}/.vimperatorrc
-	@ln -sfr ${VIMDIR}/dot.tern-project						${HOME}/.tern-project
-	@ln -sfr ${VIMDIR}/dot.ycm_extra_conf.py				${HOME}/.ycm_extra_conf
-	@ln -sfr ${VIMDIR}/dot.pentadactylrc 					${HOME}/.pentadactylrc
-	@ln -sfr ${VIMDIR}/dot.ctags 							${HOME}/.ctags
-	@cp -R   ${VIMDIR}/colors 								${HOME}/.vim/
-	@cp -R   ${VIMDIR}/template                           	${HOME}/.vim/template/
+vim_install:
+	@ln -sfr  ${VIMDIR}/dot.vimrc							${HOME}/.vimrc
+	@ln -sfr  ${VIMDIR}/dot.vimperatorrc				    ${HOME}/.vimperatorrc
+	@ln -sfr  ${VIMDIR}/dot.tern-project				    ${HOME}/.tern-project
+	@ln -sfr  ${VIMDIR}/dot.ycm_extra_conf.py				${HOME}/.ycm_extra_conf
+	@ln -sfr  ${VIMDIR}/dot.pentadactylrc 					${HOME}/.pentadactylrc
+	@ln -sfr  ${VIMDIR}/dot.ctags 							${HOME}/.ctags
+	@cp -R    ${VIMDIR}/colors 								${HOME}/.vim/
+	@cp -R    ${VIMDIR}/template                           	${HOME}/.vim/template/
+	@mkdir -p ${HOME}/.vimperator/
+	@cp -Rf   ${VIMDIR}/vimperator/*   	  					${HOME}/.vimperator/
 
-clean_vim:
+vim_clean:
 	@rm 	  ${HOME}/.vimrc
 	@rm 	  ${HOME}/.vimperatorrc
 	@rm 	  ${HOME}/.pentadactylrc
@@ -48,18 +50,19 @@ clean_vim:
 	@rm  	  ${HOME}/.ctags
 	@rm -rf   ${HOME}/.vim/template 
 	@rm -rf   ${HOME}/.vim/colors
+	@rm -rf   ${HOME}/.vimperator/
 
-setup_bash:
+bash_install:
 	@ln -sf   ${BASHDIR}/bashrc                             ${HOME}/.bashrc
 	@mkdir -p ${HOME}/bash_conf 
 	@ln -sf   ${BASHDIR}/conf/alias.git.bash                ${HOME}/bash_conf/alias.git.bash
 	@ln -sf   ${BASHDIR}/conf/alias.dev.bash                ${HOME}/bash_conf/alias.dev.bash
 	@ln -sf   ${BASHDIR}/conf/alias.common.bash             ${HOME}/bash_conf/alias.common.bash
 
-clean_bash:
+bash_clean:
 	@rm -rf   ${HOME}/bash_conf
 
-setup_elx:
+elx_install:
 	@ln -fs   ${HOME}/Documents/Edimax/ELX/					${HOME}/ELX
 	@ln -fs   ${HOME}/Documents/Edimax/ELX/APPS/web/			${HOME}/eweb
 	@sudo cp -r ${SCRIPTDIR}/jobs/*							/tftpboot/scripts/
