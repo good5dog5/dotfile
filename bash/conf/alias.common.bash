@@ -1,16 +1,11 @@
 #!/usr/bin/env bash
 # Jordan huang<good5dog5@gmail.com>
-# Somesier navigation 
-
 
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
-alias dl="cd ~/Downloads"
-alias dt="cd ~/Desktop"
-alias dc="cd ~/Documents"
 
 # Fast edit config file
 alias evr="vim $HOME/.vimrc"

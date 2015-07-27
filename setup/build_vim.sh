@@ -1,5 +1,12 @@
-#!/bin/bash
+
+#!/usr/bin/env bash
+# Jordan huang<good5dog5@gmail.com>
 # Reference to https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
 dir="$HOME/usr/tools/"
 
 clone_vim_repo() {
@@ -9,7 +16,7 @@ clone_vim_repo() {
         git clone https://github.com/b4winckler/vim 
     else
         echo "Please install git first"
-        return
+        exit 1
     fi
 }
 checkout_ver_430() 
@@ -67,6 +74,7 @@ cd "$dir"
 clone_vim_repo
 checkout_ver_430
 config_and_build
+install_vim
 clean_vim_pkg
 
 

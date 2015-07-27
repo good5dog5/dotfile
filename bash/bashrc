@@ -38,15 +38,21 @@ _source_files()
     for f in $files
     do
         . "${f}"
+       # echo "source ${f}"
     done
+}
+
+function_exists() {
+    declare -f -F $1 > /dev/null
+    return $?
 }
 # Source all alias files
 _source_files "${HOME}/bash_conf"
 
 # Source all auto_complete files
 _source_files "$DOTFILE/script/autoComplete"
-_source_files "/etc/default/locale"
 _source_files "/etc/bash_completion"
+_source_files "/etc/default/locale"
 
 # Source Powerline to enable bash prompt
 _source_files "/usr/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh" 
@@ -63,6 +69,8 @@ _source_files "${HOME}/.LESS_TERMCAP"
 
 # Load nvm
 _source_files "$NVM_DIR/nvm.sh"
+
+
 
 # Set the PS1 prompt (with color).
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\][ \W ]\[\033[00m\]\$ '
@@ -87,3 +95,15 @@ shopt -s histverify
 stty susp ^o
 
 
+# For git-alias setup
+# ref: https://gist.github.com/mwhite/6887990
+for al in `__git_aliases`; do
+    alias g$al="git $al"
+
+    complete_func=_git_$(__git_aliased_command $al)
+    function_exists $complete_fnc && __git_complete g$al $complete_func
+done
+
+
+# need to be more elegant
+source "$DOTFILE/script/autoComplete/bash_completion"
