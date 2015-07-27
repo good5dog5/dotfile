@@ -54,15 +54,9 @@ function chkEnv() {
 }
 
 # Make 
-function mm() { 
+function m() { 
     chkEnv
     $make -f $makefile $1
-}
-# make clear
-function mc() {
-
-    chkEnv
-    $make -f $makefile clean
 }
 # Clear then make all
 function cm() {
@@ -71,7 +65,7 @@ function cm() {
 }
 # make -f makefile menuconfig
 function mmu() {
-    if [ "${PWD##/home/jordan/Documents/Edimax/ELX/boards}" != "${PWD}" ];
+    if [ "${PWD##${HOME}/Documents/Edimax/ELX/boards}" != "${PWD}" ];
     then
         make -f Makefile.ELX menuconfig
     else

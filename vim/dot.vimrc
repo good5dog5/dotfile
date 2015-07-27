@@ -546,7 +546,7 @@ endfunction
 function! ShowText()
 
     let l:currentWord = expand('<cword>')+2
-    let l:file="/tftpboot/web_elecom/lang/basic/uk.js"
+    let l:file="~/web/web_edimax_nms/file/nms/uk.js"
 
     echomsg system("sed '" . l:currentWord . "!d' " . l:file)
 endfunction
