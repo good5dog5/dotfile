@@ -44,9 +44,9 @@ def find_diff():
              diff.append(line)
 
 def append_to_equal():
-    
+
     for langFile in Files:
-        
+
         if langFile.name == maxfile.name:
             continue
 
@@ -64,7 +64,7 @@ def append_to_equal():
         with open(langFile.name, "w") as f:
             for line in newFile:
                 f.write(line)
-        
+
 
 find_diff()
 append_to_equal()

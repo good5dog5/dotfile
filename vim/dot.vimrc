@@ -42,6 +42,7 @@
     Plugin 'good5dog5/arm.vim'
     Plugin 'gabrielelana/vim-markdown'
     Plugin 'hynek/vim-python-pep8-indent'
+    Plugin 'klen/python-mode'
 
     " Navagation
     Plugin 'scrooloose/nerdtree'
@@ -189,7 +190,7 @@
     nnoremap <CR> :noh<CR><CR>
  
     nmap <leader>v :edit $MYVIMRC<CR>
-    nmap <leader>r :source $MYVIMRC<CR>
+    nmap <leader>R :source $MYVIMRC<CR>
     nmap <leader>n :NERDTree .<CR>
     nmap <leader>w :call ShowText()<CR>
     "sts the lines matching the word under the cursor from the beginning of the file, and then asks you which match you want to jump to, and finally, jumps to that match.
@@ -426,6 +427,17 @@
     " vim-expand-region {{{1
             vmap v     <Plug>(expand_region_expand)
             vmap <C-v> <Plug>(expand_region_shrink)
+    "}}}
+    
+    " Python-mode {{{1
+        " turn off pymode's autocomplete to prevent conflict with ycm
+        let g:pymode_rope_complete_on_dot = 0
+
+        " Pymode could show documentation for current word by `pydoc`.
+        let g:pymode_doc = 1
+        let g:pymode_doc_bind = 'K'
+        " ignore 'import but not used error
+        let g:pymode_lint_ignore = "W0611,E231"
     "}}}
 
 
