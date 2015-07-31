@@ -1,5 +1,5 @@
 # Enviroment variable
-export WEBROOT="web_hawking"
+export WEBROOT="web_elecom"
 export BOARDIP="192.168.1.235"
 export PCIP="192.168.1.222"
 
@@ -79,8 +79,12 @@ function Gcgi() {
     curl --digest -u "$USER:$PASS" "http://$BOARDIP/cgi-bin/$1.cgi?info=$2&radio_idx=$3" \
         | jq '.'
 }
-# lazy gcc, default outfile: filename_prefix.out, eg: hello.c -> hello.out
-function lgcc ()
+# lazy compile and execute, default outfile: filename_prefix.out, eg: hello.c -> hello.out
+function x()
 {
-    gcc -std=c99  -o ${1%.*}{.out,.${1##*.}} $2 $3 $4 $5 -lm && time ./${1%.*}.out
+    if [[ "$1" =~ .*.cpp ]]; then
+        g++ -std=c++11 -g -o ${1%.*}{.out,.${1##*.}} $2 $3 $4 $5  && time ./${1%.*}.out && valgrind  ./${1%.*}.out
+    else
+        gcc -std=c99 -g -o ${1%.*}{.out,.${1##*.}} $2 $3 $4 $5 -lm && time ./${1%.*}.out && valgrind  ./${1%.*}.out
+    fi
 }

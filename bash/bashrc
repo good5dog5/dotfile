@@ -50,6 +50,7 @@ function_exists() {
 _source_files "${HOME}/bash_conf"
 
 # Source all auto_complete files
+_source_files "/usr/share/bash-completion/bash_completion"
 _source_files "$DOTFILE/script/autoComplete"
 _source_files "/etc/bash_completion"
 _source_files "/etc/default/locale"
@@ -106,4 +107,4 @@ done
 
 
 # need to be more elegant
-source "$DOTFILE/script/autoComplete/bash_completion"
+# source "$DOTFILE/script/autoComplete/bash_completion"
