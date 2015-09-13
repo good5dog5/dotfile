@@ -1,5 +1,8 @@
 #!/bin/bash
-build_Apache_Thrift()
+
+core=$(grep -c ^processor /proc/cpuinfo)
+
+function build_Apache_Thrift()
 {
     sudo apt-get install -y          \
         pidgin                       \
@@ -18,27 +21,33 @@ build_Apache_Thrift()
         g++                          \
         libssl-dev                   
 
-    cd /tmp
-    curl http://ftp.twaren.net/Unix/Web/apache/thrift/0.9.2/thrift-0.9.2.tar.gz | tar zx
-    cd thrift-0.9.2/ 
-    ./configure 
-    make -j16 
-    sudo checkinstall
-    thrift --help 
+    cd $HOME/.local/bin/
+        curl ftp://ftp.twaren.net/Unix/Web/apache/thrift/0.9.2/thrift-0.9.2.tar.gz  | tar zx
+
+    cd thrift-0.9.2
+        ./configure 
+
+    make THRIFT_STATIC=true -j${core}
+    sudo checkinstall --install -y
 }
-build_line()
+function build_line()
 {
-    cd /tmp
-    git clone http://altrepo.eu/git/purple-line.git/ purple-line
-    git clone http://altrepo.eu/git/line-protocol.git/ line-protocol
-    cp line-protocol/line_main.thrift purple-line/
-    cp line-protocol/line.thrift purple-line/
+    cd $HOME/.local/bin/
+
+        [ -d "purple-line"   ] && sudo rm -rf purple-line
+        [ -d "line-protocal" ] && sudo rm -rf line-protocal
+
+        git clone http://altrepo.eu/git/purple-line.git/   purple-line   
+        git clone http://altrepo.eu/git/line-protocol.git/ line-protocol 
+        cp line-protocol/line_main.thrift purple-line/
+        cp line-protocol/line.thrift purple-line/
 
     cd purple-line
-    make
+        make -j${core}
 
-    sudo make install
+    sudo checkinstall --install 
 }
 
-build_Apache_Thrift
+# build_Apache_Thrift
 build_line
+

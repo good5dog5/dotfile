@@ -43,6 +43,7 @@
     Plugin 'gabrielelana/vim-markdown'
     Plugin 'hynek/vim-python-pep8-indent'
     Plugin 'klen/python-mode'
+    Plugin 'vim-scripts/rtorrent-syntax-file'
 
     " Navagation
     Plugin 'scrooloose/nerdtree'
@@ -176,6 +177,7 @@
     " let g:indent_guides_start_level=2
     let g:indent_guides_guide_size=1
 " }}}
+
 " [ Useful shortcuts ] {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       Useful shortcuts                   "        
@@ -221,6 +223,7 @@
  
     vmap <C-c> "+y
     nmap <C-p> "+p
+    cmap w!! w !sudo tee % >/dev/null
  
     "}}} 
     "[ Text movement ] {{{2
@@ -446,15 +449,15 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       Auto command                       "        
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    autocmd FileType vim setlocal fdm=marker
-    autocmd FileType lua setlocal fdm=marker
-    autocmd FileType html set omnifunc=htmlcomplete#CompleteTag,
-    autocmd BufNewFile,BufRead *.htm* set filetype=javascript
-    autocmd Filetype make setlocal noexpandtab
-    autocmd BufNewFile,BufRead  *.vim*  set filetype=vim
-    autocmd BufNewFile,BufRead  *.bash* call SetBashOption()
-    autocmd BufNewFile,BufRead  *.sh    call SetBashOption()
-    autocmd BufNewFile,BufRead  *.cgi   set filetype=json
+    autocmd FileType vim                      setlocal fdm=marker
+    autocmd FileType lua                      setlocal fdm=marker
+    autocmd Filetype make                     setlocal noexpandtab
+    autocmd FileType html                     set omnifunc=htmlcomplete#CompleteTag,
+    autocmd BufNewFile,BufRead  *.bash*       call SetBashOption()
+    autocmd BufNewFile,BufRead  *.sh          call SetBashOption()
+    autocmd BufNewFile,BufRead  *.vim*        set filetype=vim
+    autocmd BufNewFile,BufRead  *.htm*        set filetype=javascript
+    autocmd BufNewFile,BufRead  *.cgi         set filetype=json
  
     "Automatic story folding state while switch between buffers
     autocmd BufWinLeave ?* mkview!
@@ -477,6 +480,9 @@
 
     " Set scripts to be executable from the shell
     autocmd BufWritePost * call Mode_executable()
+
+    " auto reload vimrc when editing it
+    autocmd! bufwritepost .vimrc source $MYVIMRC
 
 " [ My function   ] {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""

@@ -7,6 +7,12 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
 
+# RM
+alias rm='rm -r'
+alias rmf='rm -rf'
+# CP
+alias cp='cp -r'
+
 # Fast edit config file
 alias evr="vim $HOME/.vimrc"
 alias evpr="vim $HOME/.vimperatorrc"
@@ -14,6 +20,7 @@ alias ebr="vim $HOME/.bashrc"
 alias sbr="source $HOME/.bashrc"
 alias etmr="vim $HOME/.tmux.conf"
 alias eemr="vim $HOME/.emacs.d/init.el"
+alias eplist="vim $HOME/.pkglist"
 eba() {
    if [ "$#" -eq 0 ]; then
        vim $HOME/bash_conf/alias.common.bash
@@ -26,8 +33,7 @@ eba() {
 alias h="history | tail -100"
 
 # ls -r mean reverse the sort order
-alias ll="ls -lrhF --color=auto --group-directories-first"
-alias lll="ls -alrhF --color=auto --group-directories-first"
+alias ll="ls -alrhF --color=auto --group-directories-first"
 #list hidden files
 alias l.="ls -d .*"
 #list directories
@@ -38,18 +44,11 @@ alias grep="grep  --color=auto"
 alias wg="ag -inru "
 #find name
 alias fn="find ./ -iname "
-alias dic="sdcv"
 alias opend="xdg-open"
 
 # List only directories
 alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
  
-#Aliases toward tmux
-alias tmux="tmux -2"
-alias tml="tmux list-sessions"
-alias tma="tmux attach-session -t"
-alias tmc="clear && tmux clear-history"
-alias tmk="tmux kill-session -t"
 
 #Make mount output human readable
 alias mount='mount |column -t'
@@ -57,11 +56,11 @@ alias mount='mount |column -t'
 alias inet='ifconfig | grep "inet addr"'
 alias ports='netstat -tulanp'
 
-alias ptt="luit -encoding big5 telnet ptt.cc"
 alias vi="vim"
 alias vd="vimdiff"
 alias em="emacs -nw"
 alias py="python"
+alias dd_progress="sudo kill -USR1 $(pgrep ^dd)"
 
 #For delelopment convinient
 
@@ -83,7 +82,8 @@ export TODOTXT_CFG_FILE="${HOME}/github/dotfile/setup/todo.txt_cli-2.9/.todo.cfg
 alias t='todo.sh $1'
 
 # Functions ------------------
-md () { mkdir -p "$1" && cd "$1"; } #mkdir and go to new dir 
+md () { mkdir -p "$1"; } #mkdir 
+mcd () { mkdir -p "$1" && cd "$1"; } #mkdir and go to new dir 
 #bu - Back Up a file. Usage "bu filename.txt" 
 bu () { cp $1 ${1}-`date +%Y%m%d%H%M`.backup ; }
 # MAKE 
