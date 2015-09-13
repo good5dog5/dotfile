@@ -36,6 +36,7 @@
     " Complete search engines and bookmarks.
     set complete=sb
     set editor="urxvt -fn 'xft:Droid Sans Mono for Powerline:pixelsize=15' -e vim"
+    set nohlsearch
 
 " Mappings {{{1
     " clear all key mappings
@@ -98,3 +99,97 @@ source ~/.vimperator/plugin/smooth.js
 source ~/.vimperator/plugin/jquery-loader.js
 source ~/.vimperator/plugin/jquery-2.1.4.js
 
+" about.config {{
+
+    " Disable animation
+    set! browser.tabs.animate=false
+
+    set! browser.cache.use_new_backend=0
+
+    " Fast urlbar autoFill
+    set! browser.urlbar.delay=0
+
+    " Fast render
+    set! nglayout.initialpaint.delay=0
+
+    " new tab page is about:blank
+    " set! browser.newtab.url=about:blank
+
+    " enable pipelining
+    set! network.http.pipelining=true
+    set! network.http.pipelining.maxrequests=64
+    set! network.http.max-connections=64
+    set! network.http.max-connections-per-server=64
+
+    " what to clear after shutdown?
+    set! privacy.clearOnShutdown.cache=false
+    set! privacy.clearOnShutdown.cookies=true
+    set! privacy.clearOnShutdown.downloads=true
+    set! privacy.clearOnShutdown.formdata=true
+    set! privacy.clearOnShutdown.history=false
+    set! privacy.clearOnShutdown.offlineApps=true
+    set! privacy.clearOnShutdown.passwords=false
+    set! privacy.clearOnShutdown.sessions=false
+    set! privacy.clearOnShutdown.siteSettings=false
+
+    " don't check if we're the default browser
+    set! browser.shell.checkDefaultBrowser=false
+
+    " make sure CSP is enabled
+    set! security.csp.enable=true
+
+    " view that source
+    set! view_source.syntax_highlight=true
+    set! view_source.wrap_long_lines=true
+
+    " Longer interval to save session
+    set! browser.sessionstore.interval=30000
+
+    " Use memory instead of disk cache
+    set! browser.cache.disk.enable=false
+    set! browser.cache.disk.capacity=0
+    set! browser.cache.memory.enable=true
+    set! browser.cache.memory.max_entry_size=2048000
+
+    " Tree Style Tab
+    " --------------
+
+    " tab display
+    set! extensions.treestyletab.twisty.style="sidebar"
+    set! extensions.treestyletab.tabbar.invertTabContents=false
+
+    " no indent
+    set! extensions.treestyletab.maxTreeLevel.vertical=1
+
+    " omnipresent tabs
+    set! extensions.treestyletab.tabbar.autoHide.mode=0
+    set! extensions.treestyletab.tabbar.autoHide.mode.fullscreen=0
+
+    " vertical tabs
+    set! extensions.treestyletab.autoAttach.duplicateTabCommand=0
+    set! extensions.treestyletab.autoAttach.duplicateTabCommand.back=0
+    set! extensions.treestyletab.autoAttach.duplicateTabCommand.forward=0
+    set! extensions.treestyletab.autoAttach.fromCurrent=1
+    set! extensions.treestyletab.autoAttach.goButton=0
+    set! extensions.treestyletab.autoAttach.newTabButton=0
+    set! extensions.treestyletab.autoAttach.newTabCommand=0
+    set! extensions.treestyletab.autoAttach.searchResult=0
+
+    " drop links like it's hot
+    set! extensions.treestyletab.dropLinksOnTab.behavior=2
+
+    " context items
+    set! extensions.treestyletab.show.context-item-bookmarkTabSubtree=false
+    set! extensions.treestyletab.show.context-item-collapseAllSubtree=false
+    set! extensions.treestyletab.show.context-item-expandAllSubtree=false
+    set! extensions.treestyletab.show.context-item-reloadDescendantTabs=false
+    set! extensions.treestyletab.show.context-item-reloadTabSubtree=true
+    set! extensions.treestyletab.show.context-item-removeAllTabsButThisTree=false
+    set! extensions.treestyletab.show.context-item-removeDescendantTabs=true
+    set! extensions.treestyletab.show.context-item-removeTabSubtree=true
+    set! extensions.treestyletab.show.context-item-toggleAutoHide=false
+    set! extensions.treestyletab.show.context-item-toggleFixed=false
+
+    " no collapsing
+    " set! extensions.treestyletab.allowSubtreeCollapseExpand.horizontal=false
+    " set! extensions.treestyletab.allowSubtreeCollapseExpand.vertical=false

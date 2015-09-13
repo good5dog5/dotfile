@@ -4,10 +4,16 @@
 [ -z "$PS1" ] && return
 
 # Set the default editor
-export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/usr/script
+export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/usr/bin
 export PATH=$PATH:$HOME/usr/nand2tetris/tools
 export PATH=$PATH:$HOME/usr/phantomjs/bin
+export PATH=$PATH:$HOME/go/bin
+
+
+# export GOROOT=/usr/bin/go
+export GOPATH=$HOME/go
 
 #export CLASSPATH="$HOME.local/bin/js.jar"
 export EDITOR=vim
@@ -19,9 +25,11 @@ export UVA_PATH=$HOME/github/codeSet/c/Uva/
 #Get color support for 'less'
 export LESS="--RAW-CONTROL-CHARS"
 
-export NVM_DIR="/home/jordan/.nvm"
 export DOTFILE="${HOME}/github/dotfile"
+export XDG_CONFIG_HOME="${HOME}/.config"
 
+# Ranger
+# export RANGER_LOAD_DEFAULT_RC="FALSE"
 _source_files()
 {
     [ ! $# -eq 1 ] &&  return
@@ -37,7 +45,9 @@ _source_files()
     local files="${1}/*"
     for f in $files
     do
-        . "${f}"
+        if [ -f $f ]; then
+            . "${f}"
+        fi
        # echo "source ${f}"
     done
 }
@@ -51,7 +61,7 @@ _source_files "${HOME}/bash_conf"
 
 # Source all auto_complete files
 _source_files "/usr/share/bash-completion/bash_completion"
-_source_files "$DOTFILE/script/autoComplete"
+_source_files "$DOTFILE/bash/bash_complete"
 _source_files "/etc/bash_completion"
 _source_files "/etc/default/locale"
 
