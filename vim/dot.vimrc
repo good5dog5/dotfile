@@ -44,6 +44,7 @@
     Plugin 'hynek/vim-python-pep8-indent'
     Plugin 'klen/python-mode'
     Plugin 'vim-scripts/rtorrent-syntax-file'
+    Plugin 'PotatoesMaster/i3-vim-syntax'
 
     " Navagation
     Plugin 'scrooloose/nerdtree'
