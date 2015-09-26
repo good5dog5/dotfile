@@ -34,8 +34,8 @@ config_and_build()
                 --enable-gui=auto
                 --enable-gnome-check
                 --enable-cscope
-                --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu"
-                --prefix=/usr
+                --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu
+                --prefix=/usr"
 
     ./configure $flag
 }
@@ -71,7 +71,7 @@ set_default_editor()
 }
 
 cd "$dir"
-clone_vim_repo
+#clone_vim_repo
 checkout_ver_430
 config_and_build
 install_vim
