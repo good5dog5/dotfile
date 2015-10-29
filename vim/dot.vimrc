@@ -49,7 +49,7 @@
     " Navagation
     Plugin 'scrooloose/nerdtree'
     Plugin 'Lokaltog/vim-easymotion'
-    Plugin 'steffanc/cscopemaps.vim'
+    Plugin 'good5dog5/cscopemaps.vim'
     Plugin 'Valloric/MatchTagAlways'
     Plugin 'majutsushi/tagbar'
     Plugin 'christoomey/vim-tmux-navigator'
