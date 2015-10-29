@@ -27,7 +27,7 @@ export LESS="--RAW-CONTROL-CHARS"
 
 export DOTFILE="${HOME}/github/dotfile"
 export XDG_CONFIG_HOME="${HOME}/.config"
-
+export TIGRC_USER="$XDG_CONFIG_HOME"/tig/tigrc
 # Ranger
 # export RANGER_LOAD_DEFAULT_RC="FALSE"
 _source_files()

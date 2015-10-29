@@ -33,7 +33,6 @@ python-gpgme
 xbindkeys
 pidgin
 checkinstall
-youtube-dl
 wget
 lame
 default-jre
@@ -45,8 +44,6 @@ gimp
 gnome-panel
 i3
 conky-all
-mutt
-offlineimap
 mkvtoolnix
 autojump
 bash-completion
@@ -56,7 +53,6 @@ libgmp3-dev
 goldendict
 dict-gcide
 sqlite3
-ranger
 w3m
 pv
 feh
@@ -65,3 +61,5 @@ rtorrent
 acpi
 sysstat
 imagemagick
+sdcv
+cloc
