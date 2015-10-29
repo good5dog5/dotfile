@@ -1,37 +1,29 @@
 .PHONY: clean clean_bash
 BASEDIR:=$(shell pwd)
 
-VIMDIR   :=${BASEDIR}/vim
-BASHDIR  :=${BASEDIR}/bash
-SETUPDIR :=${BASEDIR}/setup
-BINDIR   :=${BASEDIR}/bin
-CONFDIR  :=${BASEDIR}/config
-SCRIPTDIR:=${BASEDIR}/script
-EMACSDIR :=${BASEDIR}/emacs
+VIMDIR      :=${BASEDIR}/vim
+BASHDIR     :=${BASEDIR}/bash
+SETUPDIR    :=${BASEDIR}/setup
+BINDIR      :=${BASEDIR}/bin
+CONFDIR     :=${BASEDIR}/config
+SCRIPTDIR   :=${BASEDIR}/script
+PACKAGEDIR  :=${BASEDIR}/PKG
 
 BASH_ALIAS   :=${BASHDIR}/bash_alias
 BASH_COMPLETE:=${BASHDIR}/bash_complete
 
 all: install_all setup_others setup_bash setup_vim 
 
-all_install:
+init:
 	sh      $(SETUPDIR)/init.sh
-	sh      $(SETUPDIR)/install_vundle.sh
-	sh      $(SETUPDIR)/install_autojump.sh
-	sh      $(SETUPDIR)/install_powerline_font.sh
 	@cp -R  ${SCRIPTDIR}/*									${HOME}/usr/script/
 	@cp -R  ${BINDIR}/stardict/*							${STARDICT_DATA_DIR}
+	@ln -fs $(BINDIR)/colorgcc							    ${HOME}/usr/bin/colorgcc
 
 conf_install:
-	@ln -fs   ${CONFDIR}/tmux.conf							${HOME}/.tmux.conf
 	@ln -fs   ${CONFDIR}/gitconfig							${HOME}/.gitconfig
 	@ln -fs   ${CONFDIR}/LESS_TERMCAP 						${HOME}/.LESS_TERMCAP
-	@ln -fs   $(BINDIR)/colorgcc							${HOME}/usr/bin/colorgcc
-	@ln -fsr ./pkglist  								    ${HOME}/.pkglist
 	@ln -fsr  ${CONFDIR}/inputrc  						    ${HOME}/.inputrc
-
-emace_install:
-	@ln -sfr  ${EMACSDIR}/init.el 							${HOME}/.emacs.d/init.el
 
 vim_install:
 	@ln -sf   ${VIMDIR}/dot.vimrc							${HOME}/.vimrc
@@ -44,6 +36,8 @@ vim_install:
 	@cp -R    ${VIMDIR}/template                           	${HOME}/.vim/template/
 	@mkdir -p ${HOME}/.vimperator/
 	@cp -Rf   ${VIMDIR}/vimperator/*   	  					${HOME}/.vimperator/
+	@bash     ${SETUPDIR}/install_vundle.sh
+	
 
 vim_clean:
 	@rm 	  ${HOME}/.vimrc
@@ -57,7 +51,7 @@ vim_clean:
 	@rm -rf   ${HOME}/.vimperator/
 
 bash_install:
-	@ln -sf   ${BASHDIR}/bashrc                             ${HOME}/.bashrc
+	@ln -sf   ${BASHDIR}/bashrc                           ${HOME}/.bashrc
 	@mkdir -p ${HOME}/bash_conf 
 	@ln -sf   ${BASH_ALIAS}/alias.git.bash                ${HOME}/bash_conf/alias.git.bash
 	@ln -sf   ${BASH_ALIAS}/alias.dev.bash                ${HOME}/bash_conf/alias.dev.bash

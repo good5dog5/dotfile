@@ -45,6 +45,7 @@
     Plugin 'klen/python-mode'
     Plugin 'vim-scripts/rtorrent-syntax-file'
     Plugin 'PotatoesMaster/i3-vim-syntax'
+    Plugin 'BohrShaw/vim-vimperator-syntax'
 
     " Navagation
     Plugin 'scrooloose/nerdtree'
@@ -60,6 +61,7 @@
     Plugin 'bling/vim-airline'
     Plugin 'junegunn/vim-easy-align'
     Plugin 'nathanaelkane/vim-indent-guides'
+    Plugin 'chrisbra/Colorizer'
     " Auto-complete
     Plugin 'Valloric/YouCompleteMe'
     Plugin 'marijnh/tern_for_vim'
@@ -85,7 +87,7 @@
     set foldnestmax=8
     set foldcolumn=3
     " Automatically refresh any unchanged files
-    "set autoread
+    set autoread
  
     "retab command can replace all sequence of white-space"
     "contain<bt> with new strings of wihte-space, use the"
@@ -118,21 +120,19 @@
     "}}}
     set formatoptions-=cro
                          
-                         
     set smartindent     
     set autoindent
  
     set fileencodings=utf-8
     set encoding=utf-8
     set tenc=utf-8 
-    au FileType javascript call JavaScriptFold()
  
     "No bells
     set noerrorbells visualbell t_vb=
  
     set switchbuf=split
  
-    set showcmd      " Show (partial) command in status line.
+    set showcmd          " Show (partial) command in status line.
     set incsearch        " Incremental search
  
  
@@ -141,11 +141,27 @@
     set completeopt=menu,menuone
     " Limit popup menu height
     set pumheight=20
+
+    set relativenumber
+
+    " undo info
+    if !isdirectory($HOME."/.vim")
+        call mkdir($HOME."/.vim", "", 0770)
+    endif
+    if !isdirectory($HOME."/.vim/undo-dir")
+        call mkdir($HOME."/.vim/undo-dir", "", 0700)
+    endif
+    set undodir=~/.vim/undo-dir
+    set undofile
+    set nobackup
+    set noswapfile
 " }}}
 " [ User interface   ] {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       Vim user interface                    "         
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    set modeline
+    set modelines=3
     set number
     set nowrap
     set hidden
@@ -190,7 +206,7 @@
     map <F12> :call Switch_html_javascript()<CR>
  
     "clear highlight after search nnoremap: nmap and no-remap
-    nnoremap <CR> :noh<CR><CR>
+    nnoremap <CR> :noh<CR>
  
     nmap <leader>v :edit $MYVIMRC<CR>
     nmap <leader>R :source $MYVIMRC<CR>
@@ -211,8 +227,8 @@
  
     nmap <F8>      :TagbarToggle<CR>
  
-    "Replace word under current cursor"
-    nmap <leader>s :%s/\<<C-r><C-w>\>/
+    "Replace word staring from cursor postion"
+    nmap <leader>s :.,$s/\<<C-r><C-w>\>/
     "Replace select word (save in register ")
     "Idea from http://asktherelic.com/2011/04/02/on-easily-replacing-text-in-vim/
     vmap <Leader>s "sy:%s/<C-R>=substitute(@s,"\n",'\\n','g')<CR>/
@@ -256,6 +272,18 @@
           syntax region foldBraces start=/{/ end=/}/ transparent fold keepend extend
     endfunction
     "}}}
+
+    "Turns off Vim’s crazy default regex characters and makes searches use normal regexes
+    nnoremap / /\v
+    vnoremap / /\v
+    "Easy to find match bracket pairs
+    nnoremap <tab> %
+    vnoremap <tab> %
+    nnoremap ; :
+
+    "Select the last changed (or pasted) tex
+    "reference http://vim.wikia.com/wiki/Selecting_your_pasted_texj 
+    " nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
     
 " }}}
 " [ Plugin configure ] {{{1
@@ -444,7 +472,6 @@
         let g:pymode_lint_ignore = "W0611,E231"
     "}}}
 
-
 " }}}
 " [ Auto command   ] {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -454,6 +481,7 @@
     autocmd FileType lua                      setlocal fdm=marker
     autocmd Filetype make                     setlocal noexpandtab
     autocmd FileType html                     set omnifunc=htmlcomplete#CompleteTag,
+    autocmd FileType javascript               call JavaScriptFold()
     autocmd BufNewFile,BufRead  *.bash*       call SetBashOption()
     autocmd BufNewFile,BufRead  *.sh          call SetBashOption()
     autocmd BufNewFile,BufRead  *.vim*        set filetype=vim
@@ -576,3 +604,4 @@ function! Mode_executable()
     endif
 endfunction
 
+"// vim: set foldmethod=marker:

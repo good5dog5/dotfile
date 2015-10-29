@@ -1,6 +1,25 @@
 #!/usr/bin/env bash
 # Jordan huang<good5dog5@gmail.com>
 
+# color definition
+COLOR_END='\[\e[m\]'
+COLOR_BLACK='\[\e[0;30m\]'
+COLOR_RED='\[\e[0;31m\]'
+COLOR_GREEN='\[\e[0;32m\]'
+COLOR_YELLOW='\[\e[0;33m\]'
+COLOR_BLUE='\[\e[0;34m\]'
+COLOR_PURPLE='\[\e[0;35m\]'
+COLOR_CYAN='\[\e[0;36m\]'
+COLOR_WHITE='\[\e[0;37m\]'
+COLOR_L_BLACK='\[\e[1;30m\]'
+COLOR_L_RED='\[\e[1;31m\]'
+COLOR_L_GREEN='\[\e[1;32m\]'
+COLOR_L_YELLOW='\[\e[1;33m\]'
+COLOR_L_BLUE='\[\e[1;34m\]'
+COLOR_L_PURPLE='\[\e[1;35m\]'
+COLOR_L_CYAN='\[\e[1;36m\]'
+COLOR_L_WHITE='\[\e[1;37m\]'
+
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -21,13 +40,6 @@ alias sbr="source $HOME/.bashrc"
 alias etmr="vim $HOME/.tmux.conf"
 alias eemr="vim $HOME/.emacs.d/init.el"
 alias eplist="vim $HOME/.pkglist"
-eba() {
-   if [ "$#" -eq 0 ]; then
-       vim $HOME/bash_conf/alias.common.bash
-   else
-       vim $HOME/bash_conf/alias.$1.bash
-   fi
-}
 
 #Shortcuts
 alias h="history | tail -100"
@@ -39,12 +51,12 @@ alias l.="ls -d .*"
 #list directories
 alias lld="ls -lrUd */ --color=auto"  
 alias ls="ls -r --color=auto  --group-directories-first --sort=extension"
+alias layout="tree -L 3"
 alias grep="grep  --color=auto"
 #word grep
-alias wg="ag -inru "
+alias wg="ag --ignore-case --unrestricted --follow"
 #find name
 alias fn="find ./ -iname "
-alias opend="xdg-open"
 
 # List only directories
 alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
@@ -75,13 +87,36 @@ alias twk="python $HOME/usr/venv/bin/rainbowstream"
 
 alias setclip='xclip -selection c'
 alias getclip='xclip -selection clipboard -o'
+alias wtf="man"
+alias gC="git clone "
 
 # todo.txt_cli
 export TODOTXT_DEFAULT_ACTION=ls
 export TODOTXT_CFG_FILE="${HOME}/github/dotfile/setup/todo.txt_cli-2.9/.todo.cfg"
 alias t='todo.sh $1'
 
+# Apt-get aliases
+alias agi='sudo apt-get install'
+alias agr='sudo apt-get remove'
+alias agu='sudo apt-get update'
+alias acs='apt-cache search'
+
 # Functions ------------------
+F() 
+{
+    if  hash thunar 2>/dev/null ; then
+        thunar
+    else
+        xdg-open
+    fi
+}
+eba() {
+   if [ "$#" -eq 0 ]; then
+       vim $HOME/bash_conf/alias.common.bash
+   else
+       vim $HOME/bash_conf/alias.$1.bash
+   fi
+}
 md () { mkdir -p "$1"; } #mkdir 
 mcd () { mkdir -p "$1" && cd "$1"; } #mkdir and go to new dir 
 #bu - Back Up a file. Usage "bu filename.txt" 
@@ -104,7 +139,7 @@ uva() {
         ln -sf "../Makefile" "./Makefile"
     fi
 }
-extract () {
+ext() {
   if [ $# -ne 1 ]
   then
     echo "Error: No file specified."
@@ -135,21 +170,20 @@ function path(){
     printf "%s\n" $PATH
     IFS=$old
 }
-batch_install() {
-    [ -f $HOME/.pkglist ] && cat $HOME/.pkglist | xargs sudo apt-get -y install
-}
-net_interface_down_up()
-{
-    if [ $# -ne 1 ]
-    then
-        echo "Error : no interface specified."
-        return 1
-    fi
 
-    sudo ifconfig "$1" down
-    sleep 5
-    sudo ifconfig "$1" up
+batch_install() {
+
+    # local PKG_DIR="$HOME/.package"
+    # if [ -d "$PKG_DIR" ]; then
+    #
+    #     cd $PKG_DIR
+    for f in ./*;
+    do
+        cat $f | xargs sudo apt-get -y install 
+    done
+    # fi
 }
+
 # A shortcut function that simplifies usage of xclip.
 # - Accepts input from either stdin (pipe), or params.
 # ------------------------------------------------
@@ -186,4 +220,16 @@ cb() {
       echo -e "$_scs_col""Copied to clipboard:\e[0m $input"
     fi
   fi
+}
+
+# colorize man pages
+man () {
+    env LESS_TERMCAP_mb=$'\E[1;31m' \
+    LESS_TERMCAP_md=$'\E[01;38;5;74m' \
+    LESS_TERMCAP_me=$'\E[0m' \
+    LESS_TERMCAP_so=$'\E[0;7;32m' \
+    LESS_TERMCAP_se=$'\E[0m' \
+    LESS_TERMCAP_us=$'\E[0;33m' \
+    LESS_TERMCAP_ue=$'\E[0m' \
+    man "$@"
 }

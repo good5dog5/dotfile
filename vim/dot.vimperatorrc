@@ -38,6 +38,12 @@
     set editor="urxvt -fn 'xft:Droid Sans Mono for Powerline:pixelsize=15' -e vim"
     set nohlsearch
 
+    " don't focus any "input" elements automatically when open pages.
+    set focuscontent
+
+    set nextpattern=\s*下一頁|下一張|下頁|下一步\s*,\bnext\b,^>$,^(>>|»)$,^(>|»),(>|»)$,\bmore\b
+    set previouspattern=\s*上一頁|上一張|上頁|上一步\s*,\bprev|previous\b,^<$,^(<<|«)$,^(<|«),(<|«)$ 
+
 " Mappings {{{1
     " clear all key mappings
     " to avoid troubles from loading rc file several times
@@ -88,9 +94,10 @@ autocmd LocationChange .*                             js modes.passAllKeys = fal
 autocmd LocationChange mail\\.google\\.com            js modes.passAllKeys = true
 
 "URL Mappings"
-map  <leader>git :topen https://github.com/good5dog5<CR>
+map  <leader>git  :topen https://github.com/good5dog5<CR>
 map  <leader>note :topen http://0.0.0.0:4000<CR>
 map  <leader>mail :topen https://mail.google.com<CR>
+map  <leader>ptt  :topen telnet://ptt.cc<CR>
 
 let g:smooth_scroll_amount="70"
 let g:smooth_scroll_interval="20"
@@ -104,6 +111,12 @@ source ~/.vimperator/plugin/jquery-2.1.4.js
     " Disable animation
     set! browser.tabs.animate=false
 
+    " Display tab-bar anytime
+    set! browser.tabs.autoHide=false
+
+    " Don't animate tab-bar when switch to fullscreen
+    set! browser.fullscreen.animateUp=0
+
     set! browser.cache.use_new_backend=0
 
     " Fast urlbar autoFill
@@ -112,6 +125,9 @@ source ~/.vimperator/plugin/jquery-2.1.4.js
     " Fast render
     set! nglayout.initialpaint.delay=0
 
+    " Enable OpenGL Off-Main-Thread Compositing (OMTC)
+    set! layers.acceleration.force-enabled=true
+    set! layers.offmainthreadcomposition.enabled=true
     " new tab page is about:blank
     " set! browser.newtab.url=about:blank
 
@@ -151,45 +167,64 @@ source ~/.vimperator/plugin/jquery-2.1.4.js
     set! browser.cache.memory.enable=true
     set! browser.cache.memory.max_entry_size=2048000
 
+    " Enabling Media Source Extensions in Firefox
+    set! media.mediasource.enabled=true
+
+    " Disable ‘youtube.com is now fullscreen’ popup in Firefox browser
+    set! full-screen-api.approval-required=false 
+
+
     " Tree Style Tab
-    " --------------
+        " -------------- {{{3
 
-    " tab display
-    set! extensions.treestyletab.twisty.style="sidebar"
-    set! extensions.treestyletab.tabbar.invertTabContents=false
+        " tab display
+        set! extensions.treestyletab.twisty.style="sidebar"
+        set! extensions.treestyletab.twisty.style="sidebar"
+        set! extensions.treestyletab.tabbar.invertTabContents=false
 
-    " no indent
-    set! extensions.treestyletab.maxTreeLevel.vertical=1
 
-    " omnipresent tabs
-    set! extensions.treestyletab.tabbar.autoHide.mode=0
-    set! extensions.treestyletab.tabbar.autoHide.mode.fullscreen=0
+        " no indent
+        set! extensions.treestyletab.maxTreeLevel.vertical=1
 
-    " vertical tabs
-    set! extensions.treestyletab.autoAttach.duplicateTabCommand=0
-    set! extensions.treestyletab.autoAttach.duplicateTabCommand.back=0
-    set! extensions.treestyletab.autoAttach.duplicateTabCommand.forward=0
-    set! extensions.treestyletab.autoAttach.fromCurrent=1
-    set! extensions.treestyletab.autoAttach.goButton=0
-    set! extensions.treestyletab.autoAttach.newTabButton=0
-    set! extensions.treestyletab.autoAttach.newTabCommand=0
-    set! extensions.treestyletab.autoAttach.searchResult=0
+        " omnipresent tabs
+        set! extensions.treestyletab.tabbar.autoHide.mode=1
+        set! extensions.treestyletab.tabbar.autoHide.mode.fullscreen=0
+        set! extensions.treestyletab.tabbar.autoHide.mode.toggle=1
+        set! extensions.treestyletab.tabbar.autoHide.mode.toggle.fullscreen=1
 
-    " drop links like it's hot
-    set! extensions.treestyletab.dropLinksOnTab.behavior=2
+        " vertical tabs
+        set! extensions.treestyletab.autoAttach.duplicateTabCommand=0
+        set! extensions.treestyletab.autoAttach.duplicateTabCommand.back=0
+        set! extensions.treestyletab.autoAttach.duplicateTabCommand.forward=0
+        set! extensions.treestyletab.autoAttach.fromCurrent=1
+        set! extensions.treestyletab.autoAttach.goButton=0
+        set! extensions.treestyletab.autoAttach.newTabButton=0
+        set! extensions.treestyletab.autoAttach.newTabCommand=0
+        set! extensions.treestyletab.autoAttach.searchResult=0
 
-    " context items
-    set! extensions.treestyletab.show.context-item-bookmarkTabSubtree=false
-    set! extensions.treestyletab.show.context-item-collapseAllSubtree=false
-    set! extensions.treestyletab.show.context-item-expandAllSubtree=false
-    set! extensions.treestyletab.show.context-item-reloadDescendantTabs=false
-    set! extensions.treestyletab.show.context-item-reloadTabSubtree=true
-    set! extensions.treestyletab.show.context-item-removeAllTabsButThisTree=false
-    set! extensions.treestyletab.show.context-item-removeDescendantTabs=true
-    set! extensions.treestyletab.show.context-item-removeTabSubtree=true
-    set! extensions.treestyletab.show.context-item-toggleAutoHide=false
-    set! extensions.treestyletab.show.context-item-toggleFixed=false
+        " drop links like it's hot
+        set! extensions.treestyletab.dropLinksOnTab.behavior=2
 
-    " no collapsing
-    " set! extensions.treestyletab.allowSubtreeCollapseExpand.horizontal=false
-    " set! extensions.treestyletab.allowSubtreeCollapseExpand.vertical=false
+        " context items
+        set! extensions.treestyletab.show.context-item-bookmarkTabSubtree=false
+        set! extensions.treestyletab.show.context-item-collapseAllSubtree=false
+        set! extensions.treestyletab.show.context-item-expandAllSubtree=false
+        set! extensions.treestyletab.show.context-item-reloadDescendantTabs=false
+        set! extensions.treestyletab.show.context-item-reloadTabSubtree=true
+        set! extensions.treestyletab.show.context-item-removeAllTabsButThisTree=false
+        set! extensions.treestyletab.show.context-item-removeDescendantTabs=true
+        set! extensions.treestyletab.show.context-item-removeTabSubtree=true
+        set! extensions.treestyletab.show.context-item-toggleAutoHide=false
+        set! extensions.treestyletab.show.context-item-toggleFixed=false
+
+        " no collapsing
+        " set! extensions.treestyletab.allowSubtreeCollapseExpand.horizontal=false
+        " set! extensions.treestyletab.allowSubtreeCollapseExpand.vertical=false
+    "}}}
+    " BBSFx
+    set! extensions.bbsfox2.host_default.FontFace.string="WenQuanYi Zen Hei Mono"
+    "}}}
+
+
+
+" vim: ft=vimperator ts=4 sw=4 sts=0 et fdm=marker fdc=3
