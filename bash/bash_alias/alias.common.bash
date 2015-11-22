@@ -69,16 +69,18 @@ alias inet='ifconfig | grep "inet addr"'
 alias ports='netstat -tulanp'
 
 alias vi="vim"
+alias v="vim"
 alias vd="vimdiff"
 alias em="emacs -nw"
 alias py="python"
+alias ipy="ipython"
 alias dd_progress="sudo kill -USR1 $(pgrep ^dd)"
+alias bc='bc --quiet --mathlib'
 
 #For delelopment convinient
 
 alias armgcc="arm-linux-gnueabihf-gcc"
 alias armobjdump="arm-linux-gnueabihf-objdump"
-alias gdb="gdb -q"
 
 
 alias js="java -jar /home/jordan/.local/bin/js.jar"
@@ -95,11 +97,7 @@ export TODOTXT_DEFAULT_ACTION=ls
 export TODOTXT_CFG_FILE="${HOME}/github/dotfile/setup/todo.txt_cli-2.9/.todo.cfg"
 alias t='todo.sh $1'
 
-# Apt-get aliases
-alias agi='sudo apt-get install'
-alias agr='sudo apt-get remove'
-alias agu='sudo apt-get update'
-alias acs='apt-cache search'
+alias xup="xrdb ~/.Xresources"
 
 # Functions ------------------
 F() 

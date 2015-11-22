@@ -16,4 +16,7 @@ alias mp3_download="youtube-dl --output \"/media/jordan/MASS/music/%(title)s.%(e
                                 --extract-audio \
                                 --audio-format mp3  "
 alias top="htop"
+alias anki="ipython -i -c \"%run /usr/bin/anki\""
 
+alias gdb="gdb -q"
+alias cgdb="cgdb -q"
