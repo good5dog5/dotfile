@@ -1,6 +1,5 @@
 curl
 gparted
-htop
 konsole
 nodejs
 python-pip
@@ -63,3 +62,6 @@ sysstat
 imagemagick
 sdcv
 cloc
+pdfgrep
+skype
+graphviz
