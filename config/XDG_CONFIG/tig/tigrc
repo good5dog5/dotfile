@@ -120,6 +120,7 @@ set line-graphics = yes
     bind main F !@sh -c "git show %(commit) --pretty=format: --name-only | xargs | xsel -ib"
     bind main E !<sh -c "vim -c 'Gedit %(commit)' $(ls | head -1)"
     bind main V !<sh -c "vim $(git show %(commit) --pretty=format: --name-only | xargs)"
+    bind main + !git commit 
 
 # }}}
 # Diff {{{
@@ -149,7 +150,7 @@ set line-graphics = yes
 # Status {{{
 
     bind status R !@git reset HEAD %(file)
-    bind status A !@git commit --amend
+    bind status a !?git commit --amend
     bind status N !@git add -N %(file)
 
 # }}}
