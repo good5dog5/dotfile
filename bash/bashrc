@@ -12,6 +12,9 @@ export PATH=$PATH:$HOME/usr/phantomjs/bin
 export PATH=$PATH:$HOME/go/bin
 
 
+# Python path
+export PYTHONPATH=/usr/lib/python2.7/dist-packages:/usr/lib/python2.7/dist-packages/ubuntu-sso-client
+
 # export GOROOT=/usr/bin/go
 export GOPATH=$HOME/go
 
@@ -28,6 +31,9 @@ export LESS="--RAW-CONTROL-CHARS"
 export DOTFILE="${HOME}/github/dotfile"
 export XDG_CONFIG_HOME="${HOME}/.config"
 export TIGRC_USER="$XDG_CONFIG_HOME"/tig/tigrc
+
+# bc caculator
+export BC_ENV_ARGS=~/.bcrc
 # Ranger
 # export RANGER_LOAD_DEFAULT_RC="FALSE"
 _source_files()
@@ -87,19 +93,24 @@ _source_files "$NVM_DIR/nvm.sh"
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\][ \W ]\[\033[00m\]\$ '
 
 
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
-HISTCONTROL=ignoreboth
 HISTSIZE=1000
 HISTFILESIZE=2000
 
-# append to the history file, don't overwrite it
-shopt -s histappend
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 shopt -s histverify
+
+# Avoid duplicates
+# See bash(1) for more options
+export HISTCONTROL=ignoredups:erasedups  
+# When the shell exits, append to the history file instead of overwriting it
+shopt -s histappend
+
+# After each command, append to the history file and reread it
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+
 
 # Enable Ctrl-z to toggle vim fg-bg switch
 # remap susp to ^o and ~/.inputrc assing ^z to "fg
@@ -117,4 +128,4 @@ done
 
 
 # need to be more elegant
-# source "$DOTFILE/script/autoComplete/bash_completion"
+eval $(gpg-agent --daemon)
