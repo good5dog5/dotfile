@@ -41,6 +41,7 @@ java-package
 freemind
 gimp
 gnome-panel
+gvim
 i3
 conky-all
 mkvtoolnix
@@ -65,3 +66,5 @@ cloc
 pdfgrep
 skype
 graphviz
+thunderbird
+irssi
