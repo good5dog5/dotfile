@@ -6,82 +6,198 @@
 "Version:
 "     1.0 - 2014/07/19 17:01
 "
-"Sections:
-"     ->General
-"     ->VIM user interface
-"     ->Colors and fonts     ->Texts, tab and indent related
-"     ->Visual mode related
-"     ->Moving around, tab and buffers
-"     ->Status line
-"     ->Useful shortcuts
-"     ->helper functions
-"     ->Tags
-"     ->Plugin configure
-"     ->Auto command
-"
-"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " }}}
 " [ General          ] {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       General                            "        
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    set nocompatible
-    filetype off
-    set rtp+=~/.vim/bundle/Vundle.vim/
- 
-    call vundle#begin()
-    Plugin 'gmarik/Vundle.vim'
-    " libraries
-    Plugin 'tomtom/tlib_vim'
-    Plugin 'MarcWeber/vim-addon-mw-utils'
-    Plugin 'vim-scripts/L9'
-    Plugin 'Shougo/vimproc.vim'
-    " Syntax
-    Plugin 'pangloss/vim-javascript'
-    Plugin 'good5dog5/arm.vim'
-    Plugin 'gabrielelana/vim-markdown'
-    Plugin 'hynek/vim-python-pep8-indent'
-    Plugin 'klen/python-mode'
-    Plugin 'vim-scripts/rtorrent-syntax-file'
-    Plugin 'PotatoesMaster/i3-vim-syntax'
-    Plugin 'BohrShaw/vim-vimperator-syntax'
-
-    " Navagation
-    Plugin 'scrooloose/nerdtree'
-    Plugin 'Lokaltog/vim-easymotion'
-    Plugin 'good5dog5/cscopemaps.vim'
-    Plugin 'Valloric/MatchTagAlways'
-    Plugin 'majutsushi/tagbar'
-    Plugin 'christoomey/vim-tmux-navigator'
-    Plugin 'terryma/vim-smooth-scroll'
-    Plugin 'terryma/vim-expand-region'
-
-    " Good-looking
-    Plugin 'bling/vim-airline'
-    Plugin 'junegunn/vim-easy-align'
-    Plugin 'nathanaelkane/vim-indent-guides'
-    Plugin 'chrisbra/Colorizer'
-    " Auto-complete
-    Plugin 'Valloric/YouCompleteMe'
-    Plugin 'marijnh/tern_for_vim'
-    Plugin 'Raimondi/delimitMate'
-    " Snippets
-    Plugin 'SirVer/ultisnips'
-    Plugin 'honza/vim-snippets'
-
-    Plugin 'ervandew/supertab'
-    Plugin 'rking/ag.vim'
-    Plugin 'kien/ctrlp.vim'
-    Plugin 'nelstrom/vim-visual-star-search'
-    Plugin 'tomtom/tcomment_vim'
-    Plugin 'wikitopian/hardmode'
-    Plugin 'KitN/nand2-vim-syn'
-
-    call vundle#end()
- 
     filetype  indent plugin on
     syntax on
+
+    let mapleader = ","
+
+    " Install vim-plug if we don't arlready have it
+    " {{{
+    if empty(glob('~/.vim/autoload/plug.vim'))
+        " Ensure all needed directories exist  (Thanks @kapadiamush)
+        execute 'mkdir -p ~/.vim/plugged'
+        execute 'mkdir -p ~/.vim/autoload'
+        " Download the actual plugin manager
+        execute '!curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+    endif
+    " }}}
+ 
+    call plug#begin('~/.vim/plugged')
+
+    " Colorschemes
+    Plug 'NLKNguyen/papercolor-theme'
+    Plug 'junegunn/seoul256.vim'
+
+    " libraries
+    Plug 'tomtom/tlib_vim'
+    Plug 'MarcWeber/vim-addon-mw-utils'
+    Plug 'vim-scripts/L9'
+
+    " Syntax
+    Plug 'pangloss/vim-javascript', {'for': 'javascript'}
+    Plug 'good5dog5/arm.vim', {'for': 'asm'}
+    Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
+    Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
+    Plug 'klen/python-mode', {'for' : 'python'}
+    Plug 'vim-scripts/rtorrent-syntax-file', {'for' : 'rtorrent'}
+    Plug 'PotatoesMaster/i3-vim-syntax'
+    Plug 'BohrShaw/vim-vimperator-syntax'
+    Plug 'xuhdev/vim-latex-live-preview', {'for' : 'tex'}
+    Plug 'LaTeX-Box-Team/LaTeX-Box', {'for' : 'tex'}
+    Plug 'hrother/offlineimaprc.vim', {'for' : 'offlineimap'}
+
+    " Navagation
+    Plug 'scrooloose/nerdtree'
+    "  {{{
+      nmap <leader>n :NERDTree.<CR>
+    "  }}}
+    Plug 'Lokaltog/vim-easymotion'
+    "  {{{
+      let g:EasyMotion_do_mapping = 0 "Disable default mapping
+      let g:EasyMotion_smartcase  = 1 "Turn on case insensitive feature
+ 
+      "2-character search motion
+      nmap ; <Plug>(easymotion-s2)
+ 
+      " JK motions: Line motions
+      map <Leader>j <Plug>(easymotion-j)
+      map <Leader>k <Plug>(easymotion-k)
+    "  }}}
+    Plug 'good5dog5/cscopemaps.vim'
+    Plug 'Valloric/MatchTagAlways'
+    Plug 'majutsushi/tagbar'
+    Plug 'christoomey/vim-tmux-navigator'
+    Plug 'terryma/vim-smooth-scroll'
+    Plug 'terryma/vim-expand-region'
+    Plug 'junegunn/fzf.vim'
+    " {{{
+      set rtp+=~/.fzf
+      nmap  <leader><space> :Files<CR>
+      nmap  <leader>a :Buffers<CR>
+      nmap  <leader>c :Colors<CR>
+      nmap  <leader>; :BLines<CR>
+      nmap  <leader>. :Lines<CR>
+      nmap  <leader>o :BTags<CR>
+      nmap  <leader>O :Tags<CR>
+      nmap  <leader>? :History<CR>
+      nmap  <leader>/ :execute 'Ag ' . input('Ag/')<CR>
+      nmap  K :call SearchWordWithAg()<CR>
+      vmap  K :call SearchVisualSelectionWithAg()<CR>
+      nmap  <leader>gl :Commits<CR>
+      nmap  <leader>ga :BCommits<CR>
+
+      imap <C-x><C-f> <plug>(fzf-complete-file-ag)
+      imap <C-x><C-l> <plug>(fzf-complete-line)
+
+      function! SearchWordWithAg()
+        execute 'Ag' expand('<cword>')
+      endfunction
+
+      function! SearchVisualSelectionWithAg() range
+        let old_reg = getreg('"')
+        let old_regtype = getregtype('"')
+        let old_clipboard = &clipboard
+        set clipboard&
+        normal! ""gvy
+        let selection = getreg('"')
+        call setreg('"', old_reg, old_regtype)
+        let &clipboard = old_clipboard
+        execute 'Ag' selection
+      endfunction
+    " }}}
+
+    " Good-looking
+    " ======================================================= 
+    Plug 'bling/vim-airline'
+    "  {{{
+       let g:airline_powerline_fonts = 1
+       " Show just the filename
+       let g:airline#extensions#tabline#fnamemod = ':t'
+
+       "Tabline
+       " Enable the list of buffers
+       let g:airline#extensions#tabline#enabled = 1
+       "Enalbe display buffers with a single tab
+       let g:airline#extensions#tabline#show_buffers = 1
+       let g:airline#extensions#tabline#buffer_idx_mode = 1
+       let g:airline#extensions#tabline#fnamecollapse = 1
+       let g:airline#extensions#tabline#show_close_button = 0
+       let g:airline#extensions#tabline#show_tab_type = 0
+
+       nmap <leader>1 <Plug>AirlineSelectTab1
+       nmap <leader>2 <Plug>AirlineSelectTab2
+       nmap <leader>3 <Plug>AirlineSelectTab3
+       nmap <leader>4 <Plug>AirlineSelectTab4
+       nmap <leader>5 <Plug>AirlineSelectTab5
+       nmap <leader>6 <Plug>AirlineSelectTab6
+       nmap <leader>7 <Plug>AirlineSelectTab7
+       nmap <leader>8 <Plug>AirlineSelectTab8
+       nmap <leader>9 <Plug>AirlineSelectTab9
+    "  }}}
+    Plug 'junegunn/vim-easy-align'
+    Plug 'nathanaelkane/vim-indent-guides'
+    Plug 'chrisbra/Colorizer'
+
+    " Auto-complete
+    " ======================================================= 
+    Plug 'Valloric/YouCompleteMe'
+    " {{{
+      "location for global configure file
+      let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+      let g:ycm_seed_identifiers_with_syntax = 1
+
+      "enable completion in comment
+      let g:ycm_complete_in_comments = 1            
+
+      "start completion while typing first charcter
+      let g:ycm_min_num_of_chars_for_completion = 3 
+      
+      "do not check ycm_extra_conf
+      let g:ycm_confirm_extra_conf = 0
+      let g:ycm_register_as_syntastic_checker = 0
+      let g:ycm_filetype_blacklist={}
+
+      nmap <leader>gl :YcmCompleter GoToDeclaration<CR>
+      nmap <leader>gf :YcmCompleter GoToDefinition<CR>
+      nmap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+    " }}}
+    Plug 'marijnh/tern_for_vim'
+    Plug 'Raimondi/delimitMate'
+    " Snippets
+    Plug 'SirVer/ultisnips'
+    " {{{
+      let g:UltiSnipsJumpForwardTrigger="<tab>"
+
+      " make YCM compatible with UltiSnips (using supertab)
+      let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+      let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+      let g:SuperTabDefaultCompletionType = '<C-n>'
+
+      " better key bindings for UltiSnipsExpandTrigger
+      let g:UltiSnipsExpandTrigger = "<tab>"
+      let g:UltiSnipsJumpForwardTrigger = "<tab>"
+      let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+      "let g:UltiSnipsJumpForwardTrigger="<tab>"
+
+      nmap <leader>+ =:set syntax=javascript<CR>
+    " }}}
+    Plug 'good5dog5/vim-snippets'
+
+    Plug 'ervandew/supertab'
+    Plug 'rking/ag.vim'
+    Plug 'nelstrom/vim-visual-star-search'
+    Plug 'tomtom/tcomment_vim'
+    Plug 'KitN/nand2-vim-syn'
+    Plug 'godlygeek/tabular'
+
+    call plug#end()
+ 
  
     set fdm=syntax
     set foldnestmax=8
@@ -210,14 +326,21 @@
  
     nmap <leader>v :edit $MYVIMRC<CR>
     nmap <leader>R :source $MYVIMRC<CR>
-    nmap <leader>n :NERDTree .<CR>
-    nmap <leader>w :call ShowText()<CR>
+
+    " Quick way to save file
+    nnoremap ww        :w<CR>
+    nnoremap qq        :q<CR>
+
+    " Select all text
+    noremap va ggVG
+
+
     "sts the lines matching the word under the cursor from the beginning of the file, and then asks you which match you want to jump to, and finally, jumps to that match.
     "reference http://superuser.com/questions/692548/go-to-lines-matched-by-i-command-to-display-lines-with-word-under-the-cursor
     nmap <leader>F [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 
     " Close current buffer
-    nmap <leader>q :bd<CR>
+    nmap <leader>q :bn<bar>bd#<CR>
     " Move to the next buffer
     nmap <leader>l :bnext<CR>
     " Move to the previous buffer
@@ -279,7 +402,6 @@
     "Easy to find match bracket pairs
     nnoremap <tab> %
     vnoremap <tab> %
-    nnoremap ; :
 
     "Select the last changed (or pasted) tex
     "reference http://vim.wikia.com/wiki/Selecting_your_pasted_texj 
@@ -291,22 +413,6 @@
 "                       Plugin configure                   "        
 
     " vim-airline {{{2
-        let g:airline_powerline_fonts = 1
-        " Enable the list of buffers
-        let g:airline#extensions#tabline#enabled = 1
- 
-        " Show just the filename
-        let g:airline#extensions#tabline#fnamemod = ':t'
- 
-        "Enalbe display buffers with a single tab
-        let g:airline#extensions#tabline#show_buffers = 1
- 
-        let NERDTreeChDirMode=2
-        "Automatic close Nerdtree after having file opened
-        let NERDTreeQuitOnOpen=1
-        "close vim if the only window left open is a NERDTree
- 
-        let g:javascript_enable_domhtmlcss = 1
     ""}}}
     " cscope {{{2
     if has("cscope")
@@ -342,61 +448,14 @@
     "}}}
     "YCM {{{2
  
-        nmap <leader>gl :YcmCompleter GoToDeclaration<CR>
-        nmap <leader>gf :YcmCompleter GoToDefinition<CR>
-        nmap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
- 
-        " Temporily disable ycm (0:enable)
-        "let g:loaded_youcompleteme = 0
- 
-        "location for global configure file
-        let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-        let g:ycm_seed_identifiers_with_syntax = 1
- 
-        "enable completion in comment
-        let g:ycm_complete_in_comments = 1            
- 
-        "start completion while typing first charcter
-        let g:ycm_min_num_of_chars_for_completion = 3 
-        
-        "do not check ycm_extra_conf
-        let g:ycm_confirm_extra_conf = 0
-        let g:ycm_register_as_syntastic_checker = 0
-        let g:ycm_filetype_blacklist={}
      "}}}
     "UltiSnips {{{2
  
-         nmap <leader>+ =:set syntax=javascript<CR>
- 
-         let g:UltiSnipsJumpForwardTrigger="<tab>"
- 
-         " make YCM compatible with UltiSnips (using supertab)
-         let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-         let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-         let g:SuperTabDefaultCompletionType = '<C-n>'
- 
-         " better key bindings for UltiSnipsExpandTrigger
-         let g:UltiSnipsExpandTrigger = "<tab>"
-         let g:UltiSnipsJumpForwardTrigger = "<tab>"
-         let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-        "let g:UltiSnipsJumpForwardTrigger="<tab>"
      "}}}
     "Tern_for_vim {{{2
  
         nmap _d :TernDef<CR>
         nmap _D :TernDoc<CR>
-     "}}}
-    "Easy-motion {{{2
- 
-         let g:EasyMotion_do_mapping = 0 "Disable default mapping
-         let g:EasyMotion_smartcase  = 1 "Turn on case insensitive feature
- 
-         "2-character search motion
-         nmap s <Plug>(easymotion-s2)
- 
-         " JK motions: Line motions
-         map <Leader>j <Plug>(easymotion-j)
-         map <Leader>k <Plug>(easymotion-k)
      "}}}
     " MatchTagAlways {{{2
  
@@ -411,39 +470,6 @@
                     \ ]
         \}
      "}}}
-    " CtrlP {{{2
-
-        " Use the nearest .git directory as the cwd
-        " This makes a lot of sense if you are working on a project that is in version
-        " control. It also supports works with .svn, .hg, .bzr.
-        let g:ctrlp_working_path_mode = 'r'
-        " ag is fast enough that CtrlP doesn't need to cache
-        let g:ctrlp_use_caching = 0
-        let g:ctrlp_map = '<leader>f'
-
-        if executable('ag')
-
-            set grepprg=ag\ --nogroup\ --nocolor
-
-            " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-            let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-        else
-            let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-            let g:ctrlp_prompt_mappings = {
-            \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
-            \ }
-        endif
-
-        " Setup some default ignores
-        let g:ctrlp_custom_ignore = {
-          \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
-          \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
-        \}
-
-    "}}}
-    " hardMode {{{2
-        noremap <leader>h <Esc>:call ToggleHardMode()<CR>
-    "}}}
 
     " The Silver Searcher {{{1
     "}}}
@@ -472,6 +498,16 @@
         let g:pymode_lint_ignore = "W0611,E231"
     "}}}
 
+    " vim-latex-live-preview {{{1
+        autocmd Filetype tex setl updatetime=1
+        let g:livepreview_previewer = 'zathura'
+        nmap <F12> :LLPStartPreview<cr>
+    "}}}
+    " vim-markdown {{{1
+
+        let g:vim_markdown_frontmatter=1
+    "}}}
+
 " }}}
 " [ Auto command   ] {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -495,17 +531,20 @@
     "Auto highlight assembly files depands on extension
     autocmd BufRead,BufNewFile *.s set filetype=arm 
     "Open a default template while open c-family file. "
-    autocmd BufNewFile *.c   call LoadCTemplate()
-    autocmd BufNewFile *.cpp call LoadCPPTemplate()
-    autocmd BufNewFile *.sh  call LoadBashTemplate()
-    autocmd BufNewFile *.md  call LoadMarkdownTemplate()
-    autocmd BufNewFile *.py  call LoadPythonTemplate()
-    autocmd BufNewFile *.md  set filetype=markdown 
-    autocmd BufNewFile *.md  setlocal nospell 
-    autocmd BufNewFile gdb*  set filetype=gdb
+    autocmd BufNewFile *.c          call LoadCTemplate()
+    autocmd BufNewFile *.cpp        call LoadCPPTemplate()
+    autocmd BufNewFile *.sh         call LoadBashTemplate()
+    autocmd BufNewFile *.md         call LoadMarkdownTemplate()
+    autocmd BufNewFile *.py         call LoadPythonTemplate()
+    autocmd BufNewFile,BufRead *.md  setlocal filetype=markdown 
+    autocmd BufNewFile,BufRead *.md  setlocal nospell 
+    autocmd BufNewFile,BufRead *.md  setlocal textwidth=80
+    autocmd BufNewFile,BufRead gdb*  set filetype=gdb
     autocmd BufNewFile,BufRead *.py call SetPythonOption() 
     " For nand2tetris use
     autocmd BufNewFile,BufRead *.hdl set filetype=nandhdl
+
+    autocmd VimEnter * if !argc() | NERDTree | endif
 
     " Set scripts to be executable from the shell
     autocmd BufWritePost * call Mode_executable()
@@ -590,13 +629,6 @@ function! Switch_html_javascript()
     end
 endfunction
 
-function! ShowText()
-
-    let l:currentWord = expand('<cword>')+2
-    let l:file="~/web/web_edimax_nms/file/nms/uk.js"
-
-    echomsg system("sed '" . l:currentWord . "!d' " . l:file)
-endfunction
 
 function! Mode_executable()
     if (getline(1) =~ "^#!")
