@@ -44,6 +44,15 @@
     set nextpattern=\s*下一頁|下一張|下頁|下一步\s*,\bnext\b,^>$,^(>>|»)$,^(>|»),(>|»)$,\bmore\b
     set previouspattern=\s*上一頁|上一張|上頁|上一步\s*,\bprev|previous\b,^<$,^(<<|«)$,^(<|«),(<|«)$ 
 
+    " https://github.com/suzuken/dotfiles/blob/master/vimperatorrc
+    " he's just awesome! it's a real solarized!
+    colorscheme solarized
+
+    " minor change to the solarized
+    hi -append Hint background-color: rgba(0, 43, 54, 0.5); color: #fff;
+    " make hint appear the most front (using 2^32)
+    hi -append Hint z-index: 2147483647 !important;
+
 " Mappings {{{1
     " clear all key mappings
     " to avoid troubles from loading rc file several times
@@ -85,6 +94,20 @@
 
     " Show HTTP Headers
     noremap ,p <Esc>:pageinfo gfmhH<CR>
+    " Default qmarks {{{2
+    " ==============================
+    " rule: lowercase letters are reserved for default marks
+        qmark b good5dog5.github.io
+        qmark c https://calendar.google.com/
+        qmark d https://drive.google.com/
+        qmark f https://www.facebook.com/
+        qmark g https://github.com/good5dog5
+        qmark m https://mail.google.com/
+        qmark p telnet://ptt.cc
+        qmark r https://getpocket.com/a/queue/
+        qmark y https://www.youtube.com
+    " }}}
+    " ==============================
 
 "Undo list
 noremap U :undo<Space>
@@ -95,8 +118,6 @@ autocmd LocationChange mail\\.google\\.com            js modes.passAllKeys = tru
 
 "URL Mappings"
 map  <leader>git  :topen https://github.com/good5dog5<CR>
-map  <leader>note :topen http://0.0.0.0:4000<CR>
-map  <leader>mail :topen https://mail.google.com<CR>
 map  <leader>ptt  :topen telnet://ptt.cc<CR>
 
 let g:smooth_scroll_amount="70"
@@ -108,6 +129,7 @@ source ~/.vimperator/plugin/jquery-2.1.4.js
 
 " about.config {{
 
+    set! browser.startup.homepage="www.google.com"
     " Disable animation
     set! browser.tabs.animate=false
 
@@ -173,6 +195,8 @@ source ~/.vimperator/plugin/jquery-2.1.4.js
     " Disable ‘youtube.com is now fullscreen’ popup in Firefox browser
     set! full-screen-api.approval-required=false 
 
+    set! browser.tabs.insertRelatedAfterCurrent=true
+
 
     " Tree Style Tab
         " -------------- {{{3
@@ -187,8 +211,8 @@ source ~/.vimperator/plugin/jquery-2.1.4.js
         set! extensions.treestyletab.maxTreeLevel.vertical=1
 
         " omnipresent tabs
-        set! extensions.treestyletab.tabbar.autoHide.mode=1
-        set! extensions.treestyletab.tabbar.autoHide.mode.fullscreen=0
+        set! extensions.treestyletab.tabbar.autoHide.mode=0
+        set! extensions.treestyletab.tabbar.autoHide.mode.fullscreen=1
         set! extensions.treestyletab.tabbar.autoHide.mode.toggle=1
         set! extensions.treestyletab.tabbar.autoHide.mode.toggle.fullscreen=1
 
@@ -223,6 +247,8 @@ source ~/.vimperator/plugin/jquery-2.1.4.js
     "}}}
     " BBSFx
     set! extensions.bbsfox2.host_default.FontFace.string="WenQuanYi Zen Hei Mono"
+    set! extensions.bbsfox2.host_default.AntiIdle.seconds=180
+    set! extensions.bbsfox2.SshSupport=true
     "}}}
 
 
