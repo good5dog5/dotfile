@@ -1,0 +1,12 @@
+set confirm off
+set auto-load safe-path /
+
+define plist
+  set var $n = $arg0
+  while $n
+    printf "%d ", $n->data
+    set var $n = $n->link
+  end
+  printf "\n"
+end
+
