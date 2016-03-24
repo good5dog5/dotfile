@@ -16,6 +16,10 @@
     syntax on
 
     let mapleader = ","
+    augroup loadvimrc
+        au!
+        au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+    augroup END
 
     " Install vim-plug if we don't arlready have it
     " {{{
@@ -63,7 +67,7 @@
       let g:EasyMotion_smartcase  = 1 "Turn on case insensitive feature
  
       "2-character search motion
-      nmap ; <Plug>(easymotion-s2)
+      nmap s <Plug>(easymotion-s2)
  
       " JK motions: Line motions
       map <Leader>j <Plug>(easymotion-j)
@@ -140,6 +144,11 @@
        nmap <leader>8 <Plug>AirlineSelectTab8
        nmap <leader>9 <Plug>AirlineSelectTab9
     "  }}}
+    Plug 'vim-airline/vim-airline-themes'
+    "  {{{
+       " au VimEnter * exec 'AirlineTheme bubblegum'
+    "  }}}
+
     Plug 'junegunn/vim-easy-align'
     Plug 'nathanaelkane/vim-indent-guides'
     Plug 'chrisbra/Colorizer'
@@ -195,6 +204,7 @@
     Plug 'tomtom/tcomment_vim'
     Plug 'KitN/nand2-vim-syn'
     Plug 'godlygeek/tabular'
+    Plug 'tpope/vim-surrounj'
 
     call plug#end()
  
@@ -213,9 +223,9 @@
     set expandtab        
     set tabstop=4        
     set shiftwidth=4     "number of spaces to use for each step of (auto)indent, use for cindent >> << etc"
- 
+
     set backspace=indent,eol,start                       
-    
+
     " Disable auto-comment 
     "{{{2
     " You can use the 'formatoptions' option  to influence how Vim formats text.
@@ -235,23 +245,23 @@
     " 
     "}}}
     set formatoptions-=cro
-                         
+
     set smartindent     
     set autoindent
- 
+
     set fileencodings=utf-8
     set encoding=utf-8
     set tenc=utf-8 
- 
+
     "No bells
     set noerrorbells visualbell t_vb=
- 
+
     set switchbuf=split
- 
+
     set showcmd          " Show (partial) command in status line.
     set incsearch        " Incremental search
- 
- 
+
+
     set wildmode=list:longest,full
     "Complete options (disable preview scratch window, longest removed to aways show menu
     set completeopt=menu,menuone
@@ -303,7 +313,7 @@
     highlight Pmenu ctermbg=240 ctermfg=48
     highlight PmenuSel ctermbg=99
     highlight CursorLine   ctermbg=239 ctermfg=NONE
-    
+
     set laststatus=2
     hi IndentGuidesEven ctermbg=238
     hi IndentGuidesOdd ctermbg=236
@@ -320,19 +330,18 @@
     let mapleader = ","
 
     map <F12> :call Switch_html_javascript()<CR>
- 
+
     "clear highlight after search nnoremap: nmap and no-remap
     nnoremap <CR> :noh<CR>
- 
+
     nmap <leader>v :edit $MYVIMRC<CR>
     nmap <leader>R :source $MYVIMRC<CR>
 
     " Quick way to save file
-    nnoremap ww        :w<CR>
     nnoremap qq        :q<CR>
 
     " Select all text
-    noremap va ggVG
+    noremap vA ggVG
 
 
     "sts the lines matching the word under the cursor from the beginning of the file, and then asks you which match you want to jump to, and finally, jumps to that match.
@@ -347,9 +356,9 @@
     nmap <leader>h :bprevious<CR>
 
     nmap <leader><Tab> <C-W><C-W>
- 
+
     nmap <F8>      :TagbarToggle<CR>
- 
+
     "Replace word staring from cursor postion"
     nmap <leader>s :.,$s/\<<C-r><C-w>\>/
     "Replace select word (save in register ")
@@ -357,14 +366,14 @@
     vmap <Leader>s "sy:%s/<C-R>=substitute(@s,"\n",'\\n','g')<CR>/
 
     nmap ,d :b#<bar>bd#<CR>
- 
+
     imap jk <Esc>
     imap JK <Esc>
- 
+
     vmap <C-c> "+y
     nmap <C-p> "+p
     cmap w!! w !sudo tee % >/dev/null
- 
+
     "}}} 
     "[ Text movement ] {{{2
        " Idea from http://codingfearlessly.com/2012/08/21/vim-putting-arrows-to-use/
@@ -406,7 +415,7 @@
     "Select the last changed (or pasted) tex
     "reference http://vim.wikia.com/wiki/Selecting_your_pasted_texj 
     " nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
-    
+
 " }}}
 " [ Plugin configure ] {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -416,19 +425,19 @@
     ""}}}
     " cscope {{{2
     if has("cscope")
- 
+
        "Specifies the command to execute cscope
        set csprg=/usr/bin/cscope
- 
+
        "Determine the order in which cstag performs a search, default 0"
        "indicate search cscope first"
        set csto=0
        set cst
- 
+
        "Search and add cscopt.out frim current directory up to root
- 
+
        let db = findfile("cscope.out", ".;")
- 
+
        if (!empty(db))
           let path = strpart(db, 0, match(db, "/cscope.out$"))
           set nocscopeverbose " suppress 'duplicate connection' error
@@ -447,22 +456,22 @@
 
     "}}}
     "YCM {{{2
- 
+
      "}}}
     "UltiSnips {{{2
- 
+
      "}}}
     "Tern_for_vim {{{2
- 
+
         nmap _d :TernDef<CR>
         nmap _D :TernDoc<CR>
      "}}}
     " MatchTagAlways {{{2
- 
+
         nmap <leader>% :MtaJumpToOtherTag<CR>
      "}}}
     " Tagbar {{{2
- 
+
         let g:tagbar_type_make = {
                     \ 'kinds':[
                         \ 'm:macros',
@@ -486,7 +495,7 @@
             vmap v     <Plug>(expand_region_expand)
             vmap <C-v> <Plug>(expand_region_shrink)
     "}}}
-    
+
     " Python-mode {{{1
         " turn off pymode's autocomplete to prevent conflict with ycm
         let g:pymode_rope_complete_on_dot = 0
@@ -499,7 +508,6 @@
     "}}}
 
     " vim-latex-live-preview {{{1
-        autocmd Filetype tex setl updatetime=1
         let g:livepreview_previewer = 'zathura'
         nmap <F12> :LLPStartPreview<cr>
     "}}}
@@ -513,33 +521,33 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       Auto command                       "        
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    autocmd FileType vim                      setlocal fdm=marker
-    autocmd FileType lua                      setlocal fdm=marker
+    autocmd FileType {lua\|vim}               setlocal fdm=marker
     autocmd Filetype make                     setlocal noexpandtab
     autocmd FileType html                     set omnifunc=htmlcomplete#CompleteTag,
     autocmd FileType javascript               call JavaScriptFold()
-    autocmd BufNewFile,BufRead  *.bash*       call SetBashOption()
-    autocmd BufNewFile,BufRead  *.sh          call SetBashOption()
+    autocmd BufNewFile,BufRead  *.{bash\sh}*  call SetBashOption()
+    autocmd BufNewFile          *.{bash\sh}*  call LoadBashTemplate()
     autocmd BufNewFile,BufRead  *.vim*        set filetype=vim
     autocmd BufNewFile,BufRead  *.htm*        set filetype=javascript
     autocmd BufNewFile,BufRead  *.cgi         set filetype=json
- 
+    autocmd BufNewFile,BufRead *.{tex\|cls}  setlocal filetype=tex
+    autocmd Filetype tex setl updatetime=1
+
     "Automatic story folding state while switch between buffers
     autocmd BufWinLeave ?* mkview!
     autocmd BufWinEnter ?* silent loadview
- 
+
     "Auto highlight assembly files depands on extension
     autocmd BufRead,BufNewFile *.s set filetype=arm 
     "Open a default template while open c-family file. "
     autocmd BufNewFile *.c          call LoadCTemplate()
     autocmd BufNewFile *.cpp        call LoadCPPTemplate()
-    autocmd BufNewFile *.sh         call LoadBashTemplate()
     autocmd BufNewFile *.md         call LoadMarkdownTemplate()
     autocmd BufNewFile *.py         call LoadPythonTemplate()
     autocmd BufNewFile,BufRead *.md  setlocal filetype=markdown 
     autocmd BufNewFile,BufRead *.md  setlocal nospell 
-    autocmd BufNewFile,BufRead *.md  setlocal textwidth=80
-    autocmd BufNewFile,BufRead gdb*  set filetype=gdb
+    autocmd BufNewFile,BufRead *.md  setlocal textwidth=100
+    autocmd BufNewFile,BufRead *gdb*  set filetype=gdb
     autocmd BufNewFile,BufRead *.py call SetPythonOption() 
     " For nand2tetris use
     autocmd BufNewFile,BufRead *.hdl set filetype=nandhdl
@@ -551,6 +559,7 @@
 
     " auto reload vimrc when editing it
     autocmd! bufwritepost .vimrc source $MYVIMRC
+
 
 " [ My function   ] {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -615,7 +624,7 @@ function! SetupELXEnvironment()
          set shiftwidth=8
          set softtabstop=8
          set expandtab
- 
+
      endif
 endfunction
 
