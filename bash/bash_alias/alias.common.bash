@@ -92,6 +92,9 @@ alias getclip='xclip -selection clipboard -o'
 alias wtf="man"
 alias gC="git clone "
 
+# show distrobution information 
+alias distro_name="cat /etc/*release"
+
 # todo.txt_cli
 export TODOTXT_DEFAULT_ACTION=ls
 export TODOTXT_CFG_FILE="${HOME}/github/dotfile/setup/todo.txt_cli-2.9/.todo.cfg"
