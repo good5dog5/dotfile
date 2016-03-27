@@ -4,10 +4,11 @@ rtorrent_dir :=${XDG_CONFIG_HOME}/rtorrent
 tig_dir      :=${XDG_CONFIG_HOME}/tig
 tmux_dir     :=${XDG_CONFIG_HOME}/tmux
 zathura_dir  :=${XDG_CONFIG_HOME}/zathura
+todo_dir     :=${XDG_CONFIG_HOME}/todo
 
-.PHONY: clean zathura ranger rtorrent tig tmux
+.PHONY: clean zathura ranger rtorrent tig tmux todo
 
-all: ranger rtorrent tmux tig zathura 
+all: ranger rtorrent tmux tig zathura todo
 
 ranger:
 	@test -d ${ranger_dir} || mkdir  		  ${ranger_dir} 
@@ -28,6 +29,10 @@ tmux:
 zathura: 
 	@test -d ${zathura_dir} || mkdir 		  ${zathura_dir} 
 	@ln -sf  ${BASEDIR}/zathura/zathurarc     ${zathura_dir}/zathurarc
+
+todo:
+	@test -d ${todo_dir} || mkdir 		  	  ${todo_dir} 
+	@ln -sf  ${BASEDIR}/todo/todo.cfg     	  ${todo_dir}/todo.cfg
 
 
 
