@@ -92,25 +92,41 @@ set line-graphics = yes
     # help
     color   help-group              207     default
 
-    # LINE(PALETTE_0, "", COLOR_MAGENTA, COLOR_DEFAULT, 0), \
-    #   LINE(PALETTE_1, "", COLOR_YELLOW, COLOR_DEFAULT, 0), \
-    #   LINE(PALETTE_2, "", COLOR_CYAN, COLOR_DEFAULT, 0), \
-    #   LINE(PALETTE_3, "", COLOR_GREEN, COLOR_DEFAULT, 0), \
-    #   LINE(PALETTE_4, "", COLOR_DEFAULT, COLOR_DEFAULT, 0), \
-    #   LINE(PALETTE_5, "", COLOR_WHITE, COLOR_DEFAULT, 0), \
-    #   LINE(PALETTE_6, "", COLOR_RED, )
 
 # }}}
 # Bindings {{{
 
 # Generic {{{
 
+    # 'G' binds to :git gc originally
+    bind generic    G  none
+    bind generic G  move-last-line
+
+    # 'g' binds to toggle commit-title-graph originally
+    bind generic g  none
+    bind generic g move-first-line
+#
+
+
     bind generic F !git fetch
     bind generic Y !echo -n %(commit) | xclip 
     bind generic X !git difftool --tool=vimdiff --no-prompt %(commit)
 
+    # rebind stash view to 's'
+    bind generic y none
+    bind generic s view-stash
+
 # }}}
 # Main {{{
+
+    # 'G' binds to :git gc originally
+    bind main    G  none
+    bind main G  move-last-line
+
+    # 'g' binds to toggle commit-title-graph originally
+    bind main g  none
+    bind main g move-first-line
+
 
     bind main ! !git revert %(commit)
     bind main C !?git checkout %(commit)
@@ -152,6 +168,8 @@ set line-graphics = yes
     bind status R !@git reset HEAD %(file)
     bind status a !?git commit --amend
     bind status N !@git add -N %(file)
+    bind status c !?git checkout  %(file)
+    bind status v !vim %(file)
 
 # }}}
 # Stage {{{
