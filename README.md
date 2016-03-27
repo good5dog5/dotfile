@@ -1,5 +1,12 @@
-#good5dog5 's dotfiles
-Hi, this is my daily use dotfiles, which incredibly tubro my productivity.
+# Dotfiles
+
+![preview](http://i.imgur.com/bqmgwFU.gif)
+## Overview
+This repo is my daily use dotfiles, manage by  Makefile.
+
+
+
+
 Hope you enjoy it :).
 ![Alt text][df_1]
 
