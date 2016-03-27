@@ -20,3 +20,15 @@ alias anki="ipython -i -c \"%run /usr/bin/anki\""
 
 alias gdb="gdb -q"
 alias cgdb="cgdb -q"
+alias feh="feh --scale-down --auto-zoom --image-bg black"
+alias irc="irssi"
+
+pg()
+{
+    pdfgrep -Rni $1  *.pdf
+}
+
+function ptt2pdf()
+{
+    libreoffice --headless --invisible --convert-to pdf *.ppt
+}
