@@ -16,10 +16,6 @@
     syntax on
 
     let mapleader = ","
-    augroup loadvimrc
-        au!
-        au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
-    augroup END
 
     " Install vim-plug if we don't arlready have it
     " {{{
@@ -144,10 +140,6 @@
        nmap <leader>8 <Plug>AirlineSelectTab8
        nmap <leader>9 <Plug>AirlineSelectTab9
     "  }}}
-    Plug 'vim-airline/vim-airline-themes'
-    "  {{{
-       " au VimEnter * exec 'AirlineTheme bubblegum'
-    "  }}}
 
     Plug 'junegunn/vim-easy-align'
     Plug 'nathanaelkane/vim-indent-guides'
@@ -155,27 +147,27 @@
 
     " Auto-complete
     " ======================================================= 
-    Plug 'Valloric/YouCompleteMe'
-    " {{{
-      "location for global configure file
-      let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-      let g:ycm_seed_identifiers_with_syntax = 1
-
-      "enable completion in comment
-      let g:ycm_complete_in_comments = 1            
-
-      "start completion while typing first charcter
-      let g:ycm_min_num_of_chars_for_completion = 3 
-      
-      "do not check ycm_extra_conf
-      let g:ycm_confirm_extra_conf = 0
-      let g:ycm_register_as_syntastic_checker = 0
-      let g:ycm_filetype_blacklist={}
-
-      nmap <leader>gl :YcmCompleter GoToDeclaration<CR>
-      nmap <leader>gf :YcmCompleter GoToDefinition<CR>
-      nmap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
-    " }}}
+    " Plug 'Valloric/YouCompleteMe'
+    " " {{{
+    "   "location for global configure file
+    "   let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+    "   let g:ycm_seed_identifiers_with_syntax = 1
+    "
+    "   "enable completion in comment
+    "   let g:ycm_complete_in_comments = 1            
+    "
+    "   "start completion while typing first charcter
+    "   let g:ycm_min_num_of_chars_for_completion = 3 
+    "   
+    "   "do not check ycm_extra_conf
+    "   let g:ycm_confirm_extra_conf = 0
+    "   let g:ycm_register_as_syntastic_checker = 0
+    "   let g:ycm_filetype_blacklist={}
+    "
+    "   nmap <leader>gl :YcmCompleter GoToDeclaration<CR>
+    "   nmap <leader>gf :YcmCompleter GoToDefinition<CR>
+    "   nmap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+    " " }}}
     Plug 'marijnh/tern_for_vim'
     Plug 'Raimondi/delimitMate'
     " Snippets
@@ -525,8 +517,8 @@
     autocmd Filetype make                     setlocal noexpandtab
     autocmd FileType html                     set omnifunc=htmlcomplete#CompleteTag,
     autocmd FileType javascript               call JavaScriptFold()
-    autocmd BufNewFile,BufRead  *.{bash\sh}*  call SetBashOption()
-    autocmd BufNewFile          *.{bash\sh}*  call LoadBashTemplate()
+    autocmd BufNewFile,BufRead  *.{bash\|sh}* call SetBashOption()
+    autocmd BufNewFile          *.{bash\|sh}* call LoadBashTemplate()
     autocmd BufNewFile,BufRead  *.vim*        set filetype=vim
     autocmd BufNewFile,BufRead  *.htm*        set filetype=javascript
     autocmd BufNewFile,BufRead  *.cgi         set filetype=json
@@ -555,10 +547,10 @@
     autocmd VimEnter * if !argc() | NERDTree | endif
 
     " Set scripts to be executable from the shell
-    autocmd BufWritePost * call Mode_executable()
+    " autocmd BufWritePost * call Mode_executable()
 
-    " auto reload vimrc when editing it
-    autocmd! bufwritepost .vimrc source $MYVIMRC
+
+
 
 
 " [ My function   ] {{{

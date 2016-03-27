@@ -54,10 +54,22 @@ alias ls="ls -r --color=auto  --group-directories-first --sort=extension"
 alias layout="tree -L 3"
 alias grep="grep  --color=auto"
 #word grep
-alias wg="ag --ignore-case --unrestricted --follow"
+alias wg="ag --ignore-case  --follow --noheading"
 #find name
-alias fn="find ./ -iname "
-
+# alias fn="find ./ -iname 2>/dev/null "
+fn() 
+{
+    local PS3="Choose a file to edit: "
+    select opt in quit $(find ./ -iname \*$1\*  2>/dev/null)
+    do
+        if [[ $opt = "quit" ]]
+        then
+            break
+        fi
+        ${EDITOR} "$opt"
+        break
+    done
+}
 # List only directories
 alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
  
@@ -87,7 +99,7 @@ alias js="java -jar /home/jordan/.local/bin/js.jar"
 alias netok="ping 8.8.8.8"
 alias twk="python $HOME/usr/venv/bin/rainbowstream"
 
-alias setclip='xclip -selection c'
+alias setclip='xclip -selection'
 alias getclip='xclip -selection clipboard -o'
 alias wtf="man"
 alias gC="git clone "
@@ -97,12 +109,17 @@ alias distro_name="cat /etc/*release"
 
 # todo.txt_cli
 export TODOTXT_DEFAULT_ACTION=ls
-export TODOTXT_CFG_FILE="${HOME}/github/dotfile/setup/todo.txt_cli-2.9/.todo.cfg"
-alias t='todo.sh $1'
+alias t='$SCRIPT_DIR/todo.sh -d $HOME/.config/todo/todo.cfg'
 
 alias xup="xrdb ~/.Xresources"
 
 # Functions ------------------
+
+# Display alias with partial name
+how()
+{
+    ag  "$1"  --ignore-case --follow --noheading $HOME/bash_conf
+}
 F() 
 {
     if  hash thunar 2>/dev/null ; then
@@ -125,13 +142,13 @@ bu () { cp $1 ${1}-`date +%Y%m%d%H%M`.backup ; }
 # MAKE 
 #-------------------------------------
 jserv () {
-    if [ -d "$HOME/Dropbox/EDIMAX" ];
+    if [ -d "$HOME/github/good5dog5.github.com" ];
     then
-        cd $HOME/Dropbox/EDIMAX && jekyll serve 
+        cd $HOME/github/good5dog5.github.com && jekyll --serve 
     fi
 }
 uva() {
-    cd "$HOME/github/codeSet/c/Uva/"
+    cd "$UVA_DIR"
     mkdir -p "$1" && cd "$1"
     cp "$HOME/.vim/template/template.c" "./$1.c"
 
@@ -150,6 +167,7 @@ ext() {
 		case $1 in
 			*.tar.bz2) tar xvjf $1   ;;
 			*.tar.gz)  tar xvzf $1   ;;
+            *.xz)      tar xvJf  $1   ;;
 			*.bz2)     bunzip2 $1    ;;
 			*.rar)     unrar x $1    ;;
 			*.gz)      gunzip $1     ;;
@@ -234,3 +252,22 @@ man () {
     LESS_TERMCAP_ue=$'\E[0m' \
     man "$@"
 }
+
+fd() {
+  if [ $# -eq 0 ]; then
+      local root=~/
+  else
+      local root=${1:-*}
+  fi
+
+  DIR=`find $root -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf` \
+    && cd "$DIR"
+}
+
+fe() {
+  IFS=' '
+  local declare files=($(fzf-tmux --query="$1" --select-1 --exit-0))
+  [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+  unset IFS
+}
+

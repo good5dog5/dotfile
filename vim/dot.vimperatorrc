@@ -98,10 +98,12 @@
     " ==============================
     " rule: lowercase letters are reserved for default marks
         qmark b good5dog5.github.io
+        qmark B localhost:4000
         qmark c https://calendar.google.com/
         qmark d https://drive.google.com/
         qmark f https://www.facebook.com/
         qmark g https://github.com/good5dog5
+        qmark l https://www.linkedin.com/
         qmark m https://mail.google.com/
         qmark p telnet://ptt.cc
         qmark r https://getpocket.com/a/queue/
