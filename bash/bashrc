@@ -1,7 +1,10 @@
-#Get python version
+#!/usr/bin/env bash
+# Jordan huang<good5dog5@gmail.com>
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
+# locale
+export LC_TIME=en_US.UTF-8
 
 # Set the default editor
 export PATH=$PATH:$HOME/usr/script
@@ -10,7 +13,11 @@ export PATH=$PATH:$HOME/usr/bin
 export PATH=$PATH:$HOME/usr/nand2tetris/tools
 export PATH=$PATH:$HOME/usr/phantomjs/bin
 export PATH=$PATH:$HOME/go/bin
+export PATH=$PATH:$HOME/.npm-global/bin
 
+# LS_COLOR
+# https://github.com/trapd00r/LS_COLORS
+eval $( dircolors -b $HOME/LS_COLORS )
 
 # Python path
 export PYTHONPATH=/usr/lib/python2.7/dist-packages:/usr/lib/python2.7/dist-packages/ubuntu-sso-client
@@ -20,6 +27,7 @@ export GOPATH=$HOME/go
 
 #export CLASSPATH="$HOME.local/bin/js.jar"
 export EDITOR=vim
+export BROWSER="firefox"
 
 #Some path for daily use
 export STARDICT_DATA_DIR=$HOME/stardict/dic/
@@ -28,14 +36,23 @@ export UVA_PATH=$HOME/github/codeSet/c/Uva/
 #Get color support for 'less'
 export LESS="--RAW-CONTROL-CHARS"
 
+#-------------------------------------------------------------------------------
+#                Enviroment variables
+#-------------------------------------------------------------------------------
 export DOTFILE="${HOME}/github/dotfile"
 export XDG_CONFIG_HOME="${HOME}/.config"
 export TIGRC_USER="$XDG_CONFIG_HOME"/tig/tigrc
+export BASH_DEBUG="0"
 
 # bc caculator
 export BC_ENV_ARGS=~/.bcrc
+
 # Ranger
 # export RANGER_LOAD_DEFAULT_RC="FALSE"
+export SCRIPT_DIR="$HOME/usr/script"
+export UVA_DIR="$HOME/Dropbox/Code/c/Uva"
+export BLOG_DIR="$HOME/github/good5dog5.github.com"
+
 _source_files()
 {
     [ ! $# -eq 1 ] &&  return
@@ -87,6 +104,10 @@ _source_files "${HOME}/.LESS_TERMCAP"
 # Load nvm
 _source_files "$NVM_DIR/nvm.sh"
 
+# Load bashmarks.sh
+# https://github.com/huyng/bashmarks
+_source_files "$SCRIPT_DIR/bashmarks.sh"
+
 
 
 # Set the PS1 prompt (with color).
@@ -129,3 +150,10 @@ done
 
 # need to be more elegant
 eval $(gpg-agent --daemon)
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+_fzf_compgen_path() {
+  ag -g "" "$1"
+}
+# There are also _fzf_path_completion and _fzf_dir_completion
+complete -F _fzf_file_completion -o default -o bashdefault doge
