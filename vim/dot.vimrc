@@ -51,6 +51,9 @@
     Plug 'xuhdev/vim-latex-live-preview', {'for' : 'tex'}
     Plug 'LaTeX-Box-Team/LaTeX-Box', {'for' : 'tex'}
     Plug 'hrother/offlineimaprc.vim', {'for' : 'offlineimap'}
+    Plug 'reedes/vim-pencil', {'for' : 'markdown'}
+    "  {{{
+     "  }}}
 
     " Navagation
     Plug 'scrooloose/nerdtree'
@@ -147,27 +150,27 @@
 
     " Auto-complete
     " ======================================================= 
-    " Plug 'Valloric/YouCompleteMe'
-    " " {{{
-    "   "location for global configure file
-    "   let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-    "   let g:ycm_seed_identifiers_with_syntax = 1
-    "
-    "   "enable completion in comment
-    "   let g:ycm_complete_in_comments = 1            
-    "
-    "   "start completion while typing first charcter
-    "   let g:ycm_min_num_of_chars_for_completion = 3 
-    "   
-    "   "do not check ycm_extra_conf
-    "   let g:ycm_confirm_extra_conf = 0
-    "   let g:ycm_register_as_syntastic_checker = 0
-    "   let g:ycm_filetype_blacklist={}
-    "
-    "   nmap <leader>gl :YcmCompleter GoToDeclaration<CR>
-    "   nmap <leader>gf :YcmCompleter GoToDefinition<CR>
-    "   nmap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
-    " " }}}
+    Plug 'Valloric/YouCompleteMe'
+    " {{{
+      "location for global configure file
+      let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+      let g:ycm_seed_identifiers_with_syntax = 1
+
+      "enable completion in comment
+      let g:ycm_complete_in_comments = 1            
+
+      "start completion while typing first charcter
+      let g:ycm_min_num_of_chars_for_completion = 3 
+
+      "do not check ycm_extra_conf
+      let g:ycm_confirm_extra_conf = 0
+      let g:ycm_register_as_syntastic_checker = 0
+      let g:ycm_filetype_blacklist = { 'markdown': 1 }
+
+      nmap <leader>gl :YcmCompleter GoToDeclaration<CR>
+      nmap <leader>gf :YcmCompleter GoToDefinition<CR>
+      nmap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+    " }}}
     Plug 'marijnh/tern_for_vim'
     Plug 'Raimondi/delimitMate'
     " Snippets
@@ -400,9 +403,6 @@
     "Turns off Vim’s crazy default regex characters and makes searches use normal regexes
     nnoremap / /\v
     vnoremap / /\v
-    "Easy to find match bracket pairs
-    nnoremap <tab> %
-    vnoremap <tab> %
 
     "Select the last changed (or pasted) tex
     "reference http://vim.wikia.com/wiki/Selecting_your_pasted_texj 
@@ -514,11 +514,9 @@
 "                       Auto command                       "        
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     autocmd FileType {lua\|vim}               setlocal fdm=marker
-    autocmd Filetype make                     setlocal noexpandtab
     autocmd FileType html                     set omnifunc=htmlcomplete#CompleteTag,
     autocmd FileType javascript               call JavaScriptFold()
     autocmd BufNewFile,BufRead  *.{bash\|sh}* call SetBashOption()
-    autocmd BufNewFile          *.{bash\|sh}* call LoadBashTemplate()
     autocmd BufNewFile,BufRead  *.vim*        set filetype=vim
     autocmd BufNewFile,BufRead  *.htm*        set filetype=javascript
     autocmd BufNewFile,BufRead  *.cgi         set filetype=json
@@ -531,12 +529,12 @@
 
     "Auto highlight assembly files depands on extension
     autocmd BufRead,BufNewFile *.s set filetype=arm 
+
     "Open a default template while open c-family file. "
-    autocmd BufNewFile *.c          call LoadCTemplate()
-    autocmd BufNewFile *.cpp        call LoadCPPTemplate()
-    autocmd BufNewFile *.md         call LoadMarkdownTemplate()
-    autocmd BufNewFile *.py         call LoadPythonTemplate()
+    autocmd BufNewFile * silent! 0r ~/.vim/template/template.%:e
+
     autocmd BufNewFile,BufRead *.md  setlocal filetype=markdown 
+    autocmd Filetype make\|markdown  setlocal noexpandtab
     autocmd BufNewFile,BufRead *.md  setlocal nospell 
     autocmd BufNewFile,BufRead *.md  setlocal textwidth=100
     autocmd BufNewFile,BufRead *gdb*  set filetype=gdb
@@ -548,6 +546,11 @@
 
     " Set scripts to be executable from the shell
     " autocmd BufWritePost * call Mode_executable()
+    augroup pencil
+      autocmd!
+      autocmd FileType markdown,mkd call pencil#init({'wrap': 'soft'})
+      autocmd FileType markdown,mkd :SoftPencil
+    augroup END
 
 
 
@@ -557,34 +560,6 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       My function                        "        
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"C/C++
-function! LoadCTemplate() 
-    0r ~/.vim/template/template.c
-    normal zR5G
-endfunction
-
-function! LoadCPPTemplate()
-    0r ~/.vim/template/template.cpp
-    normal zR5G
-endfunction
-
-"bash script"
-function! LoadBashTemplate()
-    0r ~/.vim/template/template.sh
-    normal zRG
-endfunction
-
-"markdown"
-function! LoadMarkdownTemplate()
-     0r ~/.vim/template/template.md
-     normal zR2G
-endfunction
-
-"python
-function! LoadPythonTemplate()
-     0r ~/.vim/template/template.py
-     normal zR5G
-endfunction
 
 " Add foldmarker to c and cpp "
 function! FoldPreprocessor()
@@ -604,21 +579,10 @@ function! SetPythonOption()
      set softtabstop=4
      set shiftwidth=4
      set smarttab
-     set expandtab
      set foldmethod=indent
      set foldnestmax=2
 endfunction
 
-function! SetupELXEnvironment()
-     let l:path = expand('%:p')
-     if l:path =~ '/home/jordan/Documents/Edimax/ELX/*'
-         set tabstop=8
-         set shiftwidth=8
-         set softtabstop=8
-         set expandtab
-
-     endif
-endfunction
 
 function! Switch_html_javascript()
     if (&ft=='javascript')
