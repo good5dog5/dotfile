@@ -22,6 +22,7 @@ alias gdb="gdb -q"
 alias cgdb="cgdb -q"
 alias feh="feh --scale-down --auto-zoom --image-bg black"
 alias irc="irssi"
+alias df="df -h"
 
 pg()
 {

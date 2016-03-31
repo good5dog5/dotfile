@@ -55,6 +55,7 @@ alias layout="tree -L 3"
 alias grep="grep  --color=auto"
 #word grep
 alias wg="ag --ignore-case  --follow --noheading"
+alias psgrep="ps aux | grep"
 #find name
 # alias fn="find ./ -iname 2>/dev/null "
 fn() 
@@ -135,18 +136,9 @@ eba() {
        vim $HOME/bash_conf/alias.$1.bash
    fi
 }
-md () { mkdir -p "$1"; } #mkdir 
-mcd () { mkdir -p "$1" && cd "$1"; } #mkdir and go to new dir 
-#bu - Back Up a file. Usage "bu filename.txt" 
+md () { mkdir -p "$1"; }
+mcd () { mkdir -p "$1" && cd "$1"; }
 bu () { cp $1 ${1}-`date +%Y%m%d%H%M`.backup ; }
-# MAKE 
-#-------------------------------------
-jserv () {
-    if [ -d "$HOME/github/good5dog5.github.com" ];
-    then
-        cd $HOME/github/good5dog5.github.com && jekyll --serve 
-    fi
-}
 uva() {
     cd "$UVA_DIR"
     mkdir -p "$1" && cd "$1"
@@ -156,6 +148,25 @@ uva() {
     then
         ln -sf "../Makefile" "./Makefile"
     fi
+}
+newPost()
+{
+    [ "$#" -ne 1 ] && return 1
+
+    local post_dir="$BLOG_DIR/source/_posts"
+    local newPost=`date +%Y-%m-%d`_${1}.md
+    local template="$BLOG_DIR/scaffolds/template.md"
+
+    cd "$post_dir" &&               \
+    cp "$template"  ./"$newPost" && \
+    vim "$newPost"
+
+    # -q report when files differ
+    # remove new post if not modified
+    if  diff -q $template $newPost > /dev/null ; then
+        rm ./"$newPost"
+    fi
+
 }
 ext() {
   if [ $# -ne 1 ]
@@ -239,6 +250,11 @@ cb() {
       echo -e "$_scs_col""Copied to clipboard:\e[0m $input"
     fi
   fi
+}
+
+cpwd()
+{
+    echo $pwd | xclip 
 }
 
 # colorize man pages

@@ -115,7 +115,7 @@ set line-graphics = yes
     # rebind stash view to 's'
     bind generic y none
     bind generic s view-stash
-
+    bind generic + !git commit --amend
 # }}}
 # Main {{{
 
@@ -164,9 +164,11 @@ set line-graphics = yes
 
 # }}}
 # Status {{{
-
+#
+    bind status D !@?rm %(file)
+    bind status P !git push origin
     bind status R !@git reset HEAD %(file)
-    bind status a !?git commit --amend
+    bind status + !?git commit --amend
     bind status N !@git add -N %(file)
     bind status c !?git checkout  %(file)
     bind status v !vim %(file)
