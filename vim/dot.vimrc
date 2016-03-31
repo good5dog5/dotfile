@@ -33,6 +33,7 @@
     " Colorschemes
     Plug 'NLKNguyen/papercolor-theme'
     Plug 'junegunn/seoul256.vim'
+    Plug 'altercation/vim-colors-solarized'
 
     " libraries
     Plug 'tomtom/tlib_vim'
@@ -53,7 +54,8 @@
     Plug 'hrother/offlineimaprc.vim', {'for' : 'offlineimap'}
     Plug 'reedes/vim-pencil', {'for' : 'markdown'}
     "  {{{
-     "  }}}
+       let g:vim_markdown_folding_disabled = 1
+    "  }}}
 
     " Navagation
     Plug 'scrooloose/nerdtree'
@@ -81,7 +83,7 @@
     Plug 'junegunn/fzf.vim'
     " {{{
       set rtp+=~/.fzf
-      nmap  <leader><space> :Files<CR>
+      nmap  <space><space> :Files<CR>
       nmap  <leader>a :Buffers<CR>
       nmap  <leader>c :Colors<CR>
       nmap  <leader>; :BLines<CR>
@@ -195,11 +197,18 @@
 
     Plug 'ervandew/supertab'
     Plug 'rking/ag.vim'
+    "  {{{
+        nmap ' :Ag <c-r>=expand("<cword>")<cr><cr>
+        nnoremap <space>/ :Ag
+    "   }}}
     Plug 'nelstrom/vim-visual-star-search'
+    "An extensible & universal comment vim-plugin that also handles embedded filetypes
     Plug 'tomtom/tcomment_vim'
-    Plug 'KitN/nand2-vim-syn'
     Plug 'godlygeek/tabular'
-    Plug 'tpope/vim-surrounj'
+    Plug 'tpope/vim-surround'
+
+    "asynchronous build and test dispatcher
+    Plug 'tpope/vim-dispatch'
 
     call plug#end()
  
@@ -303,7 +312,8 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     set t_Co=256
-    colorscheme jellybeans
+    colorscheme solarized
+    set background=dark
     set guifont=Monaco\ 12
     highlight Pmenu ctermbg=240 ctermfg=48
     highlight PmenuSel ctermbg=99
@@ -366,6 +376,7 @@
     imap JK <Esc>
 
     vmap <C-c> "+y
+    vmap <C-x> "+d
     nmap <C-p> "+p
     cmap w!! w !sudo tee % >/dev/null
 
