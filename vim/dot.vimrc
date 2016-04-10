@@ -46,6 +46,20 @@
     Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
     Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
     Plug 'klen/python-mode', {'for' : 'python'}
+    "  {{{
+    " turn off pymode's autocomplete to prevent conflict with ycm
+    let g:pymode_rope_complete_on_dot = 0
+
+    " Pymode could show documentation for current word by `pydoc`.
+    let g:pymode_doc = 1
+    let g:pymode_rope_show_doc_bind = 'K'
+    " ignore 'import but not used error
+    let g:pymode_lint_ignore = "W0611,E231"
+
+
+    " Auto open cwindow (quickfix) if any errors have been found
+    let g:pymode_lint_cwindow = 1
+    "  }}}
     Plug 'vim-scripts/rtorrent-syntax-file', {'for' : 'rtorrent'}
     Plug 'PotatoesMaster/i3-vim-syntax'
     Plug 'BohrShaw/vim-vimperator-syntax'
@@ -173,6 +187,7 @@
       nmap <leader>gf :YcmCompleter GoToDefinition<CR>
       nmap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
     " }}}
+    Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
     Plug 'marijnh/tern_for_vim'
     Plug 'Raimondi/delimitMate'
     " Snippets
@@ -283,7 +298,12 @@
     endif
     set undodir=~/.vim/undo-dir
     set undofile
-    set nobackup
+
+
+    " Backups and swapfile
+    set backup
+    set backupdir=$HOME/.vim/backup/
+    silent execute '!mkdir -p $HOME/.vim/backup'
     set noswapfile
 " }}}
 " [ User interface   ] {{{
@@ -311,10 +331,14 @@
 "                     Colors and Fonts                     "         
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    set t_Co=256
+if has("gui_running")
+	set guioptions-=T
+	set guifont=Droid\ Sans\ Mono\ for\ Powerline:h12
+endif
+
     colorscheme solarized
-    set background=dark
-    set guifont=Monaco\ 12
+	set background=dark
+    set t_Co=256
     highlight Pmenu ctermbg=240 ctermfg=48
     highlight PmenuSel ctermbg=99
     highlight CursorLine   ctermbg=239 ctermfg=NONE
@@ -499,17 +523,6 @@
             vmap <C-v> <Plug>(expand_region_shrink)
     "}}}
 
-    " Python-mode {{{1
-        " turn off pymode's autocomplete to prevent conflict with ycm
-        let g:pymode_rope_complete_on_dot = 0
-
-        " Pymode could show documentation for current word by `pydoc`.
-        let g:pymode_doc = 1
-        let g:pymode_doc_bind = 'K'
-        " ignore 'import but not used error
-        let g:pymode_lint_ignore = "W0611,E231"
-    "}}}
-
     " vim-latex-live-preview {{{1
         let g:livepreview_previewer = 'zathura'
         nmap <F12> :LLPStartPreview<cr>
@@ -556,12 +569,17 @@
     autocmd VimEnter * if !argc() | NERDTree | endif
 
     " Set scripts to be executable from the shell
-    " autocmd BufWritePost * call Mode_executable()
+    autocmd BufWritePost *.py call Mode_executable()
     augroup pencil
       autocmd!
       autocmd FileType markdown,mkd call pencil#init({'wrap': 'soft'})
       autocmd FileType markdown,mkd :SoftPencil
     augroup END
+
+    " Workaround for python-mode :PymodeDoc，which rasie E21 modifiable off error
+    " ref https://www.bountysource.com/issues/9393603-vim-error-cannot-make-changes-modifiable-is-off?utm_campaign=plugin&utm_content=tracker/42165&utm_medium=issues&utm_source=github
+    autocmd FileType qf,rst :setlocal modifiable
+    autocmd FileType qf,rst :set modifiable
 
 
 
