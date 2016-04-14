@@ -41,7 +41,6 @@ java-package
 freemind
 gimp
 gnome-panel
-gvim
 i3
 conky-all
 mkvtoolnix
@@ -71,3 +70,6 @@ irssi
 npm
 byzanz
 nodejs-legacy
+i3-wm
+ranger
+vim-gtk
