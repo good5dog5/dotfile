@@ -41,7 +41,6 @@ java-package
 freemind
 gimp
 gnome-panel
-i3
 conky-all
 mkvtoolnix
 autojump
@@ -70,6 +69,7 @@ irssi
 npm
 byzanz
 nodejs-legacy
-i3-wm
 ranger
 vim-gtk
+python3-dev
+xbacklight

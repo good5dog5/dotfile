@@ -7,7 +7,9 @@ URxvt.url-select.autocopy  : true
 URxvt.url-select.underline : true
 URxvt.keysym.C-equal:     perl:font-size:increase
 URxvt.keysym.C-minus:   perl:font-size:decrease
-URxvt.font        : xft:Droid\ Sans\ Mono\ For\ Powerline:regular:size=13,xft:WenQuanYi Micro Hei Mono:regular:size=13:minspace=true
+
+! some time, too small size(ex:12)，will cause powerline font brick.
+URxvt.font: xft:Droid\ Sans\ Mono\ For\ Powerline:regular:size=14,xft:WenQuanYi Micro Hei Mono:regular:size=13:minspace=true
 Rxvt.letterSpace: -1
 Rxvt.lineSpace: 2
 
