@@ -24,6 +24,8 @@ conf_install:
 	@ln -fs   ${CONFDIR}/gitconfig							${HOME}/.gitconfig
 	@ln -fs   ${CONFDIR}/LESS_TERMCAP 						${HOME}/.LESS_TERMCAP
 	@ln -fsr  ${CONFDIR}/inputrc  						    ${HOME}/.inputrc
+	@ln -fsr  ${CONFDIR}/.Xresources  						${HOME}/.Xresources
+	@ln -fsr  ${CONFDIR}/.xprofile  						${HOME}/.xprofile
 
 vim_install:
 	@ln -sf   ${VIMDIR}/dot.vimrc							${HOME}/.vimrc
