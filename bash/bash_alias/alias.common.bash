@@ -233,9 +233,9 @@ for APT in `find /etc/apt/ -name \*.list`; do
         PPA=`echo $ENTRY | cut -d/ -f5`
         #echo sudo apt-add-repository ppa:$USER/$PPA
         if [ "ppa.launchpad.net" = "$HOST" ]; then
-            echo sudo apt-add-repository ppa:$USER/$PPA
+            echo sudo apt-add-repository ppa:$USER/$PPA -y
         else
-            echo sudo apt-add-repository \'${ENTRY}\'
+            echo sudo apt-add-repository \'${ENTRY}\' -y
         fi
     done
 done
