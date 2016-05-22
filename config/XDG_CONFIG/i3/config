@@ -3,16 +3,16 @@
 set $mod Mod4
 
 # workspace 
-set $ws1  "1:Term"
-set $ws2  "2:Web"
-set $ws3  "3:File"
-set $ws4  "4:Media"
-set $ws5  "5:"
-set $ws6  "6:"
-set $ws7  "7:"
-set $ws8  "8:"
-set $ws9  "9:"
-set $ws10 "10:"
+set $ws1  "1 "
+set $ws2  "2 "
+set $ws3  "3 "
+set $ws4  "4 app"
+set $ws5  "5 "
+set $ws6  "6 "
+set $ws7  "7 "
+set $ws8  "8 "
+set $ws9  "9 "
+set $ws10 "10 "
 
 # autostart applications
 exec --no-startup-id dropbox start
@@ -20,14 +20,22 @@ exec --no-startup-id nm-applet
 exec --no-startup-id feh --bg-fill ~/Pictures/Wallpaper/bulldog.jpg
 exec --no-startup-id goldendict
 exec --no-startup-id mpd 
-exec --no-startup-id i3-msg 'workspace $ws1; exec urxvt'
-exec --no-startup-id i3-msg 'workspace $ws2; exec firefox'
-exec --no-startup-id i3-msg 'workspace $ws3; exec thunar'
-# Execute chromium-browser app, line, use comand line option.
-exec --no-startup-id i3-msg 'workspace $ws4; exec chromium-browser --app  --app-id=menkifleemblimdogmoihpfopnplikde
 exec --no-startup-id thunar --daemon &
 exec --no-startup-id "/usr/bin/urxvtd --quiet --fork --opendisplay"
 exec --no-startup-id "/home/jordan/github/dotfile/startup.sh"
+
+exec --no-startup-id i3-msg 'workspace $ws1; exec urxvt'
+exec --no-startup-id i3-msg 'workspace $ws2; exec firefox'
+exec --no-startup-id i3-msg 'workspace $ws3; exec thunar'
+
+# Execute chromium-browser app, line, use comand line option.
+exec --no-startup-id i3-msg 'workspace $ws4; exec chromium-browser --app  --app-id=menkifleemblimdogmoihpfopnplikde'
+exec --no-startup-id i3-msg 'workspace $ws4; exec chromium-browser --app  --app-id=hmjkmjkepdijhoojdojkdfohbdgmmhki'
+
+exec --no-startup-id i3-msg 'workspace $ws9; exec anki'
+
+assign [class="chromium-browser"] $ws4
+assign [class="^Anki$"] $ws9
 
 for_window [class="gimp"] floating enable, border normal
 
@@ -71,7 +79,7 @@ bindsym Mod1+Shift+l move right
 
 
 # enter fullscreen mode for the focused container
-bindsym Mod1+f fullscreen
+bindsym Mod1+Shift+f fullscreen
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -182,8 +190,8 @@ client.urgent           $rd     $rd         $tx     $id
 # gnome app
 bindsym Control+Mod1+l exec --no-startup-id i3lock --image ~/Pictures/Wallpaper/wallpaper.png
 # Print screen
-bindsym Print exec maim ~/Pictures/screenshot/$(date +%F-%T).png
-# bindsym --release Mod1+Print exec scrot -s  ~/Pictures/screenshot/$(date +%F-%T).png
+bindsym Print exec scrot  ~/Pictures/screenshot/$(date +%F-%T).png
+bindsym --release $mod+Print exec scrot -s  ~/Pictures/screenshot/$(date +%F-%T).png
 bindsym --release Mod1+Print exec ~/usr/script/imgur-screenshot.sh
 
 bindsym Control+$mod+t exec thunar

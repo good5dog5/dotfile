@@ -15,6 +15,11 @@
             "gh 	    Go to home page
             "gH 	    New tab with home page
             "y          Copy current url to clipboard
+            "o          Open one or more URLs in the current tab.
+            "           Multiple URLs can be separated with 'urlseparator' (default: ", " Note that the
+            "           space after the comma is required.)
+            "           The first URL is opened in the current tab, and all other URLs are
+            "           opened in new tabs.
         "}}}
         " @Opening {{{2
              "~ 	       Open homedir in current tab
@@ -26,6 +31,8 @@
 
     " Max number to list
     set maxitems=10         
+
+    set PassThrough=true
 
     " all type pages are opened in new tab
     " addons + downloads + help + javascript + prefs
@@ -103,10 +110,12 @@
         qmark d https://drive.google.com/
         qmark f https://www.facebook.com/
         qmark g https://github.com/good5dog5
+        qmark k https://keep.google.com
         qmark l https://www.linkedin.com/
         qmark m https://mail.google.com/
         qmark p telnet://ptt.cc
         qmark r https://getpocket.com/a/queue/
+        qmark t https://twitter.com
         qmark y https://www.youtube.com
     " }}}
     " ==============================
@@ -118,9 +127,6 @@ noremap U :undo<Space>
 autocmd LocationChange .*                             js modes.passAllKeys = false
 autocmd LocationChange mail\\.google\\.com            js modes.passAllKeys = true
 
-"URL Mappings"
-map  <leader>git  :topen https://github.com/good5dog5<CR>
-map  <leader>ptt  :topen telnet://ptt.cc<CR>
 
 let g:smooth_scroll_amount="70"
 let g:smooth_scroll_interval="20"

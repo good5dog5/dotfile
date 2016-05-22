@@ -109,7 +109,7 @@ set line-graphics = yes
 
 
     bind generic F !git fetch
-    bind generic Y !echo -n %(commit) | xclip 
+    bind generic Y !sh -c "echo -n %(commit) | xclip" 
     bind generic X !git difftool --tool=vimdiff --no-prompt %(commit)
 
     # rebind stash view to 's'

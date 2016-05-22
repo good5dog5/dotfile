@@ -24,6 +24,7 @@ set pipe_decode                              # strip headers and eval mimes when
 set thorough_search                          # strip headers and eval mimes before searching
 set sleep_time = 0                           # be fast
 set autoedit                                 # start editor without asking for to, subject,...
+set text_flowed=yes                          # send format-flowed; vim must be set to fo+=w
 
 # Sidebar Patch --------------------------------------
 set sidebar_visible = yes

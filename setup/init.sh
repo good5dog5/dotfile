@@ -33,8 +33,9 @@ generate_powerline_font()
     local DIR="${HOME}/.fonts/"
     echo "Begin Downloading Powerline font and update font cache"
 
-    cp ../bin/Droid\ Sans\ Mono\ for\ Powerline.otf $DIR
+    cp $DOTFILE/bin/Droid\ Sans\ Mono\ for\ Powerline.otf $DIR
     fc-cache -vf $DIR && printf "%-55s %5s\n\n" "Update fonts cache" "[done]"
 }
 create_directory
-# generate_powerline_font
+generate_powerline_font
+sudo ln -sf /bin/bash /bin/sh

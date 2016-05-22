@@ -9,6 +9,17 @@ alias bt="rtorrent -n -o import=${XDG_CONFIG_HOME}/rtorrent/rtorrent.rc"
 alias fm="ranger"
 alias ptt="luit -encoding big5 telnet ptt.cc"
 alias dic="sdcv"
+# function dic () {
+#
+#   local word=$1
+#
+#   if command -v dict > /dev/null; then
+#     dict $word | colorit | less -R
+#   else
+#     curl dict://dict.org/d:$word 
+#   fi
+#
+# }
 alias M="ncmpcpp -c "$XDG_CONFIG_HOME"/ncmpcpp/config"
 alias mp3_download="youtube-dl --output \"/media/jordan/MASS/music/%(title)s.%(ext)s\" \
                                 --ignore-errors \
@@ -16,7 +27,7 @@ alias mp3_download="youtube-dl --output \"/media/jordan/MASS/music/%(title)s.%(e
                                 --extract-audio \
                                 --audio-format mp3  "
 alias top="htop"
-alias anki="ipython -i -c \"%run /usr/bin/anki\""
+# alias anki="ipython -i -c \"%run /usr/bin/anki\""
 
 alias gdb="gdb -q"
 alias cgdb="cgdb -q"
@@ -29,7 +40,7 @@ pg()
     pdfgrep -Rni $1  *.pdf
 }
 
-function ptt2pdf()
+function ppt2pdf()
 {
-    libreoffice --headless --invisible --convert-to pdf *.ppt
+    libreoffice --headless --invisible --convert-to pdf *.ppt[x]
 }

@@ -6,9 +6,8 @@ DIR=( "./"
       "/usr/include/i386-linux-gnu/bits/"
     )
 
-[ -e "cscope.files" ] && rm "cscope.files"
 
-find /usr/include/ -maxdepth 1 -type f -name "*.[hc]" >> cscope.files
+find /usr/include/ -maxdepth 1 -type f -name "*.[hc]" > cscope.files
 
 for d in "${DIR[@]}"; do
 

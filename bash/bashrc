@@ -17,10 +17,10 @@ export PATH=$PATH:$HOME/.npm-global/bin
 
 # LS_COLOR
 # https://github.com/trapd00r/LS_COLORS
-eval $( dircolors -b $HOME/LS_COLORS )
+# eval $( dircolors -b $HOME/LS_COLORS )
 
 # Python path
-export PYTHONPATH=/usr/lib/python2.7/dist-packages:/usr/lib/python2.7/dist-packages/ubuntu-sso-client
+# export PYTHONPATH=/usr/lib/python2.7/dist-packages:/usr/lib/python2.7/dist-packages/ubuntu-sso-client
 
 # export GOROOT=/usr/bin/go
 export GOPATH=$HOME/go
@@ -96,7 +96,7 @@ _source_files "${HOME}/.local/lib/python2.7/site-packages/powerline/bindings/bas
 _source_files "/usr/share/autojump/autojump.bash"
 
 # Source to enable bashmarks
-_source_files "${HOME}/.local/bin/bashmarks.sh"
+# _source_files "${HOME}/.local/bin/bashmarks.sh"
 
 # Use colors for less, man, etc.
 _source_files "${HOME}/.LESS_TERMCAP"
@@ -139,7 +139,7 @@ stty susp ^o
 
 
 # For git-alias setup
-# ref: https://gist.github.com/mwhite/6887990
+# Ref: https://gist.github.com/mwhite/6887990
 for al in `__git_aliases`; do
     alias g$al="git $al"
 
@@ -153,7 +153,18 @@ eval $(gpg-agent --daemon)
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 _fzf_compgen_path() {
-  ag -g "" "$1"
+  ag -g --hidden "" "$1"
 }
+export FZF_DEFAULT_COMMAND='ag --hidden --follow --ignore .git -l -g ""'
 # There are also _fzf_path_completion and _fzf_dir_completion
 complete -F _fzf_file_completion -o default -o bashdefault doge
+
+# added by travis gem
+[ -f /home/jordan/.travis/travis.sh ] && source /home/jordan/.travis/travis.sh
+
+if [ "$(tty)" = "/dev/tty1" ]; then
+    xinit && exit
+fi
+
+# added by Anaconda3 4.0.0 installer
+export PATH="/home/jordan/anaconda3/bin:$PATH"
