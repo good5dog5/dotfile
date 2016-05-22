@@ -36,6 +36,13 @@ generate_powerline_font()
     cp $DOTFILE/bin/Droid\ Sans\ Mono\ for\ Powerline.otf $DIR
     fc-cache -vf $DIR && printf "%-55s %5s\n\n" "Update fonts cache" "[done]"
 }
+install_vim_plug()
+{
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+}
+sudo ln -sf /bin/bash /bin/sh
 create_directory
 generate_powerline_font
-sudo ln -sf /bin/bash /bin/sh
+install_vim_plug
+
