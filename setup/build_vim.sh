@@ -19,10 +19,10 @@ clone_vim_repo() {
         exit 1
     fi
 }
-checkout_ver_430() 
+checkout_ver_658() 
 {
     cd vim
-    git checkout "4cf30a6d7e71fe464190985641b55a7b8728dce5" 2>/dev/null
+    git checkout "1de85a1d3e6ee4bf51559f3fa60b3bdf2a425b53" 2>/dev/null
 }
 config_and_build() 
 {
@@ -38,6 +38,7 @@ config_and_build()
                 --prefix=/usr"
 
     ./configure $flag
+    make -j4
 }
 clean_vim_pkg()
 {
@@ -72,10 +73,10 @@ set_default_editor()
 
 cd "$dir"
 #clone_vim_repo
-checkout_ver_430
+checkout_ver_658
 config_and_build
-install_vim
-clean_vim_pkg
+# install_vim
+# clean_vim_pkg
 
 
 

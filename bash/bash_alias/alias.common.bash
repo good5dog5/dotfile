@@ -37,7 +37,7 @@ alias evr="vim $HOME/.vimrc"
 alias evpr="vim $HOME/.vimperatorrc"
 alias ebr="vim $HOME/.bashrc"
 alias sbr="source $HOME/.bashrc"
-alias etmr="vim $HOME/.tmux.conf"
+alias etmr="vim $HOME/.config/tmux/tmux.conf"
 alias eemr="vim $HOME/.emacs.d/init.el"
 alias eplist="vim $HOME/.pkglist"
 
@@ -54,7 +54,7 @@ alias ls="ls -r --color=auto  --group-directories-first --sort=extension"
 alias layout="tree -L 3"
 alias grep="grep  --color=auto"
 #word grep
-alias wg="ag --ignore-case  --follow --noheading"
+alias wg="ag --ignore-case  --follow --noheading --hidden"
 alias psgrep="ps aux | grep"
 #find name
 # alias fn="find ./ -iname 2>/dev/null "
@@ -113,6 +113,10 @@ export TODOTXT_DEFAULT_ACTION=ls
 alias t='$SCRIPT_DIR/todo.sh -d $HOME/.config/todo/todo.cfg'
 
 alias xup="xrdb ~/.Xresources"
+alias inside="tree -L 5"
+alias biggest_dir="du -hsx * | sort -rh | head -10"
+
+Big5toUTF8 () { iconv -f big5 -t utf8 -c $1 -o $1; }
 
 # Functions ------------------
 
@@ -139,10 +143,16 @@ eba() {
 md () { mkdir -p "$1"; }
 mcd () { mkdir -p "$1" && cd "$1"; }
 bu () { cp $1 ${1}-`date +%Y%m%d%H%M`.backup ; }
-uva() {
+Uva() {
     cd "$UVA_DIR"
-    mkdir -p "$1" && cd "$1"
-    cp "$HOME/.vim/template/template.c" "./$1.c"
+
+    if [ ! -d "$1" ]
+    then
+        mkdir -p "$1" && cd "$1"
+        cp "$HOME/.vim/template/template.cpp" "./$1.cpp"
+    else
+        cd "$1"
+    fi
 
     if [ -f "../Makefile" ];
     then
@@ -213,6 +223,23 @@ batch_install() {
     done
     # fi
 }
+gen_ppa_list()
+{
+# Get all the PPA installed on a system
+for APT in `find /etc/apt/ -name \*.list`; do
+    grep -Po "(?<=^deb\s).*?(?=#|$)" $APT | while read ENTRY ; do
+        HOST=`echo $ENTRY | cut -d/ -f3`
+        USER=`echo $ENTRY | cut -d/ -f4`
+        PPA=`echo $ENTRY | cut -d/ -f5`
+        #echo sudo apt-add-repository ppa:$USER/$PPA
+        if [ "ppa.launchpad.net" = "$HOST" ]; then
+            echo sudo apt-add-repository ppa:$USER/$PPA
+        else
+            echo sudo apt-add-repository \'${ENTRY}\'
+        fi
+    done
+done
+}
 
 # A shortcut function that simplifies usage of xclip.
 # - Accepts input from either stdin (pipe), or params.
@@ -252,9 +279,9 @@ cb() {
   fi
 }
 
-cpwd()
+cp_path()
 {
-    echo $pwd | xclip 
+    pwd | head -c -1 | xclip 
 }
 
 # colorize man pages
@@ -295,3 +322,5 @@ fec() {
   unset IFS
 }
 
+#Define a quick calculator function
+? () { echo "$*" | bc -l; }

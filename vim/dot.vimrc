@@ -106,8 +106,8 @@
       nmap  <leader>O :Tags<CR>
       nmap  <leader>? :History<CR>
       nmap  <leader>/ :execute 'Ag ' . input('Ag/')<CR>
-      nmap  K :call SearchWordWithAg()<CR>
-      vmap  K :call SearchVisualSelectionWithAg()<CR>
+      " nmap  K :call SearchWordWithAg()<CR>
+      " vmap  K :call SearchVisualSelectionWithAg()<CR>
       nmap  <leader>gl :Commits<CR>
       nmap  <leader>ga :BCommits<CR>
 
@@ -224,6 +224,7 @@
 
     "asynchronous build and test dispatcher
     Plug 'tpope/vim-dispatch'
+    Plug 'wannesm/wmgraphviz.vim'
 
     call plug#end()
  
@@ -338,7 +339,7 @@ endif
 
     colorscheme solarized
 	set background=dark
-    set t_Co=256
+    " set t_Co=256
     highlight Pmenu ctermbg=240 ctermfg=48
     highlight PmenuSel ctermbg=99
     highlight CursorLine   ctermbg=239 ctermfg=NONE

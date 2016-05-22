@@ -5,7 +5,7 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-mkdir ~/.local/share/fonts
+mkdir -p ~/.local/share/fonts
 cp *.ttf ~/.local/share/fonts
 fc-cache -fv
 

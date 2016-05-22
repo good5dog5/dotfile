@@ -19,6 +19,7 @@ init:
 	@cp -R  ${SCRIPTDIR}/*									${HOME}/usr/script/
 	@cp -R  ${BINDIR}/stardict/*							${STARDICT_DATA_DIR}
 	@ln -fs $(BINDIR)/colorgcc							    ${HOME}/usr/bin/colorgcc
+	@ln -fs $(BASEDIR)/mimeapps.list                        ${HOME}/.local/share/applications/mimeapps.list
 
 conf_install:
 	@ln -fs   ${CONFDIR}/gitconfig							${HOME}/.gitconfig
