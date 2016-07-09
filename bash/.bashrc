@@ -3,8 +3,10 @@
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
+
 # locale
 export LC_TIME=en_US.UTF-8
+export LANG=zh_TW.UTF-8
 
 # Set the default editor
 export PATH=$PATH:$HOME/usr/script
@@ -14,13 +16,16 @@ export PATH=$PATH:$HOME/usr/nand2tetris/tools
 export PATH=$PATH:$HOME/usr/phantomjs/bin
 export PATH=$PATH:$HOME/go/bin
 export PATH=$PATH:$HOME/.npm-global/bin
+# added by Anaconda3 4.0.0 installer
+export PATH=$PATH:$HOME/anaconda3/bin
+
+# ccache
+export CCACHE_PATH="/usr/bin" 
 
 # LS_COLOR
 # https://github.com/trapd00r/LS_COLORS
-# eval $( dircolors -b $HOME/LS_COLORS )
+eval $( dircolors -b $HOME/LS_COLORS )
 
-# Python path
-# export PYTHONPATH=/usr/lib/python2.7/dist-packages:/usr/lib/python2.7/dist-packages/ubuntu-sso-client
 
 # export GOROOT=/usr/bin/go
 export GOPATH=$HOME/go
@@ -49,6 +54,7 @@ export BC_ENV_ARGS=~/.bcrc
 
 # Ranger
 # export RANGER_LOAD_DEFAULT_RC="FALSE"
+
 export SCRIPT_DIR="$HOME/usr/script"
 export UVA_DIR="$HOME/Dropbox/Code/c/Uva"
 export BLOG_DIR="$HOME/github/good5dog5.github.com"
@@ -118,6 +124,12 @@ HISTSIZE=1000
 HISTFILESIZE=2000
 
 
+# Turn on some nifty bash features.
+#  Add a '**' glob wildcard that matches directory and subdirectory names as well as files.
+shopt -s globstar
+# Add extended glob operators, which allow repetition, grouping, and alternation.
+# e.g.: Match one or more occurrences of 'foo' or 'bar' in a row: +(foo|bar)
+shopt -s extglob
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
@@ -166,5 +178,3 @@ if [ "$(tty)" = "/dev/tty1" ]; then
     xinit && exit
 fi
 
-# added by Anaconda3 4.0.0 installer
-export PATH="/home/jordan/anaconda3/bin:$PATH"
