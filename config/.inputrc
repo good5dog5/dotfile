@@ -1,0 +1,42 @@
+# Use Vi mode instead of Emacs.
+set editing-mode emacs
+set bell-style none
+# Show all completions as soon as I press tab, even if there's more than one.
+set show-all-if-ambiguous on
+set completion-ignore-case on
+# show same prefix with "..." 
+set completion-prefix-display-length 2
+
+#------------------------------------------
+    # keymaps for when we're in command mode.
+    set keymap iv-command
+    "\e\e[A": history-search-backward
+    "\e\e[B": history-search-forward
+    # Insert the arguments from the last command
+    # "p": "i !!*\r"
+
+    # "gg": beginning-of-history
+    # "G": end-of-history
+#------------------------------------------
+# keymaps for when we're in insert mode.
+    # set keymap vi-insert
+    
+    
+    # Pressing tab will list all completions & select the first one. Pressing it 
+    # again will cycle through available completions.
+    # TAB: menu-complete
+    # Shift-TAB cycles completions backward
+    # "\e[Z": menu-complete-backward
+
+    # Option-up/option-down should also apply to insert mode
+    "\e\e[A": history-search-backward
+    "\e\e[B": history-search-forward
+
+    # glob patterns without executing, eg: 'rm *x'
+    "\ee": glob-expand-word
+    # change to movement mode by jk
+    # "jk": vi-movement-mode
+    # Needed because binding 'p' in command mode above wipes its insert mode
+    # function, too. This fixes that, and will insert 'p' when you type 'p'.
+    # "p": self-insert
+    # "j": self-insert

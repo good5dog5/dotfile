@@ -1,0 +1,50 @@
+[user]
+   email     = good5dog5@gmail.com
+   name      = Jordan Huang
+[color]
+   ui        = true
+   diff      = auto
+   branch    = auto
+   log       = auto
+
+[alias]
+   st        = status
+   stat      = status
+   stuno     = status -uno
+
+
+   co        = checkout
+
+   bo        = fetch origin
+   fu        = fetch upstream
+   po        = push origin
+   po        = push origin
+   pu        = pull --rebase origin master
+    # one-line log
+   l         = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+
+   a         = add
+   ap        = add -p
+   c         = commit
+   ca        = commit -a --verbose
+   cm        = commit -m
+   cam       = commit -a -m
+   m         = commit --amend --verbose
+
+   d         = difftool -y
+   ds        = diff --stat
+   dc        = diff --cached
+
+[core]
+   editor    = vim
+[color "diff"]
+   meta      = yellow bold
+   frag      = magenta bold
+   old       = red bold
+   new       = green bold
+[color "status"]
+   aded      = yellow
+   changed   = green
+   untracked = cyan
+[diff]
+	tool = vimdiff

@@ -1,42 +1,57 @@
 BASEDIR:=$(shell pwd)
 ranger_dir   :=${XDG_CONFIG_HOME}/ranger
 rtorrent_dir :=${XDG_CONFIG_HOME}/rtorrent
-tig_dir      :=${XDG_CONFIG_HOME}/tig
-tmux_dir     :=${XDG_CONFIG_HOME}/tmux
-zathura_dir  :=${XDG_CONFIG_HOME}/zathura
-todo_dir     :=${XDG_CONFIG_HOME}/todo
-i3_dir       :=${XDG_CONFIG_HOME}/i3
 
 .PHONY: clean zathura ranger rtorrent tig tmux todo i3
-
 all: ranger rtorrent tmux tig zathura todo i3
 
+
+# $(call mk_symbolic_link,  soure_dir)
+define mk_symbolic_link
+	@mkdir -p ${XDG_CONFIG_HOME}/$(strip $1)
+	@for FILE in $(shell find ./$1 -maxdepth 1 -type f -printf "%f\n"); do \
+		ln -sfr $$FILE  ${XDG_CONFIG_HOME}/$(strip $1)/$$FILE;                                      \
+	done
+endef
+
+# $(call rm_symbolic_link,  soure_dir)
+define rm_symbolic_link
+	@for FILE in $(shell find ./$1 -maxdepth 1 -type f -printf "%f\n"); do \
+		rm -rf ${XDG_CONFIG_HOME}/$(strip $1)/$$FILE; \
+	done
+endef
+
 ranger:
-	@test -d ${ranger_dir} || mkdir  		  ${ranger_dir} 
-	@ln -sf  ${BASEDIR}/ranger/scope.sh   	  ${ranger_dir}/scope.sh
-	@ln -sf  ${BASEDIR}/ranger/rifle.conf 	  ${ranger_dir}/rifle.conf
-	@ln -sf  ${BASEDIR}/ranger/rc.conf 	 	  ${ranger_dir}/rc.conf
+	@echo "Install ranger settings..."
+	$(call mk_symbolic_link, ranger)
 	@cp -R   ${BASEDIR}/ranger/colorschemes   ${ranger_dir}/
+ranger_clean:
+	@echo "Uninstall ranger settings..."
+	$(call rm_symbolic_link, ranger)
+
 rtorrent:
-	@test -d ${rtorrent_dir} || mkdir  		  ${rtorrent_dir} 
-	@test -d ${rtorrent_dir}/session || mkdir ${rtorrent_dir}/session 
-	@ln -sf  ${BASEDIR}/rtorrent/rtorrent.rc  ${rtorrent_dir}/rtorrent.rc
+	@echo "Install rtorrent settings..."
+	$(call mk_symbolic_link, rtorrent)
+	@mkdir -p ${rtorrent_dir/session}
+
 tig:
-	@test -d ${tig_dir} || mkdir  		  	  ${tig_dir} 
-	@ln -sf  ${BASEDIR}/tig/tigrc             ${tig_dir}/tigrc
+	@echo "Install tig settings..."
+	$(call mk_symbolic_link, tig,)
 tmux:
-	@test -d ${tmux_dir} || mkdir  		  	  ${tmux_dir} 
-	@ln -sf  ${BASEDIR}/tmux/tmux.conf        ${tmux_dir}/tmux.conf
+	@echo "Install tmux settings..."
+	$(call mk_symbolic_link, tmux)
 zathura: 
-	@test -d ${zathura_dir} || mkdir 		  ${zathura_dir} 
-	@ln -sf  ${BASEDIR}/zathura/zathurarc     ${zathura_dir}/zathurarc
+	@echo "Install zathura settings..."
+	$(call mk_symbolic_link, zathura)
 
 todo:
-	@test -d ${todo_dir} || mkdir 		  	  ${todo_dir} 
-	@ln -sf  ${BASEDIR}/todo/todo.cfg     	  ${todo_dir}/todo.cfg
+	@echo "Install todo settings..."
+	$(call mk_symbolic_link, todo)
 i3:
-	@test -d ${i3_dir} || mkdir 		  	  ${i3_dir} 
-	@ln -sf  ${BASEDIR}/i3/config     	      ${i3_dir}/config
+	@echo "Install i3 settings..."
+	$(call mk_symbolic_link, i3)
+	cp -R ./i3/icons 		${XDG_CONFIG_HOME}/i3/
+	cp -R ./i3/i3blocks_cmd ${XDG_CONFIG_HOME}/i3/
 
 
 
