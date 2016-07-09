@@ -10,6 +10,7 @@ sudo apt-add-repository ppa:webupd8team/experiments -y
 sudo apt-add-repository ppa:pi-rho/dev -y
 sudo apt-add-repository ppa:oibaf/graphics-drivers -y
 sudo apt-add-repository ppa:relan/exfat -y
+sudo add-apt-repository ppa:jd-team/jdownloader -y
 sudo apt-add-repository 'http://mega.nz/linux/MEGAsync/xUbuntu_14.04/ ./' -y
 sudo apt-add-repository 'http://archive.canonical.com/ubuntu/ trusty partner' -y
 sudo apt-add-repository 'http://au.archive.ubuntu.com/ubuntu/ trusty main restricted' -y

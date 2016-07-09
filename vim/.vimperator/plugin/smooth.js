@@ -1,4 +1,4 @@
-let self = liberator.plugins.smooziee = (function(){
+var self = liberator.plugins.smooziee = (function(){
 
     var scroll_amount = liberator.globalVariables.smooth_scroll_amount || '30';
 

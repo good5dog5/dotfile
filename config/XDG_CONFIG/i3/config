@@ -9,10 +9,10 @@ set $ws3  "3 "
 set $ws4  "4 app"
 set $ws5  "5 "
 set $ws6  "6 "
-set $ws7  "7 "
+set $ws7  "7 "
 set $ws8  "8 "
-set $ws9  "9 "
-set $ws10 "10 "
+set $ws9 "9 "
+set $ws10 "10 skype"
 
 # autostart applications
 exec --no-startup-id dropbox start
@@ -31,6 +31,9 @@ exec --no-startup-id i3-msg 'workspace $ws3; exec thunar'
 # Execute chromium-browser app, line, use comand line option.
 exec --no-startup-id i3-msg 'workspace $ws4; exec chromium-browser --app  --app-id=menkifleemblimdogmoihpfopnplikde'
 exec --no-startup-id i3-msg 'workspace $ws4; exec chromium-browser --app  --app-id=hmjkmjkepdijhoojdojkdfohbdgmmhki'
+
+exec --no-startup-id i3-msg 'workspace $ws6; exec quiterss'
+exec --no-startup-id i3-msg 'workspace $ws7; exec thunderbird'
 
 exec --no-startup-id i3-msg 'workspace $ws9; exec anki'
 

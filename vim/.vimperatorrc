@@ -32,7 +32,7 @@
     " Max number to list
     set maxitems=10         
 
-    set PassThrough=true
+    set passthrough=true
 
     " all type pages are opened in new tab
     " addons + downloads + help + javascript + prefs
@@ -108,6 +108,7 @@
         qmark B localhost:4000
         qmark c https://calendar.google.com/
         qmark d https://drive.google.com/
+        qmark e http://www45.eyny.com/index.php
         qmark f https://www.facebook.com/
         qmark g https://github.com/good5dog5
         qmark k https://keep.google.com
@@ -124,8 +125,8 @@
 noremap U :undo<Space>
 
 " PassThrough gmail 
-autocmd LocationChange .*                             js modes.passAllKeys = false
-autocmd LocationChange mail\\.google\\.com            js modes.passAllKeys = true
+" autocmd LocationChange .*                             js modes.passAllKeys = false
+" autocmd LocationChange mail\\.google\\.com            js modes.passAllKeys = true
 
 
 let g:smooth_scroll_amount="70"
