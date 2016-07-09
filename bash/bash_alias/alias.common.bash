@@ -54,11 +54,14 @@ alias ls="ls -r --color=auto  --group-directories-first --sort=extension"
 alias layout="tree -L 3"
 alias grep="grep  --color=auto"
 #word grep
-alias wg="ag --ignore-case  --follow --noheading --hidden"
+alias wg="ag --ignore-case  --follow --noheading --hidden --path-to-agignore ~/.agignore"
 alias psgrep="ps aux | grep"
 #find name
-# alias fn="find ./ -iname 2>/dev/null "
-fn() 
+fn()
+{
+     find ./ -iname "$1" 2>/dev/null
+}
+fne() 
 {
     local PS3="Choose a file to edit: "
     select opt in quit $(find ./ -iname \*$1\*  2>/dev/null)
@@ -114,17 +117,16 @@ alias t='$SCRIPT_DIR/todo.sh -d $HOME/.config/todo/todo.cfg'
 
 alias xup="xrdb ~/.Xresources"
 alias inside="tree -L 5"
-alias biggest_dir="du -hsx * | sort -rh | head -10"
+alias biggest_dir="du -sch .[!.]* * 2>/dev/null | sort -rh | head -10"
 
 Big5toUTF8 () { iconv -f big5 -t utf8 -c $1 -o $1; }
 
 # Functions ------------------
 
 # Display alias with partial name
-how()
-{
-    ag  "$1"  --ignore-case --follow --noheading $HOME/bash_conf
-}
+
+how () { ag  "$1"  --ignore-case --follow --noheading "$HOME"/bash_conf; }
+
 F() 
 {
     if  hash thunar 2>/dev/null ; then
@@ -164,19 +166,13 @@ newPost()
     [ "$#" -ne 1 ] && return 1
 
     local post_dir="$BLOG_DIR/source/_posts"
-    local newPost=`date +%Y-%m-%d`_${1}.md
+    local newPost=${1}.md
     local template="$BLOG_DIR/scaffolds/template.md"
 
     cd "$post_dir" &&               \
     cp "$template"  ./"$newPost" && \
+    sed -i "2i date: `date +"%Y-%m-%d %T"`" $newPost &&\
     vim "$newPost"
-
-    # -q report when files differ
-    # remove new post if not modified
-    if  diff -q $template $newPost > /dev/null ; then
-        rm ./"$newPost"
-    fi
-
 }
 ext() {
   if [ $# -ne 1 ]
@@ -213,15 +209,10 @@ function path(){
 
 batch_install() {
 
-    # local PKG_DIR="$HOME/.package"
-    # if [ -d "$PKG_DIR" ]; then
-    #
-    #     cd $PKG_DIR
     for f in ./*;
     do
         cat $f | xargs sudo apt-get -y install 
     done
-    # fi
 }
 gen_ppa_list()
 {
@@ -324,3 +315,4 @@ fec() {
 
 #Define a quick calculator function
 ? () { echo "$*" | bc -l; }
+

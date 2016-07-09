@@ -1,7 +1,7 @@
 ! vim: set filetype=xdefaults 
 
 URxvt*termName:                         screen-256color
-urxvt*depth: 32
+!urxvt*depth: 32
 URxvt*background: Black
 URxvt*foreground: White
 URxvt.url-select.launcher  : firefox

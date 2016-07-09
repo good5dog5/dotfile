@@ -24,8 +24,8 @@ function x()
     fi
 
     if [[ "$1" =~ .*.cpp ]]; then
-        g++ -std=c++11 -g -o ${1%.*}{.out,.${1##*.}} $2 $3 $4 $5  && time ./${1%.*}.out
+        g++ -std=c++11 -g3 -pthread -o ${1%.*}{.out,.${1##*.}} $2 $3 $4 $5  && time ./${1%.*}.out
     else
-        $CC -std=gnu99 -g -fno-builtin -o ${1%.*}{.out,.${1##*.}} $2 $3 $4 $5 -lm && time ./${1%.*}.out
+        $CC -std=gnu99 -g -fno-builtin -pthread -o ${1%.*}{.out,.${1##*.}} $2 $3 $4 $5 -lm && time ./${1%.*}.out
     fi
 }

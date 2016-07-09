@@ -27,22 +27,52 @@ create_directory() {
         fi
     done
 }
+_download()
+{
+    curl -sfLo "$1" --create-dirs "$2"
+}
 
 generate_powerline_font()
 {
     local DIR="${HOME}/.fonts/"
-    echo "Begin Downloading Powerline font and update font cache"
+    echo "Downloading Droid Sans Mono for Powerline.otf..."
+    _download $DIR/Droid\ Sans\ Mono\ for\ Powerline.otf \
+        https://www.dropbox.com/s/5i025mt90nq80ih/Droid%20Sans%20Mono%20for%20Powerline.otf?dl=0
 
-    cp $DOTFILE/bin/Droid\ Sans\ Mono\ for\ Powerline.otf $DIR
-    fc-cache -vf $DIR && printf "%-55s %5s\n\n" "Update fonts cache" "[done]"
+    # curl -sfLo $DIR/Droid\ Sans\ Mono\ for\ Powerline.otf --create-dirs \
+    #     https://www.dropbox.com/s/5i025mt90nq80ih/Droid%20Sans%20Mono%20for%20Powerline.otf?dl=0
+
+    echo "Updating fonts caches..."
+    fc-cache -vf $DIR 1>/dev/null 
 }
-install_vim_plug()
+
+install_startdict_dic()
 {
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    local DIR="$HOME/stardict/"
+
+    echo "Downloading dictionaries..."
+    _download $DIR/dic.tar \
+        https://www.dropbox.com/s/qahmqsys175bzww/dic.tar?dl=0
+    # curl -sfLo $DIR/dic.tar --create-dirs \
+    #     https://www.dropbox.com/s/qahmqsys175bzww/dic.tar?dl=0
+
+    echo "Installing stardict dictionaries..."
+    tar -xf $DIR/dic.tar -C $DIR && rm $DIR/dic.tar
 }
-sudo ln -sf /bin/bash /bin/sh
-create_directory
+
+install_flashplayer_for_firefox()
+{
+    local DIR="/usr/lib/mozilla/plugins/"
+
+    echo "Installing libflashplayer.so to $DIR ..."
+    sudo curl -sfLo $DIR/libflashplayer.so --create-dirs \
+        https://www.dropbox.com/s/iic1b7a762tkwr8/libflashplayer.so?dl=0
+}
+# echo "Change default shell to /bin/bash"
+# sudo ln -sf /bin/bash /bin/sh
+#
+# create_directory
 generate_powerline_font
-install_vim_plug
+install_startdict_dic
+install_flashplayer_for_firefox
 

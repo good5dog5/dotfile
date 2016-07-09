@@ -32,6 +32,7 @@
     Plug 'NLKNguyen/papercolor-theme'
     Plug 'junegunn/seoul256.vim'
     Plug 'altercation/vim-colors-solarized'
+    Plug 'chriskempson/tomorrow-theme'
 
     " libraries
     Plug 'tomtom/tlib_vim'
@@ -224,6 +225,7 @@
     Plug 'tpope/vim-dispatch'
     Plug 'wannesm/wmgraphviz.vim'
 
+
     call plug#end()
  
  
@@ -286,7 +288,6 @@
     " Limit popup menu height
     set pumheight=20
 
-    set relativenumber
 
     " undo info
     if !isdirectory($HOME."/.vim")

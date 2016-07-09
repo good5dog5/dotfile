@@ -59,8 +59,11 @@ set spoolfile = "+good5dog5.gmail.com/INBOX"
 # Mailboxes to show in the sidebar.
 mailboxes +good5dog5.gmail.com/INBOX \
           +good5dog5.gmail.com/archive \
+          +good5dog5.gmail.com/important \
           +good5dog5.gmail.com/sent \
           +good5dog5.gmail.com/drafts \
+          +good5dog5.gmail.com/trash
+
 
 # Other special folders.
 # set mbox      = "+good5dog5.gmail.com/archive"
