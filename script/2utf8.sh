@@ -13,6 +13,6 @@ do
     continue
   fi
   # Generate temp file to avoid Bus error
-  iconv -f ISO-8859-1 -t utf-8 $i -o $i.tmp
+  iconv -f BIG-5 -t utf-8 $i -o $i.tmp
   mv $i.tmp $i
 done

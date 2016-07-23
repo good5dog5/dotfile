@@ -10,7 +10,7 @@ all: ranger rtorrent tmux tig zathura todo i3
 define mk_symbolic_link
 	@mkdir -p ${XDG_CONFIG_HOME}/$(strip $1)
 	@for FILE in $(shell find ./$1 -maxdepth 1 -type f -printf "%f\n"); do \
-		ln -sfr $$FILE  ${XDG_CONFIG_HOME}/$(strip $1)/$$FILE;                                      \
+		ln -sfr $(strip $1)/$$FILE  ${XDG_CONFIG_HOME}/$(strip $1)/$$FILE;                                      \
 	done
 endef
 

@@ -43,6 +43,7 @@ alias eplist="vim $HOME/.pkglist"
 
 #Shortcuts
 alias h="history | tail -100"
+alias httpd='python -m SimpleHTTPServer 8001'
 
 # ls -r mean reverse the sort order
 alias ll="ls -alrhF --color=auto --group-directories-first"
@@ -113,7 +114,10 @@ alias distro_name="cat /etc/*release"
 
 # todo.txt_cli
 export TODOTXT_DEFAULT_ACTION=ls
-alias t='$SCRIPT_DIR/todo.sh -d $HOME/.config/todo/todo.cfg'
+#alias t='$SCRIPT_DIR/todo.sh -d $HOME/.config/todo/todo.cfg'
+
+# Taskworrior
+alias t='task'
 
 alias xup="xrdb ~/.Xresources"
 alias inside="tree -L 5"
@@ -123,9 +127,6 @@ Big5toUTF8 () { iconv -f big5 -t utf8 -c $1 -o $1; }
 
 # Functions ------------------
 
-# Display alias with partial name
-
-how () { ag  "$1"  --ignore-case --follow --noheading "$HOME"/bash_conf; }
 
 F() 
 {
@@ -287,6 +288,9 @@ man () {
     man "$@"
 }
 
+
+#################### FZF ########################
+how () { grep --line-buffered --no-filename  "" ~/bash_conf/* | fzf; } 
 fd() {
   if [ $# -eq 0 ]; then
       local root=~/
@@ -298,6 +302,9 @@ fd() {
     && cd "$DIR"
 }
 
+# fe [FUZZY PATTERN] - Open the selected file with the default editor
+#   - Bypass fuzzy finder if there's only one match (--select-1)
+#   - Exit if there's no match (--exit-0)
 fe() {
   IFS=' '
   local declare files=($(fzf-tmux --query="$1" --select-1 --exit-0))
@@ -305,14 +312,59 @@ fe() {
   unset IFS
 }
 
+# fe [FUZZY PATTERN] - Open the selected configure file with the default editor
 fec() {
+  pushd $PWD 1>/dev/null
   cd $DOTFILE
+
   IFS=' '
   local declare files=($(fzf-tmux --query="$1" --select-1 --exit-0))
   [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
   unset IFS
+
+  popd 1>/dev/null
 }
+
+# vf - fuzzy open with vim from anywhere
+# ex: vf word1 word2 ... (even part of a file name)
+# zsh autoload function
+vf() {
+  local files
+
+  files=(${(f)"$(locate -Ai -0 $@ | grep -z -vE '~$' | fzf --read0 -0 -1 -m)"})
+
+  if [[ -n $files ]]
+  then
+     vim -- $files
+     print -l $files[1]
+  fi
+}
+#################### FZF ########################
 
 #Define a quick calculator function
 ? () { echo "$*" | bc -l; }
+
+encrypt() { 
+
+    if [ ! -f "$1" ]; then
+        echo "Usage: encrypt [fileanme2encrypt]"
+        return
+    fi
+
+    gpg --cipher-algo AES --symmetric "$1" 
+}
+decrypt() { 
+
+    if [ "$#" -lt 2 ]; then
+        echo "Usage: decrypt outname inputFileName"
+        return 
+    fi
+
+    if [ ! -f "$2" ]; then
+        echo "$2 doesn't exist!"
+        return
+    fi
+
+    gpg --output "$1"  --decrypt "$2"
+}
 
