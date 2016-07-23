@@ -116,7 +116,9 @@
         qmark m https://mail.google.com/
         qmark p telnet://ptt.cc
         qmark r https://getpocket.com/a/queue/
+        qmark R https://www.reddit.com
         qmark t https://twitter.com
+        qmark w https://www.wunderground.com/weather-forecast/TW.html
         qmark y https://www.youtube.com
     " }}}
     " ==============================
@@ -125,8 +127,9 @@
 noremap U :undo<Space>
 
 " PassThrough gmail 
-" autocmd LocationChange .*                             js modes.passAllKeys = false
-" autocmd LocationChange mail\\.google\\.com            js modes.passAllKeys = true
+autocmd LocationChange .*                             js modes.passAllKeys = false
+autocmd LocationChange mail\\.google\\.com            js modes.passAllKeys = true
+" autocmd LocationChange reddit\\.com            js modes.passAllKeys = true
 
 
 let g:smooth_scroll_amount="70"

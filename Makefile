@@ -13,8 +13,7 @@ PACKAGEDIR  :=${BASEDIR}/PKG
 all: init conf_install vim_install bash_install
 
 init:
-	sh      $(SETUPDIR)/init.sh
-	@cp -R  ${BINDIR}/stardict/*							${STARDICT_DATA_DIR}
+	bash      $(SETUPDIR)/init.sh
 
 conf_install:
 	@$(MAKE) -C $(CONFDIR) install
@@ -27,9 +26,9 @@ vim_clean:
 	@$(MAKE) -C $(VIMDIR) clean
 
 bash_install:
-	@$(MAKE) -C $(BASEDIR) install
+	@$(MAKE) -C $(BASHDIR) install
 	@cp -R  ${SCRIPTDIR}/*							      ${HOME}/usr/script/
 bash_clean:
-	@$(MAKE) -C $(BASEDIR) clean
+	@$(MAKE) -C $(BASHDIR) clean
 
 clean: bash_clean conf_clean vim_clean

@@ -44,7 +44,7 @@
     Plug 'good5dog5/arm.vim', {'for': 'asm'}
     Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
     Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
-    Plug 'klen/python-mode', {'for' : 'python'}
+    " Plug 'klen/python-mode', {'for' : 'python'}
     "  {{{
     " turn off pymode's autocomplete to prevent conflict with ycm
     let g:pymode_rope_complete_on_dot = 0

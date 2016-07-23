@@ -18,6 +18,7 @@ export PATH=$PATH:$HOME/go/bin
 export PATH=$PATH:$HOME/.npm-global/bin
 # added by Anaconda3 4.0.0 installer
 export PATH=$PATH:$HOME/anaconda3/bin
+export PATH=$PATH:/usr/lib/libreoffice/share/xdg
 
 # ccache
 export CCACHE_PATH="/usr/bin" 

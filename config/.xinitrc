@@ -47,6 +47,7 @@ xrandr --output VGA1 --mode 1440x900
 
 # Start GNOME Keyring
 eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)
+synclient TouchpadOff=1
 
 
 
