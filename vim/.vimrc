@@ -402,7 +402,7 @@ endif
     vmap <C-c> "+y
     vmap <C-x> "+d
     nmap <C-p> "+p
-    cmap w!! w !sudo tee % >/dev/null
+    cmap w! w !sudo tee % >/dev/null
 
     "}}} 
     "[ Text movement ] {{{2

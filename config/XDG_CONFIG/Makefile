@@ -2,14 +2,14 @@ BASEDIR:=$(shell pwd)
 ranger_dir   :=${XDG_CONFIG_HOME}/ranger
 rtorrent_dir :=${XDG_CONFIG_HOME}/rtorrent
 
-.PHONY: clean zathura ranger rtorrent tig tmux todo i3
-all: ranger rtorrent tmux tig zathura todo i3
+.PHONY: clean zathura ranger rtorrent tig tmux todo i3 Thunar
+all: ranger rtorrent tmux tig zathura todo i3 Thunar
 
 
 # $(call mk_symbolic_link,  soure_dir)
 define mk_symbolic_link
 	@mkdir -p ${XDG_CONFIG_HOME}/$(strip $1)
-	@for FILE in $(shell find ./$1 -maxdepth 1 -type f -printf "%f\n"); do \
+	@for FILE in $(shell find ./$1 -maxdepth 1 -type f ! -iname "Makefile" -printf "%f\n"); do \
 		ln -sfr $(strip $1)/$$FILE  ${XDG_CONFIG_HOME}/$(strip $1)/$$FILE;                                      \
 	done
 endef
@@ -52,6 +52,11 @@ i3:
 	$(call mk_symbolic_link, i3)
 	cp -R ./i3/icons 		${XDG_CONFIG_HOME}/i3/
 	cp -R ./i3/i3blocks_cmd ${XDG_CONFIG_HOME}/i3/
+
+Thunar:
+	@echo "Install Thunar settings..."
+	$(call mk_symbolic_link, Thunar)
+	
 
 
 

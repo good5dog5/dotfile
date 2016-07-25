@@ -5,8 +5,7 @@
 [ -z "$PS1" ] && return
 
 # locale
-export LC_TIME=en_US.UTF-8
-export LANG=zh_TW.UTF-8
+export LC_ALL="en_US.UTF-8"
 
 # Set the default editor
 export PATH=$PATH:$HOME/usr/script
@@ -89,6 +88,8 @@ function_exists() {
 # Source all alias files
 _source_files "${HOME}/bash_conf"
 
+_source_files "${HOME}/.xprofile"
+
 # Source all auto_complete files
 _source_files "/usr/share/bash-completion/bash_completion"
 _source_files "$DOTFILE/bash/bash_complete"
@@ -162,7 +163,7 @@ done
 
 
 # need to be more elegant
-eval $(gpg-agent --daemon)
+#eval $(gpg-agent --daemon)
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 _fzf_compgen_path() {
@@ -176,6 +177,6 @@ complete -F _fzf_file_completion -o default -o bashdefault doge
 [ -f /home/jordan/.travis/travis.sh ] && source /home/jordan/.travis/travis.sh
 
 if [ "$(tty)" = "/dev/tty1" ]; then
-    xinit && exit
+    xinit -- :1 && exit
 fi
 
