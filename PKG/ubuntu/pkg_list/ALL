@@ -35,10 +35,8 @@ checkinstall
 wget
 lame
 default-jre
-openjdk-7-jre-headless
 libgcj14
 java-package
-freemind
 gimp
 gnome-panel
 conky-all
@@ -62,7 +60,6 @@ imagemagick
 sdcv
 cloc
 pdfgrep
-skype
 graphviz
 thunderbird
 irssi
@@ -91,3 +88,6 @@ ibus-gtk
 ibus-gtk3
 ibus-qt4
 workrave
+chromium-browser
+udiskie
+anki

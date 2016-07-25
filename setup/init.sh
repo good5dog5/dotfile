@@ -68,11 +68,17 @@ install_flashplayer_for_firefox()
     sudo curl -sfLo $DIR/libflashplayer.so --create-dirs \
         https://www.dropbox.com/s/iic1b7a762tkwr8/libflashplayer.so?dl=0
 }
+install_dropbox()
+{
+    cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+    ~/.dropbox-dist/dropboxd
+}
 # echo "Change default shell to /bin/bash"
 # sudo ln -sf /bin/bash /bin/sh
 #
-# create_directory
+create_directory
 generate_powerline_font
 install_startdict_dic
 install_flashplayer_for_firefox
+install_dropbox
 
