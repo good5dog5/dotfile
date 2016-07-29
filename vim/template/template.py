@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # Jordan huang<good5dog5@gmail.com>
 
 import os
