@@ -32,12 +32,13 @@ _download()
     curl -sfLo "$1" --create-dirs "$2"
 }
 
-generate_powerline_font()
+setup_fonts()
 {
     local DIR="${HOME}/.fonts/"
-    echo "Downloading Droid Sans Mono for Powerline.otf..."
-    _download $DIR/Droid\ Sans\ Mono\ for\ Powerline.otf \
-        https://www.dropbox.com/s/5i025mt90nq80ih/Droid%20Sans%20Mono%20for%20Powerline.otf?dl=0
+    local LINK="https://www.dropbox.com/s/rq9m6papvzd9j90/fonts.tar.gz?dl=0"
+
+    echo "Downloading fonts..."
+    wget -qO- $LINK | tar xzv -C $DIR
 
     # curl -sfLo $DIR/Droid\ Sans\ Mono\ for\ Powerline.otf --create-dirs \
     #     https://www.dropbox.com/s/5i025mt90nq80ih/Droid%20Sans%20Mono%20for%20Powerline.otf?dl=0
@@ -73,11 +74,12 @@ install_dropbox()
     cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
     ~/.dropbox-dist/dropboxd
 }
-# echo "Change default shell to /bin/bash"
-# sudo ln -sf /bin/bash /bin/sh
-#
+echo "Change default shell to /bin/bash"
+sudo ln -sf /bin/bash /bin/sh
+
 create_directory
-generate_powerline_font
+setup_fonts
+
 install_startdict_dic
 install_flashplayer_for_firefox
 install_dropbox
