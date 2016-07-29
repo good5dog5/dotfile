@@ -212,7 +212,7 @@ batch_install() {
 
     for f in ./*;
     do
-        cat $f | xargs sudo apt-get -y install 
+        cat $f | xargs sudo apt  -y install 
     done
 }
 gen_ppa_list()
@@ -339,6 +339,7 @@ vf() {
      print -l $files[1]
   fi
 }
+alias c="a=\`find . -maxdepth 1 -type d  | fzf\`; if [ \$a ]; then cd \$a; fi; unset a"
 #################### FZF ########################
 
 #Define a quick calculator function
