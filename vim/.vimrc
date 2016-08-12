@@ -225,6 +225,18 @@
     Plug 'tpope/vim-dispatch'
     Plug 'wannesm/wmgraphviz.vim'
 
+    Plug 'thinca/vim-quickrun'
+    " {{{
+        let g:quickrun_config = {
+        \   "_" : {
+        \       "outputter" : "message",
+        \   },
+        \}
+        let g:quickrun_no_default_key_mappings = 1
+        nmap <Leader>r <Plug>(quickrun)
+        map <F10> :QuickRun<CR>
+     " }}}
+
 
     call plug#end()
  
@@ -563,6 +575,7 @@ endif
     autocmd BufNewFile,BufRead *.md  setlocal textwidth=100
     autocmd BufNewFile,BufRead *gdb*  set filetype=gdb
     autocmd BufNewFile,BufRead *.py call SetPythonOption() 
+
     " For nand2tetris use
     autocmd BufNewFile,BufRead *.hdl set filetype=nandhdl
 
