@@ -88,6 +88,7 @@ alias ports='netstat -tulanp'
 alias vi="vim"
 alias v="vim"
 alias vd="vimdiff"
+tmp () { scratch=$(mktemp  -t tmp.XXXXXXXXXX); vim $scratch && rm -f $scratch; }
 alias em="emacs -nw"
 alias py="python"
 alias ipy="ipython"
@@ -367,5 +368,11 @@ decrypt() {
     fi
 
     gpg --output "$1"  --decrypt "$2"
+}
+timer() {
+  local N=$1; shift
+
+  (sleep $N && zenity --info --title="Time's Up" --text="${*:-BING}") &
+  echo "timer set for $N"
 }
 
