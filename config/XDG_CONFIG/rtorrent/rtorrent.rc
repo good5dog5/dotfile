@@ -21,7 +21,7 @@ download_rate = 1400
 upload_rate = 100
 
 # Default directory to save the downloaded torrents.
-directory = /media/jordan/MASS/BIGMORE
+directory = /media/jordan/MASS/Movie
 
 # Default session directory. Make sure you don't run multiple instance
 # of rtorrent using the same session directory. Perhaps using a
