@@ -1,6 +1,8 @@
 # i3 config file (v4)
 
 set $mod Mod4
+workspace_auto_back_and_forth yes
+bindsym Mod1+Tab workspace back_and_forth
 
 # workspace 
 set $ws1  "1 "
@@ -17,7 +19,7 @@ set $ws10 "10 skype"
 # autostart applications
 exec --no-startup-id dropbox start
 exec --no-startup-id nm-applet
-exec --no-startup-id feh --bg-fill ~/Pictures/Wallpaper/bulldog.jpg
+exec --no-startup-id feh --bg-fill --randomize ~/.wallpapers/*
 exec --no-startup-id goldendict
 exec --no-startup-id mpd 
 exec --no-startup-id thunar --daemon &
@@ -196,7 +198,7 @@ client.unfocused        $bg     $bg         $ia     $id
 client.focused_inactive $bg     $bg         $ac     $id
 client.urgent           $rd     $rd         $tx     $id
 # gnome app
-bindsym Control+Mod1+l exec --no-startup-id i3lock --image ~/Pictures/Wallpaper/wallpaper.png
+bindsym Control+Mod1+l exec --no-startup-id i3lock --image ~/.wallpapers/wallpaper.png
 # Print screen
 bindsym Print exec scrot  ~/Pictures/screenshot/$(date +%F-%T).png
 bindsym --release $mod+Print exec scrot -s  ~/Pictures/screenshot/$(date +%F-%T).png
