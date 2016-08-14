@@ -92,6 +92,7 @@ tmp () { scratch=$(mktemp  -t tmp.XXXXXXXXXX); vim $scratch && rm -f $scratch; }
 alias em="emacs -nw"
 alias py="python"
 alias ipy="ipython"
+alias ipy3="ipython3"
 alias dd_progress="sudo kill -USR1 $(pgrep ^dd)"
 alias bc='bc --quiet --mathlib'
 
@@ -108,7 +109,6 @@ alias twk="python $HOME/usr/venv/bin/rainbowstream"
 alias setclip='xclip -selection'
 alias getclip='xclip -selection clipboard -o'
 alias wtf="man"
-alias gC="git clone "
 
 # show distrobution information 
 alias distro_name="cat /etc/*release"
@@ -289,6 +289,7 @@ man () {
     man "$@"
 }
 
+gcd () { git clone $1 && cd "$(basename "$1")"; }
 
 #################### FZF ########################
 how () { grep --line-buffered --no-filename  "" ~/bash_conf/* | fzf; } 
@@ -299,7 +300,7 @@ fd() {
       local root=${1:-*}
   fi
 
-  DIR=`find $root -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf` \
+  DIR=`find $root -path '*./\.*' -prune -o -type d -print 2> /dev/null | fzf` \
     && cd "$DIR"
 }
 

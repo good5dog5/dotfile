@@ -35,7 +35,7 @@ _download()
 setup_fonts()
 {
     local DIR="${HOME}/.fonts/"
-    local LINK="https://www.dropbox.com/s/rq9m6papvzd9j90/fonts.tar.gz?dl=0"
+    local LINK="https://www.dropbox.com/s/7nb03js11c7olk0/fonts.tar.gz?dl=0"
 
     echo "Downloading fonts..."
     wget -qO- $LINK | tar xzv -C $DIR
