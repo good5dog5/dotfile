@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 # do not forget to run dbus
 export XIM=ibus
 export XIM_PROGRAM=/usr/bin/ibus-daemon

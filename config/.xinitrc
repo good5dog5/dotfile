@@ -50,7 +50,8 @@ xrandr --dpi 96
 
 # Start GNOME Keyring
 eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)
-#synclient TouchpadOff=1
+synclient TouchpadOff=1
+source ~/.xprofile
 
 # pulse audio session
 start-pulseaudio-x11
