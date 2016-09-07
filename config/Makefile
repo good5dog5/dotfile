@@ -7,6 +7,7 @@ confile := .bcrc           \
            .inputrc        \
            .gitconfig      \
            .LESS_TERMCAP   \
+		   .xmodmaprc
 
 .PHONY  : clean
 
