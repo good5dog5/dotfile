@@ -50,3 +50,5 @@
 	tool = vimdiff
 [merge]
     tool = vimdiff
+    conflictstyle = diff3
+    prompt = false

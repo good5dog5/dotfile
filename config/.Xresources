@@ -25,7 +25,7 @@ URxvt.clipboard.copycmd:  xclip -i -selection clipboard
 URxvt.clipboard.pastecmd: xclip -o -selection clipboard
 
 ! some time, too small size(ex:12)，will cause powerline font brick.
-URxvt.font: xft:Droid\ Sans\ Mono\ For\ Powerline:regular:size=14,xft:WenQuanYi Micro Hei Mono:regular:size=13:minspace=true
+URxvt.font: xft:Droid\ Sans\ Mono\ For\ Powerline:regular:size=14,xft:WenQuanYi Micro Hei Mono:regular:size=13:minspace=true,xft:FontAwesome:pixelsize=12
 Rxvt.letterSpace: -1
 Rxvt.lineSpace: 2
 
@@ -137,3 +137,5 @@ xterm*pointerColorForeground:S_base1
 ! white dark/light
 *color7:                S_base2
 *color15:               S_base3
+URxvt.inputMethod: ibus
+URxvt.preeditType: OverTheSpot

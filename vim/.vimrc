@@ -345,7 +345,7 @@
 
 if has("gui_running")
 	set guioptions-=T
-	set guifont=Droid\ Sans\ Mono\ for\ Powerline:h12
+	set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 14
 endif
 
     colorscheme solarized
@@ -434,8 +434,6 @@ endif
             set nofoldenable
             nnoremap J ]c
             nnoremap K [c
-            nnoremap L dp 
-            nnoremap H do 
             nnoremap U :diffupdate<CR>
         endif
     "}}}

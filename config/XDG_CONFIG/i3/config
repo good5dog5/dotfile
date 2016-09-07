@@ -1,7 +1,6 @@
 # i3 config file (v4)
 
 set $mod Mod4
-workspace_auto_back_and_forth yes
 bindsym Mod1+Tab workspace back_and_forth
 
 # workspace 
@@ -37,6 +36,7 @@ exec --no-startup-id i3-msg 'workspace $ws4; exec chromium-browser --app  --app-
 
 exec --no-startup-id i3-msg 'workspace $ws6; exec quiterss'
 exec --no-startup-id i3-msg 'workspace $ws7; exec thunderbird'
+exec --no-startup-id i3-msg 'workspace $ws7; exec deadbeef'
 
 exec --no-startup-id i3-msg 'workspace $ws9; exec anki'
 
