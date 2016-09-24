@@ -109,6 +109,7 @@ alias twk="python $HOME/usr/venv/bin/rainbowstream"
 alias setclip='xclip -selection'
 alias getclip='xclip -selection clipboard -o'
 alias wtf="man"
+alias zathura="zathura -d $HOME/Dropbox/.conf/zathura"
 
 # show distrobution information 
 alias distro_name="cat /etc/*release"
@@ -382,4 +383,15 @@ timer() {
   (sleep $N && zenity --info --title="Time's Up" --text="${*:-BING}") &
   echo "timer set for $N"
 }
+ankiCov() {
 
+    if [ "$#" -lt 1 ]; then
+        echo "Usage" anki_convert some.pic
+        return
+    elif [ ! -f "$1" ]; then
+        echo "$1 doesn't exist!"
+        return
+    fi
+
+    convert $1 -resize 200x200 $1
+}
