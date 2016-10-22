@@ -383,15 +383,24 @@ timer() {
   (sleep $N && zenity --info --title="Time's Up" --text="${*:-BING}") &
   echo "timer set for $N"
 }
-ankiCov() {
+ankiImg() {
+    # Remove all image file in the first level of ~/Downloads directory except the last download one
+    # then convert it's size to 200x200
+    local dir="$HOME/Downloads" 
+    cd $dir
 
-    if [ "$#" -lt 1 ]; then
-        echo "Usage" anki_convert some.pic
-        return
-    elif [ ! -f "$1" ]; then
-        echo "$1 doesn't exist!"
-        return
-    fi
+    find . -maxdepth 1 -name '*' -exec file -p {} \; |\
+        grep --only-matching --perl-regexp '^.+: \w+ image'|\
+        cut --delimiter=':' -f1 |\
+        xargs -i ls --full-time {} |\
+        cut --delimiter=' ' -f6- |\
+        sort | head -n -1 |\
+        cut --delimiter=' ' -f4 |\
+        xargs -i rm {}
 
-    convert $1 -resize 200x200 $1
+    local img_name=$(find . -maxdepth 1 -name '*' -exec file -p {} \;|\
+        grep --only-matching --perl-regexp '^.+: \w+ image'|\
+        cut --delimiter=':' -f1)
+
+    convert $img_name -resize 200x200 $img_name
 }
