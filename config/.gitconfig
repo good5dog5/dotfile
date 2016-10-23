@@ -8,7 +8,7 @@
    log       = auto
 
 [alias]
-   st        = status
+   st        = status -s
    stat      = status
    stuno     = status -uno
 
