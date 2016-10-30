@@ -182,6 +182,7 @@
       let g:ycm_register_as_syntastic_checker = 0
       let g:ycm_filetype_blacklist = { 'markdown': 1 }
 
+      let g:ycm_server_python_interpreter = "/usr/bin/python2.7"
       nmap <leader>gl :YcmCompleter GoToDeclaration<CR>
       nmap <leader>gf :YcmCompleter GoToDefinition<CR>
       nmap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
