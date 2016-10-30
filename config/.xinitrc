@@ -59,8 +59,20 @@ start-pulseaudio-x11
 udiskie &
 dropboxd &
 
-xinput --set-prop "10" "Device Accel Constant Deceleration" 0.3
-xinput --set-prop "10" "Evdev Wheel Emulation Timeout" 200
+#######################################################################
+#                        set trackpoint speed                         #
+#######################################################################
+
+case "$HOSTNAME" in
+    JLab)
+        xinput --set-prop "10" "Device Accel Constant Deceleration" 0.3
+        xinput --set-prop "10" "Evdev Wheel Emulation Timeout" 200
+    ;;
+    JTP)
+    echo  -n 180 /sys/devices/platform/i8042/serio1/serio2/speed
+    echo  -n 250 /sys/devices/platform/i8042/serio1/serio2/sensitivity
+    ;;
+esac
 
 # backlight
 xbacklight -set 65
