@@ -3,6 +3,11 @@ Host github.com
    user git
    IdentityFile ~/.ssh/github_rsa
 
+Host bitbucket.org
+    HostName bitbucket.org
+    user git
+    IdentityFile ~/.ssh/id_rsa_bitbucket
+
 Host rasp_pi
    HostName 119.77.244.141
    user jordan
