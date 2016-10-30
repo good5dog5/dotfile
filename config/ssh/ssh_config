@@ -1,0 +1,36 @@
+Host github.com
+   HostName github.com
+   user git
+   IdentityFile ~/.ssh/github_rsa
+
+Host rasp_pi
+   HostName 119.77.244.141
+   user jordan
+
+Host chiun
+        HostName 140.116.247.67
+        user chiun
+        
+Host BPI
+        HostName 192.168.1.108
+        user jordan
+
+Host home
+    HostName 192.168.1.106
+    user jordan
+
+Host JLab
+    HostName 140.114.71.56
+    user jordan
+
+Host nthu_farmer
+    HostName farmer.cs.nthu.edu.tw
+    user jordan
+
+# Host nthu_farmer
+#     HostName farmer.cs.nthu.edu.tw
+#     user jordan
+#
+# Host nthu_farmer
+#     HostName farmer.cs.nthu.edu.tw
+#     user jordan
