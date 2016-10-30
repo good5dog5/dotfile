@@ -22,6 +22,7 @@ install:
 	@ln -sfr ./colorgcc       ${HOME}/usr/bin/colorgcc
 	@mkdir -p ${HOME}/.cgdb
 	@ln -sfr ./cgdb/cgdbrc    ${HOME}/.cgdb/cgdbrc
+	@ln -sfr ./ssh/ssh_config ${HOME}/.ssh/config
 	
 	@$(MAKE) -C ./mutt install
 
