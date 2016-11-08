@@ -88,6 +88,7 @@ alias ports='netstat -tulanp'
 alias vi="vim"
 alias v="vim"
 alias vd="vimdiff"
+alias s="du -sh"
 tmp () { scratch=$(mktemp  -t tmp.XXXXXXXXXX); vim -c "set filetype=markdown" $scratch && rm -f $scratch; }
 alias em="emacs -nw"
 alias py="python"

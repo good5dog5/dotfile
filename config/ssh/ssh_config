@@ -32,6 +32,11 @@ Host nthu_farmer
     HostName farmer.cs.nthu.edu.tw
     user jordan
 
+Host nthu_whale
+    HostName 140.114.75.138
+    user logosit
+    port 13579
+
 # Host nthu_farmer
 #     HostName farmer.cs.nthu.edu.tw
 #     user jordan

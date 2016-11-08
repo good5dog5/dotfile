@@ -37,7 +37,12 @@ alias df="df -h"
 
 pg()
 {
-    pdfgrep -Rni $1  *.pdf
+    find . -name "*.pdf"  -print0 | xargs -0            \
+    pdfgrep --dereference-recursive                     \
+            --page-number                               \
+            --ignore-case                               \
+            $1
+
 }
 
 function ppt2pdf()
