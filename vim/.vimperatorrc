@@ -119,7 +119,7 @@
         qmark r https://getpocket.com/a/queue/
         qmark R https://www.reddit.com
         qmark t https://twitter.com
-        qmark w https://www.wunderground.com/weather-forecast/TW.html
+        qmark w localhost:7500
         qmark y https://www.youtube.com
     " }}}
     " ==============================

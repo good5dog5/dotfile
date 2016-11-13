@@ -405,3 +405,14 @@ ankiImg() {
 
     convert $img_name -resize 200x200 $img_name
 }
+dotGen()
+{
+    local file=$1
+    local filename=${file%.*}
+    local extension=${file##*.}
+    local outfile=${filename}.png
+    dot -Tpng $file -o $outfile && \
+
+    #show generate image file
+    feh $outfile 
+}

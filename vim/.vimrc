@@ -33,6 +33,7 @@
     Plug 'junegunn/seoul256.vim'
     Plug 'altercation/vim-colors-solarized'
     Plug 'chriskempson/tomorrow-theme'
+    Plug 'zeis/vim-kolor'
 
     " libraries
     Plug 'tomtom/tlib_vim'
@@ -349,7 +350,7 @@ if has("gui_running")
 	set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 14
 endif
 
-    colorscheme solarized
+    colorscheme kolor
 	set background=dark
     " set t_Co=256
     highlight Pmenu ctermbg=240 ctermfg=48
