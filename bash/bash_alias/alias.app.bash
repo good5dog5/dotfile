@@ -35,6 +35,10 @@ alias feh="feh --scale-down --auto-zoom --image-bg black"
 alias irc="irssi"
 alias df="df -h"
 
+#https://bbs.archlinux.org/viewtopic.php?id=95848
+#Fix "Fail to detect blank discs"
+alias brasero="dbus-launch brasero"
+
 pg()
 {
     find . -name "*.pdf"  -print0 | xargs -0            \
