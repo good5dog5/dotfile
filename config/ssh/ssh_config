@@ -28,19 +28,19 @@ Host JLab
     HostName 140.114.71.56
     user jordan
 
-Host nthu_farmer
+Host farmer
     HostName farmer.cs.nthu.edu.tw
     user jordan
 
-Host nthu_whale
-    HostName 140.114.75.138
+Host whale
+    HostName 140.114.75.143
     user logosit
     port 13579
 
-# Host nthu_farmer
-#     HostName farmer.cs.nthu.edu.tw
-#     user jordan
-#
-# Host nthu_farmer
-#     HostName farmer.cs.nthu.edu.tw
-#     user jordan
+Host sheep
+    HostName 140.114.75.139
+    user root
+
+Host wolf
+    HostName 140.114.75.140
+    user logosit
