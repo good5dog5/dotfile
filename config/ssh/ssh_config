@@ -30,12 +30,14 @@ Host JLab
 
 Host farmer
     HostName farmer.cs.nthu.edu.tw
-    user jordan
+    user logosit
+    IdentityFile ~/.ssh/farmer_rsa
 
 Host whale
     HostName 140.114.75.143
     user logosit
     port 13579
+    #IdentityFile ~/.ssh/whale_rsa
 
 Host sheep
     HostName 140.114.75.139
@@ -43,4 +45,6 @@ Host sheep
 
 Host wolf
     HostName 140.114.75.140
-    user logosit
+    user jordan
+    IdentityFile ~/.ssh/wolf_rsa
+
