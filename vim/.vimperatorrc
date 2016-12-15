@@ -117,6 +117,7 @@
         qmark m https://mail.google.com/
         qmark p telnet://ptt.cc
         qmark r https://getpocket.com/a/queue/
+        qmark s https://logoswhale.sandcats.io
         qmark R https://www.reddit.com
         qmark t https://twitter.com
         qmark w localhost:7500
