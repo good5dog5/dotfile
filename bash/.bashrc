@@ -14,6 +14,7 @@ export PATH=$PATH:$HOME/usr/bin
 export PATH=$PATH:$HOME/usr/nand2tetris/tools
 export PATH=$PATH:$HOME/usr/phantomjs/bin
 export PATH=$PATH:$HOME/go/bin
+export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/.npm-global/bin
 # added by Anaconda3 4.0.0 installer
 export PATH=$PATH:$HOME/anaconda3/bin
@@ -177,6 +178,10 @@ complete -F _fzf_file_completion -o default -o bashdefault doge
 [ -f /home/jordan/.travis/travis.sh ] && source /home/jordan/.travis/travis.sh
 
 if [ "$(tty)" = "/dev/tty1" ]; then
-    xinit -- :1 && exit
+    xinit -- :1 vt1 && exit
 fi
 
+
+export PATH="/home/jordan/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
