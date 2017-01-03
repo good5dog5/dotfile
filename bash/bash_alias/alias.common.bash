@@ -218,13 +218,20 @@ function path(){
     IFS=$old
 }
 
-batch_install() {
+batch_install() 
+{
 
     for f in ./*;
     do
-        cat $f | xargs sudo apt  -y install 
+        # Change any line begain with \# and tr replace it with newline
+        if hash apt-fast; then
+            cat "$f" | grep -vE "^\s*#" | xargs -n1 sudo apt-fast install -y --ignore-missing
+        else
+            cat "$f" | grep -vE "^\s*#" | xargs -n1 sudo apt-get install -y --ignore-missing
+        fi
     done
 }
+
 gen_ppa_list()
 {
 # Get all the PPA installed on a system

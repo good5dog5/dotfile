@@ -1,8 +1,8 @@
 curl
 gparted
-konsole
 nodejs
 python-pip
+python3-pip
 qemu
 scim
 scim-chewing
