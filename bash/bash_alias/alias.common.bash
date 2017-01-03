@@ -57,6 +57,8 @@ alias grep="grep  --color=auto"
 #word grep
 alias wg="ag --ignore-case  --follow --noheading --hidden --path-to-agignore ~/.agignore"
 
+alias tig="tig status"
+
 # Grep for a process name, excluding grep from the output.
 function psgrep() {
     ps aux | grep $1 | grep -v grep
