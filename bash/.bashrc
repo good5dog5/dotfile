@@ -16,9 +16,11 @@ export PATH=$PATH:$HOME/usr/phantomjs/bin
 export PATH=$PATH:$HOME/go/bin
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/.npm-global/bin
+
 # added by Anaconda3 4.0.0 installer
 export PATH=$PATH:$HOME/anaconda3/bin
 export PATH=$PATH:/usr/lib/libreoffice/share/xdg
+export PATH=$PATH:$HOME/.cargo/bin
 
 # ccache
 export CCACHE_PATH="/usr/bin" 
@@ -89,7 +91,7 @@ function_exists() {
 # Source all alias files
 _source_files "${HOME}/bash_conf"
 
-_source_files "${HOME}/.xprofile"
+#_source_files "${HOME}/.xprofile"
 
 # Source all auto_complete files
 _source_files "/usr/share/bash-completion/bash_completion"
@@ -117,6 +119,8 @@ _source_files "$NVM_DIR/nvm.sh"
 # https://github.com/huyng/bashmarks
 _source_files "$SCRIPT_DIR/bashmarks.sh"
 
+# rustup
+_source_files "$HOME/.local/.cargo/env"
 
 
 # Set the PS1 prompt (with color).
@@ -163,8 +167,9 @@ for al in `__git_aliases`; do
 done
 
 
-# need to be more elegant
-#eval $(gpg-agent --daemon)
+# GPG
+GPG_TTY=$(tty)
+export GPG_TTY
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 _fzf_compgen_path() {
@@ -181,7 +186,7 @@ if [ "$(tty)" = "/dev/tty1" ]; then
     xinit -- :1 vt1 && exit
 fi
 
-
 export PATH="/home/jordan/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+export WINEARCH=win32
