@@ -185,3 +185,4 @@ fi
 export PATH="/home/jordan/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+export TZ='Asia/Taipei'
