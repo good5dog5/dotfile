@@ -105,7 +105,6 @@
       nmap  <leader>o :BTags<CR>
       nmap  <leader>O :Tags<CR>
       nmap  <leader>? :History<CR>
-      nmap  <leader>/ :execute 'Ag ' . input('Ag/')<CR>
       " nmap  K :call SearchWordWithAg()<CR>
       " vmap  K :call SearchVisualSelectionWithAg()<CR>
       nmap  <leader>gl :Commits<CR>
@@ -214,7 +213,7 @@
     Plug 'ervandew/supertab'
     Plug 'rking/ag.vim'
     "  {{{
-        nmap ' :Ag <c-r>=expand("<cword>")<cr><cr>
+        nmap <leader>g :Ag <c-r>=expand("<cword>")<cr><cr>
         nnoremap <space>/ :Ag
     "   }}}
     Plug 'nelstrom/vim-visual-star-search'
@@ -559,9 +558,9 @@ endif
     autocmd BufNewFile,BufRead *.{tex\|cls}  setlocal filetype=tex
     autocmd Filetype tex setl updatetime=1
 
-    "Automatic story folding state while switch between buffers
+    "Automatic store folding state while switch between buffers (*.* instead of ?* prevent E32 error message)
     autocmd BufWinLeave ?* mkview!
-    autocmd BufWinEnter ?* silent loadview
+    autocmd BufWinEnter *.* silent loadview
 
     "Auto highlight assembly files depands on extension
     autocmd BufRead,BufNewFile *.s set filetype=arm 
