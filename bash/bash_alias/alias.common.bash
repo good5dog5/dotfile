@@ -396,7 +396,7 @@ decrypt() {
 timer() {
   local N=$1; shift
 
-  (sleep $N && zenity --info --title="Time's Up" --text="${*:-BING}") &
+  nohup bash -c "(sleep $N && zenity --info --title='Time s Up' --text="${*:-BING}")" &>/dev/null &
   echo "timer set for $N"
 }
 ankiImg() {
