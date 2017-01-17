@@ -35,7 +35,7 @@ alias cp='cp -r'
 # Fast edit config file
 alias evr="vim $HOME/.vimrc"
 alias evpr="vim $HOME/.vimperatorrc"
-alias ebr="vim $HOME/.bashrc"
+alias ebr="vim $HOME/.bashrc && sbr"
 alias sbr="source $HOME/.bashrc"
 alias etmr="vim $HOME/.config/tmux/tmux.conf"
 alias eemr="vim $HOME/.emacs.d/init.el"
@@ -147,9 +147,9 @@ F()
 }
 eba() {
    if [ "$#" -eq 0 ]; then
-       vim $HOME/bash_conf/alias.common.bash
+       vim $HOME/bash_conf/alias.common.bash && sbr
    else
-       vim $HOME/bash_conf/alias.$1.bash
+       vim $HOME/bash_conf/alias.$1.bash && sbr
    fi
 }
 md () { mkdir -p "$1"; }
