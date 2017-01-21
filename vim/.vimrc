@@ -237,6 +237,7 @@
         nmap <Leader>r <Plug>(quickrun)
         map <F10> :QuickRun<CR>
      " }}}
+     Plug 'junegunn/goyo.vim'
 
 
     call plug#end()
