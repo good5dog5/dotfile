@@ -435,3 +435,4 @@ wikiup()
     script_path="$HOME/Dropbox/mywiki"
     cd $script_path && ./run.sh start 
 }
+alias vw="cd ${HOME}/Dropbox/Note/vimwiki && vim +VimwikiIndex "

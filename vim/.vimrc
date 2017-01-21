@@ -238,6 +238,27 @@
         map <F10> :QuickRun<CR>
      " }}}
      Plug 'junegunn/goyo.vim'
+     Plug 'vimwiki/vimwiki'
+     " {{{
+        " Vimwiki config
+        " see `http://superuser.com/questions/495889/have-vimwiki-set-filetype-only-within-wikihome`
+
+        " stop vimwiki taking over markdown files
+        let g:vimwiki_ext2syntax = {}
+
+        " config for default/first wiki
+        let s:vimwiki = {}
+
+        let s:vimwiki.syntax = 'markdown'
+        let s:vimwiki.ext = '.md'
+        let s:vimwiki.diary_rel_path = 'logbook'
+        let s:vimwiki.diary_index = 'index'
+        let s:vimwiki.diary_header = 'Log Book'
+        let s:vimwiki.diary_sort = 'asc'
+        let s:vimwiki.path = "$HOME/Dropbox/Note/vimwiki"
+
+        let g:vimwiki_list = [s:vimwiki]
+    " }}}
 
 
     call plug#end()
