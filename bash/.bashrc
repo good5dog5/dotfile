@@ -20,6 +20,10 @@ export PATH=$PATH:$HOME/.npm-global/bin
 export PATH=$PATH:$HOME/anaconda3/bin
 export PATH=$PATH:/usr/lib/libreoffice/share/xdg
 
+
+# JAVA
+export JAVA_HOME=/usr/lib/jvm/java-8-oracle/jre/bin/java
+
 # ccache
 export CCACHE_PATH="/usr/bin" 
 
