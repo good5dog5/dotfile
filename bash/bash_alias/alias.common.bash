@@ -430,3 +430,8 @@ dotGen()
     #show generate image file
     feh $outfile 
 }
+wikiup()
+{
+    script_path="$HOME/Dropbox/mywiki"
+    cd $script_path && ./run.sh start 
+}
