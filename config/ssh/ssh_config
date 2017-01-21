@@ -23,11 +23,16 @@ Host farmer
     user logosit
     IdentityFile ~/.ssh/farmer_rsa
 
-Host whale
+Host whale_it
     HostName 140.114.75.143
     user logosit
     port 13579
     #IdentityFile ~/.ssh/whale_rsa
+    #
+Host whale
+    HostName 140.114.75.143
+    user jordanhuang
+    port 13579
 
 Host sheep
     HostName 140.114.75.139
