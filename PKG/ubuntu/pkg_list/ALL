@@ -66,7 +66,14 @@ irssi
 npm
 byzanz
 nodejs-legacy
+# ranger related
 ranger
+highlight
+atool
+w3m
+poppler-utils
+caca-utils
+
 vim-gtk
 python3-dev
 xbacklight
