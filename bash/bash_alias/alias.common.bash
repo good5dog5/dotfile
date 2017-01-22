@@ -93,7 +93,6 @@ alias ports='netstat -tulanp'
 
 alias vi="vim"
 alias v="vim"
-alias vd="vimdiff"
 alias s="du -sh"
 tmp () { scratch=$(mktemp  -t tmp.XXXXXXXXXX); vim -c "set filetype=markdown" $scratch && rm -f $scratch; }
 alias em="emacs -nw"
@@ -435,4 +434,5 @@ wikiup()
     script_path="$HOME/Dropbox/mywiki"
     cd $script_path && ./run.sh start 
 }
-alias vw="cd ${HOME}/Dropbox/Note/vimwiki && vim +VimwikiIndex "
+alias vw="vim +VimwikiIndex "
+alias vd="vim +VimwikiDiaryIndex"
