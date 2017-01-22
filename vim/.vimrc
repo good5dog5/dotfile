@@ -259,6 +259,11 @@
 
         let g:vimwiki_list = [s:vimwiki]
     " }}}
+     Plug 'jamessan/vim-gnupg'
+     " {{{
+        let g:GPGPreferArmor=1
+        let g:GPGDefaultRecipients=["good5dog5@gmail.com"]
+     " }}}
 
 
     call plug#end()
