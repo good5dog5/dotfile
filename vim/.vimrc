@@ -605,7 +605,7 @@ endif
     " For nand2tetris use
     autocmd BufNewFile,BufRead *.hdl set filetype=nandhdl
 
-    autocmd VimEnter * if !argc() | NERDTree | endif
+    " autocmd VimEnter * if !argc() | NERDTree | endif
 
     " Set scripts to be executable from the shell
     autocmd BufWritePost *.py call Mode_executable()
