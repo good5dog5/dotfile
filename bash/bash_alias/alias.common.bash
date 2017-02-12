@@ -436,3 +436,8 @@ wikiup()
 }
 alias vw="vim +VimwikiIndex "
 alias vd="vim +VimwikiDiaryIndex"
+
+trans() 
+{
+    python $HOME/Dropbox/2017_Architecture/mips-assembler/assemble.py $@
+}

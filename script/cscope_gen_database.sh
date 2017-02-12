@@ -11,8 +11,9 @@ find /usr/include/ -maxdepth 1 -type f -name "*.[hc]" > cscope.files
 
 for d in "${DIR[@]}"; do
 
+
     if [ -d "$d" ]; then
-       find $d -type f -name "*.[hc]" -o -name "*.cpp" >> cscope.files
+        find $d -not -path "*/testcase/*"  -type f  -name "*.[hc]" -o -name "*.cpp"  >> cscope.files
     fi
 
 done           
