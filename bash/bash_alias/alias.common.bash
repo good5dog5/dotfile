@@ -324,6 +324,26 @@ fd() {
   DIR=`find $root -path '*./\.*' -prune -o -type d -print 2> /dev/null | fzf` \
     && cd "$DIR"
 }
+# Quick open file manager and exit terminal
+fdT() {
+  if [ $# -eq 0 ]; then
+      local root=~/
+  else
+      local root=${1:-*}
+  fi
+
+  DIR=`find $root -path '*./\.*' -prune -o -type d -print 2> /dev/null | fzf` \
+    && cd "$DIR" 
+
+  if  hash thunar 2>/dev/null ; then
+      thunar
+  else
+      xdg-open
+  fi
+
+  exit
+
+}
 
 # fe [FUZZY PATTERN] - Open the selected file with the default editor
 #   - Bypass fuzzy finder if there's only one match (--select-1)
@@ -437,7 +457,20 @@ wikiup()
 alias vw="vim +VimwikiIndex "
 alias vd="vim +VimwikiDiaryIndex"
 
+# 1. translate mips code to binary
 trans() 
 {
     python $HOME/Dropbox/2017_Architecture/mips-assembler/assemble.py $@
+
+}
+mips_cp()
+{
+    # fullname="$(basename "$1")"
+    # extension=${filename##*.}
+    # filename="${filename%.*}"
+    #
+    # echo "$fullname"
+    # echo "$extension"
+    # echo "$filename"
+    cp "$1" "$1.asm" && { printf ".globl main\n.text\nmain:\n"; cat $1; } > "$1.asm"
 }
