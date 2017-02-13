@@ -143,6 +143,9 @@ source ~/.vimperator/plugin/jquery-2.1.4.js
 
 " about.config {{
 
+    " Prevent firefox's disallowance of unofficial add-on installing
+    set! xpinstall.signatures.required=false
+
     set! browser.startup.homepage="www.google.com"
     " Disable animation
     set! browser.tabs.animate=false

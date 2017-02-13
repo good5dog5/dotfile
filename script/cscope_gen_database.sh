@@ -13,7 +13,7 @@ for d in "${DIR[@]}"; do
 
 
     if [ -d "$d" ]; then
-        find $d -not -path "*/testcase/*"  -type f  -name "*.[hc]" -o -name "*.cpp"  >> cscope.files
+        find $d   -type f  -regex '.*/.*\.\(c\|cpp\|h\)$' -not -path "*/testcase/*" >> cscope.files
     fi
 
 done           
