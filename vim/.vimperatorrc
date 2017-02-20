@@ -268,6 +268,25 @@ source ~/.vimperator/plugin/jquery-2.1.4.js
     set! extensions.bbsfox2.SshSupport=true
     "}}}
 
-
+" A builtin bit.ly shortener.
+" Based on http://github.com/scy/dotscy/commit/4526f23a09b2ae51fb7f4b1e2ed3aec84f318fa5
+javascript <<EOF
+function shortenURLBitLy (url) {
+	var req = new XMLHttpRequest();
+		req.open("GET", "http://api.bit.ly/v3/shorten?login=blueyed&apiKey=R_a405dd06737e888ca6971b295b0b7a13&format=txt&longUrl=" + encodeURIComponent(url), true)
+		req.onreadystatechange = function (ev) {
+			if (req.readyState == 4) {
+				if (req.status == 200) {
+					util.copyToClipboard(req.responseText.replace(/\s+$/, ''), true);
+				} else {
+					liberator.echo(req.responseText);
+				}
+			}
+		}
+		req.send(null);
+	}
+EOF
+" mnemonic: Go and yank.
+map <silent> gy :js shortenURLBitLy(buffer.URL)<cr>
 
 " vim: ft=vimperator ts=4 sw=4 sts=0 et fdm=marker fdc=3
