@@ -20,7 +20,7 @@ Host JLab
 
 Host farmer
     HostName farmer.cs.nthu.edu.tw
-    user logosit
+    user jordan
     IdentityFile ~/.ssh/farmer_rsa
 
 Host whale_it
