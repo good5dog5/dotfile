@@ -259,7 +259,8 @@
         let s:vimwiki.path = "$HOME/Dropbox/mywiki/wikidata"
 
         let g:vimwiki_list = [s:vimwiki]
-        au! BufWritePost ~/Dropbox/mywiki/wikidata/* !git add % ;git commit -m "Auto commit."
+        au! BufWritePost ~/Dropbox/mywiki/wikidata/* silent! execute  '!git add % && git commit -m "Auto commit." &&
+                    \ !bash "$HOME/Dropbox/mywiki/run.sh --restart" > /dev/null' | redraw!
     " }}}
      Plug 'jamessan/vim-gnupg'
      " {{{
