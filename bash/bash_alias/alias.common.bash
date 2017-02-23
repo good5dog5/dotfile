@@ -474,3 +474,5 @@ mips_cp()
     # echo "$filename"
     cp "$1" "$1.asm" && { printf ".globl main\n.text\nmain:\n"; cat $1; } > "$1.asm"
 }
+
+function cd() { builtin cd -- "$@" && { [ "$PS1" = "" ] || ls -hrt --color; }; }
