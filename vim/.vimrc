@@ -82,7 +82,7 @@
       let g:EasyMotion_smartcase  = 1 "Turn on case insensitive feature
  
       "2-character search motion
-      nmap s <Plug>(easymotion-s2)
+      nmap S <Plug>(easymotion-s2)
  
       " JK motions: Line motions
       map <Leader>j <Plug>(easymotion-j)
