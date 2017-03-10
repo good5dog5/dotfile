@@ -106,36 +106,55 @@ xterm*pointerColorForeground:S_base1
 #define S_cyan          #2aa198
 #define S_green         #859900
 !
-!! black dark/light
-*color0:                S_base02
-*color8:                S_base03
-!
-! !! red dark/light
-*color1:                S_red
-*color9:                S_orange
-!
-!! green dark/light
-*color2:                S_green
-*color10:               S_base01
-!
-!! yellow dark/light
-*color3:                S_yellow
-*color11:               S_base00
-!
-!! blue dark/light
-*color4:                S_blue
-*color12:               S_base0
-!
-! magenta dark/light
-*color5:                S_magenta
-*color13:               S_violet
-!
-! cyan dark/light
-*color6:                S_cyan
-*color14:               S_base1
-!
-! white dark/light
-*color7:                S_base2
-*color15:               S_base3
-URxvt.inputMethod: ibus
-URxvt.preeditType: OverTheSpot
+
+! === fusion color scheme ===
+! special
+*foreground:   #c5c8c6
+*background:   #1d1f21
+*cursorColor:  #c5c8c6
+! black
+*color0:       #282a2e
+*color8:       #373b41
+! red
+*color1:       #a54242
+*color9:       #cc6666
+! green
+*color2:       #8c9440
+*color10:      #b5bd68
+! yellow
+*color3:       #de935f
+*color11:      #f0c674
+! blue
+*color4:       #5f819d
+*color12:      #81a2be
+! magenta
+*color5:       #85678f
+*color13:      #b294bb
+! cyan
+*color6:       #5e8d87
+*color14:      #8abeb7
+! white
+*color7:       #707880
+*color15:      #c5c8c6
+
+! ## Rofi settings
+rofi.font:             Hack Bold 13
+rofi.terminal:         i3-sensible-terminal
+rofi.separator-style:  solid
+rofi.hide-scrollbar:   false
+rofi.scrollbar-width:  6
+rofi.bw:               3
+rofi.padding:          15
+rofi.eh:               1
+rofi.line-margin:      5
+rofi.opacity:          90
+rofi.width:            550
+rofi.lines:            15
+rofi.threads: 4
+
+! Rofi colors
+rofi.color-enabled:    true
+rofi.color-window:     #2d2d2d, #586e75, #4E6269
+rofi.color-normal:     #2d2d2d, #c7c7c7, #333333, #80a5a6, #101112
+rofi.color-active:     #2d2d2d, #b5bd68, #333333, #b5bd68, #101112
+rofi.color-urgent: #2d2d2d, #cc6666, #333333, #cc6666, #101112
