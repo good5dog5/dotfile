@@ -66,7 +66,7 @@ function psgrep() {
 #find name
 fn()
 {
-     find ./ -iname "$1" 2>/dev/null
+    find . -type f -iname '*'$*'*' 2>/dev/null ; 
 }
 fne() 
 {
@@ -94,7 +94,6 @@ alias ports='netstat -tulanp'
 alias vi="vim"
 alias v="vim"
 alias s="du -sh"
-tmp () { scratch=$(mktemp  -t tmp.XXXXXXXXXX); vim -c "set filetype=markdown" $scratch && rm -f $scratch; }
 alias em="emacs -nw"
 alias py="python"
 alias ipy="ipython"
@@ -476,3 +475,7 @@ mips_cp()
 }
 
 function cd() { builtin cd -- "$@" && { [ "$PS1" = "" ] || ls -hrt --color; }; }
+temp() {
+  vim +"set buftype=nofile filetype=markdown bufhidden=wipe nobuflisted noswapfile tw=${1:-0}"
+}
+
