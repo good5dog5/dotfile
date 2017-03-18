@@ -166,7 +166,8 @@ set line-graphics = yes
 # Status {{{
 #
     bind status D !@?rm %(file)
-    bind status P !git push origin
+    bind status p !git push origin
+    bind status P !git add --patch %(file)
     bind status R !@git reset HEAD %(file)
     bind status + !?git commit --amend
     bind status N !@git add -N %(file)

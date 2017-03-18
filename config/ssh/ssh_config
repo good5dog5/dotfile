@@ -41,7 +41,9 @@ Host sheep
 Host wolf
     HostName 140.114.75.140
     IdentityFile ~/.ssh/wolf_rsa
-    ForwardX11 Yes
-    RemoteForward 55555 localhost:22
+    # Compression yes
+    # ForwardX11 Yes
+    # Ciphers blowfish-cbc,arcfour
+    # RemoteForward 55555 localhost:22
 Host *
     user jordan
