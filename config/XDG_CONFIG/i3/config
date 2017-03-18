@@ -34,11 +34,11 @@ exec --no-startup-id i3-msg 'workspace $ws4; exec chromium-browser --app  --app-
 exec --no-startup-id i3-msg 'workspace $ws4; exec chromium-browser --app  --app-id=hmjkmjkepdijhoojdojkdfohbdgmmhki'
 exec --no-startup-id i3-msg 'workspace $ws4; exec chromium-browser --app  --app-id=ejjicmeblgpmajnghnpcppodonldlgfn'
 
-exec --no-startup-id i3-msg 'workspace $ws6; exec quiterss'
+#exec --no-startup-id i3-msg 'workspace $ws6; exec quiterss'
 exec --no-startup-id i3-msg 'workspace $ws7; exec thunderbird'
-exec --no-startup-id i3-msg 'workspace $ws7; exec deadbeef'
+#exec --no-startup-id i3-msg 'workspace $ws7; exec deadbeef'
 
-exec --no-startup-id i3-msg 'workspace $ws9; exec anki'
+#exec --no-startup-id i3-msg 'workspace $ws9; exec anki'
 
 assign [class="chromium-browser"] $ws4
 assign [class="^Anki$"] $ws9
