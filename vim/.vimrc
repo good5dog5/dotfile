@@ -484,6 +484,14 @@ endif
     "reference http://vim.wikia.com/wiki/Selecting_your_pasted_texj 
     " nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
+    " Strips whitespace
+    nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+
+    " Save
+    noremap  <silent> <C-S> :update<CR>
+    vnoremap <silent> <C-S> <C-C>:update<CR>
+    inoremap <silent> <C-S> <C-O>:update<CR>
+
 " }}}
 " [ Plugin configure ] {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
