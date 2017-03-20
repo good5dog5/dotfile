@@ -475,7 +475,7 @@ mips_cp()
 }
 
 function cd() { builtin cd -- "$@" && { [ "$PS1" = "" ] || ls -hrt --color; }; }
-temp() {
+tmp() {
   vim +"set buftype=nofile filetype=markdown bufhidden=wipe nobuflisted noswapfile tw=${1:-0}"
 }
 
