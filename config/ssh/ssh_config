@@ -18,19 +18,13 @@ Host BPI
 Host JLab
     HostName 140.114.71.56
 
-Host farmer
-    HostName farmer.cs.nthu.edu.tw
+Host logos
+    HostName logos.cs.nthu.edu.tw
     user jordan
-    IdentityFile ~/.ssh/farmer_rsa
+    IdentityFile ~/.ssh/logos_rsa
 
-Host whale_it
-    HostName 140.114.75.143
-    user logosit
-    port 13579
-    #IdentityFile ~/.ssh/whale_rsa
-    #
 Host whale
-    HostName 140.114.75.143
+    HostName whale.cs.nthu.edu.tw
     user jordanhuang
     port 13579
 
@@ -45,5 +39,9 @@ Host wolf
     # ForwardX11 Yes
     # Ciphers blowfish-cbc,arcfour
     # RemoteForward 55555 localhost:22
+   
+Host cubietruck
+    HostName 140.114.71.118
+
 Host *
     user jordan
