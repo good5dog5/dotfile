@@ -27,6 +27,7 @@ Host whale
     HostName whale.cs.nthu.edu.tw
     user jordanhuang
     port 13579
+    IdentityFile ~/.ssh/whale_rsa
 
 Host sheep
     HostName 140.114.75.139
@@ -36,12 +37,13 @@ Host wolf
     HostName 140.114.75.140
     IdentityFile ~/.ssh/wolf_rsa
     # Compression yes
-    # ForwardX11 Yes
+     ForwardX11 Yes
     # Ciphers blowfish-cbc,arcfour
     # RemoteForward 55555 localhost:22
    
 Host cubietruck
-    HostName 140.114.71.118
+    HostName 140.114.71.55
+    IdentityFile ~/.ssh/cubietruck_rsa
 
 Host *
     user jordan
