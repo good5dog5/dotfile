@@ -32,7 +32,7 @@ ranger_clean:
 rtorrent:
 	@echo "Install rtorrent settings..."
 	$(call mk_symbolic_link, rtorrent)
-	@mkdir -p ${rtorrent_dir/session}
+	@mkdir -p ${rtorrent_dir}/session
 
 tig:
 	@echo "Install tig settings..."
@@ -50,8 +50,7 @@ todo:
 i3:
 	@echo "Install i3 settings..."
 	$(call mk_symbolic_link, i3)
-	cp -R ./i3/icons 		${XDG_CONFIG_HOME}/i3/
-	cp -R ./i3/i3blocks_cmd ${XDG_CONFIG_HOME}/i3/
+	@cp -R ./i3/i3blocks_cmd ${XDG_CONFIG_HOME}/i3/
 
 Thunar:
 	@echo "Install Thunar settings..."
