@@ -198,15 +198,16 @@ client.unfocused        $bg     $bg         $ia     $id
 client.focused_inactive $bg     $bg         $ac     $id
 client.urgent           $rd     $rd         $tx     $id
 # gnome app
-bindsym Control+Mod1+l exec --no-startup-id i3lock --image ~/.wallpapers/wallpaper.png
+bindsym Control+Mod1+l exec --no-startup-id i3lock --image ~/.wallpapers/flowers.png
 # Print screen
 bindsym Print exec scrot  ~/Pictures/screenshot/$(date +%F-%T).png
 bindsym --release $mod+Print exec scrot -s  ~/Pictures/screenshot/$(date +%F-%T).png
 #bindsym --release Mod1+Print exec ~/usr/script/imgur-screenshot.sh
 
-bindsym Control+$mod+t exec thunar
-bindsym Control+$mod+f exec firefox
-bindsym Control+$mod+c exec chromium-browser
+bindsym Control+Shift+t exec thunar
+bindsym Control+Shift+f exec firefox
+bindsym Control+Shift+c exec chromium-browser
+bindsym Control+Shift+s exec catfish
 
 
 # vim:filetype=i3
