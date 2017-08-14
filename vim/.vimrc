@@ -45,6 +45,7 @@
     Plug 'good5dog5/arm.vim', {'for': 'asm'}
     Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
     Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
+    " Plug 'chrisbra/csv.vim', {'for': 'csv'}
     " Plug 'klen/python-mode', {'for' : 'python'}
     "  {{{
     " turn off pymode's autocomplete to prevent conflict with ycm
@@ -82,7 +83,7 @@
       let g:EasyMotion_smartcase  = 1 "Turn on case insensitive feature
  
       "2-character search motion
-      nmap S <Plug>(easymotion-s2)
+      nmap s <Plug>(easymotion-s2)
  
       " JK motions: Line motions
       map <Leader>j <Plug>(easymotion-j)
@@ -267,6 +268,7 @@
         let g:GPGPreferArmor=1
         let g:GPGDefaultRecipients=["good5dog5@gmail.com"]
      " }}}
+     Plug 'tpope/vim-fugitive'
 
 
     call plug#end()
@@ -430,9 +432,10 @@ endif
     nmap <leader><Tab> <C-W><C-W>
 
     nmap <F8>      :TagbarToggle<CR>
+    let g:tagbar_autofocus = 1
 
     "Replace word staring from cursor postion"
-    nmap <leader>s :.,$s/\<<C-r><C-w>\>/
+    nmap <leader>S :.,$s/\<<C-r><C-w>\>/
     "Replace select word (save in register ")
     "Idea from http://asktherelic.com/2011/04/02/on-easily-replacing-text-in-vim/
     vmap <Leader>s "sy:%s/<C-R>=substitute(@s,"\n",'\\n','g')<CR>/
