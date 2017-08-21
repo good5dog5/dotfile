@@ -29,7 +29,7 @@ export CCACHE_PATH="/usr/bin"
 
 # LS_COLOR
 # https://github.com/trapd00r/LS_COLORS
-eval $( dircolors -b $HOME/LS_COLORS )
+[ -f $HOME/LS_COLORS ] && eval $( dircolors -b $HOME/LS_COLORS )
 
 
 # export GOROOT=/usr/bin/go
@@ -185,8 +185,9 @@ if [ "$(tty)" = "/dev/tty1" ]; then
     xinit -- :1 vt1 && exit
 fi
 
-
-export PATH="/home/jordan/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+if hash pyenv 2>/dev/null; then
+    export PATH="/home/jordan/.pyenv/bin:$PATH"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
 export TZ='Asia/Taipei'

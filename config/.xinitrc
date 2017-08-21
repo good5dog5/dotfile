@@ -34,7 +34,7 @@ xset +fp /usr/share/fonts/local
 xset +fp ~/.fonts
 xset fp rehash
 
-xset r rate 180 40 # Sane repeat rate
+xset r rate 180 45 # keyboard settings, typematic delay to xxxms and a typematic rate to xxHz
 xset -b            # No bell
 xset -dpms         # Keep screen on at all times
 
@@ -69,8 +69,12 @@ case "$HOSTNAME" in
         xinput --set-prop "10" "Evdev Wheel Emulation Timeout" 200
     ;;
     JTP)
-    echo  -n 180 /sys/devices/platform/i8042/serio1/serio2/speed
-    echo  -n 250 /sys/devices/platform/i8042/serio1/serio2/sensitivity
+        echo  -n 180 /sys/devices/platform/i8042/serio1/serio2/speed
+        echo  -n 250 /sys/devices/platform/i8042/serio1/serio2/sensitivity
+    ;;
+    jordan-SCOPE)
+        xinput --set-prop 10 272 0.3
+        # reference https://askubuntu.com/questions/205676/how-to-change-mouse-speed-sensitivity
     ;;
 esac
 
