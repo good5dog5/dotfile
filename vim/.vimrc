@@ -95,6 +95,7 @@
     Plug 'christoomey/vim-tmux-navigator'
     Plug 'terryma/vim-smooth-scroll'
     Plug 'terryma/vim-expand-region'
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
     " {{{
       set rtp+=~/.fzf
@@ -108,6 +109,8 @@
       nmap  <leader>? :History<CR>
       " nmap  K :call SearchWordWithAg()<CR>
       " vmap  K :call SearchVisualSelectionWithAg()<CR>
+      nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
+      nnoremap <silent> <leader>. :AgIn 
       nmap  <leader>gl :Commits<CR>
       nmap  <leader>ga :BCommits<CR>
 
@@ -321,7 +324,7 @@
     "No bells
     set noerrorbells visualbell t_vb=
 
-    set switchbuf=split
+    set switchbuf+=usetab
 
     set showcmd          " Show (partial) command in status line.
     set incsearch        " Incremental search
