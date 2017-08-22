@@ -453,7 +453,7 @@ wikiup()
     script_path="$HOME/Dropbox/mywiki"
     cd $script_path && ./run.sh start 
 }
-alias vw="vim +VimwikiIndex "
+alias vw="vim -c 'cd ~/Dropbox/mywiki/wikidata' +VimwikiIndex "
 alias vd="vim +VimwikiDiaryIndex"
 
 # 1. translate mips code to binary
@@ -479,3 +479,7 @@ tmp() {
   vim +"set buftype=nofile filetype=markdown bufhidden=wipe nobuflisted noswapfile tw=${1:-0}"
 }
 
+vcsv()
+{
+    csvtool readable "$@" | view -
+}
