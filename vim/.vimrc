@@ -259,7 +259,6 @@
         let s:vimwiki.diary_index = 'index'
         let s:vimwiki.diary_header = 'Log Book'
         let s:vimwiki.diary_sort = 'asc'
-        " let s:vimwiki.path = "$HOME/Dropbox/Note/vimwiki"
         let s:vimwiki.path = "$HOME/Dropbox/mywiki/wikidata"
 
         let g:vimwiki_list = [s:vimwiki]
