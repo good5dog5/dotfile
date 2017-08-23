@@ -73,7 +73,7 @@ case "$HOSTNAME" in
         echo  -n 250 /sys/devices/platform/i8042/serio1/serio2/sensitivity
     ;;
     jordan-SCOPE)
-        xinput --set-prop 10 272 0.3
+        xinput --set-prop 9 "Device Accel Constant Deceleration"  0.3
         # reference https://askubuntu.com/questions/205676/how-to-change-mouse-speed-sensitivity
     ;;
 esac

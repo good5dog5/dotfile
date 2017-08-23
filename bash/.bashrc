@@ -170,7 +170,7 @@ done
 # need to be more elegant
 #eval $(gpg-agent --daemon)
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+_source_files "${HOME}/.fzf.bash"
 _fzf_compgen_path() {
   ag -g --hidden "" "$1"
 }
@@ -185,8 +185,9 @@ if [ "$(tty)" = "/dev/tty1" ]; then
     xinit -- :1 vt1 && exit
 fi
 
+export PATH="/home/jordan/.pyenv/bin:$PATH"
 if hash pyenv 2>/dev/null; then
-    export PATH="/home/jordan/.pyenv/bin:$PATH"
+    export PYENV_VIRTUALENV_DISABLE_PROMPT=1
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
 fi
