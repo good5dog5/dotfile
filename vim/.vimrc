@@ -166,6 +166,11 @@
     Plug 'junegunn/vim-easy-align'
     Plug 'nathanaelkane/vim-indent-guides'
     Plug 'chrisbra/Colorizer'
+    "『盘古之白』中文排版自动规范化的 Vim 插件 
+    " Plug 'hotoo/pangu.vim'
+    " {{{
+        " autocmd BufWritePre *.markdown,*.md,*.text,*.txt,*.wiki,*.cnx call PanGuSpacing()
+    " }}}
 
     " Auto-complete
     " ======================================================= 
@@ -626,9 +631,8 @@ endif
     " Set scripts to be executable from the shell
     autocmd BufWritePost *.py call Mode_executable()
     augroup pencil
-      autocmd!
-      autocmd FileType markdown,mkd call pencil#init({'wrap': 'soft'})
-      autocmd FileType markdown,mkd :SoftPencil
+        autocmd!
+        autocmd FileType markdown,mkd call pencil#init({'wrap': 'soft'})
     augroup END
 
     " Workaround for python-mode :PymodeDoc，which rasie E21 modifiable off error
