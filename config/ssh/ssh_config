@@ -44,6 +44,9 @@ Host wolf
 Host cubietruck
     HostName 140.114.71.55
     IdentityFile ~/.ssh/cubietruck_rsa
-
+Host SCOPE
+    HostName 140.114.85.218
+    IdentityFile ~/.ssh/id_SCOPElab
+    port 10655
 Host *
     user jordan
