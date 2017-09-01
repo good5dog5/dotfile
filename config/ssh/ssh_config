@@ -42,7 +42,7 @@ Host wolf
     # RemoteForward 55555 localhost:22
    
 Host cubietruck
-    HostName 140.114.71.55
+    HostName 140.114.236.74
     IdentityFile ~/.ssh/cubietruck_rsa
 Host SCOPE
     HostName 140.114.85.218
