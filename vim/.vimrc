@@ -266,6 +266,11 @@
         let s:vimwiki.diary_sort = 'asc'
         let s:vimwiki.path = "$HOME/Dropbox/mywiki/wikidata"
 
+        " Get Vimwiki working with SnipMate
+        " Check https://stackoverflow.com/questions/12033273/get-vimwiki-working-with-snipmate-the-vim-plugins
+        " 
+        let g:vimwiki_table_mappings = 0
+
         let g:vimwiki_list = [s:vimwiki]
         au! BufWritePost ~/Dropbox/mywiki/wikidata/* silent! execute  '!git add % && git commit -m "Auto commit." &&
                     \ !bash "$HOME/Dropbox/mywiki/run.sh restart" > /dev/null' | redraw!
