@@ -48,5 +48,9 @@ Host SCOPE
     HostName 140.114.85.218
     IdentityFile ~/.ssh/id_SCOPElab
     port 10655
+Host tk1
+    HostName 140.114.85.218 
+    IdentityFile ~/.ssh/cubietruck_rsa
+    port 10666
 Host *
     user jordan
