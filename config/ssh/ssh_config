@@ -46,6 +46,7 @@ Host cubietruck
     IdentityFile ~/.ssh/cubietruck_rsa
 Host SCOPE
     HostName 140.114.85.218
+    ForwardX11 Yes
     IdentityFile ~/.ssh/id_SCOPElab
     port 10655
 Host tk1
