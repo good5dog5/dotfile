@@ -4,7 +4,7 @@ export XIM_PROGRAM=/usr/bin/ibus-daemon
 export XIM_ARGS="--xim"
 export XMODIFIERS=@im=ibus
 export GTK_IM_MODULE="xim" # fix ibus can't type chinese in chrome
-export QT_IM_MODULE="ibus" 
+export QT_IM_MODULE="xim" 
 export DefaultIMModule=ibus
 #export GTK_IM_MODULE_FILE=/usr/lib/x86_64-linux-gnu/gtk-2.0/2.10.0/immodules.cache
 ibus-daemon -drx &
