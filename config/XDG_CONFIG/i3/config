@@ -201,7 +201,7 @@ client.urgent           $rd     $rd         $tx     $id
 bindsym Control+Mod1+l exec --no-startup-id i3lock --image ~/.wallpapers/flowers.png
 # Print screen
 bindsym Print exec scrot  ~/Pictures/screenshot/$(date +%F-%T).png
-bindsym --release $mod+Print exec scrot -s  ~/Pictures/screenshot/$(date +%F-%T).png
+bindsym --release $mod+Print exec bash ~/.config/i3/customize_shot.sh
 #bindsym --release Mod1+Print exec ~/usr/script/imgur-screenshot.sh
 
 bindsym Control+Shift+t exec thunar
