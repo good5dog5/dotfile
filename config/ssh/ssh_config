@@ -48,6 +48,7 @@ Host SCOPE
     HostName 140.114.85.218
     ForwardX11 Yes
     IdentityFile ~/.ssh/id_SCOPElab
+    LocalForward 8888 localhost:8888
     port 10655
 Host tk1
     HostName 140.114.85.218 
