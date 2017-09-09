@@ -78,6 +78,11 @@ case "$HOSTNAME" in
     ;;
 esac
 
+# Sync all clipboard. copy one, paste everywhere!
+# https://blog.nelhage.com/2008/09/autocutsel/
+autocutsel -fork &
+autocutsel -selection PRIMARY -fork &
+
 # backlight
 xbacklight -set 65
 exec i3 -V > ~/i3log-$(date + '%F-%k-%M-%S') 2>&1
