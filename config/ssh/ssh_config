@@ -36,8 +36,9 @@ Host sheep
 Host wolf
     HostName 140.114.75.140
     IdentityFile ~/.ssh/wolf_rsa
-    # Compression yes
-     ForwardX11 Yes
+    Compression yes
+    Ciphers blowfish-cbc,arcfour
+    ForwardX11 Yes
     # Ciphers blowfish-cbc,arcfour
     # RemoteForward 55555 localhost:22
    
@@ -47,6 +48,8 @@ Host cubietruck
 Host SCOPE
     HostName 140.114.85.218
     ForwardX11 Yes
+    Compression yes
+    Ciphers blowfish-cbc,arcfour
     IdentityFile ~/.ssh/id_SCOPElab
     LocalForward 8888 localhost:8888
     port 10655
