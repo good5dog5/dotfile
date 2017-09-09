@@ -170,13 +170,28 @@ done
 # need to be more elegant
 #eval $(gpg-agent --daemon)
 
+### FZF settings
 _source_files "${HOME}/.fzf.bash"
+
 _fzf_compgen_path() {
   ag -g --hidden "" "$1"
 }
 export FZF_DEFAULT_COMMAND='ag --hidden --follow --ignore .git -l -g ""'
 # There are also _fzf_path_completion and _fzf_dir_completion
 complete -F _fzf_file_completion -o default -o bashdefault doge
+
+# pass completion suggested by @d4ndo (#362)
+_fzf_complete_pass() {
+  _fzf_complete '+m' "$@" < <(
+    pwdir=${PASSWORD_STORE_DIR-~/.password-store/}
+    stringsize="${#pwdir}"
+    find "$pwdir" -name "*.gpg" -print |
+        cut -c "$((stringsize + 1))"-  |
+        sed -e 's/\(.*\)\.gpg/\1/'
+  )
+}
+
+[ -n "$BASH" ] && complete -F _fzf_complete_pass -o default -o bashdefault pass
 
 # added by travis gem
 [ -f /home/jordan/.travis/travis.sh ] && source /home/jordan/.travis/travis.sh
@@ -192,3 +207,11 @@ if hash pyenv 2>/dev/null; then
     eval "$(pyenv virtualenv-init -)"
 fi
 export TZ='Asia/Taipei'
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+### Pass
+PASSWORD_STORE_DIR="$HOME/Dropbox/Personal.data/Account.data/pass"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
