@@ -75,8 +75,8 @@ cd "$dir"
 #clone_vim_repo
 checkout_ver_658
 config_and_build
-# install_vim
-# clean_vim_pkg
+install_vim
+clean_vim_pkg
 
 
 
