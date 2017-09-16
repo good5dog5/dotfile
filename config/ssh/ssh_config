@@ -9,6 +9,7 @@ Host bitbucket.org
     IdentityFile ~/.ssh/id_rsa_bitbucket
 
 Host rasp_pi
+   user scope 
    HostName 119.77.244.141
 
 Host BPI
@@ -49,13 +50,18 @@ Host SCOPE
     HostName 140.114.85.218
     ForwardX11 Yes
     Compression yes
-    Ciphers blowfish-cbc,arcfour
     IdentityFile ~/.ssh/id_SCOPElab
     LocalForward 8888 localhost:8888
+    LocalForward 5902 localhost:5902
     port 10655
 Host tk1
     HostName 140.114.85.218 
     IdentityFile ~/.ssh/cubietruck_rsa
     port 10666
+
+HOST scopen
+    HostName 140.114.91.176
+    # User scope
+    # LocalForward 8888 localhost:8888
+    # LocalForward 5902 localhost:5902
 Host *
-    user jordan
