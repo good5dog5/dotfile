@@ -215,3 +215,10 @@ export PATH="$PATH:$HOME/.rvm/bin"
 PASSWORD_STORE_DIR="$HOME/Dropbox/Personal.data/Account.data/pass"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+#### CUDA 7.5 stuff
+export CUDA_HOME=/usr/local/cuda-7.5 
+export LD_LIBRARY_PATH=${CUDA_HOME}/lib64
+
+PATH=${CUDA_HOME}/bin:${PATH} 
+export PATH 

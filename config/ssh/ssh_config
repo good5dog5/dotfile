@@ -62,6 +62,6 @@ Host tk1
 HOST scopen
     HostName 140.114.91.176
     # User scope
-    # LocalForward 8888 localhost:8888
-    # LocalForward 5902 localhost:5902
+    LocalForward 8888 localhost:8888
+    LocalForward 5902 localhost:5902
 Host *

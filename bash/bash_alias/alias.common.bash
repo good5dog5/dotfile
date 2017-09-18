@@ -108,7 +108,7 @@ alias armobjdump="arm-linux-gnueabihf-objdump"
 
 
 alias js="java -jar /home/jordan/.local/bin/js.jar"
-alias netok="ping 8.8.8.8"
+alias netok="while true; do sleep 1.5 && ping 8.8.8.8 && break; done"
 alias twk="python $HOME/usr/venv/bin/rainbowstream"
 
 alias setclip='xclip -selection'
@@ -416,11 +416,9 @@ timer() {
   nohup bash -c "(sleep $N && zenity --info --title='Time s Up' --text="${*:-BING}")" &>/dev/null &
   echo "timer set for $N"
 }
-ankiImg() {
-    # Remove all image file in the first level of ~/Downloads directory except the last download one
+rmImg() {
+    # Remove all image file in current directory
     # then convert it's size to 200x200
-    local dir="$HOME/Downloads" 
-    cd $dir
 
     find . -maxdepth 1 -name '*' -exec file -p {} \; |\
         grep --only-matching --perl-regexp '^.+: \w+ image'|\
@@ -431,11 +429,6 @@ ankiImg() {
         cut --delimiter=' ' -f4 |\
         xargs -i rm {}
 
-    local img_name=$(find . -maxdepth 1 -name '*' -exec file -p {} \;|\
-        grep --only-matching --perl-regexp '^.+: \w+ image'|\
-        cut --delimiter=':' -f1)
-
-    convert $img_name -resize 200x200 $img_name
 }
 dotGen()
 {
