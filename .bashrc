@@ -99,13 +99,13 @@ function_exists() {
     return $?
 }
 # Source all alias files
-_source_files "${HOME}/bash_conf"
+_source_files "${HOME}/bash_utils"
 
 _source_files "${HOME}/.xprofile"
 
 # Source all auto_complete files
 _source_files "/usr/share/bash-completion/bash_completion"
-_source_files "$DOTFILE/bash/bash_complete"
+_source_files "${HOME}/bash_utils/bash_complete"
 _source_files "/etc/bash_completion"
 _source_files "/etc/default/locale"
 
