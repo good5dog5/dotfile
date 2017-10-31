@@ -26,9 +26,12 @@ Host logos
 
 Host whale
     HostName whale.cs.nthu.edu.tw
+    LocalForward 8890 localhost:8888
+    ForwardX11 Yes
     user jordanhuang
     port 13579
     IdentityFile ~/.ssh/whale_rsa
+    LocalForward 53682 localhost:53682
 
 Host sheep
     HostName 140.114.75.139
@@ -53,15 +56,72 @@ Host SCOPE
     IdentityFile ~/.ssh/id_SCOPElab
     LocalForward 8888 localhost:8888
     LocalForward 5902 localhost:5902
+    LocalForward 5903 localhost:5903
+    LocalForward 2222 localhost:2222
+    LocalForward 2223 localhost:2223
+    LocalForward 2224 localhost:2224
+    LocalForward 53682 localhost:53682
     port 10655
 Host tk1
     HostName 140.114.85.218 
-    IdentityFile ~/.ssh/cubietruck_rsa
+    IdentityFile ~/.ssh/id_SCOPElab
+    user ubuntu
     port 10666
 
-HOST scopen
+HOST gC0
     HostName 140.114.91.176
-    # User scope
-    LocalForward 8888 localhost:8888
-    LocalForward 5902 localhost:5902
+    LocalForward 8891 localhost:8888
+    IdentityFile ~/.ssh/id_SCOPElab
+
+Host gC1
+    HostName 10.230.1.101
+    Port 22
+    ProxyCommand ssh -q -W %h:%p gC0
+    IdentityFile ~/.ssh/id_SCOPElab
+
+Host gC2
+    HostName 10.230.1.102
+    Port 22
+    ProxyCommand ssh -q -W %h:%p gC0
+    IdentityFile ~/.ssh/id_SCOPElab
+
+Host gC3
+    HostName 10.230.1.103
+    Port 22
+    ProxyCommand ssh -q -W %h:%p gC0
+    IdentityFile ~/.ssh/id_SCOPElab
+
+# -q: Quiet mode, Cause most warning and diagnostic messages to be suppressed.
+# -W host:port Requests that standard input and output on the client be forwarded to host on port over the secure channel.
+Host gC4
+    HostName 10.230.255.244
+    Port 22
+    ProxyCommand ssh -q -W %h:%p gC0
+    IdentityFile ~/.ssh/id_SCOPElab
+    LocalForward 8890 localhost:8888
+
+
+Host qcu-VM1
+    HostName localhost
+    Compression yes
+    port 2222
+    IdentityFile ~/.ssh/id_SCOPElab
+Host qcu-VM2
+    HostName localhost
+    Compression yes
+    port 2223
+    IdentityFile ~/.ssh/id_SCOPElab
+
+Host qcu-VM3
+    HostName localhost
+    Compression yes
+    port 2224
+    IdentityFile ~/.ssh/id_SCOPElab
+Host aT
+    HostName localhost
+    IdentityFile ~/.ssh/id_SCOPElab
+    User root
+    port 32768
 Host *
+    User jordan
+    Port 22

@@ -55,7 +55,9 @@ alias ls="ls -r --color=auto  --group-directories-first --sort=extension"
 alias layout="tree -L 3"
 alias grep="grep  --color=auto"
 #word grep
-alias wg="ag --ignore-case  --follow --noheading --hidden --path-to-agignore ~/.agignore"
+## --ignore-case似乎會讓ag沒辦法找中文，測試發現即使不用ignore-case，default還是會不區分大小寫
+## -c, to sum up count
+alias wg="ag  --follow --noheading --hidden --path-to-ignore ~/.agignore"
 
 
 # Grep for a process name, excluding grep from the output.
@@ -189,25 +191,29 @@ ext()
     echo "Error: No file specified."
     return 1
   fi
-	if [ -f "$1" ] ; then
-		case "$1" in
-			*.tar.bz2) tar xvjf "$1"   ;;
-			*.tar.gz)  tar xvzf "$1"   ;;
-            *.xz)      tar xvJf  "$1"   ;;
-			*.bz2)     bunzip2 "$1"    ;;
-			*.rar)     unrar x "$1"    ;;
-			*.gz)      gunzip "$1"     ;;
-			*.tar)     tar xvf "$1"    ;;
-			*.tbz2)    tar xvjf "$1"   ;;
-			*.tgz)     tar xvzf "$1"   ;;
-			*.zip)     unzip "$1"      ;;
-			*.Z)       uncompress "$1" ;;
-			*.7z)      7z x "$1"       ;;
-			*)         echo "'$1' cannot be extracted via extract" ;;
+  files=( $@ )
+  for f in "${files[@]}" 
+  do
+	if [ -f "$f" ] ; then
+		case "$f" in
+			*.tar.bz2) tar xvjf "$f"   ;;
+			*.tar.gz)  tar xvzf "$f"   ;;
+            *.xz)      tar xvJf  "$f"   ;;
+			*.bz2)     bunzip2 "$f"    ;;
+			*.rar)     unrar x "$f"    ;;
+			*.gz)      gunzip "$f"     ;;
+			*.tar)     tar xvf "$f"    ;;
+			*.tbz2)    tar xvjf "$f"   ;;
+			*.tgz)     tar xvzf "$f"   ;;
+			*.zip)     unzip "$f"      ;;
+			*.Z)       uncompress "$f" ;;
+			*.7z)      7z x "$f"       ;;
+			*)         echo "'$f' cannot be extracted via extract" ;;
 		esac
 	else
-		echo "'$1' is not a valid file"
+		echo "'$f' is not a valid file"
 	fi
+    done
 }
 function path(){
     old=$IFS

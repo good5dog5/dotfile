@@ -7,18 +7,26 @@
 # locale
 export LC_ALL="en_US.UTF-8"
 
+### Function to prevent duplicate entries in path
+function ADD2PATH {
+  case ":$PATH:" in
+    *":$1:"*) :;; # already there
+    *) PATH="$1:$PATH";; # or PATH="$PATH:$1"
+  esac
+}
+
 # Set the default editor
-export PATH=$PATH:$HOME/usr/script
-export PATH=$PATH:$HOME/.local/bin
-export PATH=$PATH:$HOME/usr/bin
-export PATH=$PATH:$HOME/usr/nand2tetris/tools
-export PATH=$PATH:$HOME/usr/phantomjs/bin
-export PATH=$PATH:$HOME/go/bin
-export PATH=$PATH:/usr/local/go/bin
-export PATH=$PATH:$HOME/.npm-global/bin
-# added by Anaconda3 4.0.0 installer
-export PATH=$PATH:$HOME/anaconda3/bin
-export PATH=$PATH:/usr/lib/libreoffice/share/xdg
+# use user-installed conda!
+ADD2PATH $HOME/anaconda3/bin
+ADD2PATH $HOME/usr/script
+ADD2PATH $HOME/.local/bin
+ADD2PATH $HOME/usr/bin
+ADD2PATH $HOME/usr/nand2tetris/tools
+ADD2PATH $HOME/usr/phantomjs/bin
+ADD2PATH $HOME/go/bin
+ADD2PATH /usr/local/go/bin
+ADD2PATH $HOME/.npm-global/bin
+ADD2PATH /usr/lib/libreoffice/share/xdg
 
 
 # JAVA
@@ -200,7 +208,7 @@ if [ "$(tty)" = "/dev/tty1" ]; then
     xinit -- :1 vt1 && exit
 fi
 
-export PATH="/home/jordan/.pyenv/bin:$PATH"
+ADD2PATH $HOME/jordan/.pyenv/bin
 if hash pyenv 2>/dev/null; then
     export PYENV_VIRTUALENV_DISABLE_PROMPT=1
     eval "$(pyenv init -)"
@@ -208,8 +216,6 @@ if hash pyenv 2>/dev/null; then
 fi
 export TZ='Asia/Taipei'
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
 
 ### Pass
 PASSWORD_STORE_DIR="$HOME/Dropbox/Personal.data/Account.data/pass"
@@ -220,5 +226,5 @@ PASSWORD_STORE_DIR="$HOME/Dropbox/Personal.data/Account.data/pass"
 export CUDA_HOME=/usr/local/cuda-7.5 
 export LD_LIBRARY_PATH=${CUDA_HOME}/lib64
 
-PATH=${CUDA_HOME}/bin:${PATH} 
+ADD2PATH ${CUDA_HOME}/bin
 export PATH 
