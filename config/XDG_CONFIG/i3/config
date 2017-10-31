@@ -30,12 +30,13 @@ exec --no-startup-id i3-msg 'workspace $ws2; exec firefox'
 exec --no-startup-id i3-msg 'workspace $ws3; exec thunar'
 
 # Execute chromium-browser app, line, use comand line option.
-exec --no-startup-id i3-msg 'workspace $ws4; exec chromium-browser --app  --app-id=menkifleemblimdogmoihpfopnplikde'
+#exec --no-startup-id i3-msg 'workspace $ws4; exec chromium-browser --app  --app-id=menkifleemblimdogmoihpfopnplikde'
 exec --no-startup-id i3-msg 'workspace $ws4; exec chromium-browser --app  --app-id=hmjkmjkepdijhoojdojkdfohbdgmmhki'
 exec --no-startup-id i3-msg 'workspace $ws4; exec chromium-browser --app  --app-id=ejjicmeblgpmajnghnpcppodonldlgfn'
 
 #exec --no-startup-id i3-msg 'workspace $ws6; exec quiterss'
-exec --no-startup-id i3-msg 'workspace $ws7; exec thunderbird'
+# exec --no-startup-id i3-msg 'workspace $ws7; exec thunderbird'
+exec --no-startup-id i3-msg 'workspace $ws7; exec Wavebox
 #exec --no-startup-id i3-msg 'workspace $ws7; exec deadbeef'
 
 #exec --no-startup-id i3-msg 'workspace $ws9; exec anki'
