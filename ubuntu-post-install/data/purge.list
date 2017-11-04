@@ -1,4 +1,7 @@
+activity-log-manager
 aisleriot
+checkbox-converged
+deja-dup
 gnome-mahjongg
 gnome-mines
 gnome-sudoku
@@ -7,8 +10,13 @@ landscape-client-ui-install
 overlay-scrollbar
 overlay-scrollbar-gtk2
 overlay-scrollbar-gtk3
-thunderbird
+remmina
 rhythmbox
+shotwell
+shotwell-common
+thunderbird
+ubuntu-system-settings
+ubuntu-web-launchers
 unity-scope-calculator
 unity-scope-chromiumbookmarks
 unity-scope-colourlovers
@@ -23,5 +31,7 @@ unity-scope-video-remote
 unity-scope-virtualbox
 unity-scope-yelp
 unity-scope-zotero
+unity8*
+usb-creator-gtk
 webbrowser-app
 xdiagnose
