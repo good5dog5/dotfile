@@ -111,6 +111,7 @@ _source_files "/etc/default/locale"
 
 # Source Powerline to enable bash prompt
 _source_files "/usr/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh" 
+_source_files "/usr/local/lib/python2.7/dist-packages/powerline/bindings/bash/powerline.sh"
 _source_files "${HOME}/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh"
 
 # Source to enable Autojump
