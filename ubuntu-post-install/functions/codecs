@@ -1,29 +1,40 @@
 #!/bin/bash
 
-# Install Ubuntu Restricted Extras 
+# Install non-free multimedia codecs using the list 'data/codec.list'
 function codecs {
-    # Variables
-    PACKAGE=ubuntu-restricted-extras
-    NAME="Multimedia Codecs"
-    # Check if already installed
-    show_info 'Checking if already installed...'
-    PKGCHECK=$(dpkg-query -W --showformat='${Status}\n' $PACKAGE|grep "install ok installed")
-    if [ "" == "$PKGCHECK" ]; then
-        show_info $NAME 'is not installed. Proceeding'
-        if (whiptail --title "Multimedia Codecs" --yesno "Install Ubuntu Restricted Extras for multimedia playback?" 10 60) then
-            # Install
-            show_info 'Installing...'
-            show_warning 'Requires root privileges'
-            sudo apt-get install -y ubuntu-restricted-extras
-            # Done
-            show_success 'Done.'
-        else
-            main
-        fi
-    else
-        # Already installed
-        show_success 'Already installed.'
-        whiptail --title "Finished" --msgbox "$NAME are installed." 8 78
-        main
-    fi
+	display_title "Starting 'codecs' function..."
+	# Check list
+	CODECS=$(dirname "$0")'/data/codecs.list'
+	# Draw window
+	if (eval `resize` && whiptail \
+		--title "Multimedia Codecs" \
+		--yesno "Current list of non-free codecs to install: \n\n$(for LINE in $(cat $CODECS); do echo '  '$LINE; done) \n\nProceed with installation?" \
+		$LINES $COLUMNS $(( $LINES - 12 )) \
+		--scrolltext) then
+		# Install loop
+		display_info 'Installing non-free codecs...'
+		for PACKAGE in $(cat $CODECS); do
+			# Check if package is installed
+			check_packages $PACKAGE
+			EXITSTATUS=$?
+			# If package is not installed
+			if [ $EXITSTATUS = 1 ]; then
+				# Install package
+				display_info "'$PACKAGE' is not installed. Installing..."
+				# Admin privileges
+				elevate_privilege "apt install -y $PACKAGE"
+				# Done
+				display_success "'$PACKAGE' installation is complete."
+			else
+				# Show already installed message
+				echo "Package '$PACKAGE' is installed."
+			fi
+		done
+		# Finish
+		display_success "Installation complete."
+		whiptail --title "Finished" --msgbox "Installation complete." 8 64
+		main
+	else
+		main
+	fi
 }

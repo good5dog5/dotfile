@@ -1,93 +1,101 @@
 #!/bin/bash
+#
+# Update the list of packages in 'data/purge.list' to suit your preferences
+# Listed packages that are are not any system-crucial software to avoid breakage
 
-dir="$(dirname "$0")"
-
-PURGED="$dir/data/purge.list"
-
-# Remove unused/unwanted packages that are listed in 'data/purge.list'
-function unused {
-    if (eval `resize` && whiptail \
-        --title "Remove Un-used Pre-installed Applications" \
-        --yesno "Current list of pre-installed applications to remove: \n\n$(cat $PURGED) \n\nAre you sure you want proceed?" \
-        $LINES $COLUMNS $(( $LINES - 12 )) \
-        --scrolltext ) then
-        show_info 'Removing unused pre-installed applications...'
-        show_warning 'Requires root privileges'
-        sudo apt-get remove -y $(cat $PURGED)
-        # Done
-        show_success 'Done.'
-        whiptail --title "Finished" --msgbox "Your list of unwanted pre-installed applications have been removed." 8 78
-        cleanup
-    else
-        cleanup
-    fi
-}
-
-# Remove old kernels
-function kernels {
-    if (whiptail --title "Remove Outdated Kernels" --yesno "If you're not currently using the newest kernel installed on your system, the following may break it. \n\nAre you sure you want proceed?" 10 60) then
-        show_info 'Removing outdated kernel(s)...'
-        show_warning 'Requires root privileges'
-        sudo dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' | grep -v linux-libc-dev | xargs sudo apt-get -y --no-install-recommends purge
-        show_success 'Done.'
-        whiptail --title "Finished" --msgbox "Outdated kernels have been successfully removed." 8 78
-        cleanup
-    else
-        cleanup
-    fi
+# Remove unused preinstalled apps
+function purge_unused {
+	display_title "Starting 'purge_unused' function..."
+	# Check list
+	PURGED=$(dirname "$0")'/data/purge.list'
+	# Draw window
+	if (eval `resize` && whiptail \
+		--title "Remove Un-used Pre-installed Applications" \
+		--yesno "Current list of pre-installed applications to remove: \n\n$(for LINE in $(cat $PURGED); do echo '  '$LINE; done) \n\nAre you sure you want proceed?" \
+		$LINES $COLUMNS $(( $LINES - 12 )) \
+		--scrolltext ) then
+		# Remove loop
+		display_info 'Removing unused pre-installed applications...'
+		for PACKAGE in $(cat $PURGED); do
+			# Check if package is installed
+			check_packages $PACKAGE
+			EXITSTATUS=$?
+			# If package is not installed
+			if [ $EXITSTATUS = 1 ]; then
+				# Show already installed message
+				echo "Package '$PACKAGE' is already removed."
+			else
+				# Remove package
+				display_info "'$PACKAGE' is installed. Removing..."
+				# Admin privileges
+				elevate_privilege "apt purge -y $PACKAGE"
+				# Done
+				display_success "'$PACKAGE' removal is complete."
+			fi
+		done
+		# Done
+		display_success 'Removal of unused packages complete.'
+		whiptail --title "Finished" --msgbox "Your list of unwanted pre-installed applications have been removed." 8 64
+		cleanup
+	else
+		cleanup
+	fi
 }
 
 # Remove Orphaned Packages
-function orphaned {
-    show_info 'Removing orphaned packages...'
-    show_warning 'Requires root privileges'
-    sudo apt-get autoremove -y
-    show_success 'Done.'
-    whiptail --title "Finished" --msgbox "Orphaned packages have been successfully removed." 8 78
-    cleanup
+function remove_orphans {
+	display_title "Starting 'remove_orphans' function..."
+	display_info 'Removing orphaned packages...'
+	# Admin privileges
+	elevate_privilege "apt autoremove -y $PACKAGE"
+	# Done
+	display_success 'Removal of orphaned packages complete.'
+	whiptail --title "Finished" --msgbox "Orphaned packages have been successfully removed." 8 64
+	cleanup
 }
 
 # Remove Leftover Config files
-function leftovers {
-    show_info 'Removing leftover configuration files...'
-    show_warning 'Requires root privileges'
-    sudo dpkg --purge $(COLUMNS=200 dpkg -l | grep '^rc' | tr -s ' ' | cut -d ' ' -f 2)
-    show_success 'Done.'
-    # Check
-    whiptail --title "Finished" --msgbox "Leftover configuration files have been removed." 8 78
-    cleanup
+function remove_leftover_config {
+	display_title "Starting 'remove_leftover_config' function..."
+	display_info 'Removing leftover configuration files...'
+	# Admin privileges
+	elevate_privilege "dpkg --purge $(COLUMNS=200 dpkg -l | grep '^rc' | tr -s ' ' | cut -d ' ' -f 2)"
+	# Done
+	display_success 'Removal of leftover configuration files complete.'
+	whiptail --title "Finished" --msgbox "Leftover configuration files have been removed." 8 64
+	cleanup
 }
 
 # Clean apt cache
-function clean-cache {
-    show_info 'Cleaning package cache...'
-    show_warning 'Requires root privileges'
-    sudo apt-get clean
-    show_success 'Done.'
-    whiptail --title "Finished" --msgbox "Package cache has been cleaned." 8 78
-    cleanup
+function clean_apt_cache {
+	display_title "Starting 'clean_apt_cache' function..."
+	display_info 'Cleaning package cache...'
+	# Admin privileges
+	elevate_privilege "apt clean"
+	# Done
+	display_success 'Package cache cleaned.'
+	whiptail --title "Finished" --msgbox "Package cache has been cleaned." 8 64
+	cleanup
 }
 
 # Cleanup System
 function cleanup {
-    eval `resize` 
-    CLEANUP=$(whiptail \
-        --notags \
-        --title "System Cleanup" \
-        --menu "\nWhat would you like to do?" \
-        --cancel-button "Go Back" \
-        $LINES $COLUMNS $(( $LINES - 12 )) \
-        clean-cache 'Clean package cache' \
-        leftovers   'Remove leftover configuration files' \
-        orphaned    'Remove orphaned packages' \
-        unused      'Remove unused pre-installed packages' \
-        kernels     'Remove old kernel(s)' \
-        3>&1 1>&2 2>&3)
-     
-    exitstatus=$?
-    if [ $exitstatus = 0 ]; then
-        $CLEANUP
-    else
-        main
-    fi
+	display_title "Starting 'cleanup' function..."
+	EXITSTATUS=$?
+	if [ $EXITSTATUS = 0 ]; then
+		# Draw window
+		$(eval `resize`&& whiptail \
+		--notags \
+		--title "System Cleanup" \
+		--menu "\nWhat would you like to do?" \
+		--cancel-button "Go Back" \
+		$LINES $COLUMNS $(( $LINES - 12 )) \
+		clean_apt_cache			'Clean package cache' \
+		remove_leftover_config	'Remove leftover configuration files' \
+		remove_orphans			'Remove orphaned packages' \
+		purge_unused			'Remove unused pre-installed packages' \
+		3>&1 1>&2 2>&3)
+	else
+		main
+	fi
 }
