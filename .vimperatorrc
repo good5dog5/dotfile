@@ -156,7 +156,7 @@ source ~/.vimperator/plugin/jquery-2.1.4.js
     " Don't animate tab-bar when switch to fullscreen
     set! browser.fullscreen.animateUp=0
 
-    set! browser.cache.use_new_backend=0
+    set! browser.cache.use_new_backend=1
 
     " Fast urlbar autoFill
     set! browser.urlbar.delay=0
@@ -204,7 +204,7 @@ source ~/.vimperator/plugin/jquery-2.1.4.js
     set! browser.cache.disk.enable=false
     set! browser.cache.disk.capacity=0
     set! browser.cache.memory.enable=true
-    set! browser.cache.memory.max_entry_size=2048000
+    set! browser.cache.memory.max_entry_size=5124000
 
     " Enabling Media Source Extensions in Firefox
     set! media.mediasource.enabled=true
