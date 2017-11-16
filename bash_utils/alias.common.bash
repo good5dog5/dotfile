@@ -57,7 +57,7 @@ alias grep="grep  --color=auto"
 #word grep
 ## --ignore-case似乎會讓ag沒辦法找中文，測試發現即使不用ignore-case，default還是會不區分大小寫
 ## -c, to sum up count
-alias wg="ag  --follow --noheading --hidden --path-to-ignore ~/.agignore"
+alias wg="ag  --follow --noheading --hidden --ignore-case --path-to-agignore ~/.agignore"
 
 
 # Grep for a process name, excluding grep from the output.
