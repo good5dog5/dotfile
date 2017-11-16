@@ -5,12 +5,27 @@
  </paths>
  <sounddirs/>
  <dictionaryOrder id="0" name="">
+  <dictionary name="The Collaborative International Dictionary of English v.0.48">86fe4fab7df4cff0e92e8d55e591e88f</dictionary>
+  <dictionary name="Longman DOCE 5th Ed. (En-En)">0120754f668bad5469e617f2e57b568a</dictionary>
+  <dictionary name="Longman DOCE5 Extras (En-En)">98c9d8dfcb13c6187654274d1746b320</dictionary>
+  <dictionary name="Longman Pronunciation Dictionary (En-En)">908b1525c85c906e6d6888e967077370</dictionary>
+  <dictionary name="Merriam-Webster's Collegiate 11 (En-En)">f3fcca170dbef158998e98ff8817de40</dictionary>
+  <dictionary name="Oxford Advanced Learners Dictionary 8th Ed.">270a8b360936fed0a183fb632273de22</dictionary>
+  <dictionary name="Oxford Advanced Learner's English-Chinese Dictionary (4/e)">c6bafacbd7046f6d5f2edc534cbb25a6</dictionary>
+  <dictionary name="English (US) Morphology">2ad4f416a670ade0fbb0e493a069434d</dictionary>
+  <dictionary name="English Wikipedia">ae6f89aac7151829681b85f035d54e48</dictionary>
   <mutedDictionaries/>
  </dictionaryOrder>
  <inactiveDictionaries id="0" name="">
   <mutedDictionaries/>
  </inactiveDictionaries>
- <groups nextId="1"/>
+ <groups nextId="2">
+  <group id="1" name="Prefered">
+   <dictionary name="Oxford Advanced Learner's English-Chinese Dictionary (4/e)">c6bafacbd7046f6d5f2edc534cbb25a6</dictionary>
+   <dictionary name="Oxford Advanced Learners Dictionary 8th Ed.">270a8b360936fed0a183fb632273de22</dictionary>
+   <mutedDictionaries/>
+  </group>
+ </groups>
  <hunspell dictionariesPath="/home/jordan/.goldendict/eng_morphology">
   <enabled>en_US</enabled>
  </hunspell>
@@ -56,7 +71,11 @@
  <programs/>
  <voiceEngines/>
  <mutedDictionaries/>
- <popupMutedDictionaries/>
+ <popupMutedDictionaries>
+  <mutedDictionary>f3fcca170dbef158998e98ff8817de40</mutedDictionary>
+  <mutedDictionary>908b1525c85c906e6d6888e967077370</mutedDictionary>
+  <mutedDictionary>270a8b360936fed0a183fb632273de22</mutedDictionary>
+ </popupMutedDictionaries>
  <preferences>
   <interfaceLanguage></interfaceLanguage>
   <helpLanguage></helpLanguage>
@@ -131,10 +150,10 @@
    <maxDictionarySize>0</maxDictionarySize>
   </fullTextSearch>
  </preferences>
- <lastMainGroupId>0</lastMainGroupId>
+ <lastMainGroupId>1</lastMainGroupId>
  <lastPopupGroupId>0</lastPopupGroupId>
  <popupWindowState>AAAA/wAAAAH9AAAAAAAAAhQAAAGTAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAQAAAAEAAAAaAGQAaQBjAHQAaQBvAG4AYQByAHkAQgBhAHIDAAAAAP////8AAAAAAAAAAA==</popupWindowState>
- <popupWindowGeometry>AdnQywABAAAAAALcAAAB6gAABQgAAAN8AAAC3AAAAeoAAAUIAAADfAAAAAAAAA==</popupWindowGeometry>
+ <popupWindowGeometry>AdnQywABAAAAAAUpAAAAjgAAB1UAAAIgAAAFKQAAAI4AAAdVAAACIAAAAAAAAA==</popupWindowGeometry>
  <pinPopupWindow>0</pinPopupWindow>
  <mainWindowState></mainWindowState>
  <mainWindowGeometry></mainWindowGeometry>
@@ -142,7 +161,7 @@
  <helpSplitterState></helpSplitterState>
  <dictInfoGeometry></dictInfoGeometry>
  <inspectorGeometry></inspectorGeometry>
- <timeForNewReleaseCheck>2017-11-14T21:23:50</timeForNewReleaseCheck>
+ <timeForNewReleaseCheck>2017-11-17T01:14:28</timeForNewReleaseCheck>
  <skippedRelease></skippedRelease>
  <showingDictBarNames>0</showingDictBarNames>
  <usingSmallIconsInToolbars>0</usingSmallIconsInToolbars>
