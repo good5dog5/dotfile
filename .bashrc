@@ -110,9 +110,9 @@ _source_files "/etc/bash_completion"
 _source_files "/etc/default/locale"
 
 # Source Powerline to enable bash prompt
-_source_files "/usr/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh" 
-_source_files "/usr/local/lib/python2.7/dist-packages/powerline/bindings/bash/powerline.sh"
-_source_files "${HOME}/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh"
+# _source_files "/usr/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh" 
+# _source_files "/usr/local/lib/python2.7/dist-packages/powerline/bindings/bash/powerline.sh"
+# _source_files "${HOME}/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh"
 
 # Source to enable Autojump
 _source_files "/usr/share/autojump/autojump.bash"
@@ -133,7 +133,8 @@ _source_files "$SCRIPT_DIR/bashmarks.sh"
 
 
 # Set the PS1 prompt (with color).
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\][ \W ]\[\033[00m\]\$ '
+export PS1="\[\033[1;32m\]\u\[\033[1;37m\]@\[\033[1;31m\]\h\[\033[00m\]:\[\033[01;36m\]\w\[\033[00m\]\$ "
+# PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\][ \W ]\[\033[00m\]\$ '
 
 
 HISTSIZE=1000
