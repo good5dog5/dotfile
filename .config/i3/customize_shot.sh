@@ -13,8 +13,8 @@ set -o nounset
 wiki_pic_dir="$HOME/Dropbox/mywiki/static/img/postImg"
 pic_name=$(date +%F-%T).png
 
-scrot -s ~/Pictures/screenshot/"$pic_name"
+scrot -s ~/Dropbox/"$pic_name"
 
-new_name=$(zenity --entry --text "Name the pic" --entry-text "$pic_name");
-cp ~/Pictures/screenshot/"$pic_name" "$wiki_pic_dir/$new_name"
-echo "/img/postImg/$new_name" | xclip -sel clip
+# new_name=$(zenity --entry --text "Name the pic" --entry-text "$pic_name");
+# cp ~/Pictures/screenshot/"$pic_name" "$wiki_pic_dir/$new_name"
+# echo "/img/postImg/$new_name" | xclip -sel clip
