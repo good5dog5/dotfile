@@ -132,6 +132,7 @@ noremap U :undo<Space>
 autocmd LocationChange .*                             js modes.passAllKeys = false
 autocmd LocationChange mail\\.google\\.com            js modes.passAllKeys = true
 autocmd LocationChange localhost:8890/notebooks       js modes.passAllKeys = true
+autocmd LocationChange localhost:8888/notebooks       js modes.passAllKeys = true
 " autocmd LocationChange reddit\\.com            js modes.passAllKeys = true
 
 
