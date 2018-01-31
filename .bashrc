@@ -225,9 +225,19 @@ PASSWORD_STORE_DIR="$HOME/Dropbox/Personal.data/Account.data/pass"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-#### CUDA 7.5 stuff
-export CUDA_HOME=/usr/local/cuda-7.5 
-export LD_LIBRARY_PATH=${CUDA_HOME}/lib64
+
+###################
+#  CUDA settings  #
+###################
+
+if [ $(hostname) = 'tegra-ubuntu' ]; then
+
+    export CUDA_HOME=/usr/local/cuda-8.0
+    export LD_LIBRARY_PATH=${CUDA_HOME}/lib64
+else
+    export CUDA_HOME=/usr/local/cuda-7.5 
+    export LD_LIBRARY_PATH=${CUDA_HOME}/lib64
+fi
 
 ADD2PATH ${CUDA_HOME}/bin
 export PATH 
