@@ -18,7 +18,7 @@ function ADD2PATH {
 # Set the default editor
 # use user-installed conda!
 ADD2PATH $HOME/anaconda3/bin
-ADD2PATH $HOME/usr/script
+ADD2PATH $HOME/script
 ADD2PATH $HOME/.local/bin
 ADD2PATH $HOME/usr/bin
 ADD2PATH $HOME/usr/nand2tetris/tools
@@ -27,6 +27,7 @@ ADD2PATH $HOME/go/bin
 ADD2PATH /usr/local/go/bin
 ADD2PATH $HOME/.npm-global/bin
 ADD2PATH /usr/lib/libreoffice/share/xdg
+ADD2PATH $HOME/.npm-global/bin
 
 
 # JAVA
