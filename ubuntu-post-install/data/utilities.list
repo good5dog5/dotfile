@@ -104,3 +104,11 @@ youtube-dl
 zathura
 nautilus-dropbox
 python-setuptools
+okular
+autocutsel
+policykit-1-gnome
+gnome-keyring
+gtk2-engines-pixbuf
+gtk3-engines-breeze
+gtk3-engines-unico
+gtk3-engines-xfce
