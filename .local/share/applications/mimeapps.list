@@ -48,6 +48,8 @@ image/jpeg=feh.desktop
 application/x-trash=gedit.desktop
 text/plain=gvim.desktop
 inode/directory=Thunar.desktop
+application/x-anki=anki.desktop
+application/x-apkg=anki.desktop
 
 [Added Associations]
 x-scheme-handler/http=firefox.desktop;

@@ -62,7 +62,7 @@ alias wg="ag  --follow --noheading --ignore-case --hidden --path-to-agignore ~/.
 
 # Grep for a process name, excluding grep from the output.
 function psgrep() {
-    ps aux | grep $1 | grep -v grep
+    ps aux | grep "$1" | grep -v grep
 }
 
 #find name
