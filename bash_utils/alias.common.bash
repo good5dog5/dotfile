@@ -62,7 +62,7 @@ alias wg="ag  --follow --noheading --ignore-case --hidden --path-to-agignore ~/.
 
 # Grep for a process name, excluding grep from the output.
 function psgrep() {
-    ps aux | grep $1 | grep -v grep
+    ps aux | grep "$1" | grep -v grep
 }
 
 #find name
@@ -155,6 +155,11 @@ eba() {
 md () { mkdir -p "$1"; }
 mcd () { mkdir -p "$1" && cd "$1"; }
 bu () { cp $1 ${1}-`date +%Y%m%d%H%M`.backup ; }
+function swap()
+{
+    local TMPFILE=tmp.$$
+    mv "$1" $TMPFILE && mv "$2" "$1" && mv $TMPFILE $2
+}
 Uva() {
     cd "$UVA_DIR"
 

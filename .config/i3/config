@@ -20,7 +20,7 @@ exec --no-startup-id dropbox start
 exec --no-startup-id nm-applet
 exec --no-startup-id feh --bg-fill --randomize ~/.wallpapers/*
 exec --no-startup-id goldendict
-exec --no-startup-id mpd 
+# exec --no-startup-id mpd 
 exec --no-startup-id thunar --daemon &
 exec --no-startup-id "/usr/bin/urxvtd --quiet --fork --opendisplay"
 exec --no-startup-id workrave
@@ -30,21 +30,37 @@ exec --no-startup-id i3-msg 'workspace $ws2; exec firefox'
 exec --no-startup-id i3-msg 'workspace $ws3; exec thunar'
 
 # Execute chromium-browser app, line, use comand line option.
-#exec --no-startup-id i3-msg 'workspace $ws4; exec chromium-browser --app  --app-id=menkifleemblimdogmoihpfopnplikde'
-exec --no-startup-id i3-msg 'workspace $ws4; exec chromium-browser --app  --app-id=hmjkmjkepdijhoojdojkdfohbdgmmhki'
-exec --no-startup-id i3-msg 'workspace $ws4; exec chromium-browser --app  --app-id=ejjicmeblgpmajnghnpcppodonldlgfn'
+# exec --no-startup-id i3-msg 'workspace $ws4; exec chromium-browser --app  --app-id=menkifleemblimdogmoihpfopnplikde'
+# exec --no-startup-id i3-msg 'workspace $ws4; exec chromium-browser --app  --app-id=ejjicmeblgpmajnghnpcppodonldlgfn'
 
-#exec --no-startup-id i3-msg 'workspace $ws6; exec quiterss'
 # exec --no-startup-id i3-msg 'workspace $ws7; exec thunderbird'
 exec --no-startup-id i3-msg 'workspace $ws7; exec Wavebox
-#exec --no-startup-id i3-msg 'workspace $ws7; exec deadbeef'
+# exec --no-startup-id i3-msg 'workspace $ws7; exec deadbeef'
 
-#exec --no-startup-id i3-msg 'workspace $ws9; exec anki'
+# exec --no-startup-id i3-msg 'workspace $ws9; exec anki'
 
-assign [class="chromium-browser"] $ws4
-assign [class="^Anki$"] $ws9
+# assign [class="chromium-browser"] $ws4
+# assign [class="^Anki$"] $ws9
 
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+#######################
+#  floating settings  #
+#######################
+for_window [title="Preferences|Skype|Catfish|Google Keep|Fsearch"] floating enable
 for_window [class="gimp"] floating enable, border normal
+# for_window [class="Lxappearance"] floating enable
+# for_window [class="Seahorse"] floating enable
+# for_window [class="Pavucontrol"] floating enable
+# for_window [class="Nautilus"] floating enable
+# for_window [class="Pamac"] floating enable
+# for_window [class="Peek"] floating enable
+#
+# for_window [window_role="pop-up"] floating enable
+# for_window [window_role="task_dialog"] floating enable
+# for_window [title="Preferences$"] floating enable
+# for_window [title="taskwin"] floating enable
 
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -56,8 +72,6 @@ for_window [class="gimp"] floating enable, border normal
 # chose a FreeType font, such as:
 font pango:DejaVu Sans Mono 12
 
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
 
 # start a terminal
 bindsym Mod1+Return exec urxvt
@@ -166,6 +180,7 @@ bindsym XF86AudioMicMute     exec "amixer -D pulse sset Capture toggle"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+        tray_output primary
         position top
         status_command i3blocks -c $HOME/.config/i3/i3blocks.conf
         colors {
@@ -201,14 +216,17 @@ client.urgent           $rd     $rd         $tx     $id
 # gnome app
 bindsym Control+Mod1+l exec --no-startup-id i3lock --image ~/.wallpapers/flowers.png
 # Print screen
-bindsym Print exec scrot  ~/Pictures/screenshot/$(date +%F-%T).png
-bindsym --release $mod+Print exec bash ~/.config/i3/customize_shot.sh
+
+bindsym Print exec scrot -u  ~/Dropbox/$(date +%F-%H-%M-%S).png
+bindsym --release $mod+Print exec  scrot -s ~/Dropbox/$(date +%F-%H-%M-%S).png
+# bindsym Print exec scrot  ~/Pictures/screenshot/$(date +%F-%T).png
+# bindsym --release $mod+Print exec bash ~/.config/i3/customize_shot.sh
 #bindsym --release Mod1+Print exec ~/usr/script/imgur-screenshot.sh
 
 bindsym Control+Shift+t exec thunar
 bindsym Control+Shift+f exec firefox
-bindsym Control+Shift+c exec chromium-browser
-bindsym Control+Shift+s exec catfish
+# bindsym Control+Shift+c exec chromium-browser
+bindsym Control+Shift+s exec fsearch
 
 
 # vim:filetype=i3

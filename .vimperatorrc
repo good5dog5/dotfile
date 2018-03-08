@@ -107,14 +107,14 @@
         qmark b good5dog5.github.io
         qmark B localhost:4000
         qmark c https://calendar.google.com/
-        qmark d https://drive.google.com/
-        qmark e http://www45.eyny.com/index.php
+        qmark d https://drive.google.com/drive/u/1/my-drive
+        qmark e https://www.evernote.com/Home.action?login=true
         qmark f https://www.facebook.com/
         qmark g https://github.com/good5dog5
         qmark i https://www.linkedin.com
         qmark k https://keep.google.com
         qmark l https://www.linkedin.com/
-        qmark m https://inbox.google.com/
+        qmark m https://inbox.google.com/u/1/
         qmark p telnet://ptt.cc
         qmark r https://getpocket.com/a/queue/
         qmark s https://logoswhale.sandcats.io
@@ -131,6 +131,9 @@ noremap U :undo<Space>
 " PassThrough gmail 
 autocmd LocationChange .*                             js modes.passAllKeys = false
 autocmd LocationChange mail\\.google\\.com            js modes.passAllKeys = true
+autocmd LocationChange localhost:8890/notebooks       js modes.passAllKeys = true
+autocmd LocationChange localhost:8891/notebooks       js modes.passAllKeys = true
+autocmd LocationChange localhost:8888/notebooks       js modes.passAllKeys = true
 " autocmd LocationChange reddit\\.com            js modes.passAllKeys = true
 
 
