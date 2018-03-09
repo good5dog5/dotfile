@@ -455,11 +455,12 @@ endif
     nmap ,d :b#<bar>bd#<CR>
 
     imap jk <Esc>
-    imap JK <Esc>
 
-    vmap <C-c> "+y
+    vmap <C-c> :!xclip -f -sel clip<CR><CR>
     vmap <C-x> "+d
-    nmap <C-p> "+p
+    nmap <C-p> :r!xclip -o -sel clip<CR><CR>
+    " vmap "+y :!xclip -f -sel clip
+    " map "+p :r!xclip -o -sel clip
     cmap w! w !sudo tee % >/dev/null
 
     "}}} 
