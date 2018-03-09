@@ -15,6 +15,9 @@ function ADD2PATH {
   esac
 }
 
+export GOROOT=$HOME/go                                                                                                            
+export GOPATH=$HOME/gopackage 
+
 # Set the default editor
 # use user-installed conda!
 ADD2PATH $HOME/anaconda3/bin
@@ -27,6 +30,8 @@ ADD2PATH $HOME/go/bin
 ADD2PATH /usr/local/go/bin
 ADD2PATH $HOME/.npm-global/bin
 ADD2PATH /usr/lib/libreoffice/share/xdg
+ADD2PATH $GOROOT/bin                                                                                                              
+ADD2PATH $GOPATH/bin
 ADD2PATH $HOME/.npm-global/bin
 
 
@@ -41,8 +46,6 @@ export CCACHE_PATH="/usr/bin"
 [ -f $HOME/LS_COLORS ] && eval $( dircolors -b $HOME/LS_COLORS )
 
 
-# export GOROOT=/usr/bin/go
-export GOPATH=$HOME/go
 
 #export CLASSPATH="$HOME.local/bin/js.jar"
 export EDITOR=vim
