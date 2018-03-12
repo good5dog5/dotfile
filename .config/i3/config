@@ -217,11 +217,8 @@ client.urgent           $rd     $rd         $tx     $id
 bindsym Control+Mod1+l exec --no-startup-id i3lock --image ~/.wallpapers/flowers.png
 # Print screen
 
-bindsym Print exec scrot -u  ~/Dropbox/$(date +%F-%H-%M-%S).png
-bindsym --release $mod+Print exec  scrot -s ~/Dropbox/$(date +%F-%H-%M-%S).png
-# bindsym Print exec scrot  ~/Pictures/screenshot/$(date +%F-%T).png
-# bindsym --release $mod+Print exec bash ~/.config/i3/customize_shot.sh
-#bindsym --release Mod1+Print exec ~/usr/script/imgur-screenshot.sh
+bindsym Print                exec bash $HOME/.config/i3/customize_shot.sh --full
+bindsym --release $mod+Print exec bash $HOME/.config/i3/customize_shot.sh --region
 
 bindsym Control+Shift+t exec thunar
 bindsym Control+Shift+f exec firefox

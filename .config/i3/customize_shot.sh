@@ -5,16 +5,33 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-## 1. Take screenshot
-## 2. rename it 
-## 3. copy to wiki direct
-## 4. copy the path to clipboard
 
-wiki_pic_dir="$HOME/Dropbox/mywiki/static/img/postImg"
-pic_name=$(date +%F-%T).png
+SCREENSHOT_PATH="$HOME/Pictures/screenshot"
+PIC_NAME=$(date +%F-%T).png
 
-scrot -s ~/Dropbox/"$pic_name"
+full_screen_shot()
+{
+    scrot -u "$SCREENSHOT_PATH"/"$PIC_NAME" && \
+        xclip -selection clipboard -t "image/png" < "$SCREENSHOT_PATH"/"$PIC_NAME"
+}
 
-# new_name=$(zenity --entry --text "Name the pic" --entry-text "$pic_name");
-# cp ~/Pictures/screenshot/"$pic_name" "$wiki_pic_dir/$new_name"
-# echo "/img/postImg/$new_name" | xclip -sel clip
+region_shot() 
+{
+    # ref https://github.com/linuxdeepin/deepin-screenshot/issues/8
+    scrot -s "$SCREENSHOT_PATH"/"$PIC_NAME" && \
+        xclip -selection clipboard -t "image/png" < "$SCREENSHOT_PATH"/"$PIC_NAME"
+
+}
+
+OPT="$1"
+case $OPT in 
+    --full)
+        full_screen_shot
+        ;;
+    --region)
+        region_shot
+        ;;
+    *)
+        full_screen_shot
+        ;;
+esac
