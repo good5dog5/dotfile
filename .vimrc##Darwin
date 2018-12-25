@@ -124,12 +124,12 @@
       function! SearchVisualSelectionWithAg() range
         let old_reg = getreg('"')
         let old_regtype = getregtype('"')
-        let old_clipboard = &clipboard
-        set clipboard&
+        " let old_clipboard = &clipboard
+        " set clipboard&
         normal! ""gvy
         let selection = getreg('"')
         call setreg('"', old_reg, old_regtype)
-        let &clipboard = old_clipboard
+        " let &clipboard = old_clipboard
         execute 'Ag' selection
       endfunction
     " }}}
@@ -179,6 +179,7 @@
       "location for global configure file
       let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
       let g:ycm_seed_identifiers_with_syntax = 1
+	  let g:ycm_server_python_interpreter="/usr/local/bin/python3"
 
       "enable completion in comment
       let g:ycm_complete_in_comments = 1            
@@ -191,13 +192,12 @@
       let g:ycm_register_as_syntastic_checker = 0
       let g:ycm_filetype_blacklist = { 'markdown': 1 }
 
-      let g:ycm_server_python_interpreter = "/usr/bin/python2.7"
       nmap <leader>gl :YcmCompleter GoToDeclaration<CR>
       nmap <leader>gf :YcmCompleter GoToDefinition<CR>
       nmap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
     " }}}
     Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
-    Plug 'marijnh/tern_for_vim'
+    " Plug 'marijnh/tern_for_vim'
     Plug 'Raimondi/delimitMate'
     " Snippets
     Plug 'SirVer/ultisnips'
@@ -230,6 +230,9 @@
     Plug 'tomtom/tcomment_vim'
     Plug 'godlygeek/tabular'
     Plug 'tpope/vim-surround'
+
+	" toggle, display and navigate marks
+	Plug 'kshenoy/vim-signature'
 
     "asynchronous build and test dispatcher
     Plug 'tpope/vim-dispatch'
@@ -286,11 +289,14 @@
     call plug#end()
  
  
+    set clipboard=unnamed
     set fdm=syntax
     set foldnestmax=8
     set foldcolumn=3
     " Automatically refresh any unchanged files
     set autoread
+	" mouse supported
+	set mouse=a
  
     "retab command can replace all sequence of white-space"
     "contain<bt> with new strings of wihte-space, use the"
@@ -300,6 +306,7 @@
     set expandtab        
     set tabstop=4        
     set shiftwidth=4     "number of spaces to use for each step of (auto)indent, use for cindent >> << etc"
+	set pastetoggle=<F2>
 
     set backspace=indent,eol,start                       
 
@@ -390,10 +397,10 @@
 
 if has("gui_running")
 	set guioptions-=T
-	set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 14
+	set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 18
 endif
 
-    colorscheme kolor
+    colorscheme seoul256
 	set background=dark
     " set t_Co=256
     highlight Pmenu ctermbg=240 ctermfg=48
@@ -415,7 +422,7 @@ endif
     "Set key combination's map leader
     let mapleader = ","
 
-    map <F12> :call Switch_html_javascript()<CR>
+    " map <F12> :call Switch_html_javascript()<CR>
 
     "clear highlight after search nnoremap: nmap and no-remap
     nnoremap <CR> :noh<CR>
@@ -514,7 +521,7 @@ endif
     if has("cscope")
 
        "Specifies the command to execute cscope
-       set csprg=/usr/bin/cscope
+       set csprg=/usr/local/bin/cscope
 
        "Determine the order in which cstag performs a search, default 0"
        "indicate search cscope first"
@@ -689,5 +696,7 @@ function! Mode_executable()
         silent !chmod +x % 
     endif
 endfunction
+
+
 
 "// vim: set foldmethod=marker:

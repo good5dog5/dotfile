@@ -1,6 +1,6 @@
 [user]
-   email     = good5dog5@gmail.com
-   name      = Jordan Huang
+	email = good5dog5@gmail.com
+	name = Jordan Huang
 [color]
    ui        = true
    diff      = auto
@@ -41,6 +41,7 @@
 [core]
    editor    = vim
 	attributesfile = /home/jordan/.gitattributes
+	excludesfile = /Users/jordanhuang/.gitignore_global
 [color "diff"]
    meta      = yellow bold
    frag      = magenta bold
@@ -60,3 +61,11 @@
 [filter "clean_ipynb"]
     clean = jq --indent 1 --monochrome-output '. + if .metadata.git.suppress_outputs | not then { cells: [.cells[] | . + if .cell_type == \"code\" then { outputs: [], execution_count: null } else {} end ] } else {} end'
     smudge = cat
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[commit]
+	template = /Users/jordanhuang/.stCommitMsg
