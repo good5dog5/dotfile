@@ -73,7 +73,7 @@
     "  }}}
 
     " Navagation
-    Plug 'scrooloose/nerdtree'
+    Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
     "  {{{
       nmap <leader>n :NERDTree.<CR>
     "  }}}
@@ -136,8 +136,9 @@
 
     " Good-looking
     " ======================================================= 
-    Plug 'bling/vim-airline'
+    Plug 'vim-airline/vim-airline'
     "  {{{
+	   " let g:airline_extensions = []
        let g:airline_powerline_fonts = 1
        " Show just the filename
        let g:airline#extensions#tabline#fnamemod = ':t'
@@ -151,6 +152,7 @@
        let g:airline#extensions#tabline#fnamecollapse = 1
        let g:airline#extensions#tabline#show_close_button = 0
        let g:airline#extensions#tabline#show_tab_type = 0
+	   let g:airline_highlighting_cache = 1
 
        nmap <leader>1 <Plug>AirlineSelectTab1
        nmap <leader>2 <Plug>AirlineSelectTab2
@@ -250,34 +252,6 @@
         map <F10> :QuickRun<CR>
      " }}}
      Plug 'junegunn/goyo.vim'
-     Plug 'vimwiki/vimwiki'
-     " {{{
-        " Vimwiki config
-        " see `http://superuser.com/questions/495889/have-vimwiki-set-filetype-only-within-wikihome`
-
-        " stop vimwiki taking over markdown files
-        let g:vimwiki_ext2syntax = {}
-
-        " config for default/first wiki
-        let s:vimwiki = {}
-
-        let s:vimwiki.syntax = 'markdown'
-        let s:vimwiki.ext = '.md'
-        let s:vimwiki.diary_rel_path = 'logbook'
-        let s:vimwiki.diary_index = 'index'
-        let s:vimwiki.diary_header = 'Log Book'
-        let s:vimwiki.diary_sort = 'asc'
-        let s:vimwiki.path = "$HOME/Dropbox/mywiki/wikidata"
-
-        " Get Vimwiki working with SnipMate
-        " Check https://stackoverflow.com/questions/12033273/get-vimwiki-working-with-snipmate-the-vim-plugins
-        " 
-        let g:vimwiki_table_mappings = 0
-
-        let g:vimwiki_list = [s:vimwiki]
-        au! BufWritePost ~/Dropbox/mywiki/wikidata/* silent! execute  '!git add % && git commit -m "Auto commit." &&
-                    \ !bash "$HOME/Dropbox/mywiki/run.sh restart" > /dev/null' | redraw!
-    " }}}
      Plug 'jamessan/vim-gnupg'
      " {{{
         let g:GPGPreferArmor=1
