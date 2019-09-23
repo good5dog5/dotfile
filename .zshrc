@@ -1,6 +1,8 @@
 
+source ~/.zplug/init.zsh
+
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/jordanhuang/.oh-my-zsh"
+export ZSH="/Users/$USERNAME/.oh-my-zsh"
 export XDG_CONFIG_HOME="${HOME}/.config"
 export TIGRC_USER="$XDG_CONFIG_HOME"/tig/tigrc
 export EDITOR=vim
@@ -23,6 +25,7 @@ plugins=(
   fzf
   osx
 )
+zplug "MichaelAquilina/zsh-autoswitch-virtualenv"
 unsetopt listambiguous
 
 source $ZSH/oh-my-zsh.sh
@@ -41,7 +44,7 @@ alias wg="ag  --follow --noheading --ignore-case --hidden --path-to-ignore ~/.ag
 alias vi="mvim -v"
 alias vim="mvim -v"
 alias ipy3="ipython3"
-alias r="sudo bash /Users/jordanhuang/script/ec2-hosts/update_hosts.sh"
+alias r="sudo bash /Users/$USERNAME/script/ec2-hosts/update_hosts.sh"
 
 function ADD2PATH {
   case ":$PATH:" in
@@ -174,9 +177,9 @@ export GOROOT=/usr/local/opt/go/libexec
 # Set the default editor
 # use user-installed conda!
 ADD2PATH "$(brew --prefix coreutils)/libexec/gnubin"
+ADD2PATH /usr/local/anaconda3/bin 
 ADD2PATH $HOME/bin
 ADD2PATH /usr/local/bin
-ADD2PATH $HOME/anaconda3/bin
 ADD2PATH $HOME/script
 ADD2PATH $HOME/.local/bin
 ADD2PATH $HOME/usr/bin
@@ -191,9 +194,9 @@ ADD2PATH $HOME/.npm-global/bin
 ADD2PATH $HOME/kkstrem/script
 
 export PATH
-source ~/anaconda3/bin/aws_zsh_completer.sh
 
 
+gcd () { git clone $1 && cd "$(basename "$1" ".git")"; }
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
 [[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
@@ -204,5 +207,6 @@ source ~/anaconda3/bin/aws_zsh_completer.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 
-if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
+#if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
 export PATH="/usr/local/opt/node@6/bin:$PATH"
+source /usr/local/opt/autoenv/activate.sh
