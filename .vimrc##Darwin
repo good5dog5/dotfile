@@ -181,7 +181,9 @@
       "location for global configure file
       let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
       let g:ycm_seed_identifiers_with_syntax = 1
-	  let g:ycm_server_python_interpreter="/usr/local/bin/python3"
+	  let g:ycm_server_python_interpreter="/usr/bin/python"
+      let g:ycm_server_use_vim_stdout = 0
+      let g:ycm_log_level = 'debug'
 
       "enable completion in comment
       let g:ycm_complete_in_comments = 1            
@@ -224,7 +226,7 @@
     Plug 'ervandew/supertab'
     Plug 'rking/ag.vim'
     "  {{{
-        nmap <leader>g :Ag <c-r>=expand("<cword>")<cr><cr>
+        nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
         nnoremap <space>/ :Ag
     "   }}}
     Plug 'nelstrom/vim-visual-star-search'

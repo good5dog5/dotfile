@@ -1,1 +1,1 @@
-/Users/jordanhuang/.vimrc##Darwin
+/Users/jordan/.vimrc##Darwin
