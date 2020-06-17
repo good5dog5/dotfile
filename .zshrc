@@ -12,6 +12,12 @@ export EDITOR=vim
 export LC_ALL="en_US.UTF-8"
 
 ZSH_THEME="simple"
+# ZSH_THEME="powerlevel9k/powerlevel9k"
+# POWERLEVEL9K_MODE='nerdfont-complete'
+# command line 左邊想顯示的內容
+# POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs) # <= left prompt 設了 "dir"
+# # command line 右邊想顯示的內容
+# POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
 
 
 # Which plugins would you like to load?
@@ -24,6 +30,9 @@ plugins=(
   docker
   fzf
   osx
+  pyenv
+  mvn
+  docker
 )
 zplug "MichaelAquilina/zsh-autoswitch-virtualenv"
 unsetopt listambiguous
@@ -43,8 +52,11 @@ alias tmux="tmux -2 -f "$XDG_CONFIG_HOME"/tmux/tmux.conf"
 alias wg="ag  --follow --noheading --ignore-case --hidden --path-to-ignore ~/.agignore"
 alias vi="mvim -v"
 alias vim="mvim -v"
-alias ipy3="ipython3"
+# https://stackoverflow.com/questions/20327621/calling-ipython-from-a-virtualenv
+alias ipy="python -c 'import IPython; IPython.terminal.ipapp.launch_new_instance()'"
 alias r="sudo bash /Users/$USERNAME/script/ec2-hosts/update_hosts.sh"
+alias sftp="sftp -F $HOME/.ssh/config"
+alias mvn8="JAVA_HOME=$(/usr/libexec/java_home -v1.8) && mvn"
 
 function ADD2PATH {
   case ":$PATH:" in
@@ -57,6 +69,19 @@ function wikiup()
 {
     script_path="$HOME/Dropbox/mywiki"
     cd $script_path && ./run.sh start 
+}
+function syncFuData()
+{
+    #rsync -azP   ubuntu@fu.sis:/opt/fuGlass/python/data/BlankGlass/ /opt/fuGlass/python/data/BlankGlass/
+    rsync -azP   ubuntu@fu.sis:/opt/fuGlass/product/ /opt/fuGlass/product/
+    rsync -azP   ubuntu@fu.sis:/opt/fuGlass/blankGlass/ /opt/fuGlass/blankGlass/
+    rsync -azP   ubuntu@fu.sis:/opt/fuGlass/sheetGlass/ /opt/fuGlass/sheetGlass/
+    rsync -azP   ubuntu@fu.sis:/opt/fuGlass/assemblyGlass/ /opt/fuGlass/assemblyGlass/
+    # rsync -azP   ubuntu@fu.sis:/opt/fuGlass/commonMaterial/ /opt/fuGlass/commonMaterial/
+    rsync -azP   ubuntu@fu.sis:/opt/fuGlass/python/data/BlankGlass/ /opt/fuGlass/python/data/BlankGlass/
+    rsync -azP   ubuntu@fu.sis:/opt/fuGlass/python/data/SheetGlass/ /opt/fuGlass/python/data/SheetGlass/
+    rsync -azP   ubuntu@fu.sis:/opt/fuGlass/python/data/AssemblyGlass/ /opt/fuGlass/python/data/AssemblyGlass/
+    rsync -azP   ubuntu@fu.sis:/opt/fuGlass/python/data/CommonMateral/ /opt/fuGlass/python/data/CommonMateral/
 }
 
 function md () { mkdir -p "$1"; }
@@ -160,6 +185,19 @@ function fe() {
   unset IFS
 }
 
+# Modified version where you can press
+#   - CTRL-O to open with `open` command,
+#   - CTRL-E or Enter key to open with the $EDITOR
+function fo() {
+  local out file key
+  IFS=$'\n' out=("$(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)")
+  key=$(head -1 <<< "$out")
+  file=$(head -2 <<< "$out" | tail -1)
+  if [ -n "$file" ]; then
+    [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-vim} "$file"
+  fi
+}
+
 function s3du(){
 	bucket=`cut -d/ -f3 <<< $1`
 	prefix=`awk -F/ '{for (i=4; i<NF; i++) printf $i"/"; print $NF}' <<< $1`
@@ -192,6 +230,8 @@ ADD2PATH /usr/lib/libreoffice/share/xdg
 ADD2PATH $GOROOT/bin                                                                                                              
 ADD2PATH $HOME/.npm-global/bin
 ADD2PATH $HOME/kkstrem/script
+ADD2PATH /opt/local/bin
+ADD2PATH /opt/local/sbin
 
 export PATH
 
@@ -210,3 +250,36 @@ gcd () { git clone $1 && cd "$(basename "$1" ".git")"; }
 #if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
 export PATH="/usr/local/opt/node@6/bin:$PATH"
 source /usr/local/opt/autoenv/activate.sh
+eval "$(direnv hook zsh)"
+
+x()
+{
+    local CC="gcc"
+
+
+    if [[ "$1" =~ .*.cpp ]]; then
+        g++ -std=c++11 -g3 -pthread -o ${1%.*}{.out,.${1##*.}} $2 $3 $4 $5  && time ./${1%.*}.out
+    else
+        $CC -std=gnu99 -g -fno-builtin -pthread -o ${1%.*}{.out,.${1##*.}} $2 $3 $4 $5 -lm && time ./${1%.*}.out
+    fi
+}
+git-fshow() {
+	local g=(
+		git log
+		--graph
+		--format='%C(auto)%h%d %s %C(white)%C(bold)%cr'
+		--color=always
+		"$@"
+	)
+
+	local fzf=(
+		fzf
+		--ansi
+		--reverse
+		--tiebreak=index
+		--no-sort
+		--bind=ctrl-s:toggle-sort
+		--preview 'f() { set -- $(echo -- "$@" | grep -o "[a-f0-9]\{7\}"); [ $# -eq 0 ] || git show --color=always $1; }; f {}'
+	)
+	$g | $fzf
+}

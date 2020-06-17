@@ -41,7 +41,7 @@
     Plug 'vim-scripts/L9'
 
     " Syntax
-    Plug 'pangloss/vim-javascript', {'for': 'javascript'}
+    " Plug 'pangloss/vim-javascript', {'for': 'javascript'}
     Plug 'good5dog5/arm.vim', {'for': 'asm'}
     Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
     Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
@@ -99,7 +99,7 @@
     Plug 'junegunn/fzf.vim'
     " {{{
       set rtp+=~/.fzf
-      nmap  <space><space> :Files<CR>
+      nmap  <space><space> :ProjectFiles<CR>
       nmap  <leader>a :Buffers<CR>
       nmap  <leader>c :Colors<CR>
       nmap  <leader>; :BLines<CR>
@@ -116,6 +116,7 @@
 
       imap <C-x><C-f> <plug>(fzf-complete-file-ag)
       imap <C-x><C-l> <plug>(fzf-complete-line)
+
 
       function! SearchWordWithAg()
         execute 'Ag' expand('<cword>')
@@ -260,6 +261,9 @@
         let g:GPGDefaultRecipients=["good5dog5@gmail.com"]
      " }}}
      Plug 'tpope/vim-fugitive'
+     Plug 'ivanov/vim-ipython'
+     Plug 'nathangrigg/vim-beancount'
+     Plug 'lifepillar/pgsql.vim'
 
 
     call plug#end()
@@ -398,7 +402,6 @@ endif
     "Set key combination's map leader
     let mapleader = ","
 
-    " map <F12> :call Switch_html_javascript()<CR>
 
     "clear highlight after search nnoremap: nmap and no-remap
     nnoremap <CR> :noh<CR>
@@ -656,15 +659,6 @@ function! SetPythonOption()
 endfunction
 
 
-function! Switch_html_javascript()
-    if (&ft=='javascript')
-        :set ft=html
-        :set foldmethod=manual
-    else
-        :set ft=javascript
-        :set foldmethod=syntax
-    end
-endfunction
 
 
 function! Mode_executable()
@@ -673,6 +667,35 @@ function! Mode_executable()
     endif
 endfunction
 
+function! Convert2CreateDB() range
+    silent! execute a:firstline . "," . a:lastline . 's/[^\x00-\xFF]//g'
+    silent! execute a:firstline . "," . a:lastline . 's/\t/ /g'
+    silent! execute a:firstline . "," . a:lastline . 's/VARCHAR\s*\([0-9]*\)\s*/VARCHAR \(\1\)/g'
+    silent! execute a:firstline . "," . a:lastline . 's/DECIMAL/DOUBLE PRECISION/g'
+    silent! execute a:firstline . "," . a:lastline . 's/\(UPDATE_USER.*\|CREATED_TIME.*$\)/\1 NOT NULL/g'
+    silent! execute a:firstline . "," . a:lastline . 's/\s\+$\|$/,/e'
+endfunction
+vnoremap <leader>H :call Convert2CreateDB()<cr>
+
+function! FormatJSON()
+    :%!python -m json.tool
+endfunction
+
+
+" For fzf-vim
+function! s:find_git_root()
+    return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+endfunction
+
+autocmd FileType sql call SqlFormatter()
+augroup end
+function SqlFormatter()
+    set noai
+    " set mappings...
+    map ,pt  :%!sqlformat --reindent --keywords upper --identifiers lower -<CR>
+endfunction
+
+command! ProjectFiles execute 'Files' s:find_git_root()
 
 
 "// vim: set foldmethod=marker:

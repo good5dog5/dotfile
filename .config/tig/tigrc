@@ -3,7 +3,11 @@
 # Variables {{{
 
 # set horizontal-scroll = 33%
-set line-graphics = yes
+set line-graphics    = yes
+set refresh-mode     = auto
+set refresh-mode     = periodic
+set refresh-interval = 5
+
 
 # }}}
 # Views {{{
