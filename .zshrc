@@ -251,6 +251,7 @@ gcd () { git clone $1 && cd "$(basename "$1" ".git")"; }
 export PATH="/usr/local/opt/node@6/bin:$PATH"
 source /usr/local/opt/autoenv/activate.sh
 eval "$(direnv hook zsh)"
+source $(brew --prefix nvm)/nvm.sh
 
 x()
 {

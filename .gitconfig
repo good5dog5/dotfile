@@ -69,3 +69,5 @@
 	trustExitCode = true
 [commit]
 	template = /Users/jordan/.stCommitMsg
+[pull]
+	rebase = true
