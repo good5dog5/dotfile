@@ -228,10 +228,11 @@ ADD2PATH /usr/local/go/bin
 ADD2PATH $HOME/.npm-global/bin
 ADD2PATH /usr/lib/libreoffice/share/xdg
 ADD2PATH $GOROOT/bin                                                                                                              
-ADD2PATH $HOME/.npm-global/bin
 ADD2PATH $HOME/kkstrem/script
 ADD2PATH /opt/local/bin
 ADD2PATH /opt/local/sbin
+# Postgres
+ADD2PATH /Applications/Postgres.app/Contents/Versions/latest/bin
 
 export PATH
 
@@ -251,7 +252,6 @@ gcd () { git clone $1 && cd "$(basename "$1" ".git")"; }
 export PATH="/usr/local/opt/node@6/bin:$PATH"
 source /usr/local/opt/autoenv/activate.sh
 eval "$(direnv hook zsh)"
-source $(brew --prefix nvm)/nvm.sh
 
 x()
 {
