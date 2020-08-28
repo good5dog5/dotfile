@@ -125,10 +125,7 @@ function ext()
     done
 }
 function path(){
-    old=$IFS
-    IFS=:
-    printf "%s\n" $PATH
-    IFS=$old
+	echo "$PATH" | tr ':' '\n'
 }
 function man () {
     env LESS_TERMCAP_mb=$'\E[1;31m' \
@@ -283,4 +280,19 @@ git-fshow() {
 		--preview 'f() { set -- $(echo -- "$@" | grep -o "[a-f0-9]\{7\}"); [ $# -eq 0 ] || git show --color=always $1; }; f {}'
 	)
 	$g | $fzf
+}
+
+bip() {
+	### BREW + FZF
+	# update multiple packages at once
+	# mnemonic [B]rew [U]pdate [P]lugin
+
+
+	local inst=$(brew search | eval "fzf ${FZF_DEFAULT_OPTS} -m --header='[brew:install]'")
+
+	if [[ $inst ]]; then
+		for prog in $(echo $inst)
+		do brew install $prog
+		done
+	fi
 }
