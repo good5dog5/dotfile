@@ -264,6 +264,8 @@
      Plug 'ivanov/vim-ipython'
      Plug 'nathangrigg/vim-beancount'
      Plug 'lifepillar/pgsql.vim'
+     " vim viewer
+     Plug 'chrisbra/csv.vim'
 
 
     call plug#end()
@@ -447,12 +449,12 @@ endif
     "}}} 
     "[ Text movement ] {{{2
        " Idea from http://codingfearlessly.com/2012/08/21/vim-putting-arrows-to-use/
-       nmap <Left>  <<
-       nmap <Right> >>
+       " nmap <Left>  <<
+       " nmap <Right> >>
 
        " gv reselect the last visual area.
-       vmap <Left>  <gv
-       vmap <Right> >gv
+       " vmap <Left>  <gv
+       " vmap <Right> >gv
     "}}}
 
     "[vimdiff mapping] {{{2
