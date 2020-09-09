@@ -1,5 +1,15 @@
+# begin time profile
+zmodload zsh/datetime
+setopt PROMPT_SUBST
+PS4='+$EPOCHREALTIME %N:%i> '
 
-source ~/.zplug/init.zsh
+logfile=$(mktemp zsh_profile.XXXXXXXX)
+echo "Logging to $logfile"
+exec 3>&2 2>$logfile
+setopt XTRACE
+
+
+# source ~/.zplug/init.zsh
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/$USERNAME/.oh-my-zsh"
@@ -23,16 +33,12 @@ ZSH_THEME="simple"
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(
   autojump
   docker
   fzf
   osx
-  pyenv
   mvn
-  docker
 )
 zplug "MichaelAquilina/zsh-autoswitch-virtualenv"
 unsetopt listambiguous
@@ -211,7 +217,7 @@ export GOROOT=/usr/local/opt/go/libexec
 
 # Set the default editor
 # use user-installed conda!
-ADD2PATH "$(brew --prefix coreutils)/libexec/gnubin"
+ADD2PATH "/usr/local/opt/coreutils/libexec/gnubin"
 ADD2PATH /usr/local/anaconda3/bin 
 ADD2PATH $HOME/bin
 ADD2PATH /usr/local/bin
@@ -296,3 +302,7 @@ bip() {
 		done
 	fi
 }
+
+# end time profile
+unsetopt XTRACE
+exec 2>&3 3>&-
