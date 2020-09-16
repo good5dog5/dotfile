@@ -1,12 +1,13 @@
 # begin time profile
-zmodload zsh/datetime
-setopt PROMPT_SUBST
-PS4='+$EPOCHREALTIME %N:%i> '
 
-logfile=$(mktemp zsh_profile.XXXXXXXX)
-echo "Logging to $logfile"
-exec 3>&2 2>$logfile
-setopt XTRACE
+# zmodload zsh/datetime
+# setopt PROMPT_SUBST
+# PS4='+$EPOCHREALTIME %N:%i> '
+#
+# logfile=$(mktemp zsh_profile.XXXXXXXX)
+# echo "Logging to $logfile"
+# exec 3>&2 2>$logfile
+# setopt XTRACE
 
 
 eval "$(pyenv init -)"
@@ -21,7 +22,10 @@ setopt HIST_FIND_NO_DUPS
 setopt HIST_SAVE_NO_DUPS
 setopt HIST_BEEP
 
-# source ~/.zplug/init.zsh
+if [ -f ${HOME}/.zplug/init.zsh ]; then
+    source ${HOME}/.zplug/init.zsh
+fi
+
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/$USERNAME/.oh-my-zsh"
@@ -75,6 +79,7 @@ alias ipy="python -c 'import IPython; IPython.terminal.ipapp.launch_new_instance
 alias r="sudo bash /Users/$USERNAME/script/ec2-hosts/update_hosts.sh"
 alias sftp="sftp -F $HOME/.ssh/config"
 alias mvn8="JAVA_HOME=$(/usr/libexec/java_home -v1.8) && mvn"
+alias cat='bat --style=plain'
 
 function ADD2PATH {
   case ":$PATH:" in
@@ -316,5 +321,6 @@ bip() {
 }
 
 # end time profile
-unsetopt XTRACE
-exec 2>&3 3>&-
+
+# unsetopt XTRACE
+# exec 2>&3 3>&-
