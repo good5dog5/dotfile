@@ -33,7 +33,7 @@ set completion-prefix-display-length 2
     "\e\e[B": history-search-forward
 
     # glob patterns without executing, eg: 'rm *x'
-    "\ee": glob-expand-word
+    # "\ee": glob-expand-word
     # change to movement mode by jk
     # "jk": vi-movement-mode
     # Needed because binding 'p' in command mode above wipes its insert mode
