@@ -22,6 +22,7 @@ then
     # note - my setup assumes 'base-index' was set at 1
     tmux new-window -n Ledger
     tmux new-window -n JavaExample
+    tmux new-window -n AVMapping
     
     tmux send-keys -t "$TMUX_NAME":1 'cd ~/synergies/fu-glass/backend' C-m
     tmux send-keys -t "$TMUX_NAME":2 'cd ~/Dropbox/Ledger' C-m
@@ -30,6 +31,7 @@ then
     tmux send-keys -t "$TMUX_NAME":3 'cd ~/github/JavaExample/ ' C-m
     tmux split-window -v -p 30 -t "$TMUX_NAME":3 
 
+    tmux send-keys -t "$TMUX_NAME":4 'cd ~/Workspace/proj_AVMapping' C-m
 fi
 tmux attach -t "$TMUX_NAME"
 

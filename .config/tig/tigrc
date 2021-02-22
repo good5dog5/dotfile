@@ -109,12 +109,15 @@ set refresh-interval = 5
     # 'g' binds to toggle commit-title-graph originally
     bind generic g  none
     bind generic g move-first-line
+
+
+    bind diff       D       >git difftool --tool=vimdiff --trust-exit-code --no-prompt %(commit)^! -- %(file)
+    bind stage      D       >sh -c "git difftool --tool=vimdiff --trust-exit-code --no-prompt `expr '%(status)' : 'Staged changes' >/dev/null && echo --cached` -- '%(file)'"
 #
 
 
     bind generic F !git fetch
     bind generic Y !sh -c "echo -n %(commit) | xclip" 
-    bind generic X !git difftool --tool=vimdiff --no-prompt %(commit)
 
     # rebind stash view to 's'
     bind generic y none

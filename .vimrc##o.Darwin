@@ -45,7 +45,7 @@
     Plug 'good5dog5/arm.vim', {'for': 'asm'}
     Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
     Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
-    " Plug 'chrisbra/csv.vim', {'for': 'csv'}
+    Plug 'chrisbra/csv.vim', {'for': 'csv'}
     " Plug 'klen/python-mode', {'for' : 'python'}
     "  {{{
     " turn off pymode's autocomplete to prevent conflict with ycm
@@ -265,7 +265,13 @@
      Plug 'nathangrigg/vim-beancount'
      Plug 'lifepillar/pgsql.vim'
      " vim viewer
-     Plug 'chrisbra/csv.vim'
+     " Plug 'chrisbra/csv.vim'
+     Plug 'justinmk/vim-sneak'
+     " {{{
+        let g:sneak#label = 1
+        nmap f <Plug>Sneak_s
+        nmap F <Plug>Sneak_S
+     " }}}
 
 
     call plug#end()
@@ -578,6 +584,8 @@ endif
     " vim-markdown {{{1
 
         let g:vim_markdown_frontmatter=1
+        let g:vim_markdown_conceal = 0
+        let g:vim_markdown_conceal_code_blocks = 0
     "}}}
 
 " }}}

@@ -79,13 +79,28 @@ alias ipy="python -c 'import IPython; IPython.terminal.ipapp.launch_new_instance
 alias r="sudo bash /Users/$USERNAME/script/ec2-hosts/update_hosts.sh"
 alias sftp="sftp -F $HOME/.ssh/config"
 alias mvn8="JAVA_HOME=$(/usr/libexec/java_home -v1.8) && mvn"
-alias cat='bat --style=plain'
+
+# if [ -x "$(command -v bat)" ]; then
+# 	alias cat='bat --style=plain'
+# fi
+
+if [ -x "$(command -v exa)" ]; then
+	alias l='exa'
+	alias la='exa -a'
+	alias ll='exa -lah'
+	alias ls='exa --color=auto'
+fi
+alias typora="open -a typora"
+if [ -x "$(command -v leetcode)" ]; then
+	alias lc='leetcode'
+fi
 
 function ADD2PATH {
   case ":$PATH:" in
     *":$1:"*) :;; # already there
     *) PATH="$1:$PATH";; # or PATH="$PATH:$1"
   esac
+
 }
 
 function wikiup()
@@ -253,6 +268,8 @@ ADD2PATH /opt/local/bin
 ADD2PATH /opt/local/sbin
 # Postgres
 ADD2PATH /Applications/Postgres.app/Contents/Versions/latest/bin
+# MySQL
+ADD2PATH /usr/local/mysql/bin
 
 export PATH
 
@@ -271,6 +288,7 @@ gcd () { git clone $1 && cd "$(basename "$1" ".git")"; }
 #if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
 export PATH="/usr/local/opt/node@6/bin:$PATH"
 source /usr/local/opt/autoenv/activate.sh
+export AUTOENV_ENV_FILENAME=".autoenv"
 eval "$(direnv hook zsh)"
 
 x()
@@ -318,6 +336,16 @@ bip() {
 		do brew install $prog
 		done
 	fi
+}
+
+# open jupyter-notebook and load specific csv into pandas
+jp() {
+	if [[ $# -eq 1 ]]; then
+		dir=dirname "$1"
+		jupyter-notebook --no-mathjax --autoreload --notebook-dir="$dir"
+	fi
+
+	jupyter-notebook --no-mathjax --autoreload 
 }
 
 # end time profile
