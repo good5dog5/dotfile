@@ -246,6 +246,7 @@ function s3du(){
 
 export GOPATH="${HOME}/go"
 export GOROOT=/usr/local/opt/go/libexec
+export GOBIN=$GOPATH/bin
 
 # Set the default editor
 # use user-installed conda!
@@ -259,10 +260,10 @@ ADD2PATH $HOME/usr/bin
 ADD2PATH $HOME/usr/nand2tetris/tools
 ADD2PATH $HOME/usr/phantomjs/bin
 ADD2PATH "$GOROOT/bin"
+ADD2PATH "$GOPATH/bin"
 ADD2PATH /usr/local/go/bin
 ADD2PATH $HOME/.npm-global/bin
 ADD2PATH /usr/lib/libreoffice/share/xdg
-ADD2PATH $GOROOT/bin                                                                                                              
 ADD2PATH $HOME/kkstrem/script
 ADD2PATH /opt/local/bin
 ADD2PATH /opt/local/sbin
@@ -287,7 +288,7 @@ gcd () { git clone $1 && cd "$(basename "$1" ".git")"; }
 
 #if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
 export PATH="/usr/local/opt/node@6/bin:$PATH"
-source /usr/local/opt/autoenv/activate.sh
+#source /usr/local/opt/autoenv/activate.sh
 export AUTOENV_ENV_FILENAME=".autoenv"
 eval "$(direnv hook zsh)"
 
@@ -352,3 +353,6 @@ jp() {
 
 # unsetopt XTRACE
 # exec 2>&3 3>&-
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/mc mc

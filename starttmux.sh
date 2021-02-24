@@ -14,7 +14,7 @@ then
     # if session does not exist create it
     # note - default window numbered either 0 or 1 depending on tmux 'base-index'
     # note - my setup assumes 'base-index' was set at 1
-    tmux -2 new-session -s "$TMUX_NAME" -n 福耀 -d
+    tmux -2 new-session -s "$TMUX_NAME" -n aiLabs -d
     
     
     # create additional named windows
@@ -24,7 +24,7 @@ then
     tmux new-window -n JavaExample
     tmux new-window -n AVMapping
     
-    tmux send-keys -t "$TMUX_NAME":1 'cd ~/synergies/fu-glass/backend' C-m
+    tmux send-keys -t "$TMUX_NAME":1 'cd ~/aiLabs/min.io' C-m
     tmux send-keys -t "$TMUX_NAME":2 'cd ~/Dropbox/Ledger' C-m
     
     
