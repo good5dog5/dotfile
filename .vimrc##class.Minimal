@@ -41,11 +41,11 @@
     Plug 'vim-scripts/L9'
 
     " Syntax
-    Plug 'pangloss/vim-javascript', {'for': 'javascript'}
+    " Plug 'pangloss/vim-javascript', {'for': 'javascript'}
     Plug 'good5dog5/arm.vim', {'for': 'asm'}
     Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
     Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
-    " Plug 'chrisbra/csv.vim', {'for': 'csv'}
+    Plug 'chrisbra/csv.vim', {'for': 'csv'}
     " Plug 'klen/python-mode', {'for' : 'python'}
     "  {{{
     " turn off pymode's autocomplete to prevent conflict with ycm
@@ -73,7 +73,7 @@
     "  }}}
 
     " Navagation
-    Plug 'scrooloose/nerdtree'
+    Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
     "  {{{
       nmap <leader>n :NERDTree.<CR>
     "  }}}
@@ -90,7 +90,7 @@
       map <Leader>k <Plug>(easymotion-k)
     "  }}}
     Plug 'good5dog5/cscopemaps.vim'
-    " Plug 'Valloric/MatchTagAlways'
+    Plug 'Valloric/MatchTagAlways'
     Plug 'majutsushi/tagbar'
     Plug 'christoomey/vim-tmux-navigator'
     Plug 'terryma/vim-smooth-scroll'
@@ -99,7 +99,7 @@
     Plug 'junegunn/fzf.vim'
     " {{{
       set rtp+=~/.fzf
-      nmap  <space><space> :Files<CR>
+      nmap  <space><space> :ProjectFiles<CR>
       nmap  <leader>a :Buffers<CR>
       nmap  <leader>c :Colors<CR>
       nmap  <leader>; :BLines<CR>
@@ -117,6 +117,7 @@
       imap <C-x><C-f> <plug>(fzf-complete-file-ag)
       imap <C-x><C-l> <plug>(fzf-complete-line)
 
+
       function! SearchWordWithAg()
         execute 'Ag' expand('<cword>')
       endfunction
@@ -124,20 +125,21 @@
       function! SearchVisualSelectionWithAg() range
         let old_reg = getreg('"')
         let old_regtype = getregtype('"')
-        let old_clipboard = &clipboard
-        set clipboard&
+        " let old_clipboard = &clipboard
+        " set clipboard&
         normal! ""gvy
         let selection = getreg('"')
         call setreg('"', old_reg, old_regtype)
-        let &clipboard = old_clipboard
+        " let &clipboard = old_clipboard
         execute 'Ag' selection
       endfunction
     " }}}
 
     " Good-looking
     " ======================================================= 
-    Plug 'bling/vim-airline'
+    Plug 'vim-airline/vim-airline'
     "  {{{
+	   " let g:airline_extensions = []
        let g:airline_powerline_fonts = 1
        " Show just the filename
        let g:airline#extensions#tabline#fnamemod = ':t'
@@ -151,6 +153,7 @@
        let g:airline#extensions#tabline#fnamecollapse = 1
        let g:airline#extensions#tabline#show_close_button = 0
        let g:airline#extensions#tabline#show_tab_type = 0
+	   let g:airline_highlighting_cache = 1
 
        nmap <leader>1 <Plug>AirlineSelectTab1
        nmap <leader>2 <Plug>AirlineSelectTab2
@@ -174,31 +177,9 @@
 
     " Auto-complete
     " ======================================================= 
-    " Plug 'Valloric/YouCompleteMe'
-    " " {{{
-    "   "location for global configure file
-    "   let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-    "   let g:ycm_seed_identifiers_with_syntax = 1
-    "
-    "   "enable completion in comment
-    "   let g:ycm_complete_in_comments = 1            
-    "
-    "   "start completion while typing first charcter
-    "   let g:ycm_min_num_of_chars_for_completion = 3 
-    "
-    "   "do not check ycm_extra_conf
-    "   let g:ycm_confirm_extra_conf = 0
-    "   let g:ycm_register_as_syntastic_checker = 0
-    "   let g:ycm_filetype_blacklist = { 'markdown': 1 }
-    "
-    "   let g:ycm_server_python_interpreter = "/usr/bin/python2.7"
-    "   nmap <leader>gl :YcmCompleter GoToDeclaration<CR>
-    "   nmap <leader>gf :YcmCompleter GoToDefinition<CR>
-    "   nmap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
-    " " }}}
     Plug 'Raimondi/delimitMate'
     " Snippets
-    " Plug 'SirVer/ultisnips'
+    Plug 'SirVer/ultisnips'
     " {{{
       let g:UltiSnipsJumpForwardTrigger="<tab>"
 
@@ -220,7 +201,7 @@
     Plug 'ervandew/supertab'
     Plug 'rking/ag.vim'
     "  {{{
-        nmap <leader>g :Ag <c-r>=expand("<cword>")<cr><cr>
+        nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
         nnoremap <space>/ :Ag
     "   }}}
     Plug 'nelstrom/vim-visual-star-search'
@@ -228,6 +209,9 @@
     Plug 'tomtom/tcomment_vim'
     Plug 'godlygeek/tabular'
     Plug 'tpope/vim-surround'
+
+	" toggle, display and navigate marks
+	Plug 'kshenoy/vim-signature'
 
     "asynchronous build and test dispatcher
     Plug 'tpope/vim-dispatch'
@@ -245,50 +229,36 @@
         map <F10> :QuickRun<CR>
      " }}}
      Plug 'junegunn/goyo.vim'
-     Plug 'vimwiki/vimwiki'
-     " {{{
-        " Vimwiki config
-        " see `http://superuser.com/questions/495889/have-vimwiki-set-filetype-only-within-wikihome`
-
-        " stop vimwiki taking over markdown files
-        let g:vimwiki_ext2syntax = {}
-
-        " config for default/first wiki
-        let s:vimwiki = {}
-
-        let s:vimwiki.syntax = 'markdown'
-        let s:vimwiki.ext = '.md'
-        let s:vimwiki.diary_rel_path = 'logbook'
-        let s:vimwiki.diary_index = 'index'
-        let s:vimwiki.diary_header = 'Log Book'
-        let s:vimwiki.diary_sort = 'asc'
-        let s:vimwiki.path = "$HOME/Dropbox/mywiki/wikidata"
-
-        " Get Vimwiki working with SnipMate
-        " Check https://stackoverflow.com/questions/12033273/get-vimwiki-working-with-snipmate-the-vim-plugins
-        " 
-        let g:vimwiki_table_mappings = 0
-
-        let g:vimwiki_list = [s:vimwiki]
-        au! BufWritePost ~/Dropbox/mywiki/wikidata/* silent! execute  '!git add % && git commit -m "Auto commit." &&
-                    \ !bash "$HOME/Dropbox/mywiki/run.sh restart" > /dev/null' | redraw!
-    " }}}
      Plug 'jamessan/vim-gnupg'
      " {{{
         let g:GPGPreferArmor=1
         let g:GPGDefaultRecipients=["good5dog5@gmail.com"]
      " }}}
      Plug 'tpope/vim-fugitive'
+     Plug 'ivanov/vim-ipython'
+     Plug 'nathangrigg/vim-beancount'
+     Plug 'lifepillar/pgsql.vim'
+     " vim viewer
+     " Plug 'chrisbra/csv.vim'
+     Plug 'justinmk/vim-sneak'
+     " {{{
+        let g:sneak#label = 1
+        nmap f <Plug>Sneak_s
+        nmap F <Plug>Sneak_S
+     " }}}
 
 
     call plug#end()
  
  
+    set clipboard=unnamed
     set fdm=syntax
     set foldnestmax=8
     set foldcolumn=3
     " Automatically refresh any unchanged files
     set autoread
+	" mouse supported
+	set mouse=a
  
     "retab command can replace all sequence of white-space"
     "contain<bt> with new strings of wihte-space, use the"
@@ -298,6 +268,7 @@
     set expandtab        
     set tabstop=4        
     set shiftwidth=4     "number of spaces to use for each step of (auto)indent, use for cindent >> << etc"
+	set pastetoggle=<F2>
 
     set backspace=indent,eol,start                       
 
@@ -388,10 +359,10 @@
 
 if has("gui_running")
 	set guioptions-=T
-	set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 14
+	set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 18
 endif
 
-    colorscheme kolor
+    colorscheme seoul256
 	set background=dark
     " set t_Co=256
     highlight Pmenu ctermbg=240 ctermfg=48
@@ -413,7 +384,6 @@ endif
     "Set key combination's map leader
     let mapleader = ","
 
-    map <F12> :call Switch_html_javascript()<CR>
 
     "clear highlight after search nnoremap: nmap and no-remap
     nnoremap <CR> :noh<CR>
@@ -453,22 +423,18 @@ endif
     nmap ,d :b#<bar>bd#<CR>
 
     imap jk <Esc>
-    imap JK <Esc>
 
-    vmap <C-c> "+y
-    vmap <C-x> "+d
-    nmap <C-p> "+p
     cmap w! w !sudo tee % >/dev/null
 
     "}}} 
     "[ Text movement ] {{{2
        " Idea from http://codingfearlessly.com/2012/08/21/vim-putting-arrows-to-use/
-       nmap <Left>  <<
-       nmap <Right> >>
+       " nmap <Left>  <<
+       " nmap <Right> >>
 
        " gv reselect the last visual area.
-       vmap <Left>  <gv
-       vmap <Right> >gv
+       " vmap <Left>  <gv
+       " vmap <Right> >gv
     "}}}
 
     "[vimdiff mapping] {{{2
@@ -516,7 +482,7 @@ endif
     if has("cscope")
 
        "Specifies the command to execute cscope
-       set csprg=/usr/bin/cscope
+       set csprg=/usr/local/bin/cscope
 
        "Determine the order in which cstag performs a search, default 0"
        "indicate search cscope first"
@@ -592,6 +558,8 @@ endif
     " vim-markdown {{{1
 
         let g:vim_markdown_frontmatter=1
+        let g:vim_markdown_conceal = 0
+        let g:vim_markdown_conceal_code_blocks = 0
     "}}}
 
 " }}}
@@ -675,15 +643,6 @@ function! SetPythonOption()
 endfunction
 
 
-function! Switch_html_javascript()
-    if (&ft=='javascript')
-        :set ft=html
-        :set foldmethod=manual
-    else
-        :set ft=javascript
-        :set foldmethod=syntax
-    end
-endfunction
 
 
 function! Mode_executable()
@@ -691,5 +650,36 @@ function! Mode_executable()
         silent !chmod +x % 
     endif
 endfunction
+
+function! Convert2CreateDB() range
+    silent! execute a:firstline . "," . a:lastline . 's/[^\x00-\xFF]//g'
+    silent! execute a:firstline . "," . a:lastline . 's/\t/ /g'
+    silent! execute a:firstline . "," . a:lastline . 's/VARCHAR\s*\([0-9]*\)\s*/VARCHAR \(\1\)/g'
+    silent! execute a:firstline . "," . a:lastline . 's/DECIMAL/DOUBLE PRECISION/g'
+    silent! execute a:firstline . "," . a:lastline . 's/\(UPDATE_USER.*\|CREATED_TIME.*$\)/\1 NOT NULL/g'
+    silent! execute a:firstline . "," . a:lastline . 's/\s\+$\|$/,/e'
+endfunction
+vnoremap <leader>H :call Convert2CreateDB()<cr>
+
+function! FormatJSON()
+    :%!python -m json.tool
+endfunction
+
+
+" For fzf-vim
+function! s:find_git_root()
+    return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+endfunction
+
+autocmd FileType sql call SqlFormatter()
+augroup end
+function SqlFormatter()
+    set noai
+    " set mappings...
+    map ,pt  :%!sqlformat --reindent --keywords upper --identifiers lower -<CR>
+endfunction
+
+command! ProjectFiles execute 'Files' s:find_git_root()
+
 
 "// vim: set foldmethod=marker:
