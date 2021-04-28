@@ -24,7 +24,7 @@ then
     tmux new-window -n JavaExample
     tmux new-window -n AVMapping
     
-    tmux send-keys -t "$TMUX_NAME":1 'cd ~/aiLabs/min.io' C-m
+    tmux send-keys -t "$TMUX_NAME":1 'cd ~/aiLabs/repo/tower-server' C-m
     tmux send-keys -t "$TMUX_NAME":2 'cd ~/Dropbox/Ledger' C-m
     
     

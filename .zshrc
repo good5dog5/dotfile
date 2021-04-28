@@ -21,17 +21,34 @@ setopt HIST_IGNORE_SPACE
 setopt HIST_FIND_NO_DUPS
 setopt HIST_SAVE_NO_DUPS
 setopt HIST_BEEP
+# history sharing between tmux pane/windows
+setopt inc_append_history
 
 if [ -f ${HOME}/.zplug/init.zsh ]; then
     source ${HOME}/.zplug/init.zsh
 fi
 
+### NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+# For ailabs
+export VAULT_ADDR=https://vault.corp.ailabs.tw
+export SOPS_VAULT_URIS=$VAULT_ADDR/v1/ailabs/smart-city/transit/keys/minio-backup
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/$USERNAME/.oh-my-zsh"
 export XDG_CONFIG_HOME="${HOME}/.config"
 export TIGRC_USER="$XDG_CONFIG_HOME"/tig/tigrc
 export EDITOR=vim
+
+# K8S
+command -v kubectl > /dev/null && alias k=kubectl || echo 'kubectl not installed'
+command -v kubectx > /dev/null && alias ktx=kubectx || echo 'kubectx not installed'
+
+# Gnu find instead of Macos find
+command -v gfind > /dev/null && alias find=gfind || echo 'gfind not installed'
 
 
 # set server locale to en, prevent remote tab completion problem
@@ -55,6 +72,9 @@ plugins=(
   fzf
   osx
   mvn
+  kubectl
+  terraform
+  vagrant
 )
 zplug "MichaelAquilina/zsh-autoswitch-virtualenv"
 unsetopt listambiguous
@@ -102,6 +122,7 @@ function ADD2PATH {
   esac
 
 }
+
 
 function wikiup()
 {
@@ -152,6 +173,7 @@ function ext()
 			*.tar)     tar xvf "$f"    ;;
 			*.tbz2)    tar xvjf "$f"   ;;
 			*.tgz)     tar xvzf "$f"   ;;
+            *.zst)     tar -I zstd -xvf "$f" ;;
 			*.zip)     unzip "$f"      ;;
 			*.Z)       uncompress "$f" ;;
 			*.7z)      7z x "$f"       ;;
@@ -271,6 +293,9 @@ ADD2PATH /opt/local/sbin
 ADD2PATH /Applications/Postgres.app/Contents/Versions/latest/bin
 # MySQL
 ADD2PATH /usr/local/mysql/bin
+# k8s plugin: krew
+ADD2PATH "${KREW_ROOT:-$HOME/.krew}/bin"
+
 
 export PATH
 
@@ -288,8 +313,7 @@ gcd () { git clone $1 && cd "$(basename "$1" ".git")"; }
 
 #if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
 export PATH="/usr/local/opt/node@6/bin:$PATH"
-#source /usr/local/opt/autoenv/activate.sh
-export AUTOENV_ENV_FILENAME=".autoenv"
+# source $(brew --prefix autoenv)/activate.sh
 eval "$(direnv hook zsh)"
 
 x()

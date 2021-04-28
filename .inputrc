@@ -9,7 +9,7 @@ set completion-prefix-display-length 2
 
 #------------------------------------------
     # keymaps for when we're in command mode.
-    set keymap iv-command
+    set keymap vi-command
     "\e\e[A": history-search-backward
     "\e\e[B": history-search-forward
     # Insert the arguments from the last command

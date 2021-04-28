@@ -6,6 +6,7 @@
 
 # locale
 export LC_ALL="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
 
 ### Function to prevent duplicate entries in path
 function ADD2PATH {
