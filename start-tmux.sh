@@ -20,12 +20,10 @@ then
     # create additional named windows
     # note - extra windows start at 1 or 2 and count upward depending on tmux 'base-index'
     # note - my setup assumes 'base-index' was set at 1
-    tmux new-window -n Ledger
     tmux new-window -n JavaExample
-    tmux new-window -n AVMapping
+    tmux new-window -n AVM
     
     tmux send-keys -t "$TMUX_NAME":1 'cd ~/aiLabs/repo/tower-server' C-m
-    tmux send-keys -t "$TMUX_NAME":2 'cd ~/Dropbox/Ledger' C-m
     
     
     tmux send-keys -t "$TMUX_NAME":3 'cd ~/github/JavaExample/ ' C-m

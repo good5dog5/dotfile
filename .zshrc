@@ -10,7 +10,7 @@
 # setopt XTRACE
 
 
-eval "$(pyenv init -)"
+# eval "$(pyenv init -)"
 
 # prevent duplicate history 
 setopt EXTENDED_HISTORY
@@ -23,6 +23,9 @@ setopt HIST_SAVE_NO_DUPS
 setopt HIST_BEEP
 # history sharing between tmux pane/windows
 setopt inc_append_history
+HISTSIZE=100000
+SAVEHIST=100000
+HISTFILE=${HOME}/.cache/zsh/history
 
 if [ -f ${HOME}/.zplug/init.zsh ]; then
     source ${HOME}/.zplug/init.zsh
@@ -36,6 +39,9 @@ export NVM_DIR="$HOME/.nvm"
 # For ailabs
 export VAULT_ADDR=https://vault.corp.ailabs.tw
 export SOPS_VAULT_URIS=$VAULT_ADDR/v1/ailabs/smart-city/transit/keys/minio-backup
+alias vaultLogin="vault login -method=ldap username='jordan.huang'"
+alias cfz="vim $HOME/.zshrc"
+alias scfz="source $HOME/.zshrc"
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/$USERNAME/.oh-my-zsh"
@@ -43,12 +49,9 @@ export XDG_CONFIG_HOME="${HOME}/.config"
 export TIGRC_USER="$XDG_CONFIG_HOME"/tig/tigrc
 export EDITOR=vim
 
-# K8S
-command -v kubectl > /dev/null && alias k=kubectl || echo 'kubectl not installed'
-command -v kubectx > /dev/null && alias ktx=kubectx || echo 'kubectx not installed'
+# recursive decrypted
+# alias sopsDecrypt='find ./ -maxdepth 5 -type f -iname "*.yml" -or -iname "*.yaml" | xargs -I % sh -c 'sops -d -i %';'
 
-# Gnu find instead of Macos find
-command -v gfind > /dev/null && alias find=gfind || echo 'gfind not installed'
 
 
 # set server locale to en, prevent remote tab completion problem
@@ -114,6 +117,42 @@ alias typora="open -a typora"
 if [ -x "$(command -v leetcode)" ]; then
 	alias lc='leetcode'
 fi
+
+# K8S
+command -v kubectl > /dev/null && alias k=kubectl || echo 'kubectl not installed'
+command -v kubectx > /dev/null && alias ktx=kubectx || echo 'kubectx not installed'
+
+# Gnu find instead of Macos find
+command -v gfind > /dev/null && alias find=gfind || echo 'gfind not installed'
+
+
+# IDE
+alias pycharm='open -a /Applications/PyCharm.app'
+alias intellj='open -a /Applications/IntelliJ\ IDEA.app'
+alias webstorm='open -a /Applications/WebStorm.app'
+
+# docker
+# drcv [FUZZY PATTERN] - Choose a docker container to remove (and associated volumes)
+drcv() {
+  docker ps -a | sed '1d' | fzf -m | awk '{print $1}' | xargs docker rm -v
+}
+
+# drc [FUZZY PATTERN] - Choose a docker container to remove
+drc() {
+  docker ps -a | sed '1d' | fzf -m | awk '{print $1}' | xargs docker rm
+}
+
+
+# dri [FUZZY PATTERN] - Choose a docker image to remove
+dri() {
+  docker images | sed '1d' | fzf -m | awk '{print $3}' | xargs docker rmi
+}
+
+# drv [FUZZY PATTERN] - Choose a docker volume to remove
+drv() {
+  docker volume ls | sed '1d'| fzf -m | awk '{print $2}' | xargs docker volume rm
+}
+
 
 function ADD2PATH {
   case ":$PATH:" in
@@ -208,8 +247,10 @@ function tmp() {
 # To undo the effect of this function, you can type "cd -" to return to the
 # original directory.
 # This binds Ctrl-O to ranger-cd:
-#bind '"\C-o":"ranger-cd\C-m"'
 #
+# Key bindings
+bindkey "[D" backward-word
+bindkey "[C" forward-word]]
 
 function fm {
     tempfile="$(mktemp -t tmp.XXXXXX)"
@@ -220,6 +261,7 @@ function fm {
     fi
     rm -f -- "$tempfile"
 }
+bindkey -s '^o' 'fm\n'
 
 function fn()
 {
@@ -270,6 +312,8 @@ export GOPATH="${HOME}/go"
 export GOROOT=/usr/local/opt/go/libexec
 export GOBIN=$GOPATH/bin
 
+# for tter src 弱測
+ADD2PATH "$HOME/aiLabs/task/tter-src-scan"
 # Set the default editor
 # use user-installed conda!
 ADD2PATH "/usr/local/opt/coreutils/libexec/gnubin"
@@ -313,7 +357,11 @@ gcd () { git clone $1 && cd "$(basename "$1" ".git")"; }
 
 #if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
 export PATH="/usr/local/opt/node@6/bin:$PATH"
-# source $(brew --prefix autoenv)/activate.sh
+
+### for autoenv
+export AUTOENV_ENV_FILENAME=.autoenv
+export AUTOENV_ENABLE_LEAVE=.autoenv.leave
+source ~/.autoenv/activate.sh
 eval "$(direnv hook zsh)"
 
 x()

@@ -173,6 +173,7 @@ set refresh-interval = 5
 # Status {{{
 #
     bind status D !@?rm %(file)
+    bind status <Ctrl-d> !git rm --cached %(file)
     bind status p !git push origin 
     bind status P !git add --patch %(file)
     bind status R !@git reset HEAD %(file)
