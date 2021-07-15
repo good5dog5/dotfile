@@ -97,13 +97,24 @@ alias src="source ~/.zshrc"
 alias biggest_dir="du -sch .[!.]* * 2>/dev/null | sort -rh | head -10"
 alias tmux="tmux -2 -f "$XDG_CONFIG_HOME"/tmux/tmux.conf"
 alias wg="ag  --follow --noheading --ignore-case --hidden --path-to-ignore ~/.agignore"
-alias vi="mvim -v"
-alias vim="mvim -v"
 # https://stackoverflow.com/questions/20327621/calling-ipython-from-a-virtualenv
 alias ipy="python -c 'import IPython; IPython.terminal.ipapp.launch_new_instance()'"
 alias r="sudo bash /Users/$USERNAME/script/ec2-hosts/update_hosts.sh"
 alias sftp="sftp -F $HOME/.ssh/config"
 # alias mvn8="JAVA_HOME=$(/usr/libexec/java_home -v1.8) && mvn"
+case `uname` in
+  Darwin)
+	alias vi="mvim -v"
+	alias vim="mvim -v"
+  ;;
+  Linux)
+	alias vi="vim -v"
+	alias vim="vim -v"
+  ;;
+  FreeBSD)
+    # commands for FreeBSD go here
+  ;;
+esac
 
 # if [ -x "$(command -v bat)" ]; then
 # 	alias cat='bat --style=plain'
