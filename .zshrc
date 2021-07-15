@@ -31,12 +31,16 @@ if [ -f ${HOME}/.zplug/init.zsh ]; then
     source ${HOME}/.zplug/init.zsh
 fi
 
+
 ### NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # For ailabs
+
+# npm build with mem 5120 MB
+export NODE_OPTIONS="--max-old-space-size=5120"
 export VAULT_ADDR=https://vault.corp.ailabs.tw
 export SOPS_VAULT_URIS=$VAULT_ADDR/v1/ailabs/smart-city/transit/keys/minio-backup
 alias vaultLogin="vault login -method=ldap username='jordan.huang'"
@@ -49,8 +53,6 @@ export XDG_CONFIG_HOME="${HOME}/.config"
 export TIGRC_USER="$XDG_CONFIG_HOME"/tig/tigrc
 export EDITOR=vim
 
-# recursive decrypted
-# alias sopsDecrypt='find ./ -maxdepth 5 -type f -iname "*.yml" -or -iname "*.yaml" | xargs -I % sh -c 'sops -d -i %';'
 
 
 
@@ -79,8 +81,8 @@ plugins=(
   terraform
   vagrant
 )
-zplug "MichaelAquilina/zsh-autoswitch-virtualenv"
 unsetopt listambiguous
+command -v zplug > /dev/null && zplug "MichaelAquilina/zsh-autoswitch-virtualenv"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -101,7 +103,7 @@ alias vim="mvim -v"
 alias ipy="python -c 'import IPython; IPython.terminal.ipapp.launch_new_instance()'"
 alias r="sudo bash /Users/$USERNAME/script/ec2-hosts/update_hosts.sh"
 alias sftp="sftp -F $HOME/.ssh/config"
-alias mvn8="JAVA_HOME=$(/usr/libexec/java_home -v1.8) && mvn"
+# alias mvn8="JAVA_HOME=$(/usr/libexec/java_home -v1.8) && mvn"
 
 # if [ -x "$(command -v bat)" ]; then
 # 	alias cat='bat --style=plain'
@@ -119,17 +121,19 @@ if [ -x "$(command -v leetcode)" ]; then
 fi
 
 # K8S
-command -v kubectl > /dev/null && alias k=kubectl || echo 'kubectl not installed'
-command -v kubectx > /dev/null && alias ktx=kubectx || echo 'kubectx not installed'
+command -v kubectl > /dev/null && alias k=kubectl
+command -v ktx > /dev/null && alias ktx=kubectx
 
 # Gnu find instead of Macos find
-command -v gfind > /dev/null && alias find=gfind || echo 'gfind not installed'
+command -v gfind > /dev/null && alias find=gfind
 
 
 # IDE
 alias pycharm='open -a /Applications/PyCharm.app'
 alias intellj='open -a /Applications/IntelliJ\ IDEA.app'
 alias webstorm='open -a /Applications/WebStorm.app'
+alias goland='open -a /Applications/GoLand.app'
+
 
 # docker
 # drcv [FUZZY PATTERN] - Choose a docker container to remove (and associated volumes)
