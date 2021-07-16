@@ -48,7 +48,6 @@ alias cfz="vim $HOME/.zshrc"
 alias scfz="source $HOME/.zshrc"
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/$USERNAME/.oh-my-zsh"
 export XDG_CONFIG_HOME="${HOME}/.config"
 export TIGRC_USER="$XDG_CONFIG_HOME"/tig/tigrc
 export EDITOR=vim
@@ -106,10 +105,12 @@ case `uname` in
   Darwin)
 	alias vi="mvim -v"
 	alias vim="mvim -v"
+	export ZSH="/Users/$USERNAME/.oh-my-zsh"
   ;;
   Linux)
 	alias vi="vim -v"
 	alias vim="vim -v"
+	export ZSH="$HOME/.oh-my-zsh"
   ;;
   FreeBSD)
     # commands for FreeBSD go here
@@ -376,8 +377,8 @@ export PATH="/usr/local/opt/node@6/bin:$PATH"
 ### for autoenv
 export AUTOENV_ENV_FILENAME=.autoenv
 export AUTOENV_ENABLE_LEAVE=.autoenv.leave
-source ~/.autoenv/activate.sh
-eval "$(direnv hook zsh)"
+[ -f ~/.fzf.zsh ] && source ~/.autoenv/activate.sh
+command -v direnv > /dev/null && eval "$(direnv hook zsh)"
 
 x()
 {
