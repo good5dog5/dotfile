@@ -264,12 +264,6 @@
      Plug 'lifepillar/pgsql.vim'
      " vim viewer
      " Plug 'chrisbra/csv.vim'
-     Plug 'justinmk/vim-sneak'
-     " {{{
-        let g:sneak#label = 1
-        nmap f <Plug>Sneak_s
-        nmap F <Plug>Sneak_S
-     " }}}
 
 
     call plug#end()

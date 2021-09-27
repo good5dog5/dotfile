@@ -10,7 +10,6 @@
 # setopt XTRACE
 
 
-# eval "$(pyenv init -)"
 
 # prevent duplicate history 
 setopt EXTENDED_HISTORY
@@ -38,6 +37,15 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # For ailabs
+function update-pipelinehook-docker-img() {
+	pipelineHookPath="${HOME}/aiLabs/repo/system/tower-server/pipelinehook"
+
+	cd ${pipelineHookPath}
+	DOCKER_BUILDKIT=1 docker build . \
+	   	-t 'registry.corp.ailabs.tw/smartcity/system/tower-server/pipelinehook:pipeline-dev' && \
+	docker push registry.corp.ailabs.tw/smartcity/system/tower-server/pipelinehook:pipeline-dev
+
+}
 
 # npm build with mem 5120 MB
 export NODE_OPTIONS="--max-old-space-size=5120"
@@ -46,6 +54,7 @@ export SOPS_VAULT_URIS=$VAULT_ADDR/v1/ailabs/smart-city/transit/keys/minio-backu
 alias vaultLogin="vault login -method=ldap username='jordan.huang'"
 alias cfz="vim $HOME/.zshrc"
 alias scfz="source $HOME/.zshrc"
+
 
 # Path to your oh-my-zsh installation.
 export XDG_CONFIG_HOME="${HOME}/.config"
@@ -79,11 +88,21 @@ plugins=(
   kubectl
   terraform
   vagrant
+  ssh-agent
+  pyenv-lazy
+  tmux
 )
+
+# AUTO start tmux
+ZSH_TMUX_AUTOSTART=true
+
+# AUTO attach tmux if exists
+ZSH_TMUX_AUTOCONNECT=true
+
 unsetopt listambiguous
 command -v zplug > /dev/null && zplug "MichaelAquilina/zsh-autoswitch-virtualenv"
 
-source $ZSH/oh-my-zsh.sh
+source "${HOME}/.oh-my-zsh/oh-my-zsh.sh"
 
 alias tml="tmux list-sessions"
 alias tma="tmux attach-session -t"
@@ -127,6 +146,11 @@ if [ -x "$(command -v exa)" ]; then
 	alias ll='exa -lah'
 	alias ls='exa --color=auto'
 fi
+
+# if [ -x "$(command -v nnn)" ]; then
+# 	alias ll='nnn -de'
+# fi
+
 alias typora="open -a typora"
 if [ -x "$(command -v leetcode)" ]; then
 	alias lc='leetcode'
@@ -135,6 +159,7 @@ fi
 # K8S
 command -v kubectl > /dev/null && alias k=kubectl
 command -v ktx > /dev/null && alias ktx=kubectx
+
 
 # Gnu find instead of Macos find
 command -v gfind > /dev/null && alias find=gfind
@@ -205,6 +230,15 @@ function swap()
 {
     local TMPFILE=tmp.$$
     mv "$1" $TMPFILE && mv "$2" "$1" && mv $TMPFILE $2
+}
+
+function pkg2Daphne() {
+	__tmpdir=$(mktemp -d tmp.XXXXXX) 
+
+	# prevent hidden files
+	rsync -avC --exclude=".*" $1/* $__tmpdir
+	zip -r $1.zip $__tmpdir/*
+	rm -rf $__tmpdir
 }
 
 function ext() 
