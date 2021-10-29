@@ -26,6 +26,10 @@ HISTSIZE=100000
 SAVEHIST=100000
 HISTFILE=${HOME}/.cache/zsh/history
 
+if [ ! -f ${HISTFILE}  ]; then
+	mkdir -p ${HISTFILE}
+fi
+
 if [ -f ${HOME}/.zplug/init.zsh ]; then
     source ${HOME}/.zplug/init.zsh
 fi
@@ -94,10 +98,10 @@ plugins=(
 )
 
 # AUTO start tmux
-ZSH_TMUX_AUTOSTART=true
+ZSH_TMUX_AUTOSTART=false
 
 # AUTO attach tmux if exists
-ZSH_TMUX_AUTOCONNECT=true
+ZSH_TMUX_AUTOCONNECT=false
 
 unsetopt listambiguous
 command -v zplug > /dev/null && zplug "MichaelAquilina/zsh-autoswitch-virtualenv"
@@ -168,8 +172,14 @@ command -v gfind > /dev/null && alias find=gfind
 # IDE
 alias pycharm='open -a /Applications/PyCharm.app'
 alias intellj='open -a /Applications/IntelliJ\ IDEA.app'
-alias webstorm='open -a /Applications/WebStorm.app'
+alias ws='open -a /Applications/WebStorm.app'
 alias goland='open -a /Applications/GoLand.app'
+
+
+# for docker-sync https://docker-sync.readthedocs.io/en/latest/getting-started/installation.html
+# if which ruby >/dev/null && which gem >/dev/null; then
+# 	  PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+# fi
 
 
 # docker
