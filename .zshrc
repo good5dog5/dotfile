@@ -59,6 +59,8 @@ alias vaultLogin="vault login -method=ldap username='jordan.huang'"
 alias cfz="vim $HOME/.zshrc"
 alias scfz="source $HOME/.zshrc"
 
+alias gcp='~/Downloads/google-cloud-sdk/bin/gcloud compute ssh --zone "us-east1-c" "colab-1-vm"  --project "beaming-glyph-344503"'
+
 
 # Path to your oh-my-zsh installation.
 export XDG_CONFIG_HOME="${HOME}/.config"
@@ -87,7 +89,7 @@ plugins=(
   autojump
   docker
   fzf
-  osx
+  macos
   mvn
   kubectl
   terraform
@@ -487,3 +489,9 @@ jp() {
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/mc mc
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/private/tmp/google-cloud-sdk/path.zsh.inc' ]; then . '/private/tmp/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/private/tmp/google-cloud-sdk/completion.zsh.inc' ]; then . '/private/tmp/google-cloud-sdk/completion.zsh.inc'; fi
