@@ -1,5 +1,5 @@
 [user]
-	email = jordan.huang@gapp.nthu.edu.tw
+	email = jordan.huang@ailabs.tw
 	name = jordan
 [color]
    ui        = true
@@ -53,7 +53,7 @@
    changed   = green
    untracked = cyan
 [diff]
-	tool = vimdiff
+	tool = meld
 [merge]
         tool = meld
 [mergetool "meld"]
@@ -76,3 +76,13 @@
 	rebase = true
 [rerere]
 	enabled = false
+[difftool "meld"]
+	cmd = open -W -a Meld --args \\\"$LOCAL\\\" \\\"$PWD/$REMOTE\\\"
+	trustExitCode = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[init]
+	defaultBranch = main
