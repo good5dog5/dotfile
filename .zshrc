@@ -34,13 +34,28 @@ if [ -f ${HOME}/.zplug/init.zsh ]; then
     source ${HOME}/.zplug/init.zsh
 fi
 
-
+export DISPLAY=:0
 ### NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # For ailabs
+
+#### db-port-forwarding
+# prod-tower -> 27011
+alias forward-prod-tower-db='kubectx jordan.huang@lab3 && kubectl -n group-smart-city port-forward svc/tower-db 27011:27017'
+# stag-tower -> 27012
+alias forward-stag-tower-db='kubectx jordan.huang@lab3 && kubectl -n group-smart-city port-forward svc/tower-db-staging 27012:27017'
+# stag-preview-traveler -> 27013
+alias forward-stag-preview-traveler-db='kubectx jordan.huang@lab3 && kubectl -n group-smart-city port-forward svc/traveler-db-preview-staging 27013:27017'
+alias forward-stag-traveler-db='kubectx jordan.huang@lab3 && kubectl -n group-smart-city port-forward svc/traveler-db-staging 27020:27017'
+# prod-traveler-internal -> 27014
+alias forward-prod-traveler-db-preview='kubectx jordan.huang@lab4 && kubectl -n group-smart-city port-forward svc/traveler-db-preview 27014:27017'
+alias forward-prod-traveler-db='kubectx jordan.huang@lab4 && kubectl -n group-smart-city port-forward svc/traveler-db 27015:27017'
+alias forward-stag-thanos-db='kubectx jordan.huang@lab3 && kubectl -n group-smart-city port-forward svc/thanos-db-staging 27016:27017'
+alias forward-dev-thanos-db='kubectx jordan.huang@lab3 && kubectl -n group-smart-city port-forward svc/thanos-db-dev 27018:27017'
+alias forward-prod-thanos-db='kubectx jordan.huang@lab4 && kubectl -n group-smart-city port-forward svc/thanos-db 27019:27017'
 function update-pipelinehook-docker-img() {
 	pipelineHookPath="${HOME}/aiLabs/repo/system/tower-server/pipelinehook"
 
@@ -66,6 +81,7 @@ alias gcp='~/Downloads/google-cloud-sdk/bin/gcloud compute ssh --zone "us-east1-
 export XDG_CONFIG_HOME="${HOME}/.config"
 export TIGRC_USER="$XDG_CONFIG_HOME"/tig/tigrc
 export EDITOR=vim
+export KUBECONFIG="$HOME/.kube/user-smart-city@lab3:$HOME/.kube/config:$HOME/.kube/towerDev.kubeconfig"
 
 
 
@@ -175,6 +191,7 @@ alias pycharm='open -a /Applications/PyCharm.app'
 alias intellj='open -a /Applications/IntelliJ\ IDEA.app'
 alias ws='open -a /Applications/WebStorm.app'
 alias goland='open -a /Applications/GoLand.app'
+alias ad='open -a /Applications/Android\ Studio.app'
 
 
 # for docker-sync https://docker-sync.readthedocs.io/en/latest/getting-started/installation.html
@@ -204,6 +221,9 @@ dri() {
 drv() {
   docker volume ls | sed '1d'| fzf -m | awk '{print $2}' | xargs docker volume rm
 }
+
+# lazydocker
+alias lzd='lazydocker'
 
 
 function ADD2PATH {
@@ -400,11 +420,13 @@ ADD2PATH /Applications/Postgres.app/Contents/Versions/latest/bin
 ADD2PATH /usr/local/mysql/bin
 # k8s plugin: krew
 ADD2PATH "${KREW_ROOT:-$HOME/.krew}/bin"
-
+# Flutter
+ADD2PATH "$HOME/Tools/flutter/bin"
 
 export PATH
 
 
+compdef g='git'
 gcd () { git clone $1 && cd "$(basename "$1" ".git")"; }
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
@@ -491,7 +513,7 @@ autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/mc mc
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/private/tmp/google-cloud-sdk/path.zsh.inc' ]; then . '/private/tmp/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/Users/jordan/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jordan/Downloads/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/private/tmp/google-cloud-sdk/completion.zsh.inc' ]; then . '/private/tmp/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/Users/jordan/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/jordan/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
