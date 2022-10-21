@@ -13,11 +13,19 @@ is_command() {
     command -v "$1" > /dev/null 2>&1
 }
 
+packages=" vim tmux git zsh"
+
 if [ ${system_type} = "Linux" ]; then
     if  is_command sudo; then
-        sudo apt-get update -y && sudo apt-get install vim tmux git -y
+        sudo apt-get update -y && sudo apt-get install ${packages} -y
+        # install oh-my-zsh
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+        sudo chsh -s $(which zsh)
     else
-        apt-get update -y && apt-get install vim tmux git -y
+        apt-get update -y && apt-get install ${packages} -y
+        # install oh-my-zsh
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+        chsh -s $(which zsh)
     fi
 fi
 
@@ -33,7 +41,3 @@ if [ ${system_type} = "Darwin" ]; then
     fi
 fi
 
-if command -v vim >/dev/null 2>&1; then
-      echo "Bootstraping Vim"
-        vim '+PlugUpdate' '+PlugClean!' '+PlugUpdate' '+qall'
-fi
