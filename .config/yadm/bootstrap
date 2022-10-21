@@ -14,7 +14,11 @@ is_command() {
 }
 
 if [ ${system_type} = "Linux" ]; then
-    sudo apt-get update -y && sudo apt-get install vim tmux git -y
+    if  is_command sudo; then
+        sudo apt-get update -y && sudo apt-get install vim tmux git -y
+    else
+        apt-get update -y && apt-get install vim tmux git -y
+    fi
 fi
 
 if [ ${system_type} = "Darwin" ]; then
