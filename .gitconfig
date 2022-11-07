@@ -41,8 +41,8 @@
 
 [core]
    editor    = vim
-	attributesfile = /home/jordan/.gitattributes
-	excludesfile = /Users/jordan/.gitignore_global
+	attributesfile = ~/.gitattributes
+	excludesfile = ~/.gitignore_global
 [color "diff"]
    meta      = yellow bold
    frag      = magenta bold
@@ -71,7 +71,7 @@
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [commit]
-	template = /Users/jordan/.stCommitMsg
+	template = ~/.stCommitMsg
 [pull]
 	rebase = true
 [rerere]
