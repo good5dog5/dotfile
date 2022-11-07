@@ -13,6 +13,11 @@ is_command() {
 system_type=$(uname -s)
 packages=" wget curl zsh vim tmux git zsh ranger "
 
+cd "$HOME"
+
+echo "Initialising submodules"
+yadm submodule update --recursive --init
+
 
 if [ ${system_type} = "Linux" ]; then
     if  is_command sudo; then

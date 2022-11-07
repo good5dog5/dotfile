@@ -10,6 +10,17 @@
 # setopt XTRACE
 
 
+#zmodload zsh/zprof
+
+if [ -f ${HOME}/.zplug/init.zsh ]; then
+   source ${HOME}/.zplug/init.zsh
+fi
+
+command_exists() {
+    command -v "$1" > /dev/null 2>&1
+}
+
+command_exists  && zplug "davidparsson/zsh-pyenv-lazy"
 
 # prevent duplicate history 
 setopt EXTENDED_HISTORY
@@ -30,15 +41,11 @@ if [ ! -f ${HISTFILE}  ]; then
 	mkdir -p ${HISTFILE}
 fi
 
-if [ -f ${HOME}/.zplug/init.zsh ]; then
-    source ${HOME}/.zplug/init.zsh
-fi
 
 export DISPLAY=:0
-### NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+#[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # For ailabs
 
@@ -81,7 +88,7 @@ alias gcp='~/Downloads/google-cloud-sdk/bin/gcloud compute ssh --zone "us-east1-
 export XDG_CONFIG_HOME="${HOME}/.config"
 export TIGRC_USER="$XDG_CONFIG_HOME"/tig/tigrc
 export EDITOR=vim
-export KUBECONFIG="$HOME/.kube/user-smart-city@lab3:$HOME/.kube/config:$HOME/.kube/towerDev.kubeconfig"
+export KUBECONFIG="$HOME/.kube/user-smart-city@lab3:$HOME/.kube/config:$HOME/.kube/towerDev.kubeconfig:$HOME/.kube/tower-test.kubeconfig"
 
 
 
@@ -98,21 +105,21 @@ ZSH_THEME="simple"
 # POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
 
 
-# Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 plugins=(
-  autojump
+  autojump	
   docker
   fzf
+  kubectl
   macos
   mvn
-  kubectl
-  terraform
-  vagrant
-  ssh-agent
   pyenv-lazy
+  rake-fast
+  ssh-agent
+  terraform
   tmux
+  vagrant
 )
 
 # AUTO start tmux
@@ -122,7 +129,6 @@ ZSH_TMUX_AUTOSTART=false
 ZSH_TMUX_AUTOCONNECT=false
 
 unsetopt listambiguous
-command -v zplug > /dev/null && zplug "MichaelAquilina/zsh-autoswitch-virtualenv"
 
 source "${HOME}/.oh-my-zsh/oh-my-zsh.sh"
 
@@ -441,11 +447,11 @@ gcd () { git clone $1 && cd "$(basename "$1" ".git")"; }
 #if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
 export PATH="/usr/local/opt/node@6/bin:$PATH"
 
-### for autoenv
-export AUTOENV_ENV_FILENAME=.autoenv
-export AUTOENV_ENABLE_LEAVE=.autoenv.leave
-[ -f ~/.fzf.zsh ] && source ~/.autoenv/activate.sh
-command -v direnv > /dev/null && eval "$(direnv hook zsh)"
+#### for autoenv
+#export AUTOENV_ENV_FILENAME=.autoenv
+#export AUTOENV_ENABLE_LEAVE=.autoenv.leave
+#[ -f ~/.fzf.zsh ] && source ~/.autoenv/activate.sh
+#command -v direnv > /dev/null && eval "$(direnv hook zsh)"
 
 x()
 {
@@ -504,6 +510,12 @@ jp() {
 	jupyter-notebook --no-mathjax --autoreload 
 }
 
+# zsh startup time profiling
+timezsh() {
+  shell=${1-$SHELL}
+  for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
+}
+
 # end time profile
 
 # unsetopt XTRACE
@@ -517,3 +529,21 @@ if [ -f '/Users/jordan/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/User
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/jordan/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/jordan/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+### NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+#ADD2PATH ~/.npm/node_modules/.bin # Global modules
+#nvm_load () {
+#	[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+#	[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+#	#
+#   	# . $NVM_DIR/nvm.sh && . $NVM_DIR/bash_completion; 
+#}
+#alias node='unalias nvm; unalias node; unalias npm; nvm_load; node $@'
+#alias npm='unalias nvm; unalias node; unalias npm; nvm_load; npm $@'
+#alias nvm='unalias nvm; unalias node; unalias npm; nvm_load; nvm $@'
+
+
+#zprof
