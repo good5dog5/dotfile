@@ -48,3 +48,11 @@ fi
 ### install oh-my-zsh
 wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
 sh install.sh
+
+### zplug
+curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+
+
+### install pyenv
+# ref: https://github.com/pyenv/pyenv-installer
+curl https://pyenv.run | bash
