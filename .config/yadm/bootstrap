@@ -7,13 +7,16 @@ set -o nounset
 
 
 
-system_type=$(uname -s)
-
 is_command() {
     command -v "$1" > /dev/null 2>&1
 }
+system_type=$(uname -s)
+packages=" vim tmux git zsh ranger "
 
-packages=" vim tmux git zsh"
+cd "$HOME"
+
+echo "Initialising submodules"
+yadm submodule update --recursive --init
 
 if [ ${system_type} = "Linux" ]; then
     if  is_command sudo; then
